@@ -1,8 +1,8 @@
-import "./configs";
+import "./configs/dotenv.configs";
 import express from 'express';
-import router from "./routes";
 import bodyParser from "body-parser";
 import { loggerMiddleware } from "./middlewares/logger.middleware";
+import router from "./routes";
 
 /*
     STRUCTURE
@@ -20,9 +20,10 @@ const app = express();
 app.set("port", process.env.PORT || 3000);
 app.set("env", process.env.NODE_ENV || "development");
 
-app.use(loggerMiddleware)
 
 app.use(bodyParser.json());
+app.use(loggerMiddleware)
+
 app.use(router);
 
 export default app;

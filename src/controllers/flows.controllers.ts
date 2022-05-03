@@ -1,30 +1,13 @@
 import { Request, Response } from "express";
-import { body, param } from "express-validator";
+import { flows } from "../models/flow.model";
 import { PolyglotFlow } from "../types";
-
-let flows: { [id: string]: PolyglotFlow } = {
-    "654251f1-a660-46ec-9294-5d92eabf6704": {
-        id: "654251f1-a660-46ec-9294-5d92eabf6704",
-        nodes: [
-            {
-                type: "start",
-                title: "Start",
-                description: "Start",
-                difficulty: 0,
-                data: {},
-                reactFlow: {}
-            }
-        ],
-        edges: []
-    }
-}
 
 /*
     Get flow by id
     @route GET /flows/:id
 */
 export async function getFlowById(req: Request<{ id: string }>, res: Response<PolyglotFlow>) {
-    await param("id", "UUID v4 is required").isUUID(4).run(req);
+    // await param("id", "UUID v4 is required").isUUID(4).run(req);
 
     const flow = flows[req.params.id];
     if (!flow) {
@@ -34,6 +17,11 @@ export async function getFlowById(req: Request<{ id: string }>, res: Response<Po
     res.send(flow);
 }
 
+
+/*
+    Update flow with given id
+    @route PUT /flows/:id
+*/
 export async function updateFlow(req: Request<{ id: string }>, res: Response) {
     // await param("id", "UUID v4 is required").isUUID(4).run(req);
     // TODO: FIXME: custom validation here for flow
@@ -51,7 +39,15 @@ export async function updateFlow(req: Request<{ id: string }>, res: Response) {
     res.status(200).send();
 }
 
-export async function createFlow(req: Request, res: Response) {
-    res.status(404).json({ msg: "Not implemented" });
-    // throw new Error('Method not implemented.');
+export async function createFlow(req: Request<PolyglotFlow>, res: Response) {
+    // TODO: add validation for flow
+    const newFlow = req.body;
+
+    if (flows[newFlow.id]) {
+        res.status(409).send();
+        return;
+    }
+
+    flows[newFlow.id] = newFlow;
+    res.status(200).send();
 }

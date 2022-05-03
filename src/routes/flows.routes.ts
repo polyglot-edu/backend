@@ -1,5 +1,5 @@
 import express from 'express';
-import * as FlowController from '../controllers/flows.controllers';
+import * as FlowController from "../controllers/flows.controllers";
 
 const router = express.Router();
 

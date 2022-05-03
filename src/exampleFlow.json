@@ -1,0 +1,634 @@
+{
+    "id": "d28acead-dbcd-43bd-8559-e6876fb8dd6c",
+    "nodes": [
+        {
+            "type": "lessonNode",
+            "title": "Definizione media",
+            "description": "Some description",
+            "difficulty": 1,
+            "data": {},
+            "reactFlow": {
+                "id": "fb175ad6-1685-4832-b1cc-052a0ff21ae1",
+                "type": "lessonNode",
+                "position": {
+                    "x": 175,
+                    "y": 135
+                },
+                "data": {
+                    "label": "Definizione media"
+                },
+                "width": 133,
+                "height": 40,
+                "dragging": false
+            }
+        },
+        {
+            "type": "closeEndedQuestionNode",
+            "title": "Esercizio media",
+            "description": "",
+            "difficulty": 1,
+            "data": {
+                "question": "media tra 2 4 6 8",
+                "correctAnswer": "5"
+            },
+            "reactFlow": {
+                "id": "727fcaab-31e3-4c7e-b630-d377c9ccdf66",
+                "type": "closeEndedQuestionNode",
+                "position": {
+                    "x": 180.00000000000003,
+                    "y": 225
+                },
+                "data": {
+                    "label": "Esercizio media"
+                },
+                "width": 117,
+                "height": 40,
+                "dragging": false
+            }
+        },
+        {
+            "type": "lessonNode",
+            "title": "Ripasso media",
+            "description": "",
+            "difficulty": 1,
+            "data": {},
+            "reactFlow": {
+                "id": "e47661cc-feb6-4af4-98e3-370a252cd059",
+                "type": "lessonNode",
+                "position": {
+                    "x": 195,
+                    "y": 315
+                },
+                "data": {
+                    "label": "Ripasso media"
+                },
+                "width": 111,
+                "height": 40,
+                "dragging": false
+            }
+        },
+        {
+            "type": "multipleChoiceQuestionNode",
+            "title": "Quiz media",
+            "description": "",
+            "difficulty": 1,
+            "data": {
+                "question": "domandona",
+                "correctAnswers": [],
+                "choices": [
+                    "risposta 1",
+                    "risposta 2",
+                    "risposta 3"
+                ]
+            },
+            "reactFlow": {
+                "id": "11fd35d6-89bb-48fc-9c3e-17784f615eaf",
+                "type": "multipleChoiceQuestionNode",
+                "position": {
+                    "x": 195,
+                    "y": 420
+                },
+                "data": {
+                    "label": "Quiz media"
+                },
+                "width": 92,
+                "height": 40,
+                "dragging": false
+            }
+        },
+        {
+            "type": "lessonNode",
+            "title": "Definizione varianza",
+            "description": "",
+            "difficulty": 1,
+            "data": {},
+            "reactFlow": {
+                "id": "ba7b203f-65f0-4ee9-9273-489cb696a0a3",
+                "type": "lessonNode",
+                "position": {
+                    "x": 390,
+                    "y": 315
+                },
+                "data": {
+                    "label": "Definizione varianza"
+                },
+                "width": 146,
+                "height": 40,
+                "dragging": false
+            }
+        },
+        {
+            "type": "closeEndedQuestionNode",
+            "title": "Esercizio varianza",
+            "description": "",
+            "difficulty": 1,
+            "data": {
+                "question": "varianza deasdfa",
+                "correctAnswer": "42"
+            },
+            "reactFlow": {
+                "id": "cfa3f040-05c5-4636-9f60-e5ad0ebe005c",
+                "type": "closeEndedQuestionNode",
+                "position": {
+                    "x": 405,
+                    "y": 405
+                },
+                "data": {
+                    "label": "Esercizio varianza"
+                },
+                "width": 129,
+                "height": 40,
+                "dragging": false
+            }
+        },
+        {
+            "type": "lessonNode",
+            "title": "Ripasso varianza",
+            "description": "",
+            "difficulty": 1,
+            "data": {},
+            "reactFlow": {
+                "id": "1bda0472-f963-4c90-81b5-a71bab5bb29b",
+                "type": "lessonNode",
+                "position": {
+                    "x": 405,
+                    "y": 495
+                },
+                "data": {
+                    "label": "Ripasso varianza"
+                },
+                "width": 124,
+                "height": 40,
+                "dragging": false
+            }
+        },
+        {
+            "type": "multipleChoiceQuestionNode",
+            "title": "Quiz varianza",
+            "description": "",
+            "difficulty": 1,
+            "data": {
+                "question": "domanda",
+                "correctAnswers": [],
+                "choices": [
+                    "risposta `",
+                    "risposta 2",
+                    "risposta 3"
+                ]
+            },
+            "reactFlow": {
+                "id": "25bc28c1-182d-4f6c-bbc0-8e7819d2be8e",
+                "type": "multipleChoiceQuestionNode",
+                "position": {
+                    "x": 405,
+                    "y": 585
+                },
+                "data": {
+                    "label": "Quiz varianza"
+                },
+                "width": 105,
+                "height": 40,
+                "dragging": false
+            }
+        },
+        {
+            "type": "lessonNode",
+            "title": "Differenza media/varianza",
+            "description": "",
+            "difficulty": 1,
+            "data": {},
+            "reactFlow": {
+                "id": "a927fb5d-6806-4492-b7be-7f5bdaa48972",
+                "type": "lessonNode",
+                "position": {
+                    "x": 630,
+                    "y": 450
+                },
+                "data": {
+                    "label": "Differenza media/varianza"
+                },
+                "width": 183,
+                "height": 40,
+                "dragging": false
+            }
+        },
+        {
+            "type": "closeEndedQuestionNode",
+            "title": "Esercizio differenza media/varianza",
+            "description": "",
+            "difficulty": 1,
+            "data": {
+                "question": "domandissima",
+                "correctAnswer": "42"
+            },
+            "reactFlow": {
+                "id": "7d9d5ee4-b093-450f-bf1e-194386bf54c6",
+                "type": "closeEndedQuestionNode",
+                "position": {
+                    "x": 615,
+                    "y": 540
+                },
+                "data": {
+                    "label": "Esercizio differenza media/varianza"
+                },
+                "width": 238,
+                "height": 40,
+                "dragging": false
+            }
+        },
+        {
+            "type": "codingQuestionNode",
+            "title": "Coding media",
+            "description": "",
+            "difficulty": 1,
+            "data": {},
+            "reactFlow": {
+                "id": "c9268f5e-ce13-49d3-8e25-4e127ac25b0a",
+                "type": "codingQuestionNode",
+                "position": {
+                    "x": 960,
+                    "y": 495.00000000000006
+                },
+                "data": {
+                    "label": "Coding media"
+                },
+                "width": 109,
+                "height": 40,
+                "dragging": false
+            }
+        },
+        {
+            "type": "codingQuestionNode",
+            "title": "Coding varianza",
+            "description": "",
+            "difficulty": 1,
+            "data": {},
+            "reactFlow": {
+                "id": "85a2b40c-beb9-4f72-96a6-849d8716a239",
+                "type": "codingQuestionNode",
+                "position": {
+                    "x": 959.9999999999999,
+                    "y": 630
+                },
+                "data": {
+                    "label": "Coding varianza"
+                },
+                "width": 121,
+                "height": 40,
+                "dragging": false
+            }
+        }
+    ],
+    "edges": [
+        {
+            "type": "unconditionalEdge",
+            "title": "",
+            "data": {},
+            "reactFlow": {
+                "id": "736e6f43-dd34-484c-ac5e-97b2aa59af56",
+                "source": "fb175ad6-1685-4832-b1cc-052a0ff21ae1",
+                "target": "727fcaab-31e3-4c7e-b630-d377c9ccdf66",
+                "type": "unconditionalEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "ed8ebf66-bd35-48a4-8bd9-7d4398cebe1a",
+                "source": "727fcaab-31e3-4c7e-b630-d377c9ccdf66",
+                "target": "e47661cc-feb6-4af4-98e3-370a252cd059",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Fail",
+            "data": {
+                "conditionKind": "fail"
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "bd62d4ec-a802-4de2-b9a0-02a4373027c6",
+                "source": "727fcaab-31e3-4c7e-b630-d377c9ccdf66",
+                "target": "ba7b203f-65f0-4ee9-9273-489cb696a0a3",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Pass",
+            "data": {
+                "conditionKind": "pass"
+            }
+        },
+        {
+            "type": "unconditionalEdge",
+            "title": "",
+            "data": {},
+            "reactFlow": {
+                "id": "38c91fa2-adeb-4c1e-828d-9fd15a192809",
+                "source": "e47661cc-feb6-4af4-98e3-370a252cd059",
+                "target": "11fd35d6-89bb-48fc-9c3e-17784f615eaf",
+                "type": "unconditionalEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "3f845553-e28e-4327-9812-8035a002c6d0",
+                "source": "11fd35d6-89bb-48fc-9c3e-17784f615eaf",
+                "target": "e47661cc-feb6-4af4-98e3-370a252cd059",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Fail",
+            "data": {
+                "conditionKind": "fail"
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "77d36922-5516-443e-821b-72360962c199",
+                "source": "11fd35d6-89bb-48fc-9c3e-17784f615eaf",
+                "target": "ba7b203f-65f0-4ee9-9273-489cb696a0a3",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Pass",
+            "data": {
+                "conditionKind": "pass"
+            }
+        },
+        {
+            "type": "unconditionalEdge",
+            "title": "",
+            "data": {},
+            "reactFlow": {
+                "id": "0d4f3138-fc35-4b3b-8b53-b89a1986f85b",
+                "source": "ba7b203f-65f0-4ee9-9273-489cb696a0a3",
+                "target": "cfa3f040-05c5-4636-9f60-e5ad0ebe005c",
+                "type": "unconditionalEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "d20e6f2c-6c37-47ff-8a30-3873e6ff2003",
+                "source": "cfa3f040-05c5-4636-9f60-e5ad0ebe005c",
+                "target": "c9268f5e-ce13-49d3-8e25-4e127ac25b0a",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Pass",
+            "data": {
+                "conditionKind": "pass"
+            }
+        },
+        {
+            "type": "exactValueEdge",
+            "title": "if 41",
+            "data": {
+                "value": "41"
+            },
+            "reactFlow": {
+                "id": "03038bb6-1351-40d9-9eeb-69e4f2b67148",
+                "source": "cfa3f040-05c5-4636-9f60-e5ad0ebe005c",
+                "target": "a927fb5d-6806-4492-b7be-7f5bdaa48972",
+                "type": "exactValueEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "f9372fed-ad26-4457-800e-19ea6a4a44e6",
+                "source": "cfa3f040-05c5-4636-9f60-e5ad0ebe005c",
+                "target": "1bda0472-f963-4c90-81b5-a71bab5bb29b",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Fail",
+            "data": {
+                "conditionKind": "fail"
+            }
+        },
+        {
+            "type": "unconditionalEdge",
+            "title": "",
+            "data": {},
+            "reactFlow": {
+                "id": "f2de6c44-a091-46aa-ad35-5814af5863c2",
+                "source": "1bda0472-f963-4c90-81b5-a71bab5bb29b",
+                "target": "25bc28c1-182d-4f6c-bbc0-8e7819d2be8e",
+                "type": "unconditionalEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "b5b7f2e2-000f-44d1-a862-3eba71e22ad5",
+                "source": "25bc28c1-182d-4f6c-bbc0-8e7819d2be8e",
+                "target": "1bda0472-f963-4c90-81b5-a71bab5bb29b",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Fail",
+            "data": {
+                "conditionKind": "fail"
+            }
+        },
+        {
+            "type": "exactValueEdge",
+            "title": "if 41",
+            "data": {
+                "value": "41"
+            },
+            "reactFlow": {
+                "id": "278a4c85-f3a6-40fe-963c-0636dcb6cfe7",
+                "source": "25bc28c1-182d-4f6c-bbc0-8e7819d2be8e",
+                "target": "a927fb5d-6806-4492-b7be-7f5bdaa48972",
+                "type": "exactValueEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "e74b6f53-4262-4abb-a55d-73e308f3fbcb",
+                "source": "25bc28c1-182d-4f6c-bbc0-8e7819d2be8e",
+                "target": "c9268f5e-ce13-49d3-8e25-4e127ac25b0a",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Pass",
+            "data": {
+                "conditionKind": "pass"
+            }
+        },
+        {
+            "type": "unconditionalEdge",
+            "title": "",
+            "data": {},
+            "reactFlow": {
+                "id": "471db234-3230-465c-943f-60e15eef3264",
+                "source": "a927fb5d-6806-4492-b7be-7f5bdaa48972",
+                "target": "7d9d5ee4-b093-450f-bf1e-194386bf54c6",
+                "type": "unconditionalEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            }
+        },
+        {
+            "type": "passFailEdge",
+            "title": "Fail",
+            "data": {
+                "conditionKind": "fail"
+            },
+            "reactFlow": {
+                "id": "1ea64299-35af-43f4-8304-837c3e4e34ff",
+                "source": "7d9d5ee4-b093-450f-bf1e-194386bf54c6",
+                "target": "a927fb5d-6806-4492-b7be-7f5bdaa48972",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "9f173f84-1b19-4fe7-848c-9ce81dcd61aa",
+                "source": "7d9d5ee4-b093-450f-bf1e-194386bf54c6",
+                "target": "c9268f5e-ce13-49d3-8e25-4e127ac25b0a",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Pass",
+            "data": {
+                "conditionKind": "pass"
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "6cf19ed6-7230-4e10-87b9-aac45418b716",
+                "source": "c9268f5e-ce13-49d3-8e25-4e127ac25b0a",
+                "target": "c9268f5e-ce13-49d3-8e25-4e127ac25b0a",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Fail",
+            "data": {
+                "conditionKind": "fail"
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "75c49cf4-cfed-4772-a3b3-647494c101f6",
+                "source": "c9268f5e-ce13-49d3-8e25-4e127ac25b0a",
+                "target": "85a2b40c-beb9-4f72-96a6-849d8716a239",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Pass",
+            "data": {
+                "conditionKind": "pass"
+            }
+        },
+        {
+            "reactFlow": {
+                "id": "3a600997-f4fe-47b2-b00d-38c3b9e5f963",
+                "source": "85a2b40c-beb9-4f72-96a6-849d8716a239",
+                "target": "85a2b40c-beb9-4f72-96a6-849d8716a239",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "Fail",
+            "data": {
+                "conditionKind": "fail"
+            }
+        }
+    ]
+}
