@@ -4,6 +4,8 @@ import sampleData from "../exampleFlow.json";
 export const flows: { [id: string]: PolyglotFlow } = {
     "654251f1-a660-46ec-9294-5d92eabf6704": {
         id: "654251f1-a660-46ec-9294-5d92eabf6704",
+        title: "Example Flow",
+        description: "This is an example flow",
         nodes: [
             {
                 type: "start",

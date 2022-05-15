@@ -1,5 +1,7 @@
 {
     "id": "d28acead-dbcd-43bd-8559-e6876fb8dd6c",
+    "title": "Media e Varianza",
+    "description": "Lezione, esercizio e coding dei concetti di media e varianza",
     "nodes": [
         {
             "type": "lessonNode",
@@ -29,7 +31,9 @@
             "difficulty": 1,
             "data": {
                 "question": "media tra 2 4 6 8",
-                "correctAnswer": "5"
+                "correctAnswers": [
+                    "5"
+                ]
             },
             "reactFlow": {
                 "id": "727fcaab-31e3-4c7e-b630-d377c9ccdf66",
@@ -43,7 +47,8 @@
                 },
                 "width": 117,
                 "height": 40,
-                "dragging": false
+                "dragging": false,
+                "selected": false
             }
         },
         {
@@ -74,11 +79,16 @@
             "difficulty": 1,
             "data": {
                 "question": "domandona",
-                "correctAnswers": [],
+                "correctAnswers": [
+                    "risposta 4"
+                ],
+                "isChoiceCorrect": [
+                    false,
+                    true
+                ],
                 "choices": [
                     "risposta 1",
-                    "risposta 2",
-                    "risposta 3"
+                    "risposta 4"
                 ]
             },
             "reactFlow": {
@@ -93,7 +103,8 @@
                 },
                 "width": 92,
                 "height": 40,
-                "dragging": false
+                "dragging": false,
+                "selected": false
             }
         },
         {
@@ -124,7 +135,9 @@
             "difficulty": 1,
             "data": {
                 "question": "varianza deasdfa",
-                "correctAnswer": "42"
+                "correctAnswers": [
+                    "42"
+                ]
             },
             "reactFlow": {
                 "id": "cfa3f040-05c5-4636-9f60-e5ad0ebe005c",
@@ -170,6 +183,11 @@
             "data": {
                 "question": "domanda",
                 "correctAnswers": [],
+                "isChoiceCorrect": [
+                    false,
+                    false,
+                    false
+                ],
                 "choices": [
                     "risposta `",
                     "risposta 2",
@@ -219,7 +237,9 @@
             "difficulty": 1,
             "data": {
                 "question": "domandissima",
-                "correctAnswer": "42"
+                "correctAnswers": [
+                    "42"
+                ]
             },
             "reactFlow": {
                 "id": "7d9d5ee4-b093-450f-bf1e-194386bf54c6",
@@ -294,7 +314,8 @@
                     "width": 25,
                     "height": 25
                 }
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}"
         },
         {
             "reactFlow": {
@@ -312,7 +333,8 @@
             "title": "Fail",
             "data": {
                 "conditionKind": "fail"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "reactFlow": {
@@ -324,13 +346,15 @@
                     "type": "arrow",
                     "width": 25,
                     "height": 25
-                }
+                },
+                "selected": false
             },
             "type": "passFailEdge",
             "title": "Pass",
             "data": {
                 "conditionKind": "pass"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "type": "unconditionalEdge",
@@ -346,7 +370,8 @@
                     "width": 25,
                     "height": 25
                 }
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}"
         },
         {
             "reactFlow": {
@@ -364,7 +389,8 @@
             "title": "Fail",
             "data": {
                 "conditionKind": "fail"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "reactFlow": {
@@ -382,7 +408,8 @@
             "title": "Pass",
             "data": {
                 "conditionKind": "pass"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "type": "unconditionalEdge",
@@ -398,7 +425,8 @@
                     "width": 25,
                     "height": 25
                 }
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}"
         },
         {
             "reactFlow": {
@@ -416,7 +444,8 @@
             "title": "Pass",
             "data": {
                 "conditionKind": "pass"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "type": "exactValueEdge",
@@ -434,7 +463,8 @@
                     "width": 25,
                     "height": 25
                 }
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    return (String.Equals(context.Condition.Data.value, context.JourneyContext.SubmittedCode), \"Exact value edge\");\n}"
         },
         {
             "reactFlow": {
@@ -452,7 +482,8 @@
             "title": "Fail",
             "data": {
                 "conditionKind": "fail"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "type": "unconditionalEdge",
@@ -468,7 +499,8 @@
                     "width": 25,
                     "height": 25
                 }
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}"
         },
         {
             "reactFlow": {
@@ -486,7 +518,8 @@
             "title": "Fail",
             "data": {
                 "conditionKind": "fail"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "type": "exactValueEdge",
@@ -504,7 +537,8 @@
                     "width": 25,
                     "height": 25
                 }
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    return (String.Equals(context.Condition.Data.value, context.JourneyContext.SubmittedCode), \"Exact value edge\");\n}"
         },
         {
             "reactFlow": {
@@ -522,7 +556,8 @@
             "title": "Pass",
             "data": {
                 "conditionKind": "pass"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "type": "unconditionalEdge",
@@ -538,7 +573,8 @@
                     "width": 25,
                     "height": 25
                 }
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}"
         },
         {
             "type": "passFailEdge",
@@ -556,7 +592,8 @@
                     "width": 25,
                     "height": 25
                 }
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "reactFlow": {
@@ -574,7 +611,8 @@
             "title": "Pass",
             "data": {
                 "conditionKind": "pass"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "reactFlow": {
@@ -592,7 +630,8 @@
             "title": "Fail",
             "data": {
                 "conditionKind": "fail"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "reactFlow": {
@@ -610,7 +649,8 @@
             "title": "Pass",
             "data": {
                 "conditionKind": "pass"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         },
         {
             "reactFlow": {
@@ -628,7 +668,8 @@
             "title": "Fail",
             "data": {
                 "conditionKind": "fail"
-            }
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
         }
     ]
 }
