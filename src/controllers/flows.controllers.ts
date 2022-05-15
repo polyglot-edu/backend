@@ -27,9 +27,6 @@ export async function updateFlow(req: Request<{ id: string }>, res: Response) {
     // TODO: FIXME: custom validation here for flow
     // await body("flow", "Flow is required").exists().run(req);
 
-    console.log(req.params)
-    console.log(req.body)
-
     const flow = flows[req.params.id];
     if (!flow) {
         res.status(404).send();
@@ -49,5 +46,7 @@ export async function createFlow(req: Request<PolyglotFlow>, res: Response) {
     }
 
     flows[newFlow.id] = newFlow;
-    res.status(200).send();
+    res.status(200).send({
+        id: newFlow.id,
+    });
 }
