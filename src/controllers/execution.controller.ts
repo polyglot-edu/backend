@@ -20,7 +20,19 @@ export async function getInitialExercise(req: Request<{}, any, GetInitialExercis
         return;
     }
 
-    res.status(200).json(firstNode);
+    const outgoingEdges = currentFlow.edges.filter(edge => edge.reactFlow.source === firstNode.reactFlow.id);
+
+    const actualNode = {
+        ...firstNode,
+        validation: outgoingEdges.map(e => ({
+            id: e.reactFlow.id,
+            title: e.title,
+            code: e.code,
+            data: e.data,
+        }))
+    }
+
+    res.status(200).json(actualNode);
 }
 
 type GetNextExerciseBody = {
@@ -44,6 +56,17 @@ export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>
         res.status(404).send();
         return;
     }
+    const outgoingEdges = currentFlow.edges.filter(edge => edge.reactFlow.source === nextNode.reactFlow.id);
 
-    res.status(200).json(nextNode);
+    const actualNode = {
+        ...nextNode,
+        validation: outgoingEdges.map(e => ({
+            id: e.reactFlow.id,
+            title: e.title,
+            code: e.code,
+            data: e.data,
+        }))
+    }
+
+    res.status(200).json(actualNode);
 }
