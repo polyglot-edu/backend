@@ -2,6 +2,7 @@ import express from 'express';
 import * as ExecutionController from "../controllers/execution.controller";
 import { Request } from "express";
 import * as flow from "../exampleFlow.json";
+import { PolyglotNode } from '../types';
 
 const router = express.Router();
 
@@ -12,39 +13,59 @@ router.post("/first", ExecutionController.getInitialExercise)
 /**
  * ALEXA TEST API
  */
+let lastExercise: PolyglotNode | null = null
 router.post("/alexa/next", async (req, res) => {
     const satisfiedConditions = flow.edges.map(e => e.reactFlow.id);
     const currentFlow = flow;
 
     const satisfiedEdges = currentFlow.edges.filter(edge => satisfiedConditions.includes(edge.reactFlow.id));
-    const possibleNextNodes = satisfiedEdges.map(edge => currentFlow.nodes.find(node => node.reactFlow.id === edge.reactFlow.target)).filter(n => n?.type === "multipleChoiceQuestionNode");
+    const possibleNextNodes = satisfiedEdges.map(edge => currentFlow.nodes.find(node => node.reactFlow.id === edge.reactFlow.target)).filter(n => n?.type === "multipleChoiceQuestionNode" || n?.type === "lessonNode");
     const nextNode = possibleNextNodes[Math.floor(Math.random() * possibleNextNodes.length)];
 
     if (!nextNode) {
         res.status(404).send();
         return;
     }
-    const outgoingEdges = currentFlow.edges.filter(edge => edge.reactFlow.source === nextNode.reactFlow.id);
-
     
-    const actualNode = {
-        title: nextNode.title,
-        description: nextNode.description,
-        question: nextNode.data.question ?? "",
-        choices: nextNode.data.choices ?? [],
-    }
+    if (nextNode.type === "multipleChoiceQuestionNode") {
+        lastExercise = nextNode;
+        
+        const actualNode = {
+            text: `${nextNode.data.question ?? ""}. ${nextNode.data.choices?.join(". ") ?? ""}`,
+            data: {
+                "expectAnswer": true
+            }
+        }
+        
+        res.status(200).json(actualNode);
+    } else if (nextNode.type === "lessonNode") {
+        lastExercise = nextNode;
 
-    res.status(200).json(actualNode);
+        const actualNode = {
+            text: `some example lesson text from a pdf`,
+            data: {
+                "expectAnswer": false
+            }
+        }
+
+        res.status(200).json(actualNode);
+    }
 })
 
 type AlexaSubmitRequestBody = {
-    answer: string;
+    answer?: string;
 }
 router.post("/alexa/submit", async (req: Request<{}, any, AlexaSubmitRequestBody>, res) => {
-    console.log(req.body.answer);
-    let statusAnswer = req.body.answer !== "" ? 200 : 500;
-    console.log(statusAnswer)
-    res.status(statusAnswer).send();
+    if(lastExercise?.type === "multipleChoiceQuestionNode") {
+        let hasAnswer = req.body.answer !== undefined ? 200 : 400;
+        if (hasAnswer === 200) {
+            res.status(hasAnswer).json({ "result": Math.random() > 0.5 ? "Not correct" : "Great job!"  });
+        } else {
+            res.status(hasAnswer).send();
+        }
+    } else if (lastExercise?.type === "lessonNode") {
+        res.status(200).json({ "result": "Lesson done" });
+    }
 })
 
 export default router;
