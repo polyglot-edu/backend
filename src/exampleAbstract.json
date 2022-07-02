@@ -1,0 +1,117 @@
+{
+    "id": "dfea1631-d1a6-49c5-aba8-e741cc23087d",
+    "title": "New Flow",
+    "description": "",
+    "nodes": [
+        {
+            "type": "multipleChoiceQuestionNode",
+            "title": "New Node",
+            "description": "",
+            "difficulty": 1,
+            "data": {
+                "question": "",
+                "correctAnswers": [],
+                "isChoiceCorrect": [],
+                "choices": []
+            },
+            "reactFlow": {
+                "id": "98a5c077-3bfe-417d-b038-1f9932283d32",
+                "type": "multipleChoiceQuestionNode",
+                "position": {
+                    "x": 465.00000000000006,
+                    "y": 270
+                },
+                "data": {
+                    "label": "New Node"
+                },
+                "width": 88,
+                "height": 40,
+                "selected": false,
+                "dragging": false
+            }
+        },
+        {
+            "type": "codingQuestionNode",
+            "title": "New Node",
+            "description": "",
+            "difficulty": 1,
+            "data": {},
+            "reactFlow": {
+                "id": "477bdc0f-b5d8-4591-8b8a-ce9190d68082",
+                "type": "codingQuestionNode",
+                "position": {
+                    "x": 705,
+                    "y": 195
+                },
+                "data": {
+                    "label": "New Node"
+                },
+                "width": 88,
+                "height": 40,
+                "selected": false,
+                "dragging": false
+            }
+        },
+        {
+            "type": "codingQuestionNode",
+            "title": "New Node",
+            "description": "",
+            "difficulty": 1,
+            "data": {},
+            "reactFlow": {
+                "id": "395ac605-359b-4a7a-9b4a-141a934af730",
+                "type": "codingQuestionNode",
+                "position": {
+                    "x": 270,
+                    "y": 165
+                },
+                "data": {
+                    "label": "New Node"
+                },
+                "width": 88,
+                "height": 40,
+                "selected": false
+            }
+        }
+    ],
+    "edges": [
+        {
+            "reactFlow": {
+                "id": "d6de563c-74b3-4889-8d80-fde94984132e",
+                "source": "395ac605-359b-4a7a-9b4a-141a934af730",
+                "target": "98a5c077-3bfe-417d-b038-1f9932283d32",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "",
+            "data": {
+                "conditionKind": "pass"
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
+        },
+        {
+            "reactFlow": {
+                "id": "10c0e0fc-05a3-40ed-9079-bb06151c66f6",
+                "source": "98a5c077-3bfe-417d-b038-1f9932283d32",
+                "target": "477bdc0f-b5d8-4591-8b8a-ce9190d68082",
+                "type": "passFailEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                }
+            },
+            "type": "passFailEdge",
+            "title": "",
+            "data": {
+                "conditionKind": "pass"
+            },
+            "code": "\n(bool, string) validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
+        }
+    ]
+}
