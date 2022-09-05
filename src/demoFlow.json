@@ -1,0 +1,207 @@
+{
+    "id": "b2cae670-dffc-4f00-9585-c4b693a0f5d7",
+    "title": "September 2022 Demo",
+    "description": "This fragment is part of an introductory statistics course.\nConcepts covered: average/mean value, median, mode.",
+    "nodes": [
+        {
+            "runtimeData": {
+                "challengeSetup": [],
+                "challengeContent": [
+                    {
+                        "type": "markdown",
+                        "content": "# title\nsubtitle sas  \nciao"
+                    }
+                ]
+            },
+            "type": "lessonTextNode",
+            "title": "Introduction to the average value",
+            "description": "",
+            "difficulty": 1,
+            "data": {
+                "text": "# title\nsubtitle sas  \nciao"
+            },
+            "reactFlow": {
+                "id": "ac0a2afc-66b5-41c4-97a2-f2cb76abaaaa",
+                "type": "lessonTextNode",
+                "position": {
+                    "x": 30,
+                    "y": 30
+                },
+                "data": {
+                    "label": "Introduction to the average value"
+                },
+                "width": 228,
+                "height": 40,
+                "selected": false,
+                "dragging": false
+            }
+        },
+        {
+            "runtimeData": {
+                "challengeSetup": [],
+                "challengeContent": [
+                    {
+                        "type": "markdown",
+                        "content": "## Coding the average  \nNow that you know what the average is, let's calculate it using C#  \nFind and print the average value of the `items` array",
+                        "priority": 0
+                    },
+                    {
+                        "type": "csharp",
+                        "content": "using System;\n\nint main() {\n    Console.WriteLine(\"Hello World!\");\n    return 0;\n}",
+                        "priority": 1
+                    }
+                ]
+            },
+            "type": "codingQuestionNode",
+            "title": "Coding the average",
+            "description": "",
+            "difficulty": 1,
+            "data": {
+                "question": "## Coding the average  \nNow that you know what the average is, let's calculate it using C#  \nFind and print the average value of the `items` array",
+                "codeTemplate": "using System;\n\nint main() {\n    Console.WriteLine(\"Hello World!\");\n    return 0;\n}",
+                "language": "csharp"
+            },
+            "reactFlow": {
+                "id": "533c51ff-02ce-4dbe-9fa6-2ad787d1546e",
+                "type": "codingQuestionNode",
+                "position": {
+                    "x": 330,
+                    "y": 165
+                },
+                "data": {
+                    "label": "Coding the average"
+                },
+                "width": 143,
+                "height": 40,
+                "selected": false,
+                "dragging": false
+            }
+        },
+        {
+            "type": "lessonTextNode",
+            "title": "End",
+            "description": "",
+            "difficulty": 1,
+            "data": {
+                "text": "well done!"
+            },
+            "reactFlow": {
+                "id": "7306037d-8ada-4baa-ab9b-5c699a196238",
+                "type": "lessonTextNode",
+                "position": {
+                    "x": 585,
+                    "y": 285
+                },
+                "data": {
+                    "label": "End"
+                },
+                "width": 45,
+                "height": 40,
+                "selected": false,
+                "dragging": false
+            },
+            "runtimeData": {
+                "challengeSetup": [],
+                "challengeContent": [
+                    {
+                        "type": "markdown",
+                        "content": "well done!"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "lessonTextNode",
+            "title": "New Node",
+            "description": "",
+            "difficulty": 1,
+            "data": {
+                "text": "well done! 💪🏻"
+            },
+            "reactFlow": {
+                "id": "31b5431d-9fde-4d35-831a-8c20ef6274b8",
+                "type": "lessonTextNode",
+                "position": {
+                    "x": 585,
+                    "y": 195
+                },
+                "data": {
+                    "label": "New Node"
+                },
+                "width": 88,
+                "height": 40,
+                "selected": false,
+                "dragging": false
+            },
+            "runtimeData": {
+                "challengeSetup": [],
+                "challengeContent": [
+                    {
+                        "type": "markdown",
+                        "content": "well done! 💪🏻"
+                    }
+                ]
+            }
+        }
+    ],
+    "edges": [
+        {
+            "type": "unconditionalEdge",
+            "title": "",
+            "data": {},
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "reactFlow": {
+                "id": "7db1f85e-479a-4846-aab6-6d4178971b17",
+                "source": "ac0a2afc-66b5-41c4-97a2-f2cb76abaaaa",
+                "target": "533c51ff-02ce-4dbe-9fa6-2ad787d1546e",
+                "type": "unconditionalEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                },
+                "selected": false
+            }
+        },
+        {
+            "type": "customValidationEdge",
+            "title": "test passed",
+            "data": {
+                "code": "async Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var passed = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().First().Value.Equals(4);\n    return (passed, \"test\");\n}"
+            },
+            "code": "async Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var passed = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().First().Value.Equals(4);\n    return (passed, \"test\");\n}",
+            "reactFlow": {
+                "id": "e9c682b1-5d97-472a-bd5e-bb8ddb2087ff",
+                "source": "533c51ff-02ce-4dbe-9fa6-2ad787d1546e",
+                "target": "7306037d-8ada-4baa-ab9b-5c699a196238",
+                "type": "customValidationEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                },
+                "selected": false
+            }
+        },
+        {
+            "type": "customValidationEdge",
+            "title": "coded the average",
+            "data": {
+                "code": "async Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var x = await CSharpScript.RunAsync<(bool, string)>($\"{context.JourneyContext.SubmittedCode}\" + @\"\n        var _random = new Random();\n        var _param = Enumerable.Range(_random.Next(3, 6), _random.Next(6, 8))\n                            .Select(i => _random.Next(100));\n        var _expected = _param.Average();\n        var _result = average(_param);\n        return (_expected == _result, $\"\"Test: {param}. Expected: {_expected}. Result: {_result}.\"\");\n    \", Microsoft.CodeAnalysis.Scripting.ScriptOptions.Default.AddImports(\"System.Linq\"));\n    return x.ReturnValue;\n}"
+            },
+            "code": "async Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var x = await CSharpScript.RunAsync<(bool, string)>($\"{context.JourneyContext.SubmittedCode}\" + @\"\n        var _random = new Random();\n        var _param = Enumerable.Range(_random.Next(3, 6), _random.Next(6, 8))\n                            .Select(i => _random.Next(100));\n        var _expected = _param.Average();\n        var _result = average(_param);\n        return (_expected == _result, $\"\"Test: {param}. Expected: {_expected}. Result: {_result}.\"\");\n    \", Microsoft.CodeAnalysis.Scripting.ScriptOptions.Default.AddImports(\"System.Linq\"));\n    return x.ReturnValue;\n}",
+            "reactFlow": {
+                "id": "7fd6cfcb-26e5-4e60-a46b-c2f3c869ab13",
+                "source": "533c51ff-02ce-4dbe-9fa6-2ad787d1546e",
+                "target": "31b5431d-9fde-4d35-831a-8c20ef6274b8",
+                "type": "customValidationEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                },
+                "selected": false
+            }
+        }
+    ]
+}

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { flows } from "../models/flow.model";
+import { PolyglotNode } from "../types";
 
 type GetInitialExerciseBody = { flowId: string }
 export async function getInitialExercise(req: Request<{}, any, GetInitialExerciseBody>, res: Response) {
@@ -29,14 +30,18 @@ export async function getInitialExercise(req: Request<{}, any, GetInitialExercis
             title: e.title,
             code: e.code,
             data: e.data,
+            type: e.type,
         }))
     }
 
     res.status(200).json(actualNode);
 }
 
+let currentExercise: any = null;
+
 type GetNextExerciseBody = {
     flowId: string;
+    currentExerciseId: string;
     satisfiedConditions: string[];
 }
 export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>, res: Response) {
@@ -45,6 +50,11 @@ export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>
 
     if (!currentFlow) {
         res.status(404).send();
+        return;
+    }
+
+    if (satisfiedConditions.length === 0) {
+        res.status(200).json(currentExercise);
         return;
     }
 
@@ -68,5 +78,6 @@ export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>
         }))
     }
 
+    currentExercise = actualNode;
     res.status(200).json(actualNode);
 }
