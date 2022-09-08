@@ -75,6 +75,7 @@ export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>
             title: e.title,
             code: e.code,
             data: e.data,
+            type: e.type,
         }))
     }
 

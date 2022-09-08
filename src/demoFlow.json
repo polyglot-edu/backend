@@ -9,28 +9,28 @@
                 "challengeContent": [
                     {
                         "type": "markdown",
-                        "content": "# The mean value, the median, and the mode  \nIn math, the word mean refers to what’s informally called the average. The mean is the number you get by dividing the sum of a set of values by the number of values in the set.  \nIn contrast, the median is the middle number in a set of ordered values.  \nThe mode is the most frequently repeated value in the set."
+                        "content": "# The mean value and the median\nIn math, the word mean refers to what’s informally called the average. The mean is the number you get by dividing the sum of a set of values by the number of values in the set.  \nIn contrast, the median is the middle number in a set of ordered values.  "
                     }
                 ]
             },
             "type": "lessonTextNode",
-            "title": "Introduction to the average value",
+            "title": "Introduction to the mean and the median",
             "description": "",
             "difficulty": 1,
             "data": {
-                "text": "# The mean value, the median, and the mode  \nIn math, the word mean refers to what’s informally called the average. The mean is the number you get by dividing the sum of a set of values by the number of values in the set.  \nIn contrast, the median is the middle number in a set of ordered values.  \nThe mode is the most frequently repeated value in the set."
+                "text": "# The mean value and the median\nIn math, the word mean refers to what’s informally called the average. The mean is the number you get by dividing the sum of a set of values by the number of values in the set.  \nIn contrast, the median is the middle number in a set of ordered values.  "
             },
             "reactFlow": {
                 "id": "ac0a2afc-66b5-41c4-97a2-f2cb76abaaaa",
                 "type": "lessonTextNode",
                 "position": {
-                    "x": 30.00000000000003,
+                    "x": -29.99999999999997,
                     "y": 165
                 },
                 "data": {
-                    "label": "Introduction to the average value"
+                    "label": "Introduction to the mean and the median"
                 },
-                "width": 228,
+                "width": 278,
                 "height": 40,
                 "selected": false,
                 "dragging": false
@@ -157,7 +157,7 @@
                 "id": "1be1a179-d620-4cc0-b5ae-f8f98a8a27c8",
                 "type": "codingQuestionNode",
                 "position": {
-                    "x": 705,
+                    "x": 840,
                     "y": 165
                 },
                 "data": {
@@ -242,6 +242,21 @@
                 "height": 40,
                 "selected": false,
                 "dragging": false
+            },
+            "runtimeData": {
+                "challengeSetup": [],
+                "challengeContent": [
+                    {
+                        "type": "markdown",
+                        "content": "Now it's your turn. Calculate the mean of the following set.  \n  \n$\\{32, 92, 35, 89, 17\\}$\n\n<details>\n  <summary>Hint</summary>\n  \n  $$\\frac{32 + 92 + 35 + 89 + 17}{5} = ?$$\n</details>",
+                        "priority": 0
+                    },
+                    {
+                        "type": "csharp",
+                        "content": "",
+                        "priority": 1
+                    }
+                ]
             }
         },
         {
@@ -250,7 +265,7 @@
             "description": "",
             "difficulty": 1,
             "data": {
-                "text": ""
+                "text": "| Mean | Median |\n|:---:|:---:|\n| Mean is the ratio of the sum of all the values<br>of the data set to the total number of values. | Median represents the middlemost value of a data set. |\n| The data set items are not arranged in ascending<br>order before finding the mean. | The data set items are arranged in ascending order<br>before finding the median. |\n| The formula to calculate the mean is the same if there<br>are an even or odd number of items in the data set. | The formula is different for an even and an odd number<br>of items in the data set. |\n| Mean takes every value in the given data set <br>for the calculation. | Every value in the given data set is not taken<br>while calculating the median. |\n| Mean is not suitable if there are drastically high and<br>low observations in the data set. This data may not<br>clearly represent the data taken into consideration.<br>Mean is best suited for the normal distribution data. | Median is suitable if there are very high and low<br>values since it arranges all the values in ascending order.<br>The median value is more appropriate for skewed distribution. |\n| Mean formula: <br> given the set $\\{x_1, x_2, ..., x_n\\}$ <br> $$\\frac{\\sum\\limits_{i=1}^n x_i}{n}$$ | Median formula: <br> given the set $\\{x_1, x_2, ..., x_n\\}$ <br><br> if n is odd: &nbsp; \\($p = \\frac{n+1}{2}$\\) $$ x_{p+1} $$ if n is even: &nbsp; \\($p = \\frac{n}{2}$\\) $$ \\frac{x_p + x_{p + 1}}{2} $$ |"
             },
             "reactFlow": {
                 "id": "c9473f2d-fa81-4808-84e9-e1fb9a7eba24",
@@ -272,7 +287,7 @@
                 "challengeContent": [
                     {
                         "type": "markdown",
-                        "content": ""
+                        "content": "| Mean | Median |\n|:---:|:---:|\n| Mean is the ratio of the sum of all the values<br>of the data set to the total number of values. | Median represents the middlemost value of a data set. |\n| The data set items are not arranged in ascending<br>order before finding the mean. | The data set items are arranged in ascending order<br>before finding the median. |\n| The formula to calculate the mean is the same if there<br>are an even or odd number of items in the data set. | The formula is different for an even and an odd number<br>of items in the data set. |\n| Mean takes every value in the given data set <br>for the calculation. | Every value in the given data set is not taken<br>while calculating the median. |\n| Mean is not suitable if there are drastically high and<br>low observations in the data set. This data may not<br>clearly represent the data taken into consideration.<br>Mean is best suited for the normal distribution data. | Median is suitable if there are very high and low<br>values since it arranges all the values in ascending order.<br>The median value is more appropriate for skewed distribution. |\n| Mean formula: <br> given the set $\\{x_1, x_2, ..., x_n\\}$ <br> $$\\frac{\\sum\\limits_{i=1}^n x_i}{n}$$ | Median formula: <br> given the set $\\{x_1, x_2, ..., x_n\\}$ <br><br> if n is odd: &nbsp; \\($p = \\frac{n+1}{2}$\\) $$ x_{p+1} $$ if n is even: &nbsp; \\($p = \\frac{n}{2}$\\) $$ \\frac{x_p + x_{p + 1}}{2} $$ |"
                     }
                 ]
             }
@@ -289,7 +304,7 @@
                 "id": "f6d047d1-83bf-448b-b8df-cb5cd1811adc",
                 "type": "lessonTextNode",
                 "position": {
-                    "x": 615,
+                    "x": 780,
                     "y": 285
                 },
                 "data": {
@@ -325,7 +340,7 @@
                 "id": "9d1026d2-dd46-46f7-94c3-851f840ea008",
                 "type": "closeEndedQuestionNode",
                 "position": {
-                    "x": 780,
+                    "x": 945.0000000000001,
                     "y": 285
                 },
                 "data": {
@@ -335,33 +350,63 @@
                 "height": 40,
                 "selected": false,
                 "dragging": false
+            },
+            "runtimeData": {
+                "challengeSetup": [],
+                "challengeContent": [
+                    {
+                        "type": "markdown",
+                        "content": "Now it's your turn. Calculate the mean of the following set.  \n  \n$\\{32, 92, 35, 89, 17\\}$\n\n<details>\n  <summary>Hint</summary>\n\n  First order the set in ascending order, $\\{17, 32, 35, 89, 92 \\}$  \n  The set has an odd number of values, so the median is the middle value, that is, the third value.\n</details>",
+                        "priority": 0
+                    },
+                    {
+                        "type": "csharp",
+                        "content": "",
+                        "priority": 1
+                    }
+                ]
             }
         },
         {
             "type": "closeEndedQuestionNode",
-            "title": "New Node",
+            "title": "Mean & Median question",
             "description": "",
             "difficulty": 1,
             "data": {
-                "question": "",
+                "question": "Calculate the mean minus the median of the set $\\{3, 5, 7, 9, 11\\}$",
                 "correctAnswers": [
-                    ""
+                    "0"
                 ]
             },
             "reactFlow": {
                 "id": "ddb6f2eb-5d57-44c5-8d74-f09c97935f3d",
                 "type": "closeEndedQuestionNode",
                 "position": {
-                    "x": 1005,
+                    "x": 975,
                     "y": 45
                 },
                 "data": {
-                    "label": "New Node"
+                    "label": "Mean & Median question"
                 },
-                "width": 88,
+                "width": 180,
                 "height": 40,
                 "selected": false,
                 "dragging": false
+            },
+            "runtimeData": {
+                "challengeSetup": [],
+                "challengeContent": [
+                    {
+                        "type": "markdown",
+                        "content": "Calculate the mean minus the median of the set $\\{3, 5, 7, 9, 11\\}$",
+                        "priority": 0
+                    },
+                    {
+                        "type": "csharp",
+                        "content": "",
+                        "priority": 1
+                    }
+                ]
             }
         }
     ],
@@ -444,7 +489,7 @@
         },
         {
             "type": "customValidationEdge",
-            "title": "coding the median",
+            "title": "coded the median",
             "data": {
                 "code": "async Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var imports = new[] { \"System.Linq\", \"System\", \"System.Collections.Generic\" };\n    var assemblies = new[] { typeof(Enumerable).Assembly, typeof(Random).Assembly, typeof(System.Collections.IEnumerable).Assembly };\n    var x = await CSharpScript.RunAsync<(bool, string)>($\"{context.JourneyContext.SubmittedCode}\" + @\"\n        var _random = new Random();\n        var _paramOdd = Enumerable.Range(4, _random.Next(0, 4) * 2 + 1)\n                                .Select(i => _random.Next(100)).ToList();\n        var _paramEven = Enumerable.Range(4, _random.Next(1, 4) * 2)\n                                .Select(i => _random.Next(100)).ToList();\n        double _median(IEnumerable<int> values)\n        {\n            var middle = values.Count() / 2.0 - 0.5;\n            var sorted = values.OrderBy(i => i);\n            return (sorted.ElementAt((int)Math.Floor(middle)) + sorted.ElementAt((int)Math.Ceiling(middle))) / 2.0;\n        }\n        double _expectedOdd = _median(_paramOdd);\n        double _expectedEven = _median(_paramEven);\n        double _resultOdd = median(_paramOdd);\n        double _resultEven = median(_paramEven);\n        var _result = _expectedOdd == _resultOdd && _expectedEven == _resultEven;\n        return (_result, $@\"\"\n            Test: {string.Join(\"\",\"\", _paramOdd)}. Count: {_paramOdd.Count()} Expected: {_expectedOdd}. Result: {_resultOdd}. {(_expectedOdd == _resultOdd ? \"\"✅\"\" : \"\"❌\"\")}.\n            Test: {string.Join(\"\",\"\", _paramEven)}. Count: {_paramEven.Count()} Expected: {_expectedEven}. Result: {_resultEven}. {(_expectedEven == _resultEven ? \"\"✅\"\" : \"\"❌\"\")}.\n        \"\");\n    \", Microsoft.CodeAnalysis.Scripting.ScriptOptions.Default.AddImports(imports).AddReferences(assemblies));\n    return x.ReturnValue;\n}"
             },
@@ -502,7 +547,7 @@
         },
         {
             "type": "customValidationEdge",
-            "title": "coding the average",
+            "title": "coded the average",
             "data": {
                 "code": "async Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var imports = new[] { \"System.Linq\", \"System\", \"System.Collections.Generic\" };\n    var assemblies = new[] { typeof(Enumerable).Assembly, typeof(Random).Assembly, typeof(System.Collections.IEnumerable).Assembly };\n    var x = await CSharpScript.RunAsync<(bool, string)>($\"{context.JourneyContext.SubmittedCode}\" + @\"\n        var _random = new Random();\n        var _param = Enumerable.Range(_random.Next(3, 6), _random.Next(5, 8))\n                            .Select(i => _random.Next(100)).ToList();\n        double _expected = _param.Average();\n        double _result = median(_param);\n        return (_expected == _result, $\"\"Test: {string.Join(\"\",\"\", _param)}. Count: {_param.Count()} Expected: {_expected}. Result: {_result}.\"\");\n    \", Microsoft.CodeAnalysis.Scripting.ScriptOptions.Default.AddImports(imports).AddReferences(assemblies));\n    return x.ReturnValue;\n}"
             },
@@ -524,9 +569,9 @@
             "type": "customValidationEdge",
             "title": "wrong",
             "data": {
-                "code": "async Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var imports = new[] { \"System.Linq\", \"System\", \"System.Collections.Generic\" };\n    var assemblies = new[] { typeof(Enumerable).Assembly, typeof(Random).Assembly, typeof(System.Collections.IEnumerable).Assembly };\n    var x = await CSharpScript.RunAsync<(bool, string)>($\"{context.JourneyContext.SubmittedCode}\" + @\"\n        var _random = new Random();\n        var _paramOdd = Enumerable.Range(4, _random.Next(0, 4) * 2 + 1)\n                                .Select(i => _random.Next(100)).ToList();\n        var _paramEven = Enumerable.Range(4, _random.Next(1, 4) * 2)\n                                .Select(i => _random.Next(100)).ToList();\n        double _median(IEnumerable<int> values)\n        {\n            var middle = values.Count() / 2.0 - 0.5;\n            var sorted = values.OrderBy(i => i);\n            return (sorted.ElementAt((int)Math.Floor(middle)) + sorted.ElementAt((int)Math.Ceiling(middle))) / 2.0;\n        }\n        double _expectedOdd = _median(_paramOdd);\n        double _expectedEven = _median(_paramEven);\n        double _resultOdd = median(_paramOdd);\n        double _resultEven = median(_paramEven);\n        var _result = !(_expectedOdd == _resultOdd && _expectedEven == _resultEven);\n        var _feedback = (x, y) switch\n        {\n            (true, true) => \"\"median calculated correctly\"\",\n            (true, false) => \"\"median incorrect for even number of values\"\",\n            (false, true) => \"\"median incorrect for odd number of values\"\",\n            (false, false) => \"\"median incorrect for both even and odd number of values\"\"\n        };\n        return (_result, _feedback);\n    \", Microsoft.CodeAnalysis.Scripting.ScriptOptions.Default.AddImports(imports).AddReferences(assemblies));\n    return x.ReturnValue;\n}"
+                "code": "async Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var imports = new[] { \"System.Linq\", \"System\", \"System.Collections.Generic\" };\n    var assemblies = new[] { typeof(Enumerable).Assembly, typeof(Random).Assembly, typeof(System.Collections.IEnumerable).Assembly };\n    var x = await CSharpScript.RunAsync<(bool, string)>($\"{context.JourneyContext.SubmittedCode}\" + @\"\n        var _random = new Random();\n        var _paramOdd = Enumerable.Range(4, _random.Next(0, 4) * 2 + 1)\n                                .Select(i => _random.Next(100)).ToList();\n        var _paramEven = Enumerable.Range(4, _random.Next(1, 4) * 2)\n                                .Select(i => _random.Next(100)).ToList();\n        double _median(IEnumerable<int> values)\n        {\n            var middle = values.Count() / 2.0 - 0.5;\n            var sorted = values.OrderBy(i => i);\n            return (sorted.ElementAt((int)Math.Floor(middle)) + sorted.ElementAt((int)Math.Ceiling(middle))) / 2.0;\n        }\n        double _expectedOdd = _median(_paramOdd);\n        double _expectedEven = _median(_paramEven);\n        double _resultOdd = median(_paramOdd);\n        double _resultEven = median(_paramEven);\n        var _result = !(_expectedOdd == _resultOdd && _expectedEven == _resultEven);\n        var _feedback = (_expectedOdd == _resultOdd, _expectedEven == _resultEven) switch\n        {\n            (true, true) => \"\"median calculated correctly\"\",\n            (true, false) => \"\"median incorrect for even number of values\"\",\n            (false, true) => \"\"median incorrect for odd number of values\"\",\n            (false, false) => \"\"median incorrect for both even and odd number of values\"\"\n        };\n        if (_result && (_resultOdd == _paramOdd.Average() || _resultEven == _paramEven.Average()))\n        {\n            _result = false;\n            _feedback = \"\"calculated the average instead of the median\"\";\n        }\n        return (_result, _feedback);\n    \", Microsoft.CodeAnalysis.Scripting.ScriptOptions.Default.AddImports(imports).AddReferences(assemblies));\n    return x.ReturnValue;\n}"
             },
-            "code": "async Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var imports = new[] { \"System.Linq\", \"System\", \"System.Collections.Generic\" };\n    var assemblies = new[] { typeof(Enumerable).Assembly, typeof(Random).Assembly, typeof(System.Collections.IEnumerable).Assembly };\n    var x = await CSharpScript.RunAsync<(bool, string)>($\"{context.JourneyContext.SubmittedCode}\" + @\"\n        var _random = new Random();\n        var _paramOdd = Enumerable.Range(4, _random.Next(0, 4) * 2 + 1)\n                                .Select(i => _random.Next(100)).ToList();\n        var _paramEven = Enumerable.Range(4, _random.Next(1, 4) * 2)\n                                .Select(i => _random.Next(100)).ToList();\n        double _median(IEnumerable<int> values)\n        {\n            var middle = values.Count() / 2.0 - 0.5;\n            var sorted = values.OrderBy(i => i);\n            return (sorted.ElementAt((int)Math.Floor(middle)) + sorted.ElementAt((int)Math.Ceiling(middle))) / 2.0;\n        }\n        double _expectedOdd = _median(_paramOdd);\n        double _expectedEven = _median(_paramEven);\n        double _resultOdd = median(_paramOdd);\n        double _resultEven = median(_paramEven);\n        var _result = !(_expectedOdd == _resultOdd && _expectedEven == _resultEven);\n        var _feedback = (x, y) switch\n        {\n            (true, true) => \"\"median calculated correctly\"\",\n            (true, false) => \"\"median incorrect for even number of values\"\",\n            (false, true) => \"\"median incorrect for odd number of values\"\",\n            (false, false) => \"\"median incorrect for both even and odd number of values\"\"\n        };\n        return (_result, _feedback);\n    \", Microsoft.CodeAnalysis.Scripting.ScriptOptions.Default.AddImports(imports).AddReferences(assemblies));\n    return x.ReturnValue;\n}",
+            "code": "async Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var imports = new[] { \"System.Linq\", \"System\", \"System.Collections.Generic\" };\n    var assemblies = new[] { typeof(Enumerable).Assembly, typeof(Random).Assembly, typeof(System.Collections.IEnumerable).Assembly };\n    var x = await CSharpScript.RunAsync<(bool, string)>($\"{context.JourneyContext.SubmittedCode}\" + @\"\n        var _random = new Random();\n        var _paramOdd = Enumerable.Range(4, _random.Next(0, 4) * 2 + 1)\n                                .Select(i => _random.Next(100)).ToList();\n        var _paramEven = Enumerable.Range(4, _random.Next(1, 4) * 2)\n                                .Select(i => _random.Next(100)).ToList();\n        double _median(IEnumerable<int> values)\n        {\n            var middle = values.Count() / 2.0 - 0.5;\n            var sorted = values.OrderBy(i => i);\n            return (sorted.ElementAt((int)Math.Floor(middle)) + sorted.ElementAt((int)Math.Ceiling(middle))) / 2.0;\n        }\n        double _expectedOdd = _median(_paramOdd);\n        double _expectedEven = _median(_paramEven);\n        double _resultOdd = median(_paramOdd);\n        double _resultEven = median(_paramEven);\n        var _result = !(_expectedOdd == _resultOdd && _expectedEven == _resultEven);\n        var _feedback = (_expectedOdd == _resultOdd, _expectedEven == _resultEven) switch\n        {\n            (true, true) => \"\"median calculated correctly\"\",\n            (true, false) => \"\"median incorrect for even number of values\"\",\n            (false, true) => \"\"median incorrect for odd number of values\"\",\n            (false, false) => \"\"median incorrect for both even and odd number of values\"\"\n        };\n        if (_result && (_resultOdd == _paramOdd.Average() || _resultEven == _paramEven.Average()))\n        {\n            _result = false;\n            _feedback = \"\"calculated the average instead of the median\"\";\n        }\n        return (_result, _feedback);\n    \", Microsoft.CodeAnalysis.Scripting.ScriptOptions.Default.AddImports(imports).AddReferences(assemblies));\n    return x.ReturnValue;\n}",
             "reactFlow": {
                 "id": "77a60655-d7bb-4811-b999-6ab427310f85",
                 "source": "1be1a179-d620-4cc0-b5ae-f8f98a8a27c8",
@@ -582,45 +627,7 @@
             "reactFlow": {
                 "id": "7f6f8cb1-42a1-42da-9b8f-57b1d77e02fd",
                 "source": "ddb6f2eb-5d57-44c5-8d74-f09c97935f3d",
-                "target": "0e3e524d-dd35-460f-b321-a50a27a176fd",
-                "type": "passFailEdge",
-                "markerEnd": {
-                    "type": "arrow",
-                    "width": 25,
-                    "height": 25
-                }
-            },
-            "type": "passFailEdge",
-            "title": "",
-            "data": {
-                "conditionKind": "pass"
-            },
-            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
-        },
-        {
-            "reactFlow": {
-                "id": "49fae040-604c-409f-9438-375267a8bb68",
-                "source": "c9473f2d-fa81-4808-84e9-e1fb9a7eba24",
-                "target": "ddb6f2eb-5d57-44c5-8d74-f09c97935f3d",
-                "type": "passFailEdge",
-                "markerEnd": {
-                    "type": "arrow",
-                    "width": 25,
-                    "height": 25
-                }
-            },
-            "type": "passFailEdge",
-            "title": "",
-            "data": {
-                "conditionKind": "pass"
-            },
-            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
-        },
-        {
-            "reactFlow": {
-                "id": "2d122530-61d3-4433-84a0-714e970985e4",
-                "source": "ddb6f2eb-5d57-44c5-8d74-f09c97935f3d",
-                "target": "c9473f2d-fa81-4808-84e9-e1fb9a7eba24",
+                "target": "1be1a179-d620-4cc0-b5ae-f8f98a8a27c8",
                 "type": "passFailEdge",
                 "markerEnd": {
                     "type": "arrow",
@@ -630,11 +637,29 @@
                 "selected": false
             },
             "type": "passFailEdge",
-            "title": "wrong",
+            "title": "pass",
             "data": {
-                "conditionKind": "fail"
+                "conditionKind": "pass"
             },
             "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var isSubmissionCorrect = context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode);\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}"
+        },
+        {
+            "type": "unconditionalEdge",
+            "title": "",
+            "data": {},
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "reactFlow": {
+                "id": "49fae040-604c-409f-9438-375267a8bb68",
+                "source": "c9473f2d-fa81-4808-84e9-e1fb9a7eba24",
+                "target": "ddb6f2eb-5d57-44c5-8d74-f09c97935f3d",
+                "type": "unconditionalEdge",
+                "markerEnd": {
+                    "type": "arrow",
+                    "width": 25,
+                    "height": 25
+                },
+                "selected": false
+            }
         }
     ]
 }
