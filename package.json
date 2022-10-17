@@ -5,6 +5,7 @@
   "private": true,
   "main": "./src/server.ts",
   "scripts": {
+    "start": "ts-node ./src/server.ts",
     "start-dev": "nodemon --watch ./src ./src/server.ts",
     "test": "jest --detectOpenHandles --coverage --verbose",
     "watch-test": "npm run test -- --watchAll"
