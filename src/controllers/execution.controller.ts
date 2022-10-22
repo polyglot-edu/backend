@@ -37,8 +37,6 @@ export async function getInitialExercise(req: Request<{}, any, GetInitialExercis
     res.status(200).json(actualNode);
 }
 
-let currentExercise: any = null;
-
 type GetNextExerciseBody = {
     flowId: string;
     currentExerciseId: string;
@@ -54,7 +52,7 @@ export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>
     }
 
     if (satisfiedConditions.length === 0) {
-        res.status(200).json(currentExercise);
+        res.status(200).json(null);
         return;
     }
 
@@ -79,6 +77,5 @@ export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>
         }))
     }
 
-    currentExercise = actualNode;
     res.status(200).json(actualNode);
 }
