@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import { loggerMiddleware } from "./middlewares/logger.middleware";
 import router from "./routes";
 import cors from "cors";
+import { errorMiddleware } from "./middlewares/error.middleware";
 
 /*
     STRUCTURE
@@ -25,8 +26,10 @@ app.set("env", process.env.NODE_ENV || "development");
 
 
 app.use(bodyParser.json());
-app.use(loggerMiddleware)
+app.use(loggerMiddleware);
 
 app.use(router);
+
+app.use(errorMiddleware);
 
 export default app;
