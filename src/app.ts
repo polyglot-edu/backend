@@ -5,7 +5,7 @@ import router from "./routes";
 import cors from "cors";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import "./config/passport"; // DON'T REMOVE
-import session from 'express-session';
+import session, { CookieOptions, SessionOptions } from 'express-session';
 import MongoStore from 'connect-mongo';
 import { COOKIE_KEY, CORS_ORIGINS, ENV, MONGO_URL } from "./utils/secrets";
 import passport from 'passport';
@@ -23,19 +23,23 @@ import passport from 'passport';
 
 const app = express();
 
-var cookieSpecs = {
+var cookieSpecs : SessionOptions = {
   secret: COOKIE_KEY,
   resave: false,
   saveUninitialized: true,
-  sameSite: 'strict',
-  cookie: { secure: false },
+  cookie: { 
+    secure: false,
+    sameSite: 'strict'
+  },
   store: MongoStore.create({ mongoUrl: MONGO_URL })
 }
 
 if (ENV === 'production') {
   app.set('trust proxy', 1) // trust first proxy
-  cookieSpecs.cookie.secure = true // serve secure cookies
-  cookieSpecs.sameSite = 'none' // enable cross domain cookies
+  if (cookieSpecs.cookie) {
+    cookieSpecs.cookie.secure = true // serve secure cookies
+    cookieSpecs.cookie.sameSite = 'none' // enable cross domain cookies
+  }
 }
 
 app.use(session(cookieSpecs));
