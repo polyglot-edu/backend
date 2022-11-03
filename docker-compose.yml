@@ -18,3 +18,4 @@ services:
       - ./:/backend
     environment:
       - MONGO_URL=mongodb://prova:SECRET@mongodb:27017
+      - CORS_ORIGINS=http://localhost:3000

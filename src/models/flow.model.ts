@@ -1,5 +1,5 @@
 import mongoose, { model, Model } from 'mongoose';
-import { PolyglotFlow } from 'PolyglotFlow';
+import { PolyglotFlow } from "../types/PolyglotFlow";
 import { v4 as uuidv4 } from 'uuid';
 import validator from 'validator';
 
