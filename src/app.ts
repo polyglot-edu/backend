@@ -27,6 +27,7 @@ var cookieSpecs = {
   secret: COOKIE_KEY,
   resave: false,
   saveUninitialized: true,
+  sameSite: 'strict',
   cookie: { secure: false },
   store: MongoStore.create({ mongoUrl: MONGO_URL })
 }
@@ -34,6 +35,7 @@ var cookieSpecs = {
 if (ENV === 'production') {
   app.set('trust proxy', 1) // trust first proxy
   cookieSpecs.cookie.secure = true // serve secure cookies
+  cookieSpecs.sameSite = 'none' // enable cross domain cookies
 }
 
 app.use(session(cookieSpecs));
