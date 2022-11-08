@@ -5,7 +5,7 @@ import router from "./routes";
 import cors from "cors";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import "./config/passport"; // DON'T REMOVE
-import session, { CookieOptions, SessionOptions } from 'express-session';
+import session, { SessionOptions } from 'express-session';
 import MongoStore from 'connect-mongo';
 import { COOKIE_KEY, CORS_ORIGINS, ENV, MONGO_URL } from "./utils/secrets";
 import passport from 'passport';
@@ -29,7 +29,6 @@ var cookieSpecs : SessionOptions = {
   saveUninitialized: true,
   cookie: { 
     secure: false,
-    sameSite: 'strict'
   },
   store: MongoStore.create({ mongoUrl: MONGO_URL })
 }
