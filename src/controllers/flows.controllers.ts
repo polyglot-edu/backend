@@ -30,7 +30,7 @@ export async function getFlowList(req: Request, res: Response, next : NextFuncti
   // await param("id", "UUID v4 is required").isUUID(4).run(req);
 
   try {
-    const flows = await PolyglotFlowModel.find({})
+    const flows = await PolyglotFlowModel.find({title: {$regex: req.query?.q?.toString(), $options: "i"}})
     if (!flows) {
       return res.status(404).send();
     }
