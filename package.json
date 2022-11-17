@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node ./dist/server.js",
     "postinstall": "tsc",
-    "start-dev": "nodemon -L --watch ./src ./src/server.ts",
+    "dev": "nodemon -L --watch ./src ./src/server.ts",
     "test": "jest --detectOpenHandles --coverage --verbose",
     "watch-test": "npm run test -- --watchAll"
   },

@@ -7,7 +7,7 @@ export const ENV = process.env.NODE_ENV || "development";
 
 export const PORT = (process.env.PORT || 5000) as number;
 
-export const MONGO_URL = (process.env.MONGO_URL || 'mongodb://prova:SECRET@mongodb:27017') as string
+export const MONGO_URL = (process.env.MONGO_URL || 'mongodb://prova:SECRET@localhost:27017') as string
 
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string;
 
