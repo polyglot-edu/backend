@@ -104,8 +104,7 @@ function getMetadata(obj: any) {
       pushField(obj[key], key, output);
     }
   })
-  // Rimuovo il primo oggetto vuoto (da rifattorizzare)
-  //output.shift();
+  
   return output;
 }
 

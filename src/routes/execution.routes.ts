@@ -28,7 +28,7 @@ router.post("/alexa/next", async (req, res) => {
     }
     
     if (nextNode.type === "multipleChoiceQuestionNode") {
-        lastExercise = nextNode;
+        lastExercise = nextNode as any;
         
         const actualNode = {
             text: `${nextNode.data.question ?? ""}. ${nextNode.data.choices?.join(". ") ?? ""}`,
@@ -39,7 +39,7 @@ router.post("/alexa/next", async (req, res) => {
         
         res.status(200).json(actualNode);
     } else if (nextNode.type === "lessonNode") {
-        lastExercise = nextNode;
+        lastExercise = nextNode as any;
 
         const actualNode = {
             text: `some example lesson text from a pdf`,

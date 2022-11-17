@@ -2,21 +2,6 @@ import mongoose, { model, Model } from 'mongoose';
 import { PolyglotFlow } from "../types/PolyglotFlow";
 import { v4 as uuidv4 } from 'uuid';
 import validator from 'validator';
-import { PolyglotNodeModel } from './node.model';
-
-const NODE_TYPES = [
-  'Abstract',
-  'CloseEndedQuestion',
-  'CodingQuestion',
-  'Lesson',
-  'MultipleChoiceQuestion'
-]
-
-const EDGE_TYPES = [
-  'CustomValidation',
-  'ExactValue',
-  'PassFail'
-]
 
 
 export const flowSchema = new mongoose.Schema<PolyglotFlow>({
@@ -40,8 +25,6 @@ export const flowSchema = new mongoose.Schema<PolyglotFlow>({
     nodes: [{type: String, required: true, ref: 'Node'}],
     edges: [{type: String, required: true, ref: 'Edge'}]
 })
-const cast = flowSchema.obj as any;
-console.log(cast._id.type.toString());
 
 export interface PolyglotFlowModel extends Model<PolyglotFlow>{
 
