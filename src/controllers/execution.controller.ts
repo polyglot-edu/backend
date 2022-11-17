@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import PolyglotFlowModel from "../models/flow.model";
+import { PolyglotNode } from "../types";
 
 type GetInitialExerciseBody = { flowId: string }
 export async function getInitialExercise(req: Request<{}, any, GetInitialExerciseBody>, res: Response, next: NextFunction) {
@@ -29,6 +30,7 @@ export async function getInitialExercise(req: Request<{}, any, GetInitialExercis
               title: e.title,
               code: e.code,
               data: e.data,
+              type: e.type,
           }))
       }
 
@@ -39,6 +41,7 @@ export async function getInitialExercise(req: Request<{}, any, GetInitialExercis
 }
 type GetNextExerciseBody = {
     flowId: string;
+    currentExerciseId: string;
     satisfiedConditions: string[];
 }
 export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>, res: Response, next: NextFunction) {
@@ -67,6 +70,7 @@ export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>
               title: e.title,
               code: e.code,
               data: e.data,
+              type: e.type,
           }))
       }
 
