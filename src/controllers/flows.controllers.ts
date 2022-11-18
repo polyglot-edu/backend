@@ -58,7 +58,10 @@ export async function updateFlow(req: Request, res: Response, next: NextFunction
     // await body("flow", "Flow is required").exists().run(req);
 
     try {
-      const flow = await PolyglotFlowModel.findOne({ _id: req.params.id})
+      const flow = await PolyglotFlowModel
+        .findOne({ _id: req.params.id})
+        .populate('nodes', 'type')
+        .populate('edges', 'type')
       if (!flow) {
         return res.status(404).send()
       }
@@ -69,22 +72,31 @@ export async function updateFlow(req: Request, res: Response, next: NextFunction
           nodes[key] = [];
         })
       }
-      req.body.nodes.forEach((obj: PolyglotNode) =>{
+    
+      await Promise.all(req.body.nodes.map(async (obj: PolyglotNode) =>{
+        if (flow.nodes.filter(node => node._id === obj._id).length && obj.type !== flow.nodes.filter(node => node._id === obj._id)[0].type) {
+          console.log("delete")
+          console.log(obj);
+          const result = await PolyglotNodeModel.findByIdAndDelete(obj._id);
+          console.log("after")
+          console.log(result)
+        }
         nodes[obj.type].push({updateOne: {
           filter: { _id: obj._id },
           update: obj,
           upsert: true,
         }});
-      })
+      }))
 
-      Object.keys(nodes).forEach(async (key: string)=>{
+      await Promise.all(Object.keys(nodes).map(async (key: string)=>{
         try {
-          await PolyglotNodeModel.discriminators?.[key].bulkWrite(nodes[key], { ordered: true });
+          const resp = await PolyglotNodeModel.discriminators?.[key].bulkWrite(nodes[key], { ordered: false });
+          console.log("no error");
+          console.log(resp);
         } catch (e) {
           console.log(e);
         }
-        
-      })
+      }))
 
       let edges: {[k: string]: any} = {};
       if (PolyglotEdgeModel.discriminators) {
@@ -92,21 +104,28 @@ export async function updateFlow(req: Request, res: Response, next: NextFunction
           edges[key] = [];
         })
       }
-      req.body.edges.forEach((obj: PolyglotEdge) =>{
+      await Promise.all(req.body.edges.map(async (obj: PolyglotEdge) =>{
+        if (flow.edges.filter(edge => edge._id === obj._id).length && obj.type !== flow.edges.filter(edge => edge._id === obj._id)[0].type) {
+          console.log("delete")
+          console.log(obj);
+          const result = await PolyglotEdgeModel.findByIdAndDelete(obj._id);
+          console.log("after")
+          console.log(result)
+        }
         edges[obj.type].push({updateOne: {
           filter: { _id: obj._id },
           update: obj,
           upsert: true,
         }});
-      })
+      }))
 
-      Object.keys(edges).forEach(async (key: string)=>{
+      await Promise.all(Object.keys(edges).map(async (key: string)=>{
         try {
           await PolyglotEdgeModel.discriminators?.[key].bulkWrite(edges[key], { ordered: true });
         } catch(e) {
           console.log(e);
         }
-      })
+      }))
 
       // FIX: controlla la bulkWrite per verificare la buona riuscita
       flow.nodes = req.body.nodes.map((val: PolyglotNode) => val._id);

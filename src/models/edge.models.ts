@@ -28,9 +28,6 @@ export const edgeSchema = new mongoose.Schema<PolyglotEdge>({
             message: "Invalid UUID-v4"
         }
     },
-    code: {
-      type: String
-    },
     title: {
       type: String,
       default: ""
@@ -54,7 +51,7 @@ export const edgeSchema = new mongoose.Schema<PolyglotEdge>({
 
 export const customValidationEdgeSchema = new mongoose.Schema({
     data: {
-      code: {type: Int8}
+      code: {type: String}
     }
 }, options);
 
