@@ -1,23 +1,41 @@
-import { PolyglotFlow } from "../types";
-import sampleData from "../exampleFlow.json";
+import mongoose, { model, Model } from 'mongoose';
+import { PolyglotFlow } from 'PolyglotFlow';
+import { v4 as uuidv4 } from 'uuid';
+import validator from 'validator';
 
-export const flows: { [id: string]: PolyglotFlow } = {
-    "654251f1-a660-46ec-9294-5d92eabf6704": {
-        id: "654251f1-a660-46ec-9294-5d92eabf6704",
-        title: "Example Flow",
-        description: "This is an example flow",
-        nodes: [
-            {
-                type: "start",
-                title: "Start",
-                description: "Start",
-                difficulty: 0,
-                data: {},
-                reactFlow: {}
-            }
-        ],
-        edges: []
+
+const flowSchema = new mongoose.Schema<PolyglotFlow>({
+    _id: { 
+        type: String,
+        required: true,
+        default: () => uuidv4(),
+        validate: {
+            validator: (id : string) => validator.isUUID(id),
+            message: "Invalid UUID-v4"
+        }
     },
+    title: { type: String},
+    description: { type: String},
+    nodes: [{
+        type: { type: String},
+        title: { type: String},
+        description: { type: String},
+        difficulty: { type: Number},
+        data: { type: {}},
+        reactFlow: { type: {}},
+    }],
+    edges: [{ 
+        type: { type: String},
+        title: { type: String},
+        code: { type: String},
+        data: { type: {}},
+        reactFlow: { type: {}},
+    }]
+})
+
+export interface PolyglotFlowModel extends Model<PolyglotFlow>{
+
 }
 
-flows[sampleData.id] = sampleData;
+export default model<PolyglotFlow, PolyglotFlowModel>("Flow", flowSchema)
+

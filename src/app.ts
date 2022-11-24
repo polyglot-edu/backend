@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import { loggerMiddleware } from "./middlewares/logger.middleware";
 import router from "./routes";
 import cors from "cors";
+import { errorMiddleware } from "./middlewares/error.middleware";
 
 /*
     STRUCTURE
@@ -20,13 +21,15 @@ const app = express();
 
 app.use(cors());
 
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 5000);
 app.set("env", process.env.NODE_ENV || "development");
 
 
 app.use(bodyParser.json());
-app.use(loggerMiddleware)
+app.use(loggerMiddleware);
 
 app.use(router);
+
+app.use(errorMiddleware);
 
 export default app;
