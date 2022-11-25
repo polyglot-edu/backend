@@ -11,30 +11,44 @@ if (ENV === "development") {
     app.use(errorHandler());
 }
 
-let isConnected = false;
+// @ts-ignore
+let cached = global.mongoose;
+
+if (!cached) {
+    // @ts-ignore
+    cached = global.mongoose = { conn: null, promise: null }
+}
 
 /**
  * Start Express server.
  */
-const server = app.listen(PORT, async () => {
-    if (isConnected) {
+const server = app.listen(PORT,async () => {
+    // https://github.com/vercel/next.js/blob/canary/examples/with-mongodb-mongoose/lib/dbConnect.js
+    if (cached.conn) {
         console.log('=> using existing database connection');
         return;
     }
-    await mongoose.connect(MONGO_URL)
+    if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGO_URL,{bufferCommands: false})
         .then(db => {
             console.log("  Database connected!\n");
-            isConnected = db.connections[0].readyState === 1;
+            return db;
         })
-        .catch((error) => {
-            console.log(error);
-        });
+
         console.log(
             "  App is running at http://localhost:%d in %s mode  🚀🚀",
             PORT,
             ENV
         );
         console.log("  Press CTRL-C to stop\n");
+    }
+    try {
+        cached.conn = await cached.promise
+    } catch (e) {
+        cached.promise = null
+        throw e
+    }
+
 });
 
 export default server;
