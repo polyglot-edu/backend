@@ -1,0 +1,1 @@
+export const EXP_ACCESSJWT = 7 * 24 * 60 * 60;

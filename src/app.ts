@@ -28,7 +28,7 @@ var cookieSpecs : SessionOptions = {
   resave: false,
   saveUninitialized: true,
   cookie: { 
-    secure: false,
+    secure: false
   },
   store: MongoStore.create({ mongoUrl: MONGO_URL })
 }
@@ -44,8 +44,7 @@ if (ENV === 'production') {
 app.use(session(cookieSpecs));
 
 app.use(cors({
-  origin: CORS_ORIGINS,
-  credentials: true,
+  origin: CORS_ORIGINS
 }));
 
 app.use(passport.initialize());
