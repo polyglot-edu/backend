@@ -1,6 +1,3 @@
-import { NextFunction, Request, Response } from "express";
+import passport from "passport";
 
-export async function checkAuth(req: Request, res: Response, next: NextFunction) {
-    if (req.user) return next();
-    res.status(401).send();
-};
+export const checkAuth = passport.authenticate('jwt', {session: false});
