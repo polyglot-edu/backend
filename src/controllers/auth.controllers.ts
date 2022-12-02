@@ -40,7 +40,7 @@ export const googleCallback = async (req: Request, res: Response, next: NextFunc
 
     // Set up cookies
     let date = new Date();
-    date.setTime(date.getTime() + EXP_ACCESSJWT);
+    date.setTime(date.getTime() + EXP_ACCESSJWT * 1000);
     const cookie_opts: CookieOptions = {expires: date};
 
     if (process.env.NODE_ENV === 'production') {
