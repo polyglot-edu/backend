@@ -3,7 +3,7 @@ import passportGoogle from "passport-google-oauth20";
 import passportJWT from 'passport-jwt';
 
 import User from "../models/user.model";
-import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, COOKIE_KEY } from "../utils/secrets";
+import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, COOKIE_KEY, DOMAIN_APP_DEPLOY, ENV } from "../utils/secrets";
 
 const GoogleStrategy = passportGoogle.Strategy;
 const JWTStrategy = passportJWT.Strategy;
@@ -22,7 +22,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "/api/auth/google/callback",
+      callbackURL: (ENV === "development" ? "http://" : "https://") + DOMAIN_APP_DEPLOY +"/api/auth/google/callback",
     },
     async (_accessToken, _refreshToken, profile, done) => {
       try{

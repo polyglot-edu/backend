@@ -23,8 +23,10 @@ export const handleRedirectUrl = (queryReturnUrl: string | undefined, referer: s
   
   if (queryReturnUrl) {
     if (queryReturnUrl.startsWith("/")) return redirectUrl + queryReturnUrl;
-    const check = CORS_ORIGINS.find(url => extractURLDomain(url) === extractURLDomain(queryReturnUrl))
-    if (check) return queryReturnUrl;
+    if (CORS_ORIGINS !== "*" ) {
+      const check = CORS_ORIGINS.find(url => extractURLDomain(url) === extractURLDomain(queryReturnUrl))
+      if (check) return queryReturnUrl;
+    }
   }
 
   return redirectUrl;

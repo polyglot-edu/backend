@@ -5,9 +5,11 @@ import fs from 'fs';
 dotenv.config();
 
 // Env definition
-export const ENV = process.env.NODE_ENV || "development";
+export const ENV = (process.env.DOMAIN_APP_DEPLOY ? "production" : (process.env.NODE_ENV || "development"));
 
 export const PORT = process.env.PORT ? +process.env.PORT : 5000;
+
+export const DOMAIN_APP_DEPLOY = process.env.DOMAIN_APP_DEPLOY || ("localhost:" + PORT)
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
@@ -21,12 +23,10 @@ export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET as string;
 
 export const COOKIE_KEY = process.env.COOKIE_KEY as string;
 
-export const CORS_ORIGINS = process.env.CORS_ORIGINS?.split(',') as string[];
+export const CORS_ORIGINS = process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : "*";
 
 
 // Env check
-if (!CORS_ORIGINS) throw new Error("CORS_ORIGINS env not defined!");
-
 if (!MONGODB_URI) throw new Error("MONGODB_URI env not defined!");
 
 if (!GOOGLE_CLIENT_ID) throw new Error("GOOGLE_CLIENT_ID env not defined!");
