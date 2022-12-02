@@ -3,7 +3,7 @@ import passport from "passport";
 import { EXP_ACCESSJWT } from "../config/auth";
 import { generateJwt, handleRedirectUrl } from "../utils/auth";
 import { extractURLDomain } from "../utils/general";
-import { CORS_ORIGINS } from "../utils/secrets";
+import { CORS_ORIGINS, ENV } from "../utils/secrets";
 
 export const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
   req.session.returnUrl = handleRedirectUrl(req.query.returnUrl?.toString(), req.headers.referer);
@@ -14,7 +14,7 @@ export const logoutJWT = async (req: Request,res: Response, next: NextFunction) 
   var redirectUrl = handleRedirectUrl(req.query.returnUrl?.toString(), req.headers.referer);
   const cookie_opts: CookieOptions = {expires: new Date(0)};
 
-  if (process.env.NODE_ENV === 'production') {
+  if (ENV === 'production') {
     cookie_opts.domain = extractURLDomain(CORS_ORIGINS[0]);
     cookie_opts.secure = true;
   }
@@ -43,7 +43,7 @@ export const googleCallback = async (req: Request, res: Response, next: NextFunc
     date.setTime(date.getTime() + EXP_ACCESSJWT * 1000);
     const cookie_opts: CookieOptions = {expires: date};
 
-    if (process.env.NODE_ENV === 'production') {
+    if (ENV === 'production') {
       cookie_opts.domain = extractURLDomain(redirectUrl);
       cookie_opts.secure = true;
     }
