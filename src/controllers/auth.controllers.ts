@@ -15,7 +15,7 @@ export const logoutJWT = async (req: Request,res: Response, next: NextFunction) 
   const cookie_opts: CookieOptions = {expires: new Date(0)};
 
   if (ENV === 'production') {
-    cookie_opts.domain = extractURLDomain(CORS_ORIGINS[0]);
+    cookie_opts.domain = extractURLDomain(redirectUrl);
     cookie_opts.secure = true;
   }
 

@@ -19,7 +19,9 @@ export const generateJwt = (user: any) => {
 export const handleRedirectUrl = (queryReturnUrl: string | undefined, referer: string | undefined) => {
   var redirectUrl = referer || CORS_ORIGINS[0];
 
-  if (redirectUrl.endsWith("/")) redirectUrl.slice(-1);
+  if (redirectUrl.endsWith("/")) {
+    redirectUrl = redirectUrl.slice(0,-1);
+  }
   
   if (queryReturnUrl) {
     if (queryReturnUrl.startsWith("/")) return redirectUrl + queryReturnUrl;
