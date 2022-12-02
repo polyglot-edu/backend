@@ -28,7 +28,7 @@ var cookieSpecs : SessionOptions = {
   resave: false,
   saveUninitialized: true,
   cookie: { 
-    secure: false,
+    secure: false
   },
   store: MongoStore.create({ mongoUrl: MONGO_URL })
 }
