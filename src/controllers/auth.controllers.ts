@@ -24,7 +24,16 @@ export const logoutJWT = async (req: Request,res: Response, next: NextFunction) 
 
 }
 
-export const googleCallback = async (req: Request, res: Response, next: NextFunction) => {
+export const logout = async (req: Request,res: Response, next: NextFunction) => {
+  var redirectUrl = handleRedirectUrl(req.query.returnUrl?.toString(), req.headers.referer);
+
+  req.logout(err => {
+    if(err) return next(err);
+    res.redirect(redirectUrl);
+  });
+}
+
+export const googleCallbackV2 = async (req: Request, res: Response, next: NextFunction) => {
   passport.authenticate("google", (err, user, info) => {
     // This is the default destination upon successful login.
     var redirectUrl = CORS_ORIGINS[0];
@@ -54,5 +63,24 @@ export const googleCallback = async (req: Request, res: Response, next: NextFunc
     res.cookie('x-auth-cookie', token, cookie_opts);
     res.redirect(redirectUrl);
 
+  })(req, res, next);
+}
+
+export const googleCallback = async (req: Request, res: Response, next: NextFunction) => {
+  passport.authenticate("google", (err, user, info) => {
+    // This is the default destination upon successful login.
+    var redirectUrl = 'back';
+
+    if (err) { return next(err); }
+    if (!user) { return res.redirect(redirectUrl); }
+
+    if (req.session.returnUrl) {
+      redirectUrl = req.session.returnUrl;
+      req.session.returnUrl = "";
+    }
+    req.logIn(user, function(err){
+      if (err) { return next(err); }
+      res.redirect(redirectUrl);
+    });
   })(req, res, next);
 }

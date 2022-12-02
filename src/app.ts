@@ -44,7 +44,8 @@ if (ENV === 'production') {
 app.use(session(cookieSpecs));
 
 app.use(cors({
-  origin: CORS_ORIGINS
+  origin: CORS_ORIGINS,
+  credentials: true,
 }));
 
 app.use(passport.initialize());
