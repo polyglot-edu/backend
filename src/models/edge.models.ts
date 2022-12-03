@@ -70,6 +70,10 @@ export const passFailEdgeSchema = new mongoose.Schema({
   }
 }, options);
 
+export const unconditionalEdgeSchema = new mongoose.Schema({
+  data: {}
+}, options);
+
 export const PolyglotEdgeModel = model<PolyglotEdge, PolyglotEdgeModel>("Edge", edgeSchema);
 
 export const CustomValidationEdge = PolyglotEdgeModel.discriminator('customValidationEdge', customValidationEdgeSchema);
@@ -77,3 +81,5 @@ export const CustomValidationEdge = PolyglotEdgeModel.discriminator('customValid
 export const ExactValueEdge = PolyglotEdgeModel.discriminator('exactValueEdge', exactValueEdgeSchema);
 
 export const PassFailEdge = PolyglotEdgeModel.discriminator('passFailEdge', passFailEdgeSchema);
+
+export const UnconditionalEdge = PolyglotEdgeModel.discriminator('unconditionalEdge', unconditionalEdgeSchema);

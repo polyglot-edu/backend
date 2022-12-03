@@ -6,7 +6,10 @@ const router = express.Router();
 
 router.route("/")
     .get(checkAuth, FlowController.getFlowList)
-    .post(checkAuth, FlowController.createFlow) // FIX: Type error when add requiresAuth
+    .post(checkAuth, FlowController.createFlow)
+
+router.route("/json")
+    .post(checkAuth, FlowController.createFlowJson);
 
 router.route("/:id")
     .get(checkAuth, FlowController.getFlowById)
