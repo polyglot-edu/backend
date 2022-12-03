@@ -39,7 +39,7 @@ export async function getFlowList(req: Request, res: Response, next : NextFuncti
     const q = req.query?.q?.toString();
     // FIXME: create privacy policy in order to display only the right flows
     const query = q ? {title: {$regex: q, $options: "i"}} : {}
-    const flows = await PolyglotFlowModel.find(query)
+    const flows = await PolyglotFlowModel.find(query).populate('author','username')
     if (!flows) {
       return res.status(404).send();
     }
@@ -144,7 +144,8 @@ export async function updateFlow(req: Request, res: Response, next: NextFunction
 
 export async function createFlow(req: Request, res: Response, next : NextFunction) {
     // TODO: add validation for flow
-    const newFlow = req.body;
+    const newFlow = req.body as PolyglotFlow;
+    newFlow.author = req.user?._id
 
     try {
       const flow =  await PolyglotFlowModel.create(newFlow);

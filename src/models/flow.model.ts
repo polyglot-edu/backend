@@ -2,6 +2,7 @@ import mongoose, { model, Model } from 'mongoose';
 import { PolyglotFlow } from "../types/PolyglotFlow";
 import { v4 as uuidv4 } from 'uuid';
 import validator from 'validator';
+import User from './user.model';
 
 
 export const flowSchema = new mongoose.Schema<PolyglotFlow>({
@@ -13,6 +14,11 @@ export const flowSchema = new mongoose.Schema<PolyglotFlow>({
             validator: (id : string) => validator.isUUID(id),
             message: "Invalid UUID-v4"
         }
+    },
+    author: {
+      type: String,
+      required: true,
+      ref: 'User'
     },
     title: { 
       type: String,
