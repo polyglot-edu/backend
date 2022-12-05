@@ -6,6 +6,7 @@ import { MultipleChoiceQuestionNode, PolyglotNodeModel } from "../models/node.mo
 import { PolyglotEdge, PolyglotFlowInfo, PolyglotNode } from "../types";
 import { PolyglotEdgeModel } from "../models/edge.models";
 import { v4 } from "uuid";
+import { DOMAIN_APP_DEPLOY } from "../utils/secrets";
 
 /*
     Get flow by id
@@ -27,6 +28,22 @@ export async function getFlowById(req: Request, res: Response<Document<unknown, 
       return next(err);
     }
     
+}
+
+export async function downloadNotebookVSC(req: Request, res: Response, next: NextFunction) {
+  const template = `#!csharp
+
+#r "nuget: Polyglot.Interactive, 0.0.2-*"
+
+#!csharp
+
+#!polyglot-setup --flowid ${req.params.id} --serverurl https://${DOMAIN_APP_DEPLOY}`
+
+  const file = Buffer.from(template);
+  res.setHeader('Content-Length', file.length);
+  res.setHeader('Content-Disposition', `attachment; filename=notebook-${req.params.id}.dib`);
+  res.write(file, 'binary');
+  res.end();
 }
 
 /*
