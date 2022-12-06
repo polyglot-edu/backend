@@ -68,13 +68,17 @@ export async function getFlowList(req: Request, res: Response, next : NextFuncti
   
 }
 
-const createOrUpdateFlow = async (flow: PolyglotFlow & { nodes: PolyglotNode[], edges: PolyglotEdge[]}, currentFlow?: any) => {
+const updateFlowQuery = async (id: string, flow: PolyglotFlow & ({ nodes: PolyglotNode[], edges: PolyglotEdge[]} | { nodes: string[], edges: string[]})) => {
+  const currentFlow = await PolyglotFlowModel
+      .findOne({ _id: id})
+      .populate('nodes', 'type')
+      .populate('edges', 'type')
+
   if (!currentFlow) {
-    const filteredFlow = JSON.parse(JSON.stringify(flow));
-    filteredFlow.nodes = [];
-    filteredFlow.edges = [];
-    currentFlow = await PolyglotFlowModel.create(filteredFlow);
+    console.log("Flow not found")
+    return null;
   }
+
   const nodeIds: string[] = []
   const edgesIds: string[] = [];
 
@@ -91,7 +95,7 @@ const createOrUpdateFlow = async (flow: PolyglotFlow & { nodes: PolyglotNode[], 
     }
     if (obj._id) nodeIds.push(obj._id)
     nodes[obj.type].push({updateOne: {
-      filter: { _id: obj._id || v4() },
+      filter: { _id: obj._id || obj.reactFlow.id },
       update: obj,
       upsert: true,
     }});
@@ -118,7 +122,7 @@ const createOrUpdateFlow = async (flow: PolyglotFlow & { nodes: PolyglotNode[], 
     }
     if (obj._id) edgesIds.push(obj._id);
     edges[obj.type].push({updateOne: {
-      filter: { _id: obj._id || v4() },
+      filter: { _id: obj._id || obj.reactFlow.id },
       update: obj,
       upsert: true,
     }});
@@ -131,13 +135,13 @@ const createOrUpdateFlow = async (flow: PolyglotFlow & { nodes: PolyglotNode[], 
     } catch(e) {
       console.log(e);
     }
-  }))
+  }));
 
   // FIX: controlla la bulkWrite per verificare la buona riuscita
-  currentFlow.nodes = nodeIds;
-  currentFlow.edges = edgesIds;
+  (flow as any).nodes = nodeIds;
+  (flow as any).edges = edgesIds;
 
-  return await currentFlow.save();
+  return await PolyglotFlowModel.findByIdAndUpdate(flow._id, flow, {new: true});
 }
 
 
@@ -151,17 +155,13 @@ export async function updateFlow(req: Request, res: Response, next: NextFunction
     // await body("flow", "Flow is required").exists().run(req);
 
     try {
-      const flow = await PolyglotFlowModel
-        .findOne({ _id: req.params.id})
-        .populate('nodes', 'type')
-        .populate('edges', 'type')
+      const flow = await updateFlowQuery(req.params.id, req.body);
+
       if (!flow) {
         return res.status(404).send()
       }
 
-      const newFlow = await createOrUpdateFlow(req.body as PolyglotFlowInfo & {nodes: PolyglotNode[], edges: PolyglotEdge[]}, flow);
-
-      return res.status(200).send(newFlow);
+      return res.status(200).send(flow);
     } catch (err) {
       return next(err);
     }
@@ -182,13 +182,21 @@ export async function createFlow(req: Request, res: Response, next : NextFunctio
 }
 
 export async function createFlowJson(req: Request, res: Response, next : NextFunction) {
-    // TODO: add validation for flow
     try {
-      const newFlow = req.body as PolyglotFlowInfo & {nodes: PolyglotNode[], edges: PolyglotEdge[]};
-      newFlow.author = req.user?._id;
+      const input = req.body as PolyglotFlowInfo & {nodes: PolyglotNode[], edges: PolyglotEdge[]};
+      input.author = req.user?._id;
 
-      const flow =  await createOrUpdateFlow(newFlow);
-      return res.status(200).send({id: flow._id});
+      const filtered = JSON.parse(JSON.stringify(input));
+      filtered.nodes = [];
+      filtered.edges = [];
+      delete filtered['_id'];
+
+      const flow =  await PolyglotFlowModel.create(filtered);
+      input._id = flow._id;
+      const newFlow = await updateFlowQuery(flow._id, input);
+      if (!newFlow) return res.status(500).json({"error": "internal error"})
+    
+      return res.status(200).send({id: newFlow?._id});
     } catch (err) {
       console.log(err);
       return next(err);
