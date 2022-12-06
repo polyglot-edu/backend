@@ -2,11 +2,20 @@ import { NextFunction, Request, Response } from "express";
 import PolyglotFlowModel from "../models/flow.model";
 import { PolyglotFlow } from "../types/PolyglotFlow";
 import { Document } from "mongoose";
-import { MultipleChoiceQuestionNode, PolyglotNodeModel } from "../models/node.model";
+import { PolyglotNodeModel } from "../models/node.model";
 import { PolyglotEdge, PolyglotFlowInfo, PolyglotNode } from "../types";
 import { PolyglotEdgeModel } from "../models/edge.models";
-import { v4 } from "uuid";
 import { DOMAIN_APP_DEPLOY } from "../utils/secrets";
+
+export async function deleteFlow(req: Request, res: Response, next: NextFunction) {
+  try {
+    const resp = await PolyglotFlowModel.deleteOne({_id: req.params.id, author: req.user?._id})
+    console.log(resp);
+    res.status(204).json();
+  } catch (error) {
+    next(error);
+  }
+}
 
 /*
     Get flow by id
@@ -55,8 +64,12 @@ export async function getFlowList(req: Request, res: Response, next : NextFuncti
 
   try {
     const q = req.query?.q?.toString();
+    const me = req.query?.me?.toString();
     // FIXME: create privacy policy in order to display only the right flows
-    const query = q ? {title: {$regex: q, $options: "i"}} : {}
+    const query: any = q ? {title: {$regex: q, $options: "i"}} : {}
+    if (me) {
+      query.author = req.user?._id
+    }
     const flows = await PolyglotFlowModel.find(query).populate('author','username')
     if (!flows) {
       return res.status(404).send();

@@ -4,8 +4,12 @@ import PolyglotFlowModel from "../models/flow.model";
 export async function autocomplete(req: Request, res: Response, next: NextFunction) {
   try {
     const q = req.query?.q?.toString();
+    const me = req.query?.me?.toString();
     // FIXME: create privacy policy in order to display only the right flows
-    const query = q ? {title: {$regex: q, $options: "i"}} : {}
+    const query: any = q ? {title: {$regex: q, $options: "i"}} : {}
+    if (me) {
+      query.author = req.user?._id
+    }
     const suggestions = await PolyglotFlowModel
       .find(query)
       .limit(10)

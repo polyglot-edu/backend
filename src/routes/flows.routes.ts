@@ -14,6 +14,7 @@ router.route("/json")
 router.route("/:id")
     .get(checkAuth, FlowController.getFlowById)
     .put(checkAuth, FlowController.updateFlow)
+    .delete(checkAuth, FlowController.deleteFlow);
  
 router.route("/:id/run")
     .get(checkAuth, FlowController.downloadNotebookVSC);
