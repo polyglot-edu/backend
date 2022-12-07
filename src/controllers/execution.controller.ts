@@ -53,6 +53,12 @@ export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>
         res.status(404).send();
         return;
       }
+
+      if (satisfiedConditions.length === 0) {
+        res.status(200).json(null);
+        return;
+      }
+
       const satisfiedEdges = flow.edges.filter(edge => satisfiedConditions.includes(edge.reactFlow.id));
       const possibleNextNodes = satisfiedEdges.map(edge => flow.nodes.find(node => node.reactFlow.id === edge.reactFlow.target));
       const nextNode = possibleNextNodes[Math.floor(Math.random() * possibleNextNodes.length)];
