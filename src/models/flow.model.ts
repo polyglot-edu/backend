@@ -28,6 +28,15 @@ export const flowSchema = new mongoose.Schema<PolyglotFlow>({
       type: String,
       required: true
     },
+    tags: [{
+      type: String,
+      enum: [
+        "GREEN",
+        "BUSINESS",
+        "DIGITAL"
+      ],
+      default: []
+    }],
     nodes: [{type: String, required: true, ref: 'Node'}],
     edges: [{type: String, required: true, ref: 'Edge'}]
 })
