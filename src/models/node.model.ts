@@ -69,7 +69,7 @@ export const codingQuestionNodeSchema = new mongoose.Schema({
     data: {
         question: {type: String},
         codeTemplate: {type: String, default: ""},
-        language: {type: String, enum: ["csharp"], default: "csharp"}
+        language: {type: String, enum: ["csharp","sysml"], default: "csharp"}
     }
 }, options);
 
