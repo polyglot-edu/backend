@@ -44,7 +44,11 @@ if (ENV === 'production') {
 app.use(session(cookieSpecs));
 
 app.use(cors({
-  origin: CORS_ORIGINS,
+  origin: (origin, callback) => {
+    // automatically set cors origin header based on client request for faster developing
+    // TODO: check domain cors in production env
+    return callback(null, true);
+  },
   credentials: true,
 }));
 

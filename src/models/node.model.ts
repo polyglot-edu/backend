@@ -30,10 +30,10 @@ export const nodeSchema = new mongoose.Schema<PolyglotNode>({
         type: Number,
         enum: [1,2,3,4,5]
     },
-    _data: { type: {}},
     reactFlow: {
         type: {}
     },
+    runtimeData: {type: {}}
 }, options);
 
 // Serve per modificare l'output delle query (da valutare il possibile utilizzo)
@@ -69,7 +69,7 @@ export const codingQuestionNodeSchema = new mongoose.Schema({
     data: {
         question: {type: String},
         codeTemplate: {type: String, default: ""},
-        language: {type: String, enum: ["csharp"], default: "csharp"}
+        language: {type: String, enum: ["csharp","sysml"], default: "csharp"}
     }
 }, options);
 

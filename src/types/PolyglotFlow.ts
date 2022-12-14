@@ -5,6 +5,7 @@ export type PolyglotFlowInfo = {
     title: string;
     author: string;
     description: string;
+    tags: string[];
 }
 
 export type PolyglotFlow = PolyglotFlowInfo & {
