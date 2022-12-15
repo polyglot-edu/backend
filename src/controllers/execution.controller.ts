@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import PolyglotFlowModel from "../models/flow.model";
-import { PolyglotNode } from "../types";
+import demoExample from "../demoFlow.json"
 
 type GetInitialExerciseBody = { flowId: string }
 export async function getInitialExercise(req: Request<{}, any, GetInitialExerciseBody>, res: Response, next: NextFunction) {
     const { flowId } = req.body;
 
     try {
-      const flow = await PolyglotFlowModel.findById(flowId);
+      const flow = await PolyglotFlowModel.findById(flowId).populate(["nodes","edges"]);
       if (!flow) {
         return res.status(404).send();
       }
@@ -24,7 +24,7 @@ export async function getInitialExercise(req: Request<{}, any, GetInitialExercis
       const outgoingEdges = flow.edges.filter(edge => edge.reactFlow.source === firstNode.reactFlow.id);
 
       const actualNode = {
-          ...firstNode,
+          ...JSON.parse(JSON.stringify(firstNode)),
           validation: outgoingEdges.map(e => ({
               id: e.reactFlow.id,
               title: e.title,
@@ -48,11 +48,17 @@ export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>
     const { flowId, satisfiedConditions } = req.body;
 
     try {
-      const flow = await PolyglotFlowModel.findById(flowId);
+      const flow = await PolyglotFlowModel.findById(flowId).populate(["nodes","edges"]);
       if (!flow) {
         res.status(404).send();
         return;
       }
+
+      if (satisfiedConditions.length === 0) {
+        res.status(200).json(null);
+        return;
+      }
+
       const satisfiedEdges = flow.edges.filter(edge => satisfiedConditions.includes(edge.reactFlow.id));
       const possibleNextNodes = satisfiedEdges.map(edge => flow.nodes.find(node => node.reactFlow.id === edge.reactFlow.target));
       const nextNode = possibleNextNodes[Math.floor(Math.random() * possibleNextNodes.length)];
@@ -64,7 +70,7 @@ export async function getNextExercise(req: Request<{}, any, GetNextExerciseBody>
       const outgoingEdges = flow.edges.filter(edge => edge.reactFlow.source === nextNode.reactFlow.id);
 
       const actualNode = {
-          ...nextNode,
+          ...JSON.parse(JSON.stringify(nextNode)),
           validation: outgoingEdges.map(e => ({
               id: e.reactFlow.id,
               title: e.title,
