@@ -5,7 +5,9 @@
   "private": true,
   "main": "./src/server.ts",
   "scripts": {
-    "start-dev": "nodemon --watch ./src ./src/server.ts",
+    "start": "node ./dist/server.js",
+    "postinstall": "tsc",
+    "dev": "nodemon -L --watch ./src ./src/server.ts",
     "test": "jest --detectOpenHandles --coverage --verbose",
     "watch-test": "npm run test -- --watchAll"
   },
@@ -14,26 +16,48 @@
     "url": "git+https://github.com/polyglot-edu/polyglot-server.git"
   },
   "author": "Tommaso Martorella (tom.martorella@gmail.com)",
+  "contributors": [
+    {
+      "name": "Davide Frageri",
+      "email": "davide.frag@gmail.com"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/polyglot-edu/polyglot-server/issues"
   },
   "homepage": "https://github.com/polyglot-edu/polyglot-server#readme",
   "dependencies": {
+    "connect-mongo": "^4.6.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.3",
     "errorhandler": "^1.5.1",
     "express": "^4.18.0",
+    "express-session": "^1.17.3",
     "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.6",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-jwt": "^4.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4",
     "uuid": "^8.3.2",
+    "validator": "^13.7.0",
     "winston": "^3.7.2"
   },
   "devDependencies": {
+    "@types/cookie-session": "^2.0.44",
     "@types/cors": "^2.8.12",
     "@types/errorhandler": "^1.5.0",
     "@types/express": "^4.17.13",
+    "@types/express-session": "^1.17.5",
     "@types/jest": "^27.4.1",
+    "@types/mongodb": "^4.0.7",
     "@types/node": "^17.0.29",
+    "@types/passport-google-oauth20": "^2.0.11",
+    "@types/passport-jwt": "^3.0.7",
     "@types/uuid": "^8.3.4",
+    "@types/validator": "^13.7.8",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "ts-jest": "^27.1.4"

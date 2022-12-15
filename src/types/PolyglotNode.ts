@@ -1,10 +1,12 @@
 // TODO: FIXME: share types between projects
 
 export type PolyglotNode = {
-    type: string,
-    title: string,
-    description: string,
-    difficulty: number,
-    data: {}
+    _id: string;
+    type: string;
+    title: string;
+    description: string;
+    difficulty: number;
+    runtimeData: any;
+    data: any;
     reactFlow: any;
 };

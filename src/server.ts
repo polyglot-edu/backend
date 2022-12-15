@@ -1,10 +1,12 @@
 import errorHandler from "errorhandler";
 import app from "./app";
+import mongoose from 'mongoose';
+import { MONGO_URL, PORT, ENV } from "./utils/secrets";
 
 /**
  * Error Handler. Provides full stack
  */
-if (app.get("env") === "development") {
+if (ENV === "development") {
     console.log("  Using errorhandler");
     app.use(errorHandler());
 }
@@ -12,11 +14,13 @@ if (app.get("env") === "development") {
 /**
  * Start Express server.
  */
-const server = app.listen(app.get("port"), () => {
+const server = app.listen(PORT,async () => {
+    await mongoose.connect(MONGO_URL);
+    console.log("  Database Connected!");
     console.log(
         "  App is running at http://localhost:%d in %s mode  🚀🚀",
-        app.get("port"),
-        app.get("env")
+        PORT,
+        ENV
     );
     console.log("  Press CTRL-C to stop\n");
 });

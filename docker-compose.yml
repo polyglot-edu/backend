@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  mongodb:
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/apps/mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=prova
+      - MONGO_INITDB_ROOT_PASSWORD=SECRET
+  backend:
+    build: .
+    ports:
+      - 5000:5000
+    volumes:
+      - ./:/backend
+    environment:
+      - MONGO_URL=mongodb://prova:SECRET@mongodb:27017
+      - CORS_ORIGINS=http://localhost:3000
+      - COOKIE_KEY=any_long_and_random_string
