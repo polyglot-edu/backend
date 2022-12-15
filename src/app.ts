@@ -9,6 +9,7 @@ import session, { SessionOptions } from 'express-session';
 import MongoStore from 'connect-mongo';
 import { COOKIE_KEY, CORS_ORIGINS, ENV, MONGO_URL } from "./utils/secrets";
 import passport from 'passport';
+import { EXP_COOKIES } from './config/auth';
 
 /*
     STRUCTURE
@@ -23,11 +24,15 @@ import passport from 'passport';
 
 const app = express();
 
+let date = new Date();
+date.setTime(date.getTime() + EXP_COOKIES);
+
 var cookieSpecs : SessionOptions = {
   secret: COOKIE_KEY,
   resave: false,
   saveUninitialized: true,
   cookie: { 
+    expires: date,
     secure: false
   },
   store: MongoStore.create({ mongoUrl: MONGO_URL })
