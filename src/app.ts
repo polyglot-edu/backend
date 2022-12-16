@@ -60,7 +60,7 @@ app.use(cors({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: "1mb"}));
 app.use(loggerMiddleware);
 
 app.use(router);
