@@ -19,7 +19,7 @@ export const checkAuth = [
   async (req: Request, res: Response, next: NextFunction) => {
     try{
       const sub = req?.auth?.sub;
-      const username = req?.auth?.name;
+      const username = req?.auth?.["https://polyglot-edu.com/username"];
       if (!sub) return res.status(400).json({"error": "Bad request!"});
 
       let query;  
@@ -39,6 +39,11 @@ export const checkAuth = [
           username: username
         });
       };
+
+      if (user.username !== username) {
+        user.username = username;
+        await user.save();
+      }
 
       req.user = user;
       next();
