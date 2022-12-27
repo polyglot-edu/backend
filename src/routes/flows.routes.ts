@@ -17,6 +17,6 @@ router.route("/:id")
     .delete(checkAuth, FlowController.deleteFlow);
  
 router.route("/:id/run")
-    .get(checkAuth, FlowController.downloadNotebookVSC);
+    .get(FlowController.downloadNotebookVSC);
 
 export default router;

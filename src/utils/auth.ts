@@ -1,15 +1,5 @@
-import jwt from 'jsonwebtoken';
-import { EXP_ACCESSJWT } from '../config/auth';
 import { extractURLDomain } from './general';
-import { COOKIE_KEY, CORS_ORIGINS } from './secrets';
-
-// Function for generating jwt tokens
-export const generateJwt = (user: any) => {
-  const token = jwt.sign(user, COOKIE_KEY, {
-    expiresIn: EXP_ACCESSJWT,
-  });
-  return token;
-};
+import { CORS_ORIGINS } from './secrets';
 
 /**
  * Possible handled cases:
