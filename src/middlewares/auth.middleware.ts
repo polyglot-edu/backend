@@ -10,7 +10,7 @@ export const checkAuth = [
           cache: true,
           rateLimit: true,
           jwksRequestsPerMinute: 5,
-          jwksUri: AUTH0_ISSUER_BASE_URL + '/.well-known/jwks.json'
+          jwksUri: AUTH0_ISSUER_BASE_URL + '.well-known/jwks.json'
     }) as any,
     audience: AUTH0_AUDIENCE,
     issuer: AUTH0_ISSUER_BASE_URL,
