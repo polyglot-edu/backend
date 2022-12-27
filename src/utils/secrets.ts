@@ -19,9 +19,17 @@ export const MONGO_URL = MONGODB_URI + (MONGODB_CERTIFICATE ? encodeURIComponent
 
 export const CORS_ORIGINS = process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : "*";
 
+export const AUTH0_ISSUER_BASE_URL = process.env.ISSUER_BASE_URL as string;
+
+export const AUTH0_AUDIENCE = process.env.AUDIENCE as string;
+
 
 // Env check
 if (!MONGODB_URI) throw new Error("MONGODB_URI env not defined!");
+
+if(!AUTH0_ISSUER_BASE_URL) throw new Error("ISSUER_BASE_URL env not defined!");
+
+if(!AUTH0_AUDIENCE) throw new Error("AUDIENCE env not defined!");
 
 // Env rielaboration
 if (MONGODB_CERTIFICATE) {

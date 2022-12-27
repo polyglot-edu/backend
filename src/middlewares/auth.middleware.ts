@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import {expressjwt as jwt} from 'express-jwt';
 import jwks from 'jwks-rsa';
 import User from "../models/user.model";
+import { AUTH0_AUDIENCE, AUTH0_ISSUER_BASE_URL } from "../utils/secrets";
 
 export const checkAuth = [
   jwt({
@@ -9,10 +10,10 @@ export const checkAuth = [
           cache: true,
           rateLimit: true,
           jwksRequestsPerMinute: 5,
-          jwksUri: 'https://dev-yvx59wsh.us.auth0.com/.well-known/jwks.json'
+          jwksUri: AUTH0_ISSUER_BASE_URL + '/.well-known/jwks.json'
     }) as any,
-    audience: 'https//api.polyglot-edu.com',
-    issuer: 'https://dev-yvx59wsh.us.auth0.com/',
+    audience: AUTH0_AUDIENCE,
+    issuer: AUTH0_ISSUER_BASE_URL,
     algorithms: ['RS256']
   }),
   async (req: Request, res: Response, next: NextFunction) => {
