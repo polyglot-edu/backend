@@ -1,8 +1,8 @@
 import express from 'express';
-import * as ChatGPTControllers from '../controllers/chatgpt.controllers'
+import * as ChatGPTControllers from '../controllers/chatgpt.controllers';
 
 const router = express.Router();
 
-router.post("/", ChatGPTControllers.chat_to_GPT);
+router.post("/ask", ChatGPTControllers.chat_to_GPT);
 
 export default router;

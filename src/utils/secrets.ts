@@ -23,6 +23,9 @@ export const AUTH0_ISSUER_BASE_URL = process.env.ISSUER_BASE_URL as string;
 
 export const AUTH0_AUDIENCE = process.env.AUDIENCE as string;
 
+export const OPENAI_SECRET_KEY = process.env.OPENAI_SECRET_KEY as string;
+export const OPENAI_CHAT_MODEL = process.env.OPENAI_CHAT_MODEL as string;
+
 
 // Env check
 if (!MONGODB_URI) throw new Error("MONGODB_URI env not defined!");
