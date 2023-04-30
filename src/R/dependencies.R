@@ -1,0 +1,5 @@
+install.packages('rvest')
+install.packages('networkD3')
+install.packages('qdapRegex')
+install.packages('tidygraph')
+install.packages('jsonlite')

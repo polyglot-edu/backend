@@ -6,7 +6,7 @@
   "main": "./src/server.ts",
   "scripts": {
     "start": "node ./dist/server.js",
-    "postinstall": "tsc",
+    "build": "tsc",
     "dev": "nodemon -L --watch ./src ./src/server.ts",
     "test": "jest --detectOpenHandles --coverage --verbose",
     "watch-test": "npm run test -- --watchAll"
