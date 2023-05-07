@@ -11,6 +11,9 @@
     "test": "jest --detectOpenHandles --coverage --verbose",
     "watch-test": "npm run test -- --watchAll"
   },
+  "nodemonConfig": {
+    "ignore": ["*.json"]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/polyglot-edu/polyglot-server.git"

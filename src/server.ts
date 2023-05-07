@@ -2,6 +2,7 @@ import errorHandler from "errorhandler";
 import app from "./app";
 import mongoose from 'mongoose';
 import { MONGO_URL, PORT, ENV } from "./utils/secrets";
+import { execTest } from "./R/execute";
 
 /**
  * Error Handler. Provides full stack
@@ -15,6 +16,7 @@ if (ENV === "development") {
  * Start Express server.
  */
 const server = app.listen(PORT,async () => {
+    execTest();
     await mongoose.connect(MONGO_URL);
     console.log("  Database Connected!");
     console.log(
