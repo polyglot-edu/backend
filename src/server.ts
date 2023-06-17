@@ -3,6 +3,7 @@ import app from "./app";
 import mongoose from 'mongoose';
 import { MONGO_URL, PORT, ENV, TEST_MODE } from "./utils/secrets";
 import User from './models/user.model';
+import { conn, initDb } from "./conceptGraph/db";
 
 /**
  * Error Handler. Provides full stack
@@ -17,6 +18,7 @@ if (ENV === "development") {
  */
 const server = app.listen(PORT,async () => {
     await mongoose.connect(MONGO_URL);
+    conn.db = await initDb();
     console.log("  Database Connected!");
     console.log(
         "  App is running at http://localhost:%d in %s mode  🚀🚀",

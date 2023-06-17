@@ -17,6 +17,7 @@ services:
     volumes:
       - ./:/backend
     environment:
-      - MONGO_URL=mongodb://prova:SECRET@mongodb:27017
+      - MONGODB_URI=mongodb://prova:SECRET@mongodb:27017
       - CORS_ORIGINS=http://localhost:3000
       - COOKIE_KEY=any_long_and_random_string
+    command: npm run dev

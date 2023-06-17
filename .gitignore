@@ -104,3 +104,10 @@ dist
 .tern-port
 
 certificate.pem
+
+tmp
+
+src/conceptGraph/material/*
+!src/conceptGraph/material/README.md
+
+encoreDB
