@@ -26,13 +26,17 @@ export const AUTH0_AUDIENCE = process.env.AUDIENCE as string;
 export const OPENAI_SECRET_KEY = process.env.OPENAI_SECRET_KEY as string;
 export const OPENAI_CHAT_MODEL = process.env.OPENAI_CHAT_MODEL as string;
 
+export const TEST_MODE = process.env.TEST_MODE === "true";
+
 
 // Env check
 if (!MONGODB_URI) throw new Error("MONGODB_URI env not defined!");
 
-if(!AUTH0_ISSUER_BASE_URL) throw new Error("ISSUER_BASE_URL env not defined!");
+if (!TEST_MODE) {
+    if(!AUTH0_ISSUER_BASE_URL) throw new Error("ISSUER_BASE_URL env not defined!");
 
-if(!AUTH0_AUDIENCE) throw new Error("AUDIENCE env not defined!");
+    if(!AUTH0_AUDIENCE) throw new Error("AUDIENCE env not defined!");
+}
 
 // Env rielaboration
 if (MONGODB_CERTIFICATE) {

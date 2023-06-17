@@ -1,7 +1,8 @@
 import errorHandler from "errorhandler";
 import app from "./app";
 import mongoose from 'mongoose';
-import { MONGO_URL, PORT, ENV } from "./utils/secrets";
+import { MONGO_URL, PORT, ENV, TEST_MODE } from "./utils/secrets";
+import User from './models/user.model';
 
 /**
  * Error Handler. Provides full stack
@@ -23,6 +24,15 @@ const server = app.listen(PORT,async () => {
         ENV
     );
     console.log("  Press CTRL-C to stop\n");
+    
+    if (TEST_MODE) {
+        const user = await User.findOne({username: "guest"});
+        if (!user) {
+            await User.create({
+                username: "guest"
+            });
+        }
+    }
 });
 
 export default server;
