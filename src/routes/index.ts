@@ -5,6 +5,7 @@ import userRouter from './user.routes';
 import searchRouter from "./search.routes";
 import metadataRouter from "./metadata.routes";
 import openaiRouter from "./openai.routes";
+import conceptRouter from "./concept.routes";
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.use("/api/user", userRouter);
 router.use("/api/search", searchRouter);
 router.use("/api/metadata", metadataRouter);
 router.use("/api/openai", openaiRouter);
+router.use("/api/concept", conceptRouter);
 
 export default router;

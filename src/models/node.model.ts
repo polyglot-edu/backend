@@ -2,6 +2,7 @@ import mongoose, { model, Model } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 import validator from 'validator';
 import { PolyglotNode } from '../types';
+import { conceptMapSchema } from './concept.models';
 
 const options = { discriminatorKey: 'type' };
 
@@ -54,7 +55,8 @@ export const nodeSchema = new mongoose.Schema<PolyglotNode>({
 
 export const abstractNodeSchema = new mongoose.Schema({
     data: {
-        target: {type: String}
+        target: {type: String},
+        conceptmap: {type: conceptMapSchema}
     }
 }, options);
 

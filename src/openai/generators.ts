@@ -1,38 +1,25 @@
+import { v4 } from "uuid";
 import { createSubconceptsPrompt, sendClassicPrompt } from "./prompts";
-
-type ConceptNode = {
-  node_id: number;
-  name: string;
-}
-
-type ConceptEdge = {
-  from: number;
-  to: number;
-}
-
-type ConceptGraph = {
-  nodes: ConceptNode[];
-  edges: ConceptEdge[];
-}
+import { PolyglotConceptEdge, PolyglotConceptMap, PolyglotConceptNode } from "../types/PolyglotConcept";
 
 export const genGraphChatGpt = async (concept: string, depth: number) => {
-  const graph: ConceptGraph = { nodes: [], edges: []};
+  const graph: PolyglotConceptMap = { nodes: [], edges: []};
   await genGraphChatGptRec(graph, concept, null, depth);
 
   return graph;
 }
 
-const genGraphChatGptRec = async (graph: ConceptGraph, concept: string, parent: ConceptNode | null, depth: number) => {
+const genGraphChatGptRec = async (graph: PolyglotConceptMap, concept: string, parent: PolyglotConceptNode | null, depth: number) => {
   try {
-    const node: ConceptNode = {node_id: graph.nodes.length, name: concept}
+    const node: PolyglotConceptNode = {_id: v4(), name: concept}
     graph.nodes.push(node);
 
     if (parent) {
-      const edge: ConceptEdge = {from: parent.node_id, to: node.node_id};
+      const edge: PolyglotConceptEdge = {from: parent._id, to: node._id};
       graph.edges.push(edge);
     }
 
-    if (depth <= 0) return;
+    if (!depth || depth <= 0) return;
 
     const prompt = createSubconceptsPrompt(concept);
 
