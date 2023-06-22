@@ -1,4 +1,4 @@
-import { createSubconceptsPrompt, sendPrompt } from "./prompts";
+import { createSubconceptsPrompt, sendClassicPrompt } from "./prompts";
 
 type ConceptNode = {
   node_id: number;
@@ -36,7 +36,7 @@ const genGraphChatGptRec = async (graph: ConceptGraph, concept: string, parent: 
 
     const prompt = createSubconceptsPrompt(concept);
 
-    const completion = await sendPrompt(prompt);
+    const completion = await sendClassicPrompt([prompt]);
 
     const subConcepts: string[] = JSON.parse(completion);
 
