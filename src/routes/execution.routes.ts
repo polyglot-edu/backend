@@ -6,8 +6,12 @@ import { PolyglotNode } from '../types';
 
 const router = express.Router();
 
-router.post("/next", ExecutionController.getNextExercise)
-router.post("/first", ExecutionController.getInitialExercise)
+router.post("/first", ExecutionController.startExecution)
+router.post("/next", ExecutionController.getNextExercisev2)
+router.post("/cmd", ExecutionController.sendCommand)
+
+// router.post("/next", ExecutionController.getNextExercise)
+// router.post("/first", ExecutionController.getInitialExercise)
 
 
 /**

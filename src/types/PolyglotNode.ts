@@ -10,3 +10,13 @@ export type PolyglotNode = {
     data: any;
     reactFlow: any;
 };
+
+export type PolyglotNodeValidation = PolyglotNode & {
+    validation: {
+      id: string;
+      title: string;
+      code: string;
+      data: any;
+      type: string;
+    }[]
+}

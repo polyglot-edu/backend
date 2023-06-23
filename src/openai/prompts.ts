@@ -1,7 +1,7 @@
 import { ChatMessage } from "@azure/openai";
 import { OpenAI } from "./client";
 
-export type CreatePromptProps = {
+export type GenResProps = {
   num_ex: number;
   type_ex: 'quiz'| 'multiple choice' | 'open ended question' | 'close ended question' | 'true or false' | 'numerical';
   language: string;
@@ -50,7 +50,7 @@ const generateJsonTemplate = ({num_ex, bloom_lv, num_choices, num_answer}: gener
   return `[${output.join(",")}]`
 }
 
-export const createResPrompt = ({num_ex, type_ex, language, topic, bloom_lv, num_choices = 4, num_answer = 1}: CreatePromptProps) => {
+export const createResPrompt = ({num_ex, type_ex, language, topic, bloom_lv, num_choices = 4, num_answer = 1}: GenResProps) => {
   const quiz_input: string = `Please, give me ${num_ex} ${type_ex} exercise${num_ex > 1 ? "s" : ""} in ${language} about ${topic} with
                         Bloom's taxonomy level = "${bloom_lv}" with ${num_choices} possible choices per exercise${num_ex > 1 ? "s" : ""} 
                         where every exercise${num_ex > 1 ? "s" : ""} must have ${num_answer} true choices. All the exercises should formatted as following example:

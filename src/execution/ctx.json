@@ -1,0 +1,11 @@
+{
+    "exec_flow_id": "",
+    "flow_id": "",
+    "user_id": null,
+    "game_id": "",
+    "current_node_id": "",
+    "exec_node_info": {
+        "executed_nodes": [],
+        "count_node": 2
+    }
+}
