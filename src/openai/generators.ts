@@ -11,60 +11,79 @@ export const genGraphChatGpt = async (concept: string, depth: number) => {
 }
 
 export const genResChatGpt = async (opt: GenResProps) => {
-  const prompt = createResPrompt(opt);
-  console.log(prompt)
+  let counter = 5;
+  while (counter > 0){
+    try {
+      const prompt = createResPrompt(opt);
+      console.log(prompt)
 
-  if (!prompt) throw Error("Prompt generation failed!");
+      if (!prompt) return ([] as PolyglotNode[]);
 
-  const answer = await sendClassicPrompt([prompt]);
-  console.log(answer);
+      const answer = await sendClassicPrompt([prompt]);
+      console.log(answer);
 
-  // TODO: better handling
-  const nodeData = JSON.parse(answer);
+      // TODO: better handling
+      const nodeData = JSON.parse(answer);
 
-  const nodeId = v4();
-  const nodes: PolyglotNode[] = nodeData.map((data: any) => ({
-    _id: nodeId,
-    data: data,
-    title: "Openai generated node",
-    runtimeData: getMultipleChoiceRuntimeData(data.choices, data.question),
-    reactFlow: {
-      id: nodeId
-    },
-    type: "multipleChoiceQuestionNode",
-    description: "",
-    difficulty: 1
-  }));
+      const nodeId = v4();
+      const nodes: PolyglotNode[] = nodeData.map((data: any) => ({
+        _id: nodeId,
+        data: data,
+        title: "Openai generated node",
+        runtimeData: getMultipleChoiceRuntimeData(data.choices, data.question),
+        reactFlow: {
+          id: nodeId
+        },
+        type: "multipleChoiceQuestionNode",
+        description: "",
+        difficulty: 1
+      }));
 
-  return nodes;
+      return nodes;
+    } catch (err) {
+      console.log(err);
+      counter--;
+      setTimeout(() => {}, 500);
+    }
+  }
+
+  const output: PolyglotNode[] = []
+  return output;
 }
 
 const genGraphChatGptRec = async (graph: PolyglotConceptMap, concept: string, parent: PolyglotConceptNode | null, depth: number) => {
-  try {
-    const node: PolyglotConceptNode = {_id: v4(), name: concept}
-    graph.nodes.push(node);
+  let counter = 5;
+  while (counter > 0){
+    try {
+      const node: PolyglotConceptNode = {_id: v4(), name: concept}
+      graph.nodes.push(node);
 
-    if (parent) {
-      const edge: PolyglotConceptEdge = {from: parent._id, to: node._id};
-      graph.edges.push(edge);
+      if (parent) {
+        const edge: PolyglotConceptEdge = {from: parent._id, to: node._id};
+        graph.edges.push(edge);
+      }
+
+      if (!depth || depth <= 0) return;
+
+      const prompt = createSubconceptsPrompt(concept);
+
+      const completion = await sendClassicPrompt([prompt]);
+
+      const subConcepts: string[] = JSON.parse(completion);
+
+      const promises = Promise.all(subConcepts.map(async (subConcept) => {
+        await genGraphChatGptRec(graph, subConcept, node, depth-1)
+      }))
+
+      await promises;
+
+      counter = 0;
+
+    } catch (err) {
+      console.log(err);
+      counter--;
+      setTimeout(() => {}, 500);
     }
-
-    if (!depth || depth <= 0) return;
-
-    const prompt = createSubconceptsPrompt(concept);
-
-    const completion = await sendClassicPrompt([prompt]);
-
-    const subConcepts: string[] = JSON.parse(completion);
-
-    const promises = Promise.all(subConcepts.map(async (subConcept) => {
-      await genGraphChatGptRec(graph, subConcept, node, depth-1)
-    }))
-
-    await promises;
-
-  } catch (err) {
-    console.log(err);
   }
 }
 
