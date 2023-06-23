@@ -69,8 +69,8 @@ const genGraphChatGptRec = async (graph: PolyglotConceptMap, concept: string, pa
 }
 
 const getMultipleChoiceRuntimeData = (choices: string[], question: string) => {
-  const choicesStr = choices.map(c => `"${c}"`).join(", ");
-  const markdown = question + choices.map((c,id) => "\n" + (id+1) + ". " + c).join(",")
+  const choicesStr = choices.map((_, id) => `"${id+1}"`).join(", ");
+  const markdown = "## " + question + choices.map((c,id) => "\n" + (id+1) + ". " + c).join(",")
   return {
     challengeSetup: [
         "\nusing Polyglot.Interactive;\nvar kernel = Kernel.Root.FindKernelByName(\"multiplechoice\") as MultipleChoiceKernel;\nkernel.Options = new HashSet<string> { "+ choicesStr +" };\n"

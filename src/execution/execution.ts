@@ -85,6 +85,7 @@ export class Execution {
 
         const {execNodeInfo, node} = this.algo.getNextExercise(nextNodes);
 
+        this.ctx.execNodeInfo = execNodeInfo;
         this.ctx.currentNodeId = node?.reactFlow.id;
 
         return await this.selectAlgoRec(execNodeInfo, node, null);
