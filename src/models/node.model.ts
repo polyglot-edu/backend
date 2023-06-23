@@ -56,7 +56,8 @@ export const nodeSchema = new mongoose.Schema<PolyglotNode>({
 export const abstractNodeSchema = new mongoose.Schema({
     data: {
         target: {type: String},
-        conceptmap: {type: conceptMapSchema}
+        conceptmap: {type: conceptMapSchema},
+        execution: {type: {}}
     }
 }, options);
 

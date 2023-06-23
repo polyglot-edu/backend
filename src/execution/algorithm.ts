@@ -217,16 +217,18 @@ export class ManualAA extends AbstractAlgorithm {
     return conceptmap.nodes;
   }
   public async getNextExercise(execNodeInfo: ExecCtxNodeInfo, currentNode: PolyglotNode, satisfiedEdges : PolyglotEdge[] | null) : Promise<{execNodeInfo: ExecCtxNodeInfo, node: PolyglotNodeValidation | null}> {
-    const orderType = "bts";
-    const numOfRes = 1;
-    
+    const numOfRes = currentNode.data.execution?.numOfRes ?? 1;
+    const bloom_lv = currentNode.data.execution?.bloom_lv ?? 'remember'
+    const resType = currentNode.data.execution?.resType ?? 'multiple choice'
+
     if (!execNodeInfo.concepts) {
       const conceptmap: PolyglotConceptMap | undefined = currentNode.data.conceptmap;
 
       // TODO: create custom Error
       if (!conceptmap) throw Error("Concept map not defined!");
 
-      const concepts = this.getConceptOrder(orderType, conceptmap);
+      const concepts: PolyglotConceptNode[] = currentNode.data.execution?.concepts ?? conceptmap.nodes
+      console.log(currentNode.data.execution)
 
       // No concepts return
       if (concepts.length === 0) {
@@ -261,10 +263,10 @@ export class ManualAA extends AbstractAlgorithm {
     // TODO: import from exec config from abstractNode
     const opts: GenResProps = {
       num_ex: 1,
-      type_ex: "multiple choice", // TODO: set from node exec config
+      type_ex: resType, // TODO: set from node exec config
       language: "english",
       topic: currentConcept.name,
-      bloom_lv: "remember" // TODO: set from node exec config
+      bloom_lv: bloom_lv
     } 
 
     // TODO: handle error
