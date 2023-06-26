@@ -36,6 +36,13 @@ export const queryOerSkill = async (db: Database, skill: string) => {
   return resp;
 }
 
+export const queryOers = async (db: Database, oers_ids: number[]) => {
+  const resp = await db.all<EncoreOer[]>(`
+    SELECT * FROM encore_oers
+    WHERE id in (${oers_ids.join(",")})`);
+  return resp;
+}
+
 // TODO: remove adjectives and countries concepts
 export const queryFilterWikiConcept = async (db: Database, oersIds: number[]) => {
   const resp = await db.all<OerWiki[]>(`

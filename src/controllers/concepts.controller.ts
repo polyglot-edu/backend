@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { getGraph, getSubConceptMap } from "../conceptGraph/helper";
 import { escapeRegExp } from "../utils/general";
 import { conn } from "../conceptGraph/db";
-import { queryAllConcepts, queryFilterWikiConcept, queryOerSkill } from "../conceptGraph/query";
+import { queryAllConcepts, queryFilterWikiConcept, queryOerSkill, queryOers } from "../conceptGraph/query";
 
 type GenGraphExtBody = {
   extracted_concepts: string[]
@@ -10,6 +10,10 @@ type GenGraphExtBody = {
 
 type GenGraphSkillBody = {
   skill: string;
+}
+
+type GenGraphOersBody = {
+  oers_ids: number[];
 }
 
 type ExtractConceptsBody = {
@@ -102,4 +106,43 @@ export async function extractConcepts(req: Request<{},any, ExtractConceptsBody>,
   const extracted_concepts = concepts.filter(c => text.match(RegExp(`\\b${escapeRegExp(c.name)}\\b`, "ims")));
 
   return res.status(200).json({extracted_concepts: [...new Set(extracted_concepts.map(c => c.name))]});
+}
+
+export async function genGraphOers(req: Request<{}, any, GenGraphOersBody>, res: Response) {
+  const { oers_ids } = req.body;
+
+  if (!oers_ids || oers_ids.length === 0) {
+    return res.status(400).json({error: "oers_ids not provided!"});
+  }
+
+  const { db } = conn;
+
+  if (!db) {
+    return res.status(500).json({error: "sqlite database not started"})
+  }
+
+  const oer_data_sample = await queryOers(db,oers_ids);
+  const wiki_concepts_sample_clean = await queryFilterWikiConcept(db,oer_data_sample.map((v) => v.id));
+  let nodeIds: {[x: string]: number}  = {}
+  let nodes: EncoreNode[] = [];
+  let edges: any = []
+  let nodes_count = 1
+  wiki_concepts_sample_clean.forEach((row) => {
+    if (!nodeIds[row.concept1]) {
+      nodeIds[row.concept1] = nodes_count;
+      const node: EncoreNode = {name: row.concept1,node_id: nodes_count++};
+      nodes.push(node);
+    }
+    if (!nodeIds[row.concept2]) {
+      nodeIds[row.concept2] = nodes_count;
+      const node: EncoreNode = {name: row.concept2,node_id: nodes_count++};
+      nodes.push(node);
+    }
+  })
+  wiki_concepts_sample_clean.forEach((row) => {
+    edges.push({from: nodeIds[row.concept1], to: nodeIds[row.concept2]})
+  })
+  const graph = {nodes: nodes, edges: edges};  
+
+  return res.status(200).json(graph);
 }
