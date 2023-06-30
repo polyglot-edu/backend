@@ -12,7 +12,8 @@ export const createEncoreOersTable = async (db: Database) => {
   await db.run(`CREATE TABLE IF NOT EXISTS encore_oers (
     id INTEGER PRIMARY KEY,
     title TEXT,
-    description TEXT
+    description TEXT,
+    skills TEXT
   )`)
 }
 

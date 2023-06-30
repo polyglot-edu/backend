@@ -12,23 +12,27 @@ export const getSubConceptMap = async (concepts: string[]) => {
   
 
   await Promise.all(concepts.map(async (concept) => {
-    const resp = await axios.get(`https://en.wikipedia.org/wiki/${concept.replace(" ", "_")}`)
-    const root = parse(resp.data);
+    try {
+      const resp = await axios.get(`https://en.wikipedia.org/wiki/${concept.replaceAll(" ", "_")}`)
+      const root = parse(resp.data);
 
-    // search all subconcepts
-    root.querySelectorAll("  p > a , .navigation-not-searchable a").forEach((elem) => {
-      const subConcept = elem.getAttribute("href")
-        ?.replace("/wiki/", "")
-        .replaceAll("_", " ")
-        .replaceAll(" \\(.+\\)","")
-        .toLowerCase()
+      // search all subconcepts
+      root.querySelectorAll("  p > a , .navigation-not-searchable a").forEach((elem) => {
+        const subConcept = elem.getAttribute("href")
+          ?.replace("/wiki/", "")
+          .replaceAll("_", " ")
+          .replaceAll(" \\(.+\\)","")
+          .toLowerCase()
 
 
-      if (!subConcept) return;
-      
-      map[concept].push(subConcept);
+        if (!subConcept) return;
+        
+        map[concept].push(subConcept);
 
-    });
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }));
 
 

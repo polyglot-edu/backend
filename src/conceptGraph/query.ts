@@ -3,7 +3,8 @@ import { Database } from "sqlite";
 export type EncoreOer = {
   id: number;
   title: string;
-  description: string
+  description: string;
+  skills: string;
 }
 
 export type OerConcept = {
@@ -52,4 +53,14 @@ export const queryFilterWikiConcept = async (db: Database, oersIds: number[]) =>
       and edge=1`); // and concept1 NOT IN (SELECT adjectives FROM words_speech)
                     // and concept2 NOT IN (SELECT adjectives FROM words_speech)
   return resp;
+}
+
+export const queryConcepts = async (db: Database, oersIds: number[]) => {
+  const resp = await db.all<OerConcept[]>(`
+    SELECT * 
+    FROM oers_concept 
+    WHERE id IN (${oersIds.join(",")})`);
+  const output: string[] = [];
+  resp.forEach(ec => output.push(...ec.extracted_concepts.split(",")));
+  return output;
 }
