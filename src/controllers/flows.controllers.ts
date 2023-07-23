@@ -42,7 +42,7 @@ export async function getFlowById(req: Request, res: Response<Document<unknown, 
 export async function downloadNotebookVSC(req: Request, res: Response, next: NextFunction) {
   const template = `#!csharp
 
-#r "nuget: Polyglot.Interactive, 0.0.2-*"
+#r "nuget: Polyglot.Interactive, 0.0.3-*"
 
 #!csharp
 
