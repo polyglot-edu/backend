@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import PolyglotFlowModel from "../models/flow.model";
 import { v4 } from "uuid";
 import { ExecCtx, Execution } from "../execution/execution";
-import { ManualAA, RandomDA } from "../execution/algorithm";
 
 type SendCommandBody = {
   ctxId: string;
@@ -46,11 +45,11 @@ export async function startExecution(req: Request<{},any,StartExecutionBody>, re
       return res.status(404).send();
     }
 
+    const algo = flow?.execution?.algo ?? "Random Execution";
+
     // create execution obj
     const ctx = Execution.createCtx(flow._id, "");
-    const algo = new RandomDA(ctx);
-    const abstractAlgo = new ManualAA(ctx);
-    const execution = new Execution(ctx,algo,abstractAlgo,flow);
+    const execution = new Execution({ctx, algo, flow});
 
     // get first available node
     const {ctx: updatedCtx, node: firstNode} = execution.getFirstExercise();
@@ -81,15 +80,19 @@ export async function getNextExercisev2(req: Request<{},any, GetNextExerciseV2Bo
 
   try {
     const ctx = ctxs[ctxId];
+
+    if (!ctx) {
+      return res.status(400).json({"error": "Ctx not found!"})
+    }
     
     const flow = await PolyglotFlowModel.findById(ctx.flowId).populate(["nodes","edges"]);
     
     if (!flow) return res.status(404).send();
     if (satisfiedConditions.length === 0) return res.status(200).json(null);
 
-    const algo = new RandomDA(ctx);
-    const abstractAlgo = new ManualAA(ctx);
-    const execution = new Execution(ctx, algo,abstractAlgo, flow);
+    const algo = flow?.execution?.algo ?? "Random Execution";
+
+    const execution = new Execution({ctx, algo, flow});
 
     const {ctx: updatedCtx, node: firstNode} = await execution.getNextExercise(satisfiedConditions);
 

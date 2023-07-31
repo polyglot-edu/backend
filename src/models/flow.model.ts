@@ -2,7 +2,6 @@ import mongoose, { model, Model } from 'mongoose';
 import { PolyglotFlow } from "../types/PolyglotFlow";
 import { v4 as uuidv4 } from 'uuid';
 import validator from 'validator';
-import User from './user.model';
 
 
 export const flowSchema = new mongoose.Schema<PolyglotFlow>({
@@ -36,7 +35,10 @@ export const flowSchema = new mongoose.Schema<PolyglotFlow>({
       default: []
     }],
     nodes: [{type: String, required: true, ref: 'Node'}],
-    edges: [{type: String, required: true, ref: 'Edge'}]
+    edges: [{type: String, required: true, ref: 'Edge'}],
+    execution: {type: {
+      algo: {type: String, default: "Random Execution"}
+    }}
 })
 
 export interface PolyglotFlowModel extends Model<PolyglotFlow>{
