@@ -3,8 +3,8 @@ import app from "./app";
 import mongoose from 'mongoose';
 import { MONGO_URL, PORT, ENV, TEST_MODE } from "./utils/secrets";
 import User from './models/user.model';
-import PolyglotFlowModel from "./models/flow.model";
 import learningPath from './guestExamples.json'
+import { updateFlowQuery } from "./controllers/flows.controllers";
 
 /**
  * Error Handler. Provides full stack
@@ -36,7 +36,7 @@ const server = app.listen(PORT,async () => {
         }
         learningPath.forEach(async (lp) => {
             lp.author = user?._id
-            await PolyglotFlowModel.updateOne({_id: lp._id},lp,{upsert: true});
+            await updateFlowQuery(lp._id,lp as any);
         })
     }
 });

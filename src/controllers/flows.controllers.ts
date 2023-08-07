@@ -81,7 +81,7 @@ export async function getFlowList(req: Request, res: Response, next : NextFuncti
   
 }
 
-const updateFlowQuery = async (id: string, flow: PolyglotFlow & ({ nodes: PolyglotNode[], edges: PolyglotEdge[]} | { nodes: string[], edges: string[]})) => {
+export const updateFlowQuery = async (id: string, flow: PolyglotFlow & ({ nodes: PolyglotNode[], edges: PolyglotEdge[]} | { nodes: string[], edges: string[]})) => {
   const currentFlow = await PolyglotFlowModel
       .findOne({ _id: id})
       .populate('nodes', 'type')
