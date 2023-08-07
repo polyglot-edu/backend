@@ -1,5 +1,5 @@
 import { ChatMessage } from "@azure/openai";
-import { OpenAI } from "./client";
+import { OpenAI } from "../../openai/client";
 
 export type GenResProps = {
   num_ex: number;

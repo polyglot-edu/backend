@@ -1,7 +1,7 @@
 import { GameEngine, SmartCampusGameEngine } from "../gamification/gamification";
-import { abstractNodeSchema } from "../models/node.model";
 import { PolyglotEdge, PolyglotFlow, PolyglotNode, PolyglotNodeValidation } from "../types";
-import { AbstractAlgorithm, DistrubutionAlgorithm } from "./algorithm";
+import { getAbstractAlgorithm, getPathSelectorAlgorithm, pathSelectorMap } from "./algo/register";
+import { AbstractAlgorithm, DistrubutionAlgorithm } from "./algo/base";
 
 export type ExecCtx = {
   flowId: string;
@@ -13,21 +13,34 @@ export type ExecCtx = {
 
 export type ExecCtxNodeInfo = {[x: string] : any};
 
+export type ExecProps = {
+  ctx: ExecCtx;
+  algo: string;
+  flow: PolyglotFlow;
+}
+
 export class Execution {
   private ctx: ExecCtx;
   private algo: DistrubutionAlgorithm;
-  private abstractAlgo: AbstractAlgorithm;
+  private abstractAlgo: AbstractAlgorithm | null;
   private flow: PolyglotFlow;
   private gameEngine: GameEngine;
 
-  constructor(_ctx: ExecCtx, _algo: DistrubutionAlgorithm, _abstractAlgo: AbstractAlgorithm, _flow: PolyglotFlow) {
-    this.ctx = _ctx;
-    this.algo = _algo;
-    this.abstractAlgo = _abstractAlgo;
-    this.flow = _flow;
+  constructor(params: ExecProps) {
+    const {ctx, algo, flow} = params;
+
+    if (!pathSelectorMap[algo]) {
+      throw Error("Path selector algorithm not set");
+    }
+
+    this.ctx = ctx;
+    this.abstractAlgo = null;
+    this.algo = getPathSelectorAlgorithm(algo, ctx);
+    this.flow = flow;
     this.gameEngine = new SmartCampusGameEngine();
 
-    this.algo.setFlow(_flow);
+    // TODO: refactor
+    this.algo.setFlow(flow);
   }
 
   public static createCtx(flowId: string, currentNodeId: string, userId?: string) {
@@ -77,6 +90,8 @@ export class Execution {
     }
     // caso in cui sto eseguendo un nodo astratto
     if (currentNode.type === "abstractNode") {
+      // TODO: refactor this
+      this.abstractAlgo = getAbstractAlgorithm(currentNode.data.execution.abstractAlgo, this.ctx);
       const {execNodeInfo, node} = await this.abstractAlgo.getNextExercise(this.ctx.execNodeInfo, currentNode, satisfiedEdges);
 
       if (execNodeInfo.done) {
