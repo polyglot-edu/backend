@@ -1,0 +1,2145 @@
+[
+    {
+        "_id": "ccf426d8-9555-4322-ac6b-4551fe975474",
+        "author": "",
+        "title": "Introduction Applied Machine Learning",
+        "description": "Applied machine learning learning's example",
+        "tags": [
+          {
+            "name": "ML",
+            "color": "cyan",
+            "_id": "64c9ee9ca16624d305968445"
+          },
+          {
+            "name": "APPLIED",
+            "color": "teal",
+            "_id": "64c9ee9ca16624d305968446"
+          }
+        ],
+        "nodes": [
+          {
+            "data": {
+              "text": "## Introduction\n### What is Machine Learning?\nMachine Learning (ML) is a subset of artificial intelligence (AI) that focuses on creating algorithms and systems that can learn and improve from experience without being explicitly programmed. The goal of ML is to enable computers to automatically learn and make predictions or decisions based on patterns and data, rather than being explicitly programmed for every specific task.\n\n### Basic Concepts in Machine Learning:\n\n**Data**: In machine learning, everything revolves around data. The data can be of different types, such as structured (tabular data), unstructured (text, images, audio), or time-series data.\n\n**Features and Labels**: In supervised learning, data is divided into features (input variables) and labels (target output). The model learns from the features to predict or classify the labels.\n\n**Training and Testing**: The process of training a machine learning model involves feeding it labeled data and allowing it to learn the underlying patterns. The model's performance is then evaluated using a separate set of data, the testing or validation data, to assess its generalization ability.\n\n**Supervised, Unsupervised, and Reinforcement Learning**: These are the three main types of machine learning approaches. Supervised learning involves training a model on labeled data. Unsupervised learning deals with finding patterns and relationships in unlabeled data. Reinforcement learning involves training a model to make decisions in an environment and receive feedback (rewards or penalties) based on its actions.\n\n### Applications of Machine Learning:\n\nMachine learning has a wide range of applications across various industries and domains. Some common applications include:\n\n**Natural Language Processing (NLP)**: Language translation, sentiment analysis, chatbots, and speech recognition.\n**Computer Vision**: Object detection, image classification, facial recognition, and autonomous vehicles.\n**Recommendation Systems**: Personalized product recommendations, movie suggestions, etc.\n**Healthcare**: Disease diagnosis, drug discovery, personalized medicine.\n**Finance**: Fraud detection, credit scoring, stock market prediction.\n**Marketing**: Customer segmentation, churn prediction, targeted advertising.\n\n### Why Study Machine Learning?\nMachine learning has become an indispensable tool in modern technology and industries. The ability to analyze large datasets, make accurate predictions, and automate decision-making processes has revolutionized various sectors. Understanding machine learning empowers individuals and organizations to harness the potential of data and build intelligent systems for solving complex problems."
+            },
+            "_id": "291eeb33-d4dd-4fab-b7d4-9e4deb5ff468",
+            "type": "lessonTextNode",
+            "description": "",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "291eeb33-d4dd-4fab-b7d4-9e4deb5ff468",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 315,
+                "y": 330
+              },
+              "width": 113,
+              "height": 46,
+              "selected": false,
+              "positionAbsolute": {
+                "x": 315,
+                "y": 330
+              },
+              "dragging": false
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "## Introduction\n### What is Machine Learning?\nMachine Learning (ML) is a subset of artificial intelligence (AI) that focuses on creating algorithms and systems that can learn and improve from experience without being explicitly programmed. The goal of ML is to enable computers to automatically learn and make predictions or decisions based on patterns and data, rather than being explicitly programmed for every specific task.\n\n### Basic Concepts in Machine Learning:\n\n**Data**: In machine learning, everything revolves around data. The data can be of different types, such as structured (tabular data), unstructured (text, images, audio), or time-series data.\n\n**Features and Labels**: In supervised learning, data is divided into features (input variables) and labels (target output). The model learns from the features to predict or classify the labels.\n\n**Training and Testing**: The process of training a machine learning model involves feeding it labeled data and allowing it to learn the underlying patterns. The model's performance is then evaluated using a separate set of data, the testing or validation data, to assess its generalization ability.\n\n**Supervised, Unsupervised, and Reinforcement Learning**: These are the three main types of machine learning approaches. Supervised learning involves training a model on labeled data. Unsupervised learning deals with finding patterns and relationships in unlabeled data. Reinforcement learning involves training a model to make decisions in an environment and receive feedback (rewards or penalties) based on its actions.\n\n### Applications of Machine Learning:\n\nMachine learning has a wide range of applications across various industries and domains. Some common applications include:\n\n**Natural Language Processing (NLP)**: Language translation, sentiment analysis, chatbots, and speech recognition.\n**Computer Vision**: Object detection, image classification, facial recognition, and autonomous vehicles.\n**Recommendation Systems**: Personalized product recommendations, movie suggestions, etc.\n**Healthcare**: Disease diagnosis, drug discovery, personalized medicine.\n**Finance**: Fraud detection, credit scoring, stock market prediction.\n**Marketing**: Customer segmentation, churn prediction, targeted advertising.\n\n### Why Study Machine Learning?\nMachine learning has become an indispensable tool in modern technology and industries. The ability to analyze large datasets, make accurate predictions, and automate decision-making processes has revolutionized various sectors. Understanding machine learning empowers individuals and organizations to harness the potential of data and build intelligent systems for solving complex problems."
+                }
+              ]
+            },
+            "title": "Introduction"
+          },
+          {
+            "data": {
+              "choices": [
+                "To explicitly program computers for every specific task.",
+                "To create algorithms and systems that can learn and improve from experience.",
+                "To automate repetitive tasks without learning from data.",
+                "To build intelligent systems without using artificial intelligence."
+              ],
+              "isChoiceCorrect": [
+                false,
+                true,
+                false,
+                false
+              ],
+              "question": "## What is the main goal of machine learning?"
+            },
+            "_id": "cc59229d-da60-4b83-9022-b356a878a1b2",
+            "type": "multipleChoiceQuestionNode",
+            "description": "",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "cc59229d-da60-4b83-9022-b356a878a1b2",
+              "type": "multipleChoiceQuestionNode",
+              "position": {
+                "x": 510,
+                "y": 210
+              },
+              "width": 95,
+              "height": 46,
+              "selected": true,
+              "positionAbsolute": {
+                "x": 510,
+                "y": 210
+              },
+              "dragging": false
+            },
+            "runtimeData": {
+              "challengeSetup": [
+                "\nusing Polyglot.Interactive;\nvar kernel = Kernel.Root.FindKernelByName(\"multiplechoice\") as MultipleChoiceKernel;\nkernel.Options = new HashSet<string> { \"1\", \"2\", \"3\", \"4\" };\n"
+              ],
+              "challengeContent": [
+                {
+                  "type": "multiplechoice",
+                  "content": "",
+                  "priority": 1
+                },
+                {
+                  "type": "markdown",
+                  "content": "## What is the main goal of machine learning?\n1. To explicitly program computers for every specific task.,\n2. To create algorithms and systems that can learn and improve from experience.,\n3. To automate repetitive tasks without learning from data.,\n4. To build intelligent systems without using artificial intelligence.",
+                  "priority": 0
+                }
+              ]
+            },
+            "title": "Quiz intro"
+          },
+          {
+            "data": {
+              "text": "## Programming and Data Manipulation:\nProgramming and Data Manipulation are essential skills that enable you to work effectively with data and implement machine learning algorithms. These skills involve using a programming language, commonly Python, and employing libraries for data manipulation and analysis, such as NumPy, pandas, and matplotlib.\n\n## Programming:\nProgramming is the process of writing code to instruct the computer on how to perform specific tasks. In machine learning, Python is one of the most popular programming languages due to its simplicity, readability, and extensive libraries. Understanding programming concepts and syntax is crucial for implementing machine learning algorithms, preprocessing data, and building models.\n\n### Key Python Concepts for Machine Learning:\n\n**Variables and Data Types**: Understanding data types (e.g., integers, floats, strings) and variables is essential for handling data in Python.\n**Conditional Statements and Loops**: These control structures are used to make decisions and perform repetitive tasks, which are common in data manipulation and preprocessing.\n**Functions and Libraries**: Functions allow you to encapsulate code for reuse, while libraries (e.g., NumPy, pandas) provide pre-built functionalities for efficient data handling.\n\n## Data Manipulation:\nData manipulation involves processing and transforming data to make it suitable for analysis and machine learning tasks. This step is crucial since raw data is often messy, incomplete, or incompatible with machine learning algorithms.\n\n### Key Data Manipulation Tasks for Machine Learning:\n\n**Data Loading**: Reading and loading data from various sources, such as CSV files, databases, or APIs.\n\n**Data Cleaning**: Removing duplicates, handling missing values, and correcting errors in the data to ensure high-quality inputs for machine learning models.\n\n**Data Transformation**: Preprocessing data into the right format, such as converting categorical variables into numerical representations or scaling features to a common range.\n\n**Data Visualization**: Creating visualizations (e.g., histograms, scatter plots) to gain insights into the data distribution and identify potential patterns.\n\n### Python Libraries for Data Manipulation in Machine Learning:\n\n**NumPy**: It provides support for working with arrays and matrices, enabling efficient numerical operations and mathematical functions, which are foundational for many machine learning algorithms.\n**Pandas**: pandas offers data structures like DataFrames and Series, which are convenient for data manipulation and analysis. It facilitates tasks like data cleaning, filtering, merging, and grouping.\n**Matplotlib**: This library is useful for creating visualizations to gain insights into the data and evaluate model performance.\n\nBy mastering programming and data manipulation in Python, you gain the ability to preprocess and prepare data effectively, which is a crucial step in any machine learning project. These skills lay the groundwork for exploring more advanced machine learning concepts and algorithms in subsequent steps of your learning path."
+            },
+            "_id": "d273e81e-89ac-4514-8925-fb6be29f14a5",
+            "type": "lessonTextNode",
+            "description": "",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "d273e81e-89ac-4514-8925-fb6be29f14a5",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 675,
+                "y": 345
+              },
+              "width": 297,
+              "height": 46,
+              "selected": false,
+              "positionAbsolute": {
+                "x": 675,
+                "y": 345
+              },
+              "dragging": false
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "## Programming and Data Manipulation:\nProgramming and Data Manipulation are essential skills that enable you to work effectively with data and implement machine learning algorithms. These skills involve using a programming language, commonly Python, and employing libraries for data manipulation and analysis, such as NumPy, pandas, and matplotlib.\n\n## Programming:\nProgramming is the process of writing code to instruct the computer on how to perform specific tasks. In machine learning, Python is one of the most popular programming languages due to its simplicity, readability, and extensive libraries. Understanding programming concepts and syntax is crucial for implementing machine learning algorithms, preprocessing data, and building models.\n\n### Key Python Concepts for Machine Learning:\n\n**Variables and Data Types**: Understanding data types (e.g., integers, floats, strings) and variables is essential for handling data in Python.\n**Conditional Statements and Loops**: These control structures are used to make decisions and perform repetitive tasks, which are common in data manipulation and preprocessing.\n**Functions and Libraries**: Functions allow you to encapsulate code for reuse, while libraries (e.g., NumPy, pandas) provide pre-built functionalities for efficient data handling.\n\n## Data Manipulation:\nData manipulation involves processing and transforming data to make it suitable for analysis and machine learning tasks. This step is crucial since raw data is often messy, incomplete, or incompatible with machine learning algorithms.\n\n### Key Data Manipulation Tasks for Machine Learning:\n\n**Data Loading**: Reading and loading data from various sources, such as CSV files, databases, or APIs.\n\n**Data Cleaning**: Removing duplicates, handling missing values, and correcting errors in the data to ensure high-quality inputs for machine learning models.\n\n**Data Transformation**: Preprocessing data into the right format, such as converting categorical variables into numerical representations or scaling features to a common range.\n\n**Data Visualization**: Creating visualizations (e.g., histograms, scatter plots) to gain insights into the data distribution and identify potential patterns.\n\n### Python Libraries for Data Manipulation in Machine Learning:\n\n**NumPy**: It provides support for working with arrays and matrices, enabling efficient numerical operations and mathematical functions, which are foundational for many machine learning algorithms.\n**Pandas**: pandas offers data structures like DataFrames and Series, which are convenient for data manipulation and analysis. It facilitates tasks like data cleaning, filtering, merging, and grouping.\n**Matplotlib**: This library is useful for creating visualizations to gain insights into the data and evaluate model performance.\n\nBy mastering programming and data manipulation in Python, you gain the ability to preprocess and prepare data effectively, which is a crucial step in any machine learning project. These skills lay the groundwork for exploring more advanced machine learning concepts and algorithms in subsequent steps of your learning path."
+                }
+              ]
+            },
+            "title": "Programming and Data manipulation"
+          },
+          {
+            "data": {
+              "text": "# Introduction to applied ML"
+            },
+            "_id": "fabb668e-1ccd-4f74-b1a9-fc153c3dcd31",
+            "type": "lessonTextNode",
+            "description": "",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "fabb668e-1ccd-4f74-b1a9-fc153c3dcd31",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 120,
+                "y": 315
+              },
+              "width": 59,
+              "height": 46,
+              "selected": false,
+              "positionAbsolute": {
+                "x": 120,
+                "y": 315
+              },
+              "dragging": false
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "# Introduction to applied ML"
+                }
+              ]
+            },
+            "title": "Start"
+          },
+          {
+            "data": {
+              "target": "",
+              "conceptmap": {
+                "_id": "057af576-954b-4a62-b6c9-731ac53afe88",
+                "nodes": [
+                  {
+                    "_id": "db96e455-78a4-486d-9443-b9db33f9a2f0",
+                    "name": "Programming and Data processing in the context of machine learning"
+                  }
+                ],
+                "edges": []
+              },
+              "execution": {
+                "concepts": [
+                  {
+                    "_id": "db96e455-78a4-486d-9443-b9db33f9a2f0",
+                    "name": "Programming and Data processing in the context of machine learning"
+                  }
+                ],
+                "abstractAlgo": "Manual abstract algorithm",
+                "resType": "multiple choice",
+                "bloom_lv": "remember",
+                "numOfRes": 2
+              }
+            },
+            "_id": "d33bc1d2-2c6a-46a5-a678-c614a654af58",
+            "type": "abstractNode",
+            "description": "",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "d33bc1d2-2c6a-46a5-a678-c614a654af58",
+              "type": "abstractNode",
+              "position": {
+                "x": 1065,
+                "y": 420
+              },
+              "width": 270,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": 1065,
+                "y": 420
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "## Programming and Data Manipulation:\nProgramming and Data Manipulation are essential skills that enable you to work effectively with data and implement machine learning algorithms. These skills involve using a programming language, commonly Python, and employing libraries for data manipulation and analysis, such as NumPy, pandas, and matplotlib.\n\n## Programming:\nProgramming is the process of writing code to instruct the computer on how to perform specific tasks. In machine learning, Python is one of the most popular programming languages due to its simplicity, readability, and extensive libraries. Understanding programming concepts and syntax is crucial for implementing machine learning algorithms, preprocessing data, and building models.\n\n### Key Python Concepts for Machine Learning:\n\n**Variables and Data Types**: Understanding data types (e.g., integers, floats, strings) and variables is essential for handling data in Python.\n**Conditional Statements and Loops**: These control structures are used to make decisions and perform repetitive tasks, which are common in data manipulation and preprocessing.\n**Functions and Libraries**: Functions allow you to encapsulate code for reuse, while libraries (e.g., NumPy, pandas) provide pre-built functionalities for efficient data handling.\n\n## Data Manipulation:\nData manipulation involves processing and transforming data to make it suitable for analysis and machine learning tasks. This step is crucial since raw data is often messy, incomplete, or incompatible with machine learning algorithms.\n\n### Key Data Manipulation Tasks for Machine Learning:\n\n**Data Loading**: Reading and loading data from various sources, such as CSV files, databases, or APIs.\n\n**Data Cleaning**: Removing duplicates, handling missing values, and correcting errors in the data to ensure high-quality inputs for machine learning models.\n\n**Data Transformation**: Preprocessing data into the right format, such as converting categorical variables into numerical representations or scaling features to a common range.\n\n**Data Visualization**: Creating visualizations (e.g., histograms, scatter plots) to gain insights into the data distribution and identify potential patterns.\n\n### Python Libraries for Data Manipulation in Machine Learning:\n\n**NumPy**: It provides support for working with arrays and matrices, enabling efficient numerical operations and mathematical functions, which are foundational for many machine learning algorithms.\n**Pandas**: pandas offers data structures like DataFrames and Series, which are convenient for data manipulation and analysis. It facilitates tasks like data cleaning, filtering, merging, and grouping.\n**Matplotlib**: This library is useful for creating visualizations to gain insights into the data and evaluate model performance.\n\nBy mastering programming and data manipulation in Python, you gain the ability to preprocess and prepare data effectively, which is a crucial step in any machine learning project. These skills lay the groundwork for exploring more advanced machine learning concepts and algorithms in subsequent steps of your learning path."
+                }
+              ]
+            },
+            "title": "Quiz Prog and Data Manipulation"
+          },
+          {
+            "data": {
+              "text": "## Data Preprocessing\n\nData preprocessing is a crucial step in applied machine learning that involves transforming raw data into a clean, consistent, and suitable format before feeding it into machine learning algorithms. The quality and suitability of the data significantly impact the performance and accuracy of the machine learning models.\n\nImportance of Data Preprocessing:\n\nHandling Missing Data: Real-world data is often incomplete, with some entries missing. Data preprocessing helps to handle missing values by imputing them with appropriate values (e.g., mean, median, or interpolation) or removing the rows/columns with missing data.\n\nDealing with Outliers: Outliers are data points that deviate significantly from the rest of the dataset. These extreme values can skew model training. Data preprocessing techniques like truncation, capping, or imputation help address outliers.\n\nFeature Scaling: Machine learning algorithms can be sensitive to the scale of input features. Data preprocessing normalizes or scales the features to bring them to a similar range, ensuring fair treatment for all features during model training.\n\nHandling Categorical Data: Many machine learning algorithms require numerical inputs. Data preprocessing encodes categorical variables into numerical representations using techniques like one-hot encoding or label encoding.\n\nFeature Engineering: Data preprocessing involves creating new features or transforming existing ones to provide more meaningful information to the model, improving its performance.\n\nDimensionality Reduction: Data preprocessing techniques like principal component analysis (PCA) help reduce the number of features, making the data more manageable and reducing computational complexity.\n\nSteps in Data Preprocessing:\n\nData Cleaning: This step involves handling missing data and removing or correcting any outliers in the dataset.\n\nData Transformation: Data transformation includes converting categorical data into numerical representations (encoding) and scaling numerical features.\n\nFeature Engineering: In this step, new features may be created, and existing features may be combined or modified to improve model performance.\n\nDimensionality Reduction: If the dataset has a high number of features, dimensionality reduction techniques like PCA can be applied to reduce the number of dimensions.\n\nData Preprocessing Tools:\nSeveral Python libraries and frameworks facilitate data preprocessing in applied machine learning, including:\n\nNumPy: For numerical operations and array manipulation.\npandas: For data manipulation, cleaning, and transformation using DataFrames.\nscikit-learn: Provides utilities for feature scaling, encoding, and dimensionality reduction."
+            },
+            "_id": "db3e8911-8521-4bd7-8b5b-6050b47b13fe",
+            "type": "lessonTextNode",
+            "description": "",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "db3e8911-8521-4bd7-8b5b-6050b47b13fe",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 1425,
+                "y": 360
+              },
+              "width": 170,
+              "height": 46,
+              "selected": false,
+              "positionAbsolute": {
+                "x": 1425,
+                "y": 360
+              },
+              "dragging": false
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "## Data Preprocessing\n\nData preprocessing is a crucial step in applied machine learning that involves transforming raw data into a clean, consistent, and suitable format before feeding it into machine learning algorithms. The quality and suitability of the data significantly impact the performance and accuracy of the machine learning models.\n\nImportance of Data Preprocessing:\n\nHandling Missing Data: Real-world data is often incomplete, with some entries missing. Data preprocessing helps to handle missing values by imputing them with appropriate values (e.g., mean, median, or interpolation) or removing the rows/columns with missing data.\n\nDealing with Outliers: Outliers are data points that deviate significantly from the rest of the dataset. These extreme values can skew model training. Data preprocessing techniques like truncation, capping, or imputation help address outliers.\n\nFeature Scaling: Machine learning algorithms can be sensitive to the scale of input features. Data preprocessing normalizes or scales the features to bring them to a similar range, ensuring fair treatment for all features during model training.\n\nHandling Categorical Data: Many machine learning algorithms require numerical inputs. Data preprocessing encodes categorical variables into numerical representations using techniques like one-hot encoding or label encoding.\n\nFeature Engineering: Data preprocessing involves creating new features or transforming existing ones to provide more meaningful information to the model, improving its performance.\n\nDimensionality Reduction: Data preprocessing techniques like principal component analysis (PCA) help reduce the number of features, making the data more manageable and reducing computational complexity.\n\nSteps in Data Preprocessing:\n\nData Cleaning: This step involves handling missing data and removing or correcting any outliers in the dataset.\n\nData Transformation: Data transformation includes converting categorical data into numerical representations (encoding) and scaling numerical features.\n\nFeature Engineering: In this step, new features may be created, and existing features may be combined or modified to improve model performance.\n\nDimensionality Reduction: If the dataset has a high number of features, dimensionality reduction techniques like PCA can be applied to reduce the number of dimensions.\n\nData Preprocessing Tools:\nSeveral Python libraries and frameworks facilitate data preprocessing in applied machine learning, including:\n\nNumPy: For numerical operations and array manipulation.\npandas: For data manipulation, cleaning, and transformation using DataFrames.\nscikit-learn: Provides utilities for feature scaling, encoding, and dimensionality reduction."
+                }
+              ]
+            },
+            "title": "Data Preprocessing"
+          },
+          {
+            "data": {
+              "target": "",
+              "conceptmap": {
+                "_id": "150e87b8-0c98-4cbe-9fb5-0b636d8088c4",
+                "nodes": [
+                  {
+                    "_id": "05d0fae2-3c75-4e57-b02b-708e69a60c15",
+                    "name": "data preprocessing"
+                  },
+                  {
+                    "_id": "2a8e6547-8117-4ced-8eae-5993ca56f07a",
+                    "name": "Data Cleaning"
+                  },
+                  {
+                    "_id": "3f249061-ce18-48fb-8348-103d21b2c1e0",
+                    "name": "Data Transformation"
+                  },
+                  {
+                    "_id": "fb7215d5-f330-4bb4-a6bf-625d771a8bf2",
+                    "name": "Data Normalization"
+                  },
+                  {
+                    "_id": "51eb33e1-75eb-4d76-a884-155d4c5d61d6",
+                    "name": "Feature Selection"
+                  },
+                  {
+                    "_id": "5fe9af4d-26b9-4a02-af00-ab472d0cf03f",
+                    "name": "Feature Engineering"
+                  }
+                ],
+                "edges": [
+                  {
+                    "_id": "bc6d86e7-1fe5-449c-93f3-71fd3d479f59",
+                    "from": "05d0fae2-3c75-4e57-b02b-708e69a60c15",
+                    "to": "2a8e6547-8117-4ced-8eae-5993ca56f07a"
+                  },
+                  {
+                    "_id": "ee38205e-bdb0-4b53-863a-87f620552216",
+                    "from": "05d0fae2-3c75-4e57-b02b-708e69a60c15",
+                    "to": "3f249061-ce18-48fb-8348-103d21b2c1e0"
+                  },
+                  {
+                    "_id": "1c00d7dc-bfa5-48df-ab0a-ecddd6eaae84",
+                    "from": "05d0fae2-3c75-4e57-b02b-708e69a60c15",
+                    "to": "fb7215d5-f330-4bb4-a6bf-625d771a8bf2"
+                  },
+                  {
+                    "_id": "b1d1b903-a903-4d6d-8805-c490218b6d8c",
+                    "from": "05d0fae2-3c75-4e57-b02b-708e69a60c15",
+                    "to": "51eb33e1-75eb-4d76-a884-155d4c5d61d6"
+                  },
+                  {
+                    "_id": "db0ce7da-3246-4ce1-afc8-d9be67400f8f",
+                    "from": "05d0fae2-3c75-4e57-b02b-708e69a60c15",
+                    "to": "5fe9af4d-26b9-4a02-af00-ab472d0cf03f"
+                  }
+                ]
+              },
+              "execution": {
+                "concepts": [
+                  {
+                    "_id": "2a8e6547-8117-4ced-8eae-5993ca56f07a",
+                    "name": "Data Cleaning"
+                  },
+                  {
+                    "_id": "3f249061-ce18-48fb-8348-103d21b2c1e0",
+                    "name": "Data Transformation"
+                  }
+                ],
+                "abstractAlgo": "Manual abstract algorithm",
+                "resType": "multiple choice",
+                "bloom_lv": "remember"
+              }
+            },
+            "_id": "fb0130fb-b705-48ea-846b-a3fc4ef57215",
+            "type": "abstractNode",
+            "description": "",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "fb0130fb-b705-48ea-846b-a3fc4ef57215",
+              "type": "abstractNode",
+              "position": {
+                "x": 1695,
+                "y": 375
+              },
+              "width": 208,
+              "height": 46,
+              "selected": false,
+              "dragging": false
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "## Programming and Data Manipulation:\nProgramming and Data Manipulation are essential skills that enable you to work effectively with data and implement machine learning algorithms. These skills involve using a programming language, commonly Python, and employing libraries for data manipulation and analysis, such as NumPy, pandas, and matplotlib.\n\n## Programming:\nProgramming is the process of writing code to instruct the computer on how to perform specific tasks. In machine learning, Python is one of the most popular programming languages due to its simplicity, readability, and extensive libraries. Understanding programming concepts and syntax is crucial for implementing machine learning algorithms, preprocessing data, and building models.\n\n### Key Python Concepts for Machine Learning:\n\n**Variables and Data Types**: Understanding data types (e.g., integers, floats, strings) and variables is essential for handling data in Python.\n**Conditional Statements and Loops**: These control structures are used to make decisions and perform repetitive tasks, which are common in data manipulation and preprocessing.\n**Functions and Libraries**: Functions allow you to encapsulate code for reuse, while libraries (e.g., NumPy, pandas) provide pre-built functionalities for efficient data handling.\n\n## Data Manipulation:\nData manipulation involves processing and transforming data to make it suitable for analysis and machine learning tasks. This step is crucial since raw data is often messy, incomplete, or incompatible with machine learning algorithms.\n\n### Key Data Manipulation Tasks for Machine Learning:\n\n**Data Loading**: Reading and loading data from various sources, such as CSV files, databases, or APIs.\n\n**Data Cleaning**: Removing duplicates, handling missing values, and correcting errors in the data to ensure high-quality inputs for machine learning models.\n\n**Data Transformation**: Preprocessing data into the right format, such as converting categorical variables into numerical representations or scaling features to a common range.\n\n**Data Visualization**: Creating visualizations (e.g., histograms, scatter plots) to gain insights into the data distribution and identify potential patterns.\n\n### Python Libraries for Data Manipulation in Machine Learning:\n\n**NumPy**: It provides support for working with arrays and matrices, enabling efficient numerical operations and mathematical functions, which are foundational for many machine learning algorithms.\n**Pandas**: pandas offers data structures like DataFrames and Series, which are convenient for data manipulation and analysis. It facilitates tasks like data cleaning, filtering, merging, and grouping.\n**Matplotlib**: This library is useful for creating visualizations to gain insights into the data and evaluate model performance.\n\nBy mastering programming and data manipulation in Python, you gain the ability to preprocess and prepare data effectively, which is a crucial step in any machine learning project. These skills lay the groundwork for exploring more advanced machine learning concepts and algorithms in subsequent steps of your learning path."
+                }
+              ]
+            },
+            "title": "Quiz Data preprocessing"
+          },
+          {
+            "data": {
+              "text": "## Good Work!"
+            },
+            "_id": "422e4c09-080e-4b1b-ae25-b76630598d44",
+            "type": "lessonTextNode",
+            "description": "",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "422e4c09-080e-4b1b-ae25-b76630598d44",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 2025,
+                "y": 390
+              },
+              "width": 57,
+              "height": 46,
+              "selected": false,
+              "dragging": false
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "## Good Work!"
+                }
+              ]
+            },
+            "title": "Stop"
+          }
+        ],
+        "edges": [
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "332658f3-5159-4ce5-9b93-0d023e8e43a4",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "332658f3-5159-4ce5-9b93-0d023e8e43a4",
+              "source": "cc59229d-da60-4b83-9022-b356a878a1b2",
+              "target": "d273e81e-89ac-4514-8925-fb6be29f14a5",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Pass"
+          },
+          {
+            "data": {
+              "conditionKind": "fail"
+            },
+            "_id": "09cc36e2-a205-4c9c-86ed-e73e63cc7df5",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "09cc36e2-a205-4c9c-86ed-e73e63cc7df5",
+              "source": "cc59229d-da60-4b83-9022-b356a878a1b2",
+              "target": "291eeb33-d4dd-4fab-b7d4-9e4deb5ff468",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Fail"
+          },
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "483dc14c-9f83-4503-a079-e3ff9dd44aef",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "483dc14c-9f83-4503-a079-e3ff9dd44aef",
+              "source": "f36a0e4a-3e29-4052-b325-7af8897a6db5",
+              "target": "64f5c98c-6010-45b5-8f8c-6e528f0e450b",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Pass"
+          },
+          {
+            "data": {
+              "conditionKind": "fail"
+            },
+            "_id": "d35ee67c-fea9-4434-a7f7-99e109ffbf7d",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "d35ee67c-fea9-4434-a7f7-99e109ffbf7d",
+              "source": "f36a0e4a-3e29-4052-b325-7af8897a6db5",
+              "target": "02b6681e-c4ed-456c-8cc9-64caa0a44839",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Fail"
+          },
+          {
+            "_id": "0dcbaf93-d580-449c-87f6-4e85053e3eac",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "data": {
+              "target": "",
+              "conceptmap": {
+                "_id": "057af576-954b-4a62-b6c9-731ac53afe88",
+                "nodes": [
+                  {
+                    "_id": "db96e455-78a4-486d-9443-b9db33f9a2f0",
+                    "name": "Programming and Data processing in the context of machine learning"
+                  }
+                ],
+                "edges": []
+              },
+              "execution": {
+                "concepts": [
+                  {
+                    "_id": "db96e455-78a4-486d-9443-b9db33f9a2f0",
+                    "name": "Programming and Data processing in the context of machine learning"
+                  }
+                ],
+                "abstractAlgo": "Manual abstract algorithm",
+                "resType": "multiple choice",
+                "bloom_lv": "remember",
+                "numOfRes": 2
+              }
+            },
+            "reactFlow": {
+              "id": "0dcbaf93-d580-449c-87f6-4e85053e3eac",
+              "source": "fabb668e-1ccd-4f74-b1a9-fc153c3dcd31",
+              "target": "291eeb33-d4dd-4fab-b7d4-9e4deb5ff468",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "un"
+          },
+          {
+            "_id": "3c0287a0-9a7b-4e22-972e-af06165f19b2",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "data": {
+              "conditionKind": "pass"
+            },
+            "reactFlow": {
+              "id": "3c0287a0-9a7b-4e22-972e-af06165f19b2",
+              "source": "db3e8911-8521-4bd7-8b5b-6050b47b13fe",
+              "target": "fb0130fb-b705-48ea-846b-a3fc4ef57215",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "un"
+          },
+          {
+            "_id": "abfa3754-9815-40c2-80fe-67ded749ed67",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "data": {
+              "target": "",
+              "conceptmap": {
+                "_id": "057af576-954b-4a62-b6c9-731ac53afe88",
+                "nodes": [
+                  {
+                    "_id": "db96e455-78a4-486d-9443-b9db33f9a2f0",
+                    "name": "Programming and Data processing in the context of machine learning"
+                  }
+                ],
+                "edges": []
+              },
+              "execution": {
+                "concepts": [
+                  {
+                    "_id": "db96e455-78a4-486d-9443-b9db33f9a2f0",
+                    "name": "Programming and Data processing in the context of machine learning"
+                  }
+                ],
+                "abstractAlgo": "Manual abstract algorithm",
+                "resType": "multiple choice",
+                "bloom_lv": "remember",
+                "numOfRes": 2
+              }
+            },
+            "reactFlow": {
+              "id": "abfa3754-9815-40c2-80fe-67ded749ed67",
+              "source": "d273e81e-89ac-4514-8925-fb6be29f14a5",
+              "target": "d33bc1d2-2c6a-46a5-a678-c614a654af58",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "un"
+          },
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "d9df23e4-0581-4693-9df3-77bd395ee318",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "d9df23e4-0581-4693-9df3-77bd395ee318",
+              "source": "d33bc1d2-2c6a-46a5-a678-c614a654af58",
+              "target": "db3e8911-8521-4bd7-8b5b-6050b47b13fe",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "pass"
+          },
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "f48f1db4-ec16-4f58-a9ed-e55bcfdeeefc",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "f48f1db4-ec16-4f58-a9ed-e55bcfdeeefc",
+              "source": "fb0130fb-b705-48ea-846b-a3fc4ef57215",
+              "target": "422e4c09-080e-4b1b-ae25-b76630598d44",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "pass"
+          },
+          {
+            "_id": "73085fec-5b09-4771-afec-97607d4193e3",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "data": {
+              "conditionKind": "pass"
+            },
+            "reactFlow": {
+              "id": "73085fec-5b09-4771-afec-97607d4193e3",
+              "source": "291eeb33-d4dd-4fab-b7d4-9e4deb5ff468",
+              "target": "cc59229d-da60-4b83-9022-b356a878a1b2",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "un"
+          }
+        ],
+        "__v": 0
+      },
+      {
+        "_id": "07401216-f6d5-46cb-a051-2d9f51031d87",
+        "author": "",
+        "title": "Epsilon Object Language",
+        "description": "Intro Learning Path on EOL",
+        "tags": [
+          {
+            "name": "MDE",
+            "color": "gray",
+            "_id": "64bcbf43c944319fc78f55dd"
+          },
+          {
+            "name": "EOF",
+            "color": "gray",
+            "_id": "64bcc507c944319fc78f5633"
+          }
+        ],
+        "nodes": [
+          {
+            "data": {
+              "question": "Exercise: Identifying the Bug Line in Epsilon EOL Code\n\nObjective: The exercise aims to test your ability to find a bug in a simple Epsilon EOL code snippet.\n\nInstructions:\nBelow is a short Epsilon EOL code snippet for performing a simple calculation. Your task is to identify the line in the code where the bug exists.\n\n```eol\n#1 var number1 = 5;\n#2 var number2 = 10;\n#3 var result = number1 + number2 * 2 - 5;\n#4 return result;\n```\n\nHint: The bug is related to operator precedence.\n\nExpected Output:\nAfter identifying and correcting the bug, the code should calculate the result correctly. The expected output should be a numerical value that reflects the corrected calculation.\n\nTask:\n1. Read the given EOL code snippet carefully.\n2. Identify the line where the bug exists.\n3. Answer with the wrong code number (i.e, x)\n\n",
+              "correctAnswers": [
+                "3"
+              ]
+            },
+            "_id": "4017ac1b-1220-44c6-9717-cdfcccc3e8ca",
+            "type": "closeEndedQuestionNode",
+            "description": "Identifying the Bug ",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "4017ac1b-1220-44c6-9717-cdfcccc3e8ca",
+              "type": "closeEndedQuestionNode",
+              "position": {
+                "x": 1125,
+                "y": 75
+              },
+              "width": 165,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": 1125,
+                "y": 75
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "Exercise: Identifying the Bug Line in Epsilon EOL Code\n\nObjective: The exercise aims to test your ability to find a bug in a simple Epsilon EOL code snippet.\n\nInstructions:\nBelow is a short Epsilon EOL code snippet for performing a simple calculation. Your task is to identify the line in the code where the bug exists.\n\n```eol\n#1 var number1 = 5;\n#2 var number2 = 10;\n#3 var result = number1 + number2 * 2 - 5;\n#4 return result;\n```\n\nHint: The bug is related to operator precedence.\n\nExpected Output:\nAfter identifying and correcting the bug, the code should calculate the result correctly. The expected output should be a numerical value that reflects the corrected calculation.\n\nTask:\n1. Read the given EOL code snippet carefully.\n2. Identify the line where the bug exists.\n3. Answer with the wrong code number (i.e, x)\n\n",
+                  "priority": 0
+                },
+                {
+                  "type": "html",
+                  "content": "",
+                  "priority": 1
+                }
+              ]
+            },
+            "title": "Identifying the Bug "
+          },
+          {
+            "data": {
+              "text": "**EOL MODULES**\n\nEOL programs are organized in modules. Each module defines a body and a number of operations. The body is a block of statements that are evaluated when the module is executed1. Each operation defines the kind of objects on which it is applicable (context), a name, a set of parameters and optionally a return type. Modules can also import other modules using import statements and access their operations, as shown in the listing below.\n\n\n```\n// file imported.eol\noperation hello() {\n  \"Hello world!\".println();\n}\n\n// file importer.eol\n// We can use relative/absolute paths or platform:/ URIs\nimport \"imported.eol\";\n\nhello(); // main body\n\n// ... more operations could be placed here ...\n```\n\n"
+            },
+            "_id": "df182676-e3b3-4f77-9772-33c5e72329c9",
+            "type": "lessonTextNode",
+            "description": "Lecture on EOL Syntax",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "df182676-e3b3-4f77-9772-33c5e72329c9",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 615,
+                "y": 120
+              },
+              "width": 194,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": 615,
+                "y": 120
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "**EOL MODULES**\n\nEOL programs are organized in modules. Each module defines a body and a number of operations. The body is a block of statements that are evaluated when the module is executed1. Each operation defines the kind of objects on which it is applicable (context), a name, a set of parameters and optionally a return type. Modules can also import other modules using import statements and access their operations, as shown in the listing below.\n\n\n```\n// file imported.eol\noperation hello() {\n  \"Hello world!\".println();\n}\n\n// file importer.eol\n// We can use relative/absolute paths or platform:/ URIs\nimport \"imported.eol\";\n\nhello(); // main body\n\n// ... more operations could be placed here ...\n```\n\n"
+                }
+              ]
+            },
+            "title": "Lecture on EOL Syntax"
+          },
+          {
+            "data": {
+              "text": "**EPSILON OBJECT LANGUAGE**\n\nEOL is the core expression language of Epsilon, and the foundation for task-specific languages for tasks such as model-validation, model-to-text transformation, model-to-model transformation and model migration. EOL can also be used as a general-purpose stand-alone model management language for automating tasks that do not fall into the patterns targeted by task-specific languages. You can learn more about EOL here. \n\nhttps://eclipse.dev/epsilon/doc/eol/"
+            },
+            "_id": "16253c45-a941-4496-b80e-8b2217ec06c1",
+            "type": "lessonTextNode",
+            "description": "Intro Lecture on EOF",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "16253c45-a941-4496-b80e-8b2217ec06c1",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 60,
+                "y": -15
+              },
+              "width": 178,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": 60,
+                "y": -15
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "**EPSILON OBJECT LANGUAGE**\n\nEOL is the core expression language of Epsilon, and the foundation for task-specific languages for tasks such as model-validation, model-to-text transformation, model-to-model transformation and model migration. EOL can also be used as a general-purpose stand-alone model management language for automating tasks that do not fall into the patterns targeted by task-specific languages. You can learn more about EOL here. \n\nhttps://eclipse.dev/epsilon/doc/eol/"
+                }
+              ]
+            },
+            "title": "Intro Lecture on EOF"
+          },
+          {
+            "data": {
+              "text": "**Epsilon Object Language (EOL) Syntax - Basics**\n\nThe Epsilon Object Language (EOL) is a simple and powerful scripting language designed for model management and manipulation within the Epsilon platform. Below are some of the basic syntax rules and constructs used in EOL:\n\n1. Variables and Data Types:\n   - Variables in EOL are declared using the `var` keyword.\n   - EOL supports dynamic typing, so data types are inferred based on the assigned value.\n   - Common data types include integers, real numbers, strings, booleans, collections (e.g., lists, sets, bags), and models.\n\nExample:\n```eol\nvar age = 25; // Integer\nvar name = \"John\"; // String\nvar isStudent = true; // Boolean\nvar numbers = new Sequence{1, 2, 3}; // Collection (List)\n```\n\n2. Expressions:\n   - EOL supports various arithmetic and logical expressions.\n   - Arithmetic operators include `+`, `-`, `*`, `/`, and `%`.\n   - Logical operators include `and`, `or`, `not`.\n\nExample:\n```eol\nvar sum = 5 + 3; // 8\nvar isAdult = age >= 18 and age < 65; // true\n```\n\n3. Control Structures:\n   - EOL has standard control structures like `if-else`, `for`, `while`, and `switch`.\n\nExample:\n```eol\nif (age >= 18) {\n    \"You are an adult.\";\n} else {\n    \"You are a minor.\";\n}\n\nfor (var i in numbers) {\n    // Loop through elements in the 'numbers' collection\n}\n```\n\n4. Model Queries:\n   - EOL allows querying and navigation through models using dot notation.\n   - `allInstances` retrieves all instances of a metaclass, and `select` filters elements based on conditions.\n\nExample:\n```eol\nvar persons = Person.allInstances; // Retrieve all instances of the 'Person' class\nvar adults = persons.select(p | p.age >= 18); // Filter 'persons' collection to include only adults\n```\n\n5. Operations and Functions:\n   - EOL supports defining custom operations and functions.\n   - Operations use the `operation` keyword, and functions use the `function` keyword.\n\nExample:\n```eol\noperation Integer multiplyByTwo(Integer x) {\n    return x * 2;\n}\n\nfunction Integer addTwoNumbers(Integer a, Integer b) {\n    return a + b;\n}\n```\n\n6. Comments:\n   - Single-line comments start with `//`.\n   - Multi-line comments are enclosed within `/* ... */`.\n\nExample:\n```eol\n// This is a single-line comment.\n\n/*\n   This is a\n   multi-line comment.\n*/\n```\n\nThese are the foundational syntax elements of the Epsilon Object Language (EOL). Understanding these basics will enable you to perform various model manipulations, transformations, and other model-driven tasks using EOL within the Epsilon platform."
+            },
+            "_id": "e6157f82-57cc-4aaf-9639-089c1d1c5f97",
+            "type": "lessonTextNode",
+            "description": "Review Lecture on EOF ",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "e6157f82-57cc-4aaf-9639-089c1d1c5f97",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 570,
+                "y": -105
+              },
+              "width": 197,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": 570,
+                "y": -105
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "**Epsilon Object Language (EOL) Syntax - Basics**\n\nThe Epsilon Object Language (EOL) is a simple and powerful scripting language designed for model management and manipulation within the Epsilon platform. Below are some of the basic syntax rules and constructs used in EOL:\n\n1. Variables and Data Types:\n   - Variables in EOL are declared using the `var` keyword.\n   - EOL supports dynamic typing, so data types are inferred based on the assigned value.\n   - Common data types include integers, real numbers, strings, booleans, collections (e.g., lists, sets, bags), and models.\n\nExample:\n```eol\nvar age = 25; // Integer\nvar name = \"John\"; // String\nvar isStudent = true; // Boolean\nvar numbers = new Sequence{1, 2, 3}; // Collection (List)\n```\n\n2. Expressions:\n   - EOL supports various arithmetic and logical expressions.\n   - Arithmetic operators include `+`, `-`, `*`, `/`, and `%`.\n   - Logical operators include `and`, `or`, `not`.\n\nExample:\n```eol\nvar sum = 5 + 3; // 8\nvar isAdult = age >= 18 and age < 65; // true\n```\n\n3. Control Structures:\n   - EOL has standard control structures like `if-else`, `for`, `while`, and `switch`.\n\nExample:\n```eol\nif (age >= 18) {\n    \"You are an adult.\";\n} else {\n    \"You are a minor.\";\n}\n\nfor (var i in numbers) {\n    // Loop through elements in the 'numbers' collection\n}\n```\n\n4. Model Queries:\n   - EOL allows querying and navigation through models using dot notation.\n   - `allInstances` retrieves all instances of a metaclass, and `select` filters elements based on conditions.\n\nExample:\n```eol\nvar persons = Person.allInstances; // Retrieve all instances of the 'Person' class\nvar adults = persons.select(p | p.age >= 18); // Filter 'persons' collection to include only adults\n```\n\n5. Operations and Functions:\n   - EOL supports defining custom operations and functions.\n   - Operations use the `operation` keyword, and functions use the `function` keyword.\n\nExample:\n```eol\noperation Integer multiplyByTwo(Integer x) {\n    return x * 2;\n}\n\nfunction Integer addTwoNumbers(Integer a, Integer b) {\n    return a + b;\n}\n```\n\n6. Comments:\n   - Single-line comments start with `//`.\n   - Multi-line comments are enclosed within `/* ... */`.\n\nExample:\n```eol\n// This is a single-line comment.\n\n/*\n   This is a\n   multi-line comment.\n*/\n```\n\nThese are the foundational syntax elements of the Epsilon Object Language (EOL). Understanding these basics will enable you to perform various model manipulations, transformations, and other model-driven tasks using EOL within the Epsilon platform."
+                }
+              ]
+            },
+            "title": "Review Lecture on EOF "
+          },
+          {
+            "data": {
+              "choices": [
+                "var",
+                "let",
+                "set"
+              ],
+              "isChoiceCorrect": [
+                true,
+                false,
+                false
+              ],
+              "question": "In Epsilon Object Language (EOL), variables are declared using which keyword?\n"
+            },
+            "_id": "c2f66e59-b70b-4e19-8eea-b1687fd26e43",
+            "type": "multipleChoiceQuestionNode",
+            "description": "Quiz on EOF Basics",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "c2f66e59-b70b-4e19-8eea-b1687fd26e43",
+              "type": "multipleChoiceQuestionNode",
+              "position": {
+                "x": 315,
+                "y": 15
+              },
+              "width": 168,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": 315,
+                "y": 15
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [
+                "\nusing Polyglot.Interactive;\nvar kernel = Kernel.Root.FindKernelByName(\"multiplechoice\") as MultipleChoiceKernel;\nkernel.Options = new HashSet<string> { \"1\", \"2\", \"3\" };\n"
+              ],
+              "challengeContent": [
+                {
+                  "type": "multiplechoice",
+                  "content": "",
+                  "priority": 1
+                },
+                {
+                  "type": "markdown",
+                  "content": "In Epsilon Object Language (EOL), variables are declared using which keyword?\n\n1. var,\n2. let,\n3. set",
+                  "priority": 0
+                }
+              ]
+            },
+            "title": "Quiz on EOF Basics"
+          },
+          {
+            "data": {
+              "choices": [
+                "Data types must be explicitly declared during variable declaration.",
+                "Data types are inferred based on the assigned value.",
+                "Data types are fixed and cannot change during program execution."
+              ],
+              "isChoiceCorrect": [
+                false,
+                true,
+                false
+              ],
+              "question": "EOL supports dynamic typing, which means:"
+            },
+            "_id": "9e238210-e934-45f3-8a65-f7941c55c9dc",
+            "type": "multipleChoiceQuestionNode",
+            "description": "Quiz on EOF Syntax",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "9e238210-e934-45f3-8a65-f7941c55c9dc",
+              "type": "multipleChoiceQuestionNode",
+              "position": {
+                "x": 870,
+                "y": 105
+              },
+              "width": 171,
+              "height": 46,
+              "selected": false,
+              "positionAbsolute": {
+                "x": 870,
+                "y": 105
+              },
+              "dragging": false
+            },
+            "runtimeData": {
+              "challengeSetup": [
+                "\nusing Polyglot.Interactive;\nvar kernel = Kernel.Root.FindKernelByName(\"multiplechoice\") as MultipleChoiceKernel;\nkernel.Options = new HashSet<string> { \"1\", \"2\", \"3\" };\n"
+              ],
+              "challengeContent": [
+                {
+                  "type": "multiplechoice",
+                  "content": "",
+                  "priority": 1
+                },
+                {
+                  "type": "markdown",
+                  "content": "EOL supports dynamic typing, which means:\n1. Data types must be explicitly declared during variable declaration.,\n2. Data types are inferred based on the assigned value.,\n3. Data types are fixed and cannot change during program execution.",
+                  "priority": 0
+                }
+              ]
+            },
+            "title": "Quiz on EOF Syntax"
+          },
+          {
+            "data": {
+              "text": ""
+            },
+            "_id": "2ade02a8-e973-4d45-a656-2f9a47feb3bd",
+            "type": "lessonTextNode",
+            "description": "Review Lecture on EOL Syntax",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "2ade02a8-e973-4d45-a656-2f9a47feb3bd",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 1140,
+                "y": 210
+              },
+              "width": 253,
+              "height": 46,
+              "selected": false,
+              "positionAbsolute": {
+                "x": 1140,
+                "y": 210
+              },
+              "dragging": false
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": ""
+                }
+              ]
+            },
+            "title": "Review Lecture on EOL Syntax"
+          },
+          {
+            "data": {
+              "text": "Congrats you reached the end of the learning path."
+            },
+            "_id": "cb28e836-b484-418f-b6e7-bdc3e16d2fe9",
+            "type": "lessonTextNode",
+            "description": "Bagde",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "cb28e836-b484-418f-b6e7-bdc3e16d2fe9",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 1395,
+                "y": 60
+              },
+              "width": 70,
+              "height": 46,
+              "selected": false,
+              "positionAbsolute": {
+                "x": 1395,
+                "y": 60
+              },
+              "dragging": false
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "Congrats you reached the end of the learning path."
+                }
+              ]
+            },
+            "title": "Badge"
+          }
+        ],
+        "edges": [
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "84c79e63-2a7d-4259-88b1-ad7a28ba3ba3",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "84c79e63-2a7d-4259-88b1-ad7a28ba3ba3",
+              "source": "0fed2305-8629-492a-8160-a63da9fe2ee8",
+              "target": "df182676-e3b3-4f77-9772-33c5e72329c9",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Pass"
+          },
+          {
+            "data": {
+              "conditionKind": "fail"
+            },
+            "_id": "13fbf0b4-550b-408c-bd94-5bbfeffea488",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "13fbf0b4-550b-408c-bd94-5bbfeffea488",
+              "source": "0fed2305-8629-492a-8160-a63da9fe2ee8",
+              "target": "e6157f82-57cc-4aaf-9639-089c1d1c5f97",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Fail"
+          },
+          {
+            "_id": "e171bcc9-c573-436b-9c80-375ddf16abcc",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "data": {
+              "target": "",
+              "conceptmap": {
+                "_id": "6b16bb49-d5e0-456e-8e2d-b136b1f6930e",
+                "nodes": [
+                  {
+                    "_id": "7858213f-87aa-4cdd-b18d-86636b3c11fa",
+                    "name": "EOL Syntax"
+                  },
+                  {
+                    "_id": "4754ca9c-4ae4-40a8-86ee-0e7828b12488",
+                    "name": "Lexical Syntax"
+                  },
+                  {
+                    "_id": "9b38986e-7835-45d1-859e-f3adb0a6b9c2",
+                    "name": "Grammatical Syntax"
+                  },
+                  {
+                    "_id": "4548b578-8edf-40ef-9992-ee243828beaf",
+                    "name": "Contextual Syntax"
+                  },
+                  {
+                    "_id": "a9063725-8ff2-4ae3-8717-d848da016e89",
+                    "name": "Morphology"
+                  },
+                  {
+                    "_id": "46bca026-3a00-425e-a263-dbd2811445cb",
+                    "name": "Phonology"
+                  },
+                  {
+                    "_id": "61414c13-9c04-4529-9cf2-fb7b9c683276",
+                    "name": "Semantics"
+                  },
+                  {
+                    "_id": "5689e910-270f-4737-b759-e26b315583ba",
+                    "name": "Syntactic Rules"
+                  },
+                  {
+                    "_id": "93ca80d8-f3bb-47f9-98f6-fec64e4cda5e",
+                    "name": "Parts of Speech"
+                  },
+                  {
+                    "_id": "13d11256-33fe-4df8-bc6d-977979794a2c",
+                    "name": "Sentence Structures"
+                  },
+                  {
+                    "_id": "2356d1b3-e7c0-44a7-bdc6-3cd87b5b283e",
+                    "name": "Tense"
+                  },
+                  {
+                    "_id": "ab01891c-b181-4a56-80db-a29cef80638d",
+                    "name": "Modality"
+                  },
+                  {
+                    "_id": "e74faded-8c2b-4319-8c0b-c09c4e20ea54",
+                    "name": "Mood"
+                  },
+                  {
+                    "_id": "9dbff39a-def6-4d03-a1bd-761e31f67df6",
+                    "name": "Subordination"
+                  },
+                  {
+                    "_id": "efa0e0d6-c3a0-4526-9672-87f554e3ded1",
+                    "name": "Semiotic Structure"
+                  },
+                  {
+                    "_id": "66ad0c71-084a-48ec-86f9-2ae13f843895",
+                    "name": "Performative Contexts"
+                  },
+                  {
+                    "_id": "0da09d6f-b8dd-4ab2-a584-2a7c1e00df59",
+                    "name": "Contextual Meaning"
+                  },
+                  {
+                    "_id": "f6f6e223-4f41-4f5a-b3da-3bc97f0a60c6",
+                    "name": "Rhetorical Functions"
+                  },
+                  {
+                    "_id": "1838642d-1493-4c08-a9fd-4affda8a572b",
+                    "name": "Discourse Analysis"
+                  }
+                ],
+                "edges": [
+                  {
+                    "from": "7858213f-87aa-4cdd-b18d-86636b3c11fa",
+                    "to": "4754ca9c-4ae4-40a8-86ee-0e7828b12488"
+                  },
+                  {
+                    "from": "7858213f-87aa-4cdd-b18d-86636b3c11fa",
+                    "to": "9b38986e-7835-45d1-859e-f3adb0a6b9c2"
+                  },
+                  {
+                    "from": "7858213f-87aa-4cdd-b18d-86636b3c11fa",
+                    "to": "4548b578-8edf-40ef-9992-ee243828beaf"
+                  },
+                  {
+                    "from": "4754ca9c-4ae4-40a8-86ee-0e7828b12488",
+                    "to": "a9063725-8ff2-4ae3-8717-d848da016e89"
+                  },
+                  {
+                    "from": "4754ca9c-4ae4-40a8-86ee-0e7828b12488",
+                    "to": "46bca026-3a00-425e-a263-dbd2811445cb"
+                  },
+                  {
+                    "from": "4754ca9c-4ae4-40a8-86ee-0e7828b12488",
+                    "to": "61414c13-9c04-4529-9cf2-fb7b9c683276"
+                  },
+                  {
+                    "from": "4754ca9c-4ae4-40a8-86ee-0e7828b12488",
+                    "to": "5689e910-270f-4737-b759-e26b315583ba"
+                  },
+                  {
+                    "from": "9b38986e-7835-45d1-859e-f3adb0a6b9c2",
+                    "to": "93ca80d8-f3bb-47f9-98f6-fec64e4cda5e"
+                  },
+                  {
+                    "from": "9b38986e-7835-45d1-859e-f3adb0a6b9c2",
+                    "to": "13d11256-33fe-4df8-bc6d-977979794a2c"
+                  },
+                  {
+                    "from": "9b38986e-7835-45d1-859e-f3adb0a6b9c2",
+                    "to": "2356d1b3-e7c0-44a7-bdc6-3cd87b5b283e"
+                  },
+                  {
+                    "from": "9b38986e-7835-45d1-859e-f3adb0a6b9c2",
+                    "to": "ab01891c-b181-4a56-80db-a29cef80638d"
+                  },
+                  {
+                    "from": "9b38986e-7835-45d1-859e-f3adb0a6b9c2",
+                    "to": "e74faded-8c2b-4319-8c0b-c09c4e20ea54"
+                  },
+                  {
+                    "from": "9b38986e-7835-45d1-859e-f3adb0a6b9c2",
+                    "to": "9dbff39a-def6-4d03-a1bd-761e31f67df6"
+                  },
+                  {
+                    "from": "4548b578-8edf-40ef-9992-ee243828beaf",
+                    "to": "efa0e0d6-c3a0-4526-9672-87f554e3ded1"
+                  },
+                  {
+                    "from": "4548b578-8edf-40ef-9992-ee243828beaf",
+                    "to": "66ad0c71-084a-48ec-86f9-2ae13f843895"
+                  },
+                  {
+                    "from": "4548b578-8edf-40ef-9992-ee243828beaf",
+                    "to": "0da09d6f-b8dd-4ab2-a584-2a7c1e00df59"
+                  },
+                  {
+                    "from": "4548b578-8edf-40ef-9992-ee243828beaf",
+                    "to": "f6f6e223-4f41-4f5a-b3da-3bc97f0a60c6"
+                  },
+                  {
+                    "from": "4548b578-8edf-40ef-9992-ee243828beaf",
+                    "to": "1838642d-1493-4c08-a9fd-4affda8a572b"
+                  }
+                ]
+              },
+              "execution": {
+                "concepts": [
+                  {
+                    "_id": "7f25dc9d-b28a-4bc6-b3dd-170b90c46f2f",
+                    "name": "Lexical Structure"
+                  },
+                  {
+                    "_id": "2917e03e-a126-43db-a537-b21fa13d64cc",
+                    "name": "Statements"
+                  },
+                  {
+                    "_id": "298ae711-de33-40e7-bb2e-ddb5aa45c564",
+                    "name": "Syntax"
+                  }
+                ],
+                "resType": "multiple choice",
+                "numOfRes": 2,
+                "bloom_lv": "understand"
+              }
+            },
+            "reactFlow": {
+              "id": "e171bcc9-c573-436b-9c80-375ddf16abcc",
+              "source": "df182676-e3b3-4f77-9772-33c5e72329c9",
+              "target": "6f12cc20-53a8-4d33-9c39-883f08955f41",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "_id": "33010945-4edf-4175-a05f-0781bc3b7df3",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "data": {
+              "text": "EOL is the core expression language of Epsilon, and the foundation for task-specific languages for tasks such as model-validation, model-to-text transformation, model-to-model transformation and model migration. EOL can also be used as a general-purpose stand-alone model management language for automating tasks that do not fall into the patterns targeted by task-specific languages. You can learn more about EOL here. https://eclipse.dev/epsilon/doc/eol/"
+            },
+            "reactFlow": {
+              "id": "33010945-4edf-4175-a05f-0781bc3b7df3",
+              "source": "16253c45-a941-4496-b80e-8b2217ec06c1",
+              "target": "0fed2305-8629-492a-8160-a63da9fe2ee8",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "_id": "19060245-18d1-4f84-9e81-40c3583f32a7",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "data": {
+              "conditionKind": "fail"
+            },
+            "reactFlow": {
+              "id": "19060245-18d1-4f84-9e81-40c3583f32a7",
+              "source": "e6157f82-57cc-4aaf-9639-089c1d1c5f97",
+              "target": "df182676-e3b3-4f77-9772-33c5e72329c9",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "_id": "584766e2-6185-4040-b79c-dfe9e78aa051",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "reactFlow": {
+              "id": "584766e2-6185-4040-b79c-dfe9e78aa051",
+              "source": "6f12cc20-53a8-4d33-9c39-883f08955f41",
+              "target": "4017ac1b-1220-44c6-9717-cdfcccc3e8ca",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "data": {
+              "conditionKind": "fail"
+            },
+            "_id": "723522c4-1e29-4df3-b42d-ff9fc4d0e81f",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "723522c4-1e29-4df3-b42d-ff9fc4d0e81f",
+              "source": "c2f66e59-b70b-4e19-8eea-b1687fd26e43",
+              "target": "e6157f82-57cc-4aaf-9639-089c1d1c5f97",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Fail"
+          },
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "616133c1-e899-4057-8d89-c3ab0e93b49f",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "616133c1-e899-4057-8d89-c3ab0e93b49f",
+              "source": "c2f66e59-b70b-4e19-8eea-b1687fd26e43",
+              "target": "df182676-e3b3-4f77-9772-33c5e72329c9",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Pass"
+          },
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "8fe020dc-1574-47a7-b2f1-fac684597a36",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "8fe020dc-1574-47a7-b2f1-fac684597a36",
+              "source": "9e238210-e934-45f3-8a65-f7941c55c9dc",
+              "target": "4017ac1b-1220-44c6-9717-cdfcccc3e8ca",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Pass"
+          },
+          {
+            "data": {
+              "conditionKind": "fail"
+            },
+            "_id": "4771b187-2767-4141-95fb-acd099fcf659",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "4771b187-2767-4141-95fb-acd099fcf659",
+              "source": "9e238210-e934-45f3-8a65-f7941c55c9dc",
+              "target": "2ade02a8-e973-4d45-a656-2f9a47feb3bd",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Fail"
+          },
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "dfdc2c83-e6d5-4c2a-ae42-2e8c56e27d49",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "dfdc2c83-e6d5-4c2a-ae42-2e8c56e27d49",
+              "source": "4017ac1b-1220-44c6-9717-cdfcccc3e8ca",
+              "target": "cb28e836-b484-418f-b6e7-bdc3e16d2fe9",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Pass"
+          },
+          {
+            "data": {
+              "conditionKind": "fail"
+            },
+            "_id": "95ff419f-2cdc-44e4-9219-ba7d7691018c",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "95ff419f-2cdc-44e4-9219-ba7d7691018c",
+              "source": "4017ac1b-1220-44c6-9717-cdfcccc3e8ca",
+              "target": "2ade02a8-e973-4d45-a656-2f9a47feb3bd",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Fail"
+          },
+          {
+            "_id": "7f259a44-b853-4d4d-9cf0-4ea53fb17538",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "data": {
+              "text": "**EOL MODULES**\n\nEOL programs are organized in modules. Each module defines a body and a number of operations. The body is a block of statements that are evaluated when the module is executed1. Each operation defines the kind of objects on which it is applicable (context), a name, a set of parameters and optionally a return type. Modules can also import other modules using import statements and access their operations, as shown in the listing below.\n\n\n```\n// file imported.eol\noperation hello() {\n  \"Hello world!\".println();\n}\n\n// file importer.eol\n// We can use relative/absolute paths or platform:/ URIs\nimport \"imported.eol\";\n\nhello(); // main body\n\n// ... more operations could be placed here ...\n```\n\n"
+            },
+            "reactFlow": {
+              "id": "7f259a44-b853-4d4d-9cf0-4ea53fb17538",
+              "source": "df182676-e3b3-4f77-9772-33c5e72329c9",
+              "target": "9e238210-e934-45f3-8a65-f7941c55c9dc",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "_id": "3051ffc8-fb1e-4848-ac30-400ba3a7f0b9",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "data": {
+              "text": "**EPSILON OBJECT LANGUAGE**\n\nEOL is the core expression language of Epsilon, and the foundation for task-specific languages for tasks such as model-validation, model-to-text transformation, model-to-model transformation and model migration. EOL can also be used as a general-purpose stand-alone model management language for automating tasks that do not fall into the patterns targeted by task-specific languages. You can learn more about EOL here. \n\nhttps://eclipse.dev/epsilon/doc/eol/"
+            },
+            "reactFlow": {
+              "id": "3051ffc8-fb1e-4848-ac30-400ba3a7f0b9",
+              "source": "16253c45-a941-4496-b80e-8b2217ec06c1",
+              "target": "c2f66e59-b70b-4e19-8eea-b1687fd26e43",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          }
+        ],
+        "__v": 0
+      },
+      {
+        "_id": "ebecf790-4a13-4db5-928c-b300e3233d6d",
+        "author": "",
+        "title": "Food Science",
+        "description": "Food Science Intro Learning Path",
+        "tags": [
+          {
+            "name": "FOOD SCIENCE",
+            "color": "gray",
+            "_id": "64bcca83c944319fc78f5671"
+          },
+          {
+            "name": "CIRCULAR ECONOMY",
+            "color": "yellow",
+            "_id": "64bcca83c944319fc78f5672"
+          }
+        ],
+        "nodes": [
+          {
+            "data": {
+              "text": "Title: An Exploration into Food Science: Unveiling the Secrets of What We Eat\n\nIntroduction:\nWelcome to today's lecture on Food Science, a fascinating and interdisciplinary field that delves into the science behind the food we consume every day. Food science encompasses a broad range of disciplines, including chemistry, biology, nutrition, engineering, and even psychology, all aimed at understanding the composition, production, and processing of food. Today, we will explore the key principles of food science, its importance in ensuring food safety and quality, and its impact on our health and well-being. So, let's embark on this exciting journey to uncover the secrets of what we eat!\n\n1. The Science of Food Composition:\nWe'll begin by understanding the basic components of food and their roles in our diet. Food is a complex matrix of macronutrients (carbohydrates, proteins, and fats), micronutrients (vitamins and minerals), water, and various other bioactive compounds. We'll explore how these components interact and contribute to the nutritional value and taste of different foods.\n\n2. Food Processing and Preservation:\nDiscover the various techniques used to process and preserve food, including pasteurization, canning, freezing, and drying. Learn about the importance of these methods in extending the shelf life of food while maintaining its safety and nutritional integrity.\n\n3. Food Safety and Quality Assurance:\nFoodborne illnesses are a significant concern globally. We'll discuss the importance of food safety regulations, the role of food scientists in ensuring safe food production, and the methods used to detect and prevent contamination.\n\n4. Sensory Science and Consumer Perception:\nEver wondered why certain foods taste better than others? Delve into the world of sensory science, where we explore the influence of taste, smell, texture, and appearance on our perception of food. Understanding consumer preferences is crucial for food manufacturers to create products that satisfy our taste buds.\n\n5. Food Engineering and Innovation:\nDiscover the innovative technologies used in the food industry, such as food fortification, genetic modification, and novel food processing techniques. Learn about the potential benefits and concerns associated with these advancements.\n\n6. Nutrition and Health:\nExplore the connection between food and health. We'll examine the role of nutrition in preventing chronic diseases and promoting overall well-being. Additionally, we'll discuss the impact of certain dietary patterns on different populations.\n\n7. Sustainable Food Production:\nIn today's world, sustainability is a pressing concern. Understand how food scientists work towards more sustainable practices in food production, reducing food waste, and promoting environmentally friendly solutions.\n\nConclusion:\nFood science plays an indispensable role in shaping our food choices, ensuring safety, and supporting our health. It combines scientific knowledge with innovation to meet the ever-evolving demands of the food industry and consumers. As we conclude this lecture, I hope you gained insights into the captivating world of food science and its profound impact on our daily lives. Remember, what we eat not only nourishes our bodies but also reflects our cultural heritage and fosters social connections. Let's appreciate the work of food scientists in bringing delicious, nutritious, and safe food to our tables. Thank you for joining this journey into the world of Food Science!"
+            },
+            "_id": "2df11a1d-0531-4d63-8812-d1a337c8b491",
+            "type": "lessonTextNode",
+            "description": "Intro to Food Science ",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "2df11a1d-0531-4d63-8812-d1a337c8b491",
+              "type": "lessonTextNode",
+              "position": {
+                "x": -345,
+                "y": -195
+              },
+              "width": 183,
+              "height": 46,
+              "selected": false,
+              "positionAbsolute": {
+                "x": -345,
+                "y": -195
+              },
+              "dragging": false
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "Title: An Exploration into Food Science: Unveiling the Secrets of What We Eat\n\nIntroduction:\nWelcome to today's lecture on Food Science, a fascinating and interdisciplinary field that delves into the science behind the food we consume every day. Food science encompasses a broad range of disciplines, including chemistry, biology, nutrition, engineering, and even psychology, all aimed at understanding the composition, production, and processing of food. Today, we will explore the key principles of food science, its importance in ensuring food safety and quality, and its impact on our health and well-being. So, let's embark on this exciting journey to uncover the secrets of what we eat!\n\n1. The Science of Food Composition:\nWe'll begin by understanding the basic components of food and their roles in our diet. Food is a complex matrix of macronutrients (carbohydrates, proteins, and fats), micronutrients (vitamins and minerals), water, and various other bioactive compounds. We'll explore how these components interact and contribute to the nutritional value and taste of different foods.\n\n2. Food Processing and Preservation:\nDiscover the various techniques used to process and preserve food, including pasteurization, canning, freezing, and drying. Learn about the importance of these methods in extending the shelf life of food while maintaining its safety and nutritional integrity.\n\n3. Food Safety and Quality Assurance:\nFoodborne illnesses are a significant concern globally. We'll discuss the importance of food safety regulations, the role of food scientists in ensuring safe food production, and the methods used to detect and prevent contamination.\n\n4. Sensory Science and Consumer Perception:\nEver wondered why certain foods taste better than others? Delve into the world of sensory science, where we explore the influence of taste, smell, texture, and appearance on our perception of food. Understanding consumer preferences is crucial for food manufacturers to create products that satisfy our taste buds.\n\n5. Food Engineering and Innovation:\nDiscover the innovative technologies used in the food industry, such as food fortification, genetic modification, and novel food processing techniques. Learn about the potential benefits and concerns associated with these advancements.\n\n6. Nutrition and Health:\nExplore the connection between food and health. We'll examine the role of nutrition in preventing chronic diseases and promoting overall well-being. Additionally, we'll discuss the impact of certain dietary patterns on different populations.\n\n7. Sustainable Food Production:\nIn today's world, sustainability is a pressing concern. Understand how food scientists work towards more sustainable practices in food production, reducing food waste, and promoting environmentally friendly solutions.\n\nConclusion:\nFood science plays an indispensable role in shaping our food choices, ensuring safety, and supporting our health. It combines scientific knowledge with innovation to meet the ever-evolving demands of the food industry and consumers. As we conclude this lecture, I hope you gained insights into the captivating world of food science and its profound impact on our daily lives. Remember, what we eat not only nourishes our bodies but also reflects our cultural heritage and fosters social connections. Let's appreciate the work of food scientists in bringing delicious, nutritious, and safe food to our tables. Thank you for joining this journey into the world of Food Science!"
+                }
+              ]
+            },
+            "title": "Intro to Food Science "
+          },
+          {
+            "data": {
+              "text": "**FOOD COMPOSITION**\n\nFood composition refers to the detailed analysis and breakdown of the various nutrients and bioactive components present in different foods. Understanding the composition of foods is essential for assessing their nutritional value and impact on human health. This information is crucial for making informed dietary choices, designing balanced meal plans, and addressing nutritional deficiencies.\n\n**Key Components of Food Composition**\n\n1. Macronutrients:\n   Macronutrients are nutrients that provide energy and are required in large quantities by the body. The three main macronutrients are:\n   - Carbohydrates: Provide energy and are found in foods like grains, fruits, vegetables, and legumes.\n   - Proteins: Essential for growth, repair, and maintenance of body tissues. Sources include meat, fish, dairy, legumes, and nuts.\n   - Fats: Serve as a concentrated source of energy, aid in nutrient absorption, and support various body functions. Common sources are oils, nuts, seeds, and fatty fish.\n\n2. Micronutrients:\n   Micronutrients are essential vitamins and minerals required in smaller amounts for various physiological functions:\n   - Vitamins: Play critical roles in metabolism, immune function, and cellular processes. Examples include vitamin A, vitamin C, vitamin D, and various B vitamins.\n   - Minerals: Necessary for bone health, nerve function, enzyme activity, and other functions. Examples include calcium, iron, zinc, and magnesium.\n\n3. Dietary Fiber:\n   Dietary fiber is a type of carbohydrate found in plant-based foods. It is not digested by the body but is crucial for digestive health, promoting regular bowel movements, and reducing the risk of certain diseases.\n\n4. Water:\n   Water is an essential component of all living organisms, and it makes up a significant portion of many foods. Staying hydrated is vital for various bodily functions and overall well-being.\n\n5. Phytochemicals:\n   Phytochemicals are bioactive compounds found in plants that offer health benefits beyond basic nutrition. They act as antioxidants, support the immune system, and may reduce the risk of chronic diseases.\n\n6. Food Additives:\n   Food additives are substances added to foods to enhance flavor, appearance, and shelf life. Common examples include preservatives, artificial colors, and flavor enhancers.\n\nImportance of Food Composition:\nUnderstanding food composition is essential for several reasons:\n\n- Nutrition Assessment: Food composition data is used to assess the nutritional value of different foods and their contribution to a balanced diet.\n- Dietary Planning: Nutritionists and dietitians use food composition information to design personalized meal plans based on specific dietary needs and health goals.\n- Public Health and Policy: Food composition data informs public health policies, food labeling regulations, and nutrition education programs.\n- Research: Researchers use food composition databases to study the relationship between diet and health outcomes, conduct nutritional studies, and develop new food products.\n\nFood composition data is collected and compiled in databases, such as the USDA National Nutrient Database and other national or international databases, making it easily accessible for various stakeholders in the fields of nutrition, health, and food science."
+            },
+            "_id": "ddfeff94-1c93-409d-a657-6591c05b9d41",
+            "type": "lessonTextNode",
+            "description": "Food Composition",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "ddfeff94-1c93-409d-a657-6591c05b9d41",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 435,
+                "y": -240
+              },
+              "width": 159,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": 435,
+                "y": -240
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "**FOOD COMPOSITION**\n\nFood composition refers to the detailed analysis and breakdown of the various nutrients and bioactive components present in different foods. Understanding the composition of foods is essential for assessing their nutritional value and impact on human health. This information is crucial for making informed dietary choices, designing balanced meal plans, and addressing nutritional deficiencies.\n\n**Key Components of Food Composition**\n\n1. Macronutrients:\n   Macronutrients are nutrients that provide energy and are required in large quantities by the body. The three main macronutrients are:\n   - Carbohydrates: Provide energy and are found in foods like grains, fruits, vegetables, and legumes.\n   - Proteins: Essential for growth, repair, and maintenance of body tissues. Sources include meat, fish, dairy, legumes, and nuts.\n   - Fats: Serve as a concentrated source of energy, aid in nutrient absorption, and support various body functions. Common sources are oils, nuts, seeds, and fatty fish.\n\n2. Micronutrients:\n   Micronutrients are essential vitamins and minerals required in smaller amounts for various physiological functions:\n   - Vitamins: Play critical roles in metabolism, immune function, and cellular processes. Examples include vitamin A, vitamin C, vitamin D, and various B vitamins.\n   - Minerals: Necessary for bone health, nerve function, enzyme activity, and other functions. Examples include calcium, iron, zinc, and magnesium.\n\n3. Dietary Fiber:\n   Dietary fiber is a type of carbohydrate found in plant-based foods. It is not digested by the body but is crucial for digestive health, promoting regular bowel movements, and reducing the risk of certain diseases.\n\n4. Water:\n   Water is an essential component of all living organisms, and it makes up a significant portion of many foods. Staying hydrated is vital for various bodily functions and overall well-being.\n\n5. Phytochemicals:\n   Phytochemicals are bioactive compounds found in plants that offer health benefits beyond basic nutrition. They act as antioxidants, support the immune system, and may reduce the risk of chronic diseases.\n\n6. Food Additives:\n   Food additives are substances added to foods to enhance flavor, appearance, and shelf life. Common examples include preservatives, artificial colors, and flavor enhancers.\n\nImportance of Food Composition:\nUnderstanding food composition is essential for several reasons:\n\n- Nutrition Assessment: Food composition data is used to assess the nutritional value of different foods and their contribution to a balanced diet.\n- Dietary Planning: Nutritionists and dietitians use food composition information to design personalized meal plans based on specific dietary needs and health goals.\n- Public Health and Policy: Food composition data informs public health policies, food labeling regulations, and nutrition education programs.\n- Research: Researchers use food composition databases to study the relationship between diet and health outcomes, conduct nutritional studies, and develop new food products.\n\nFood composition data is collected and compiled in databases, such as the USDA National Nutrient Database and other national or international databases, making it easily accessible for various stakeholders in the fields of nutrition, health, and food science."
+                }
+              ]
+            },
+            "title": "Food Composition"
+          },
+          {
+            "data": {
+              "text": "Review Lecture on Food Science"
+            },
+            "_id": "cd1e7662-f316-4e4f-b2e2-64154a46dead",
+            "type": "lessonTextNode",
+            "description": "Review Lecture on Food Science",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "cd1e7662-f316-4e4f-b2e2-64154a46dead",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 120,
+                "y": -345
+              },
+              "width": 268,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": 120,
+                "y": -345
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "Review Lecture on Food Science"
+                }
+              ]
+            },
+            "title": "Review Lecture on Food Science"
+          },
+          {
+            "data": {
+              "choices": [
+                "Proteins",
+                "Fats",
+                "Carbohydrates",
+                "Vitamins"
+              ],
+              "isChoiceCorrect": [
+                false,
+                false,
+                true,
+                false
+              ],
+              "question": "What is the primary source of energy in our diet?"
+            },
+            "_id": "61e773f0-6347-45bc-816f-74ef57b61958",
+            "type": "multipleChoiceQuestionNode",
+            "description": "Quiz on Food Science",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "61e773f0-6347-45bc-816f-74ef57b61958",
+              "type": "multipleChoiceQuestionNode",
+              "position": {
+                "x": -90,
+                "y": -195
+              },
+              "width": 186,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": -90,
+                "y": -195
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [
+                "\nusing Polyglot.Interactive;\nvar kernel = Kernel.Root.FindKernelByName(\"multiplechoice\") as MultipleChoiceKernel;\nkernel.Options = new HashSet<string> { \"1\", \"2\", \"3\", \"4\" };\n"
+              ],
+              "challengeContent": [
+                {
+                  "type": "multiplechoice",
+                  "content": "",
+                  "priority": 1
+                },
+                {
+                  "type": "markdown",
+                  "content": "What is the primary source of energy in our diet?\n1. Proteins,\n2. Fats,\n3. Carbohydrates,\n4. Vitamins",
+                  "priority": 0
+                }
+              ]
+            },
+            "title": "Quiz on Food Science"
+          },
+          {
+            "data": {
+              "choices": [
+                "VitaminC",
+                "Iron",
+                "Protein",
+                "Calcium"
+              ],
+              "isChoiceCorrect": [
+                false,
+                false,
+                true,
+                false
+              ],
+              "question": "Which of the following is a macronutrient?"
+            },
+            "_id": "c0bcde1f-ce3d-45fa-8ee0-00b9b12af50f",
+            "type": "multipleChoiceQuestionNode",
+            "description": "Quiz on Food Composition",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "c0bcde1f-ce3d-45fa-8ee0-00b9b12af50f",
+              "type": "multipleChoiceQuestionNode",
+              "position": {
+                "x": 585,
+                "y": -180
+              },
+              "width": 221,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": 585,
+                "y": -180
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [
+                "\nusing Polyglot.Interactive;\nvar kernel = Kernel.Root.FindKernelByName(\"multiplechoice\") as MultipleChoiceKernel;\nkernel.Options = new HashSet<string> { \"1\", \"2\", \"3\", \"4\" };\n"
+              ],
+              "challengeContent": [
+                {
+                  "type": "multiplechoice",
+                  "content": "",
+                  "priority": 1
+                },
+                {
+                  "type": "markdown",
+                  "content": "Which of the following is a macronutrient?\n1. VitaminC,\n2. Iron,\n3. Protein,\n4. Calcium",
+                  "priority": 0
+                }
+              ]
+            },
+            "title": "Quiz on Food Composition"
+          },
+          {
+            "data": {
+              "text": "Congrats you have reached the end of the learning path."
+            },
+            "_id": "d357151a-1958-4d7a-b447-758f196066d8",
+            "type": "lessonTextNode",
+            "description": "",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "d357151a-1958-4d7a-b447-758f196066d8",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 1065,
+                "y": -180
+              },
+              "width": 70,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": 1065,
+                "y": -180
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": "Congrats you have reached the end of the learning path."
+                }
+              ]
+            },
+            "title": "Badge"
+          },
+          {
+            "data": {
+              "text": ""
+            },
+            "_id": "8fdff6a7-1513-468f-9e03-bb9e3fb86d1c",
+            "type": "lessonTextNode",
+            "description": "",
+            "difficulty": 1,
+            "reactFlow": {
+              "id": "8fdff6a7-1513-468f-9e03-bb9e3fb86d1c",
+              "type": "lessonTextNode",
+              "position": {
+                "x": 735,
+                "y": -45
+              },
+              "width": 303,
+              "height": 46,
+              "selected": false,
+              "dragging": false,
+              "positionAbsolute": {
+                "x": 780,
+                "y": -45
+              }
+            },
+            "runtimeData": {
+              "challengeSetup": [],
+              "challengeContent": [
+                {
+                  "type": "markdown",
+                  "content": ""
+                }
+              ]
+            },
+            "title": "Review Lecture on Food Composition"
+          }
+        ],
+        "edges": [
+          {
+            "data": {
+              "conditionKind": "fail"
+            },
+            "_id": "0bc0a12d-9127-410b-8f07-f2421403c42b",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "0bc0a12d-9127-410b-8f07-f2421403c42b",
+              "source": "d2cf3a74-debe-48af-88d7-a71efe29a5cf",
+              "target": "005ae611-29c9-4403-8c3f-9a32729f1ba3",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Fail"
+          },
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "50626ae2-5b3d-4e4a-bd88-406c9b41c33b",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "50626ae2-5b3d-4e4a-bd88-406c9b41c33b",
+              "source": "d2cf3a74-debe-48af-88d7-a71efe29a5cf",
+              "target": "9929e00f-2210-4917-96f2-1d8bd834ec9f",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Pass"
+          },
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "247455ab-a3fc-419b-8870-7c3a16bfc473",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "247455ab-a3fc-419b-8870-7c3a16bfc473",
+              "source": "12cf1f38-3bcf-45d0-8cf5-4be48c832b02",
+              "target": "ddfeff94-1c93-409d-a657-6591c05b9d41",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Pass"
+          },
+          {
+            "_id": "b03abdeb-77b1-451b-b723-f9368f1cc065",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "reactFlow": {
+              "id": "b03abdeb-77b1-451b-b723-f9368f1cc065",
+              "source": "ddfeff94-1c93-409d-a657-6591c05b9d41",
+              "target": "d2cf3a74-debe-48af-88d7-a71efe29a5cf",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "data": {
+              "conditionKind": "fail"
+            },
+            "_id": "3d925c00-d378-4a3a-92bd-cc3bfe483b8b",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "3d925c00-d378-4a3a-92bd-cc3bfe483b8b",
+              "source": "12cf1f38-3bcf-45d0-8cf5-4be48c832b02",
+              "target": "cd1e7662-f316-4e4f-b2e2-64154a46dead",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Fail"
+          },
+          {
+            "_id": "32c427ee-f7bd-49a5-b0b9-fa02dba24689",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "data": {
+              "text": "Title: An Exploration into Food Science: Unveiling the Secrets of What We Eat\n\nIntroduction:\nWelcome to today's lecture on Food Science, a fascinating and interdisciplinary field that delves into the science behind the food we consume every day. Food science encompasses a broad range of disciplines, including chemistry, biology, nutrition, engineering, and even psychology, all aimed at understanding the composition, production, and processing of food. Today, we will explore the key principles of food science, its importance in ensuring food safety and quality, and its impact on our health and well-being. So, let's embark on this exciting journey to uncover the secrets of what we eat!\n\n1. The Science of Food Composition:\nWe'll begin by understanding the basic components of food and their roles in our diet. Food is a complex matrix of macronutrients (carbohydrates, proteins, and fats), micronutrients (vitamins and minerals), water, and various other bioactive compounds. We'll explore how these components interact and contribute to the nutritional value and taste of different foods.\n\n2. Food Processing and Preservation:\nDiscover the various techniques used to process and preserve food, including pasteurization, canning, freezing, and drying. Learn about the importance of these methods in extending the shelf life of food while maintaining its safety and nutritional integrity.\n\n3. Food Safety and Quality Assurance:\nFoodborne illnesses are a significant concern globally. We'll discuss the importance of food safety regulations, the role of food scientists in ensuring safe food production, and the methods used to detect and prevent contamination.\n\n4. Sensory Science and Consumer Perception:\nEver wondered why certain foods taste better than others? Delve into the world of sensory science, where we explore the influence of taste, smell, texture, and appearance on our perception of food. Understanding consumer preferences is crucial for food manufacturers to create products that satisfy our taste buds.\n\n5. Food Engineering and Innovation:\nDiscover the innovative technologies used in the food industry, such as food fortification, genetic modification, and novel food processing techniques. Learn about the potential benefits and concerns associated with these advancements.\n\n6. Nutrition and Health:\nExplore the connection between food and health. We'll examine the role of nutrition in preventing chronic diseases and promoting overall well-being. Additionally, we'll discuss the impact of certain dietary patterns on different populations.\n\n7. Sustainable Food Production:\nIn today's world, sustainability is a pressing concern. Understand how food scientists work towards more sustainable practices in food production, reducing food waste, and promoting environmentally friendly solutions.\n\nConclusion:\nFood science plays an indispensable role in shaping our food choices, ensuring safety, and supporting our health. It combines scientific knowledge with innovation to meet the ever-evolving demands of the food industry and consumers. As we conclude this lecture, I hope you gained insights into the captivating world of food science and its profound impact on our daily lives. Remember, what we eat not only nourishes our bodies but also reflects our cultural heritage and fosters social connections. Let's appreciate the work of food scientists in bringing delicious, nutritious, and safe food to our tables. Thank you for joining this journey into the world of Food Science!"
+            },
+            "reactFlow": {
+              "id": "32c427ee-f7bd-49a5-b0b9-fa02dba24689",
+              "source": "2df11a1d-0531-4d63-8812-d1a337c8b491",
+              "target": "12cf1f38-3bcf-45d0-8cf5-4be48c832b02",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "_id": "191f8acb-f0cb-4cc2-b557-3fd652f38c5e",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "data": {
+              "conditionKind": "fail"
+            },
+            "reactFlow": {
+              "id": "191f8acb-f0cb-4cc2-b557-3fd652f38c5e",
+              "source": "cd1e7662-f316-4e4f-b2e2-64154a46dead",
+              "target": "ddfeff94-1c93-409d-a657-6591c05b9d41",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "data": {
+              "conditionKind": "fail"
+            },
+            "_id": "463f2d39-ed09-4655-94b6-7a8fb861c4c2",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "463f2d39-ed09-4655-94b6-7a8fb861c4c2",
+              "source": "61e773f0-6347-45bc-816f-74ef57b61958",
+              "target": "cd1e7662-f316-4e4f-b2e2-64154a46dead",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Fail"
+          },
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "a8d480cf-70eb-4569-9b70-7102ebda9019",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "a8d480cf-70eb-4569-9b70-7102ebda9019",
+              "source": "61e773f0-6347-45bc-816f-74ef57b61958",
+              "target": "ddfeff94-1c93-409d-a657-6591c05b9d41",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Pass"
+          },
+          {
+            "data": {
+              "conditionKind": "fail"
+            },
+            "_id": "6e0f35aa-3fad-485c-b645-502c69eff207",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "6e0f35aa-3fad-485c-b645-502c69eff207",
+              "source": "c0bcde1f-ce3d-45fa-8ee0-00b9b12af50f",
+              "target": "005ae611-29c9-4403-8c3f-9a32729f1ba3",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Fail"
+          },
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "3717ad07-0e7a-4ed5-b4d5-dca86e42e241",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "3717ad07-0e7a-4ed5-b4d5-dca86e42e241",
+              "source": "c0bcde1f-ce3d-45fa-8ee0-00b9b12af50f",
+              "target": "9929e00f-2210-4917-96f2-1d8bd834ec9f",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Pass"
+          },
+          {
+            "_id": "f76eda71-ef28-41b9-9c2e-91553b91da1d",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "reactFlow": {
+              "id": "f76eda71-ef28-41b9-9c2e-91553b91da1d",
+              "source": "2df11a1d-0531-4d63-8812-d1a337c8b491",
+              "target": "61e773f0-6347-45bc-816f-74ef57b61958",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "_id": "f653d7a5-852f-429e-95b7-8c5457028a9f",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "reactFlow": {
+              "id": "f653d7a5-852f-429e-95b7-8c5457028a9f",
+              "source": "ddfeff94-1c93-409d-a657-6591c05b9d41",
+              "target": "c0bcde1f-ce3d-45fa-8ee0-00b9b12af50f",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "_id": "551309fc-d117-4a0c-9012-aaa7ba49faa2",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "reactFlow": {
+              "id": "551309fc-d117-4a0c-9012-aaa7ba49faa2",
+              "source": "005ae611-29c9-4403-8c3f-9a32729f1ba3",
+              "target": "d357151a-1958-4d7a-b447-758f196066d8",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "_id": "01cda50d-ac04-4ab4-abc9-c8b383ca543b",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "reactFlow": {
+              "id": "01cda50d-ac04-4ab4-abc9-c8b383ca543b",
+              "source": "9929e00f-2210-4917-96f2-1d8bd834ec9f",
+              "target": "d357151a-1958-4d7a-b447-758f196066d8",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          },
+          {
+            "data": {
+              "conditionKind": "pass"
+            },
+            "_id": "96331f56-3bc2-4fbe-9d35-196562b92d76",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "96331f56-3bc2-4fbe-9d35-196562b92d76",
+              "source": "c0bcde1f-ce3d-45fa-8ee0-00b9b12af50f",
+              "target": "d357151a-1958-4d7a-b447-758f196066d8",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Pass"
+          },
+          {
+            "data": {
+              "conditionKind": "fail"
+            },
+            "_id": "b219bd97-1d5b-4ac9-9c38-94d437c4cfed",
+            "type": "passFailEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    var getMultipleChoiceAnswer = () => {\n        var submitted = context.JourneyContext.EventsProduced.OfType<ReturnValueProduced>().FirstOrDefault()?.Value as HashSet<string>;\n        var answersCorrect = ((List<object>)context.Exercise.Data.isChoiceCorrect).Select((c, i) => (c, i))\n                                                                                .Where(c => bool.Parse(c.c.ToString()))\n                                                                                .Select(c => (c.i + 1).ToString())\n                                                                                .ToHashSet();\n        return submitted.SetEquals(answersCorrect);\n    };\n\n    var isSubmissionCorrect = context.Exercise.NodeType switch\n    {\n        \"multipleChoiceQuestionNode\" => getMultipleChoiceAnswer(),\n        _ => context.Exercise.Data.correctAnswers.Contains(context.JourneyContext.SubmittedCode),\n    };\n\n    var conditionKind = context.Condition.Data.conditionKind switch\n    {\n        \"pass\" => true,\n        \"fail\" => false,\n        _ => throw new Exception(\"Unknown condition kind\")\n    };\n    return (conditionKind == isSubmissionCorrect, \"Pass/Fail edge\");\n}    \n",
+            "reactFlow": {
+              "id": "b219bd97-1d5b-4ac9-9c38-94d437c4cfed",
+              "source": "c0bcde1f-ce3d-45fa-8ee0-00b9b12af50f",
+              "target": "8fdff6a7-1513-468f-9e03-bb9e3fb86d1c",
+              "type": "passFailEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": "Fail"
+          },
+          {
+            "_id": "df4c0951-cb12-43dd-8842-c8d896526bda",
+            "type": "unconditionalEdge",
+            "code": "\nasync Task<(bool, string)> validate(PolyglotValidationContext context) {\n    return (true, \"Unconditional edge\");\n}",
+            "reactFlow": {
+              "id": "df4c0951-cb12-43dd-8842-c8d896526bda",
+              "source": "8fdff6a7-1513-468f-9e03-bb9e3fb86d1c",
+              "target": "d357151a-1958-4d7a-b447-758f196066d8",
+              "type": "unconditionalEdge",
+              "markerEnd": {
+                "type": "arrow",
+                "width": 25,
+                "height": 25
+              },
+              "selected": false
+            },
+            "title": ""
+          }
+        ],
+        "__v": 0
+      }
+]

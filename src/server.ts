@@ -3,6 +3,8 @@ import app from "./app";
 import mongoose from 'mongoose';
 import { MONGO_URL, PORT, ENV, TEST_MODE } from "./utils/secrets";
 import User from './models/user.model';
+import PolyglotFlowModel from "./models/flow.model";
+import learningPath from './guestExamples.json'
 
 /**
  * Error Handler. Provides full stack
@@ -26,12 +28,16 @@ const server = app.listen(PORT,async () => {
     console.log("  Press CTRL-C to stop\n");
     
     if (TEST_MODE) {
-        const user = await User.findOne({username: "guest"});
+        let user = await User.findOne({username: "guest"});
         if (!user) {
-            await User.create({
+            user = await User.create({
                 username: "guest"
             });
         }
+        learningPath.forEach(async (lp) => {
+            lp.author = user?._id
+            await PolyglotFlowModel.updateOne({_id: lp._id},lp,{upsert: true});
+        })
     }
 });
 
