@@ -46,7 +46,7 @@ export async function downloadNotebookVSC(req: Request, res: Response, next: Nex
 
 #!csharp
 
-#!polyglot-setup --flowid ${req.params.id} --serverurl https://${DOMAIN_APP_DEPLOY}`
+#!polyglot-setup --flowid ${req.params.id} --serverurl http${DOMAIN_APP_DEPLOY.includes('localhost') ? '': 's'}://${DOMAIN_APP_DEPLOY}`
 
   const file = Buffer.from(template);
   res.setHeader('Content-Length', file.length);
