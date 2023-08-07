@@ -58,12 +58,10 @@ export class ManualAA extends AbstractAlgorithm {
         language: "english",
         topic: currentConcept.name,
         bloom_lv: bloom_lv
-      } 
-
-      const abstractAlgo = currentNode.data?.execution?.abstractAlgo ?? "Manual abstract algorithm"
+      }
   
       // TODO: handle error
-      const nextNode = await resGeneratorMap[abstractAlgo](opts);
+      const nextNode = await resGeneratorMap["resGptOpenAi"](opts);
   
       execNodeInfo.executedNodes++;
   

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { GenResProps, createResPrompt, sendClassicPrompt } from "../execution/prompts";
-import { genGraphChatGpt } from "../openai/generators";
+import { genGraphChatGpt } from "../execution/generators";
 
 export async function genResource(req: Request<any, any, GenResProps>, res: Response){
   const promptOpts = req.body;
