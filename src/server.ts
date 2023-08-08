@@ -5,6 +5,7 @@ import { MONGO_URL, PORT, ENV, TEST_MODE } from "./utils/secrets";
 import User from './models/user.model';
 import learningPath from './guestExamples.json'
 import { updateFlowQuery } from "./controllers/flows.controllers";
+import PolyglotFlowModel from "./models/flow.model"
 
 /**
  * Error Handler. Provides full stack
@@ -36,7 +37,8 @@ const server = app.listen(PORT,async () => {
         }
         learningPath.forEach(async (lp) => {
             lp.author = user?._id
-            await updateFlowQuery(lp._id,lp as any);
+            const flow =  await PolyglotFlowModel.create(lp);
+            await updateFlowQuery(flow._id,lp as any);
         })
     }
 });
