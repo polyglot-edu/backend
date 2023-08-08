@@ -37,8 +37,10 @@ const server = app.listen(PORT,async () => {
         }
         learningPath.forEach(async (lp) => {
             lp.author = user?._id
-            const flow =  await PolyglotFlowModel.create(lp);
-            await updateFlowQuery(flow._id,lp as any);
+            try {
+                await PolyglotFlowModel.create(lp);
+            } catch (e) {}
+            await updateFlowQuery(lp._id,lp as any);
         })
     }
 });
