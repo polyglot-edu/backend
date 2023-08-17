@@ -1,4 +1,5 @@
-FROM node:17.8
+ARG IMAGE=node:17.8
+FROM $IMAGE
 
 WORKDIR /backend
 
