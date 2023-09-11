@@ -8,6 +8,7 @@ export type PolyglotFlowInfo = {
     _id: string;
     title: string;
     author: string;
+    learningPathId: string;
     description: string;
     tags: string[];
     execution: PolyglotExecutionData;

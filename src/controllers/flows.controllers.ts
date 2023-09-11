@@ -102,7 +102,7 @@ export const updateFlowQuery = async (id: string, flow: PolyglotFlow & ({ nodes:
     })
   }
 
-  await Promise.all(flow.nodes.map(async (obj: PolyglotNode) =>{
+  await Promise.all(flow.nodes?.map(async (obj: PolyglotNode) =>{
     if (currentFlow.nodes.filter((node: any) => node._id === obj._id).length && obj.type !== currentFlow.nodes.filter((node: any) => node._id === obj._id)[0].type) {
       await PolyglotNodeModel.findByIdAndDelete(obj._id);
     }
@@ -112,7 +112,7 @@ export const updateFlowQuery = async (id: string, flow: PolyglotFlow & ({ nodes:
       update: obj,
       upsert: true,
     }});
-  }))
+  }) ?? [])
 
   await Promise.all(Object.keys(nodes).map(async (key: string)=>{
     try {
@@ -129,7 +129,7 @@ export const updateFlowQuery = async (id: string, flow: PolyglotFlow & ({ nodes:
       edges[key] = [];
     })
   }
-  await Promise.all(flow.edges.map(async (obj: PolyglotEdge) =>{
+  await Promise.all(flow.edges?.map(async (obj: PolyglotEdge) =>{
     if (currentFlow.edges.filter((edge: any) => edge._id === obj._id).length && obj.type !== currentFlow.edges.filter((edge: any) => edge._id === obj._id)[0].type) {
       const result = await PolyglotEdgeModel.findByIdAndDelete(obj._id);
     }
@@ -139,7 +139,7 @@ export const updateFlowQuery = async (id: string, flow: PolyglotFlow & ({ nodes:
       update: obj,
       upsert: true,
     }});
-  }))
+  }) ?? [])
 
   await Promise.all(Object.keys(edges).map(async (key: string)=>{
     try {
@@ -151,9 +151,14 @@ export const updateFlowQuery = async (id: string, flow: PolyglotFlow & ({ nodes:
   }));
 
   // FIX: controlla la bulkWrite per verificare la buona riuscita
-  (flow as any).nodes = nodeIds;
-  (flow as any).edges = edgesIds;
-
+  if (flow.nodes) {
+    (flow as any).nodes = nodeIds;
+  }
+  
+  if (flow.edges) {
+    (flow as any).edges = edgesIds;
+  }
+  
   return await PolyglotFlowModel.findByIdAndUpdate(flow._id, flow, {new: true});
 }
 
@@ -187,7 +192,7 @@ export async function createFlow(req: Request, res: Response, next : NextFunctio
     newFlow.author = req.user?._id;
 
     const flow =  await PolyglotFlowModel.create(newFlow);
-    return res.status(200).send({id: flow._id});
+    return res.status(200).send(flow);
   } catch (err) {
     console.log(err);
     return next(err);
