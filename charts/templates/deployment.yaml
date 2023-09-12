@@ -42,6 +42,10 @@ spec:
               value: "{{ .Values.env.testMode }}"
             - name: MONGODB_URI
               value: {{ .Values.env.mongodbUri }}
+            - name: OPENAI_SECRET_KEY
+              value: {{ .Values.env.openAiSecret }}
+            - name: OPENAI_ENDPOINT
+              value: {{ .Values.env.openAiEndpoint }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

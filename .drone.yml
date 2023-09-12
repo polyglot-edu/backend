@@ -12,6 +12,8 @@ globals:
     PORT: 5000
     MONGODB_URI:
       from_secret: mongodb_uri
+    OPENAI_SECRET_KEY: secret
+    OPENAI_ENDPOINT: domain
   - &condition
     event:
       - push
@@ -54,6 +56,8 @@ steps:
         - "env.PORT=$PORT"
         - "env.testMode=true"
         - "env.mongodbUri=$MONGODB_URI"
+        - "env.openAiSecret=$OPENAI_SECRET_KEY"
+        - "env.openAiEndpoint=$OPENAI_ENDPOINT"
       cleanup_failed_upgrade: true
       force_upgrade: true
       skip_tls_verify: true
