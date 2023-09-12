@@ -1,0 +1,64 @@
+kind: pipeline
+type: docker
+name: Backend
+
+globals:
+  - &docker_creds
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+  - &env
+    PORT: 5000
+    MONGODB_URI:
+      from_secret: mongodb_uri
+  - &condition
+    event:
+      - push
+
+steps:
+  - name: Build and push image to Docker # building the encore docker image
+    image: plugins/docker
+    settings:
+      repo: docker.polyglot-edu.com/polyglot-edu/backend # must be lowercase
+      registry: docker.polyglot-edu.com
+      dockerfile: ./Dockerfile
+      tags: ["${DRONE_BRANCH}"]
+      <<: *docker_creds
+    when:
+      <<: *condition
+  - name: Deploy # deploy to kubernetes using a Helm chart
+    image: pelotech/drone-helm3
+    environment:
+      CFORIGIN:
+        from_secret: cf_origin
+      DOCKERCONFIG:
+        from_secret: dockerconfigjson
+      <<: *env
+    settings:
+      mode: upgrade
+      chart: ./charts
+      release: backend-${DRONE_BRANCH}
+      namespace: backend-${DRONE_BRANCH}
+      debug: true
+      kube_service_account: admin-user
+      kube_api_server: "https://131.114.23.149:6443"
+      kube_token:
+        from_secret: kube_token
+      values:
+        - "url=polyglot-api.polyglot-edu.com"
+        - "cfOriginKey=$CFORIGIN"
+        - "dockerconfigjson=$DOCKERCONFIG"
+        - "image.repository=docker.polyglot-edu.com/polyglot-edu/backend"
+        - "image.tag=${DRONE_BRANCH}"
+        - "env.PORT=$PORT"
+        - "env.testMode=true"
+        - "env.mongodbUri=$MONGODB_URI"
+      cleanup_failed_upgrade: true
+      force_upgrade: true
+      skip_tls_verify: true
+      create_namespace: true
+    depends_on:
+      - Build and push image to Docker
+    when:
+      <<: *condition

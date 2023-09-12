@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  key: {{ .Values.cfOriginKey }}
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: origin-ca-key
