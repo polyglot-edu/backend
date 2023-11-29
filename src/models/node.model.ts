@@ -60,7 +60,78 @@ export const abstractNodeSchema = new mongoose.Schema({
         execution: {type: {}}
     }
 }, options);
+//learning nodes:
+export const LessonNodeSchema = new mongoose.Schema({
+    data: {
+        file: {type: {}}
+    }
+}, options);
 
+export const LessonTextNodeSchema = new mongoose.Schema({
+    data: {
+        text: {type: String}
+    }
+}, options);
+
+export const WatchVideoNodeSchema = new mongoose.Schema({
+    data: {
+        link: {type: String}
+    }
+}, options);
+
+export const ReadMaterialNodeSchema = new mongoose.Schema({
+    data: {
+        text: {type: String},
+        link: {type: String}
+    }
+}, options);
+
+export const CreateKeywordsListNodeSchema = new mongoose.Schema({
+    data: {
+        instructions: {type: String}
+    }
+}, options);
+
+export const MemoriseKeywordsListNodeSchema = new mongoose.Schema({
+    data: {
+        instructions: {type: String},
+        keywords: [{type: String}]
+    }
+}, options);
+
+export const SummaryNodeSchema = new mongoose.Schema({
+    data: {
+        text: {type: String}, 
+        link: {type: String}, 
+        uploadLearner: {type: Boolean}
+    }
+}, options);
+
+export const MindMapNodeSchema = new mongoose.Schema({
+    data: {
+        text: {type: String}, 
+        link: {type: String}, 
+        uploadLearner: {type: Boolean}
+    }
+}, options);
+
+export const ProblemSolvingNodeSchema = new mongoose.Schema({
+    data: {
+        text: {type: String}, 
+        link: {type: String}, 
+        uploadLearner: {type: Boolean}
+    }
+}, options);
+
+export const FindSolutionNodeSchema = new mongoose.Schema({
+    data: {
+        text: {type: String}, 
+        link: {type: String}, 
+        uploadLearner: {type: Boolean}
+    }
+}, options);
+
+//assessment nodes:
 export const closeEndedQuestionNodeSchema = new mongoose.Schema({
     data: {
         question: {type: String},
@@ -76,18 +147,6 @@ export const codingQuestionNodeSchema = new mongoose.Schema({
     }
 }, options);
 
-export const LessonNodeSchema = new mongoose.Schema({
-    data: {
-        file: {type: {}}
-    }
-}, options);
-
-export const LessonTextNodeSchema = new mongoose.Schema({
-    data: {
-        text: {type: String}
-    }
-}, options);
-
 export const multipleChoiceQuestionNodeSchema = new mongoose.Schema({
     data: {
         question: {type: String},
@@ -96,16 +155,75 @@ export const multipleChoiceQuestionNodeSchema = new mongoose.Schema({
     }
 }, options);
 
+export const TrueFalseNodeSchema = new mongoose.Schema({
+    data: {
+        instructions: {type: String},
+        question: {type: String},
+        isQuestionCorrect: [{type: Boolean}]
+    }
+}, options);
+
+export const ImageEvaluationNodeSchema = new mongoose.Schema({
+    data: {
+        link: {type: String},
+        question: {type: String},
+        answers: [{type: String}],
+        isAnswerCorrect: [{type: Boolean}]
+    }
+}, options);
+
+export const CasesEvaluationNodeSchema = new mongoose.Schema({
+    data: {
+        guidelines: {type: String}, 
+        text: {type: String}, 
+        link: {type: String}, 
+        uploadLearner: {type: Boolean}
+    }
+}, options);
+
+export const InnovationPitchNodeSchema = new mongoose.Schema({
+    data: {
+        guidelines: {type: String}, 
+        text: {type: String}, 
+        link: {type: String}, 
+        uploadLearner: {type: Boolean}
+    }
+}, options);
+
 export const PolyglotNodeModel = model<PolyglotNode, PolyglotNodeModel>("Node", nodeSchema);
 
 export const AbstractNode = PolyglotNodeModel.discriminator('abstractNode', abstractNodeSchema);
-
-export const CloseEndedQuestionNode = PolyglotNodeModel.discriminator('closeEndedQuestionNode', closeEndedQuestionNodeSchema);
-
-export const CodingQuestionNode = PolyglotNodeModel.discriminator('codingQuestionNode', codingQuestionNodeSchema);
 
 export const LessonNode = PolyglotNodeModel.discriminator('lessonNode', LessonNodeSchema);
 
 export const LessonTextNode = PolyglotNodeModel.discriminator('lessonTextNode', LessonTextNodeSchema);
 
+export const WatchVideoNode = PolyglotNodeModel.discriminator('WatchVideoNode', WatchVideoNodeSchema);
+
+export const ReadMaterialNode = PolyglotNodeModel.discriminator('ReadMaterialNode', ReadMaterialNodeSchema);
+
+export const CreateKeywordsListNode = PolyglotNodeModel.discriminator('CreateKeywordsListNode', CreateKeywordsListNodeSchema);
+
+export const MemoriseKeywordsListNode = PolyglotNodeModel.discriminator('MemoriseKeywordsListNode', MemoriseKeywordsListNodeSchema);
+
+export const SummaryNode = PolyglotNodeModel.discriminator('SummaryNode', SummaryNodeSchema);
+
+export const MindMapNode = PolyglotNodeModel.discriminator('MindMapNode', MindMapNodeSchema);
+
+export const ProblemSolvingNode = PolyglotNodeModel.discriminator('ProblemSolvingNode', ProblemSolvingNodeSchema);
+
+export const FindSolutionNode = PolyglotNodeModel.discriminator('FindSolutionNode', FindSolutionNodeSchema);
+
+export const CloseEndedQuestionNode = PolyglotNodeModel.discriminator('closeEndedQuestionNode', closeEndedQuestionNodeSchema);
+
+export const CodingQuestionNode = PolyglotNodeModel.discriminator('codingQuestionNode', codingQuestionNodeSchema);
+
 export const MultipleChoiceQuestionNode = PolyglotNodeModel.discriminator('multipleChoiceQuestionNode', multipleChoiceQuestionNodeSchema);
+
+export const TrueFalseNode = PolyglotNodeModel.discriminator('TrueFalseNode', TrueFalseNodeSchema);
+
+export const ImageEvaluationNode = PolyglotNodeModel.discriminator('ImageEvaluationNode', ImageEvaluationNodeSchema);
+
+export const CasesEvaluationNode = PolyglotNodeModel.discriminator('CasesEvaluationNode', CasesEvaluationNodeSchema);
+
+export const InnovationPitchNode = PolyglotNodeModel.discriminator('InnovationPitchNode', InnovationPitchNodeSchema);
