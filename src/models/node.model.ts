@@ -34,7 +34,11 @@ export const nodeSchema = new mongoose.Schema<PolyglotNode>({
     reactFlow: {
         type: {}
     },
-    runtimeData: {type: {}}
+    runtimeData: {type: {}},
+    platform: {
+        type:String,    
+        default:"VSCode"
+    }
 }, options);
 
 // Serve per modificare l'output delle query (da valutare il possibile utilizzo)

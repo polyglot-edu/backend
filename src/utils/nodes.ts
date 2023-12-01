@@ -32,6 +32,7 @@ export const choiceNode = () : PolyglotNode => {
     title: "choice node",
     description: "descriptiom",
     difficulty: 1,
+    platform: "VSCode",
     runtimeData: {
       challengeSetup: [
         "\nusing Polyglot.Interactive;\nvar kernel = Kernel.Root.FindKernelByName(\"multiplechoice\") as MultipleChoiceKernel;\nkernel.Options = new HashSet<string> { \"1\", \"2\" };\n",
@@ -63,6 +64,7 @@ export const finishNode = () : PolyglotNode => {
     title: "Domanda",
     description: "descriptiom",
     difficulty: 1,
+    platform: "VSCode",
     runtimeData: {
       challengeSetup: [
         "\nusing Polyglot.Interactive;\nvar kernel = Kernel.Root.FindKernelByName(\"multiplechoice\") as MultipleChoiceKernel;\nkernel.Options = new HashSet<string> { \"1\", \"2\" };\n",

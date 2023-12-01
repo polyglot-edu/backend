@@ -7,6 +7,7 @@ export type PolyglotNode = {
     description: string;
     difficulty: number;
     runtimeData: any;
+    platform: string;
     data: any;
     reactFlow: any;
 };
