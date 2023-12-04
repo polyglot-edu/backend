@@ -119,14 +119,6 @@ export function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
         },
     ];
 
-    console.log({
-        ...node,
-        data,
-        runtimeData: {
-            challengeSetup,
-            challengeContent,
-        },});
-
     return {
         ...node,
         data,
@@ -156,12 +148,6 @@ const challengeContent: ChallengeContent[] = [
     content: oldData.text,
     },
 ];
-console.log({
-    ...node,
-    runtimeData: {
-        challengeSetup,
-        challengeContent,
-    },});
 
 return {
     ...node,
