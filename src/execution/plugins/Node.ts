@@ -1,11 +1,9 @@
-import { Node } from 'reactflow';
-
 /**
  * A node in the polyglot graph.
  * @param sas comment
  */
 export type PolyglotNode = {
-  reactFlow: Node<unknown>;
+  reactFlow: any;
 };
 
 export const zip = <T, K>(a: T[], b: K[]) =>
