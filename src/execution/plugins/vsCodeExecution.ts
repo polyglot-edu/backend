@@ -172,6 +172,7 @@ return {
 };}
 
 export function vsCodeExecution(node:PolyglotNode){
+    console.log('vsCode execution run');
     if(node?.type=="multipleChoiceQuestionNode") return multipleChoiceQuestionNodeExecution(node);
     if(node?.type=="lessonTextNode") return lessonTextNodeExecution(node);        
     if(node?.type=="closeEndedQuestionNode") return closeEndedQuestionNodeExecution(node);

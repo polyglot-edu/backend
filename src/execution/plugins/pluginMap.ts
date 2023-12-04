@@ -13,6 +13,7 @@ export function nodeTypeRedirect(node:PolyglotNode|null){
 //    if(node?.type=="lessonTextNode") return lessonTextNodeExecution(node);    
 //    if(node?.type=="closeEndedQuestionNode") return closeEndedQuestionNodeExecution(node);
 //    if(node?.type=="ReadMaterialNode") return readMaterialNodeExecution(node);
-    if (node?.platform=='VSCode') return webAppExecution(node);
+    if (node?.platform=='WebApp') return webAppExecution(node);
+    console.log('not execution run');
     return node;
 }
