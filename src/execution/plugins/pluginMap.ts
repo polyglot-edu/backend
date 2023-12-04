@@ -4,24 +4,15 @@
 //
 
 import { PolyglotNode } from "../../types";
-import { closeEndedQuestionNodeExecution,
-    readMaterialNodeExecution,
-    multipleChoiceQuestionNodeExecution,
-    lessonTextNodeExecution } from "./index";
-
-const mappa={
-    "multipleChoiceQuestionNode":multipleChoiceQuestionNodeExecution,
-    "lessonTextNode":lessonTextNodeExecution,
-    "readMaterialNode":readMaterialNodeExecution,
-    "closeEndedQuestionNode":closeEndedQuestionNodeExecution,    
-}
+import { vsCodeExecution,
+    webAppExecution,} from "./index";
 
 export function nodeTypeRedirect(node:PolyglotNode|null){
-    
-    if(node?.type=="multipleChoiceQuestionNode") return multipleChoiceQuestionNodeExecution(node);
-    if(node?.type=="lessonTextNode") return lessonTextNodeExecution(node);
-    /*
-    if(node?.type=="closeEndedQuestionNode") return closeEndedQuestionNodeExecution(node.platform);
-    if(node?.type=="ReadMaterialNode") return readMaterialNodeExecution(node.platform);*/
+    if (node?.platform=='VSCode') return vsCodeExecution(node);
+//    if(node?.type=="multipleChoiceQuestionNode") return multipleChoiceQuestionNodeExecution(node);
+//    if(node?.type=="lessonTextNode") return lessonTextNodeExecution(node);    
+//    if(node?.type=="closeEndedQuestionNode") return closeEndedQuestionNodeExecution(node);
+//    if(node?.type=="ReadMaterialNode") return readMaterialNodeExecution(node);
+    if (node?.platform=='VSCode') return webAppExecution(node);
     return node;
 }
