@@ -1,6 +1,35 @@
 import { PolyglotNode } from "../../types";
 import { ChallengeContent, ChallengeSetup, zip } from "./Node";
 
+//LessonTextNodeData Execution block   
+export type LessonTextNodeData = {
+text: string;
+};
+
+export type LessonTextNode = PolyglotNode & {
+type: 'lessonTextNode';
+data: LessonTextNodeData;
+};
+
+function lessonTextNodeExecution(node:PolyglotNode){
+const oldData = node.data as LessonTextNodeData;
+
+const challengeSetup: ChallengeSetup[] = [];
+const challengeContent: ChallengeContent[] = [
+    {
+    type: 'markdown',
+    content: oldData.text,
+    },
+];
+
+return {
+    ...node,
+    runtimeData: {
+    challengeSetup,
+    challengeContent,
+    },
+};}
+
 //readMaterialNode Execution block
 export type readMaterialNodeData = {
     text: string;
@@ -12,7 +41,7 @@ export type readMaterialNode = PolyglotNode & {
     data: readMaterialNodeData;
 };
 
-export function readMaterialNodeExecution(node:PolyglotNode){
+function readMaterialNodeExecution(node:PolyglotNode){
     const oldData = node.data as readMaterialNodeData;
 
     const challengeSetup: ChallengeSetup[] = [];
@@ -46,7 +75,7 @@ export type closeEndedQuestionNodeData = {
     data: closeEndedQuestionNodeData;
     };
 
-    export function closeEndedQuestionNodeExecution(node:PolyglotNode){
+    function closeEndedQuestionNodeExecution(node:PolyglotNode){
     const oldData = node.data as closeEndedQuestionNodeData;
 
     const challengeSetup: ChallengeSetup[] = [];
@@ -79,7 +108,7 @@ export type MultipleChoiceQuestionNodeData = {
     isChoiceCorrect: boolean[];
   };
   
-export function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
+function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
     const oldData = node.data as MultipleChoiceQuestionNodeData;
 
     const data = {
@@ -126,35 +155,6 @@ export function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
         challengeSetup,
         challengeContent,
         },
-};}
-
-//LessonTextNodeData Execution block   
-export type LessonTextNodeData = {
-text: string;
-};
-
-export type LessonTextNode = PolyglotNode & {
-type: 'lessonTextNode';
-data: LessonTextNodeData;
-};
-
-export function lessonTextNodeExecution(node:PolyglotNode){
-const oldData = node.data as LessonTextNodeData;
-
-const challengeSetup: ChallengeSetup[] = [];
-const challengeContent: ChallengeContent[] = [
-    {
-    type: 'markdown',
-    content: oldData.text,
-    },
-];
-
-return {
-    ...node,
-    runtimeData: {
-    challengeSetup,
-    challengeContent,
-    },
 };}
 
 export function vsCodeExecution(node:PolyglotNode){
