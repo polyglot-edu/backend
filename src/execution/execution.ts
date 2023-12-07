@@ -2,7 +2,7 @@ import { GameEngine, SmartCampusGameEngine } from "../gamification/gamification"
 import { PolyglotEdge, PolyglotFlow, PolyglotNode, PolyglotNodeValidation } from "../types";
 import { getAbstractAlgorithm, getPathSelectorAlgorithm, pathSelectorMap } from "./algo/register";
 import { AbstractAlgorithm, DistrubutionAlgorithm } from "./algo/base";
-import { nodeTypeRedirect } from "./plugins/pluginMap";
+import { nodeTypeExecution } from "./plugins/pluginMap";
 
 export type ExecCtx = {
   flowId: string;
@@ -138,10 +138,8 @@ export class Execution {
 
     const satisfiedEdges = this.flow.edges.filter(edge => satisfiedConditions.includes(edge.reactFlow.id));
 
-    const currentNode = this.getCurrentNode();  //modifica passare piattaforma + tipo nodo e elaborarne l'esecuzione
-    //const specificRuntimeNode = pluginMap["VSCode plugin"](currentNode)
-    //const specificRuntimeNode = pluginMap[currentNode.platform](currentNode)
-    const specificRuntimeNode = nodeTypeRedirect(currentNode);
+    const currentNode = this.getCurrentNode();
+    const specificRuntimeNode = nodeTypeExecution(currentNode);
     
     return await this.selectAlgoRec(this.ctx.execNodeInfo,specificRuntimeNode,satisfiedEdges);
 
