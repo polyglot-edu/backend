@@ -14,6 +14,9 @@ data: LessonTextNodeData;
 function lessonTextNodeExecution(node:PolyglotNode){
 const oldData = node.data as LessonTextNodeData;
 
+console.log('aaaaaaaaaaaaa');
+console.log(node);
+console.log('aaaaaaaaaaaaa');
 const challengeSetup: ChallengeSetup[] = [];
 const challengeContent: ChallengeContent[] = [
     {
@@ -110,7 +113,6 @@ export type MultipleChoiceQuestionNodeData = {
   
 function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
     const oldData = node.data as MultipleChoiceQuestionNodeData;
-
     const data = {
         ...oldData,
         correctAnswers: zip(oldData?.choices, oldData?.isChoiceCorrect).reduce(
@@ -123,7 +125,6 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
         [] as string[]
         ),
     };
-
     const challengeSetup: ChallengeSetup[] = [
         `
     using Polyglot.Interactive;
@@ -160,7 +161,7 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
 export function vsCodeExecution(node:PolyglotNode){
     console.log('vsCode execution run');
     if(node?.type=="multipleChoiceQuestionNode") return multipleChoiceQuestionNodeExecution(node);
-    if(node?.type=="lessonTextNode") return lessonTextNodeExecution(node);        
+    if(node?.type=="lessonTextNode") {console.log('lessonText'); return lessonTextNodeExecution(node);}
     if(node?.type=="closeEndedQuestionNode") return closeEndedQuestionNodeExecution(node);
     if(node?.type=="ReadMaterialNode") return readMaterialNodeExecution(node);
     return null;
