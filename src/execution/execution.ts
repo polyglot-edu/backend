@@ -64,7 +64,7 @@ export class Execution {
     const outgoingEdges = this.flow.edges.filter(edge => edge.reactFlow.source === firstNode.reactFlow.id);
 
     const actualNode: PolyglotNodeValidation = {
-      ...JSON.parse(JSON.stringify(firstNode)),
+      ...nodeTypeExecution(JSON.parse(JSON.stringify(firstNode)))!,
       validation: outgoingEdges.map(e => ({
           id: e.reactFlow.id,
           title: e.title,
@@ -147,12 +147,14 @@ export class Execution {
 
     const satisfiedEdges = this.flow.edges.filter(edge => satisfiedConditions.includes(edge.reactFlow.id));
 
-    const currentNode:PolyglotNode = this.getCurrentNode()!;
-    const specificRuntimeNode = nodeTypeExecution(currentNode);
-    console.log('esecuzione');
-    console.log(specificRuntimeNode?.runtimeData);
+    const currentNode = this.getCurrentNode();
+    
+    const res = await this.selectAlgoRec(this.ctx.execNodeInfo,currentNode,satisfiedEdges);
 
-    return await this.selectAlgoRec(this.ctx.execNodeInfo,specificRuntimeNode,satisfiedEdges);
+    return {
+      ...res,
+      node: nodeTypeExecution(JSON.parse(JSON.stringify(currentNode))) as PolyglotNodeValidation
+    }
 
   }
 }
