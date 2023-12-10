@@ -76,14 +76,14 @@ export class Execution {
 
     console.log("try123");
     console.log(actualNode);
-    const execNode:PolyglotNodeValidation= nodeTypeExecution(actualNode);
+    const execNode= nodeTypeExecution(actualNode);
     console.log("--------------------");
     console.log(execNode);
     
 
     return {
       ctx: Execution.createCtx(this.flow._id, firstNode._id),
-      node: execNode
+      node: actualNode
     }
   }
 
