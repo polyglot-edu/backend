@@ -1,26 +1,13 @@
 import { PolyglotNode } from "../../types";
-import { ChallengeContent, ChallengeSetup, zip } from "./Node";
+import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, WebAppContent, WebAppSetup, closeEndedQuestionNodeData, readMaterialNodeData, zip } from "./Node";
 
-//LessonTextNodeData Execution block   
-export type LessonTextNodeData = {
-text: string;
-};
-
-export type LessonTextNode = PolyglotNode & {
-type: 'lessonTextNode';
-data: LessonTextNodeData;
-};
+//LessonTextNodeData Execution block
 
 function lessonTextNodeExecution(node:PolyglotNode){
 const oldData = node.data as LessonTextNodeData;
-
-console.log('aaaaaaaaaaaaa');
-console.log(node);
-console.log('aaaaaaaaaaaaa');
-const challengeSetup: ChallengeSetup[] = [];
-const challengeContent: ChallengeContent[] = [
+const webAppSetup: WebAppSetup[] = [];
+const webAppContent: WebAppContent[] = [
     {
-    type: 'markdown',
     content: oldData.text,
     },
 ];
@@ -28,33 +15,22 @@ const challengeContent: ChallengeContent[] = [
 return {
     ...node,
     runtimeData: {
-    challengeSetup,
-    challengeContent,
+    webAppSetup,
+    webAppContent,
     },
 };}
 
 //readMaterialNode Execution block
-export type readMaterialNodeData = {
-    text: string;
-    link: string;
-};
-  
-export type readMaterialNode = PolyglotNode & {
-    type: 'readMaterialNode';
-    data: readMaterialNodeData;
-};
 
 function readMaterialNodeExecution(node:PolyglotNode){
     const oldData = node.data as readMaterialNodeData;
 
-    const challengeSetup: ChallengeSetup[] = [];
-    const challengeContent: ChallengeContent[] = [
+    const webAppSetup: WebAppSetup[] = [];
+    const webAppContent: WebAppContent[] = [
       {
-        type: 'markdown',
         content: oldData.text,
       },
       {
-        type: 'markdown',
         content: 'Run this link: ' + oldData.link,
       },
     ];
@@ -62,29 +38,18 @@ function readMaterialNodeExecution(node:PolyglotNode){
     return {
       ...node,
       runtimeData: {
-        challengeSetup,
-        challengeContent,
+        webAppSetup,
+        webAppContent,
       },
     };}
 
-//closeEndedQuestionNode Execution block
-export type closeEndedQuestionNodeData = {
-    question: string;
-    correctAnswers: string[];
-    };
-    
-    export type closeEndedQuestionNode = PolyglotNode & {
-    type: 'readMaterialNode';
-    data: closeEndedQuestionNodeData;
-    };
-
+//closeEndedQuestionNode Execution block 
     function closeEndedQuestionNodeExecution(node:PolyglotNode){
     const oldData = node.data as closeEndedQuestionNodeData;
 
-    const challengeSetup: ChallengeSetup[] = [];
-    const challengeContent: ChallengeContent[] = [
+    const webAppSetup: WebAppSetup[] = [];
+    const webAppContent: WebAppContent[] = [
         {
-        type: 'markdown',
         content: oldData?.question,
         priority: 0,
         },
@@ -98,19 +63,13 @@ export type closeEndedQuestionNodeData = {
     return {
         ...node,
         runtimeData: {
-        challengeSetup,
-        challengeContent,
+        webAppSetup,
+        webAppContent,
         },
     };
 }
 
-//MultipleChoiceQuestionNodeData Execution block    
-export type MultipleChoiceQuestionNodeData = {
-    question: string;
-    choices: string[];
-    isChoiceCorrect: boolean[];
-  };
-  
+//MultipleChoiceQuestionNodeData Execution block  
 function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
     const specificData = node.data as MultipleChoiceQuestionNodeData;
     const data = {
@@ -125,6 +84,8 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
         [] as string[]
         ),
     };
+    const webAppSetup: WebAppSetup[] = [];
+    const webAppContent: WebAppContent[] = [];    
 
     return {
         ...node,

@@ -2,10 +2,27 @@
  * A node in the polyglot graph.
  * @param sas comment
  */
-export type PolyglotNode = {
-  reactFlow: any;
+
+export type LessonTextNodeData = {
+  text: string;
 };
 
+export type readMaterialNodeData = {
+  text: string;
+  link: string;
+};
+
+export type MultipleChoiceQuestionNodeData = {
+  question: string;
+  choices: string[];
+  isChoiceCorrect: boolean[];
+};
+
+export type closeEndedQuestionNodeData = {
+  question: string;
+  correctAnswers: string[];
+};
+  
 export const zip = <T, K>(a: T[], b: K[]) =>
 a.map((k, i) => ({ first: k, second: b[i] }));
 
@@ -17,3 +34,11 @@ export type ChallengeContent = {
   content: string;
   priority?: number;
 };
+
+export type WebAppSetup = {};
+export type WebAppContent = {
+  type?: string;
+  content: string;
+  priority?: number;
+};
+

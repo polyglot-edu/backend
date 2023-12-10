@@ -74,9 +74,16 @@ export class Execution {
       }))
     }
 
+    console.log("try123");
+    console.log(actualNode);
+    const execNode:PolyglotNodeValidation= nodeTypeExecution(actualNode);
+    console.log("--------------------");
+    console.log(execNode);
+    
+
     return {
       ctx: Execution.createCtx(this.flow._id, firstNode._id),
-      node: actualNode
+      node: execNode
     }
   }
 
@@ -125,7 +132,9 @@ export class Execution {
     // caso in cui mi sono calcolato il nodo successivo con l'algo normale e mi ha ritornato un nodo non astratto
     this.ctx.execNodeInfo = execNodeInfo;
     this.ctx.currentNodeId = currentNode.reactFlow.id; // todo check if needed
-
+    console.log("prova123");
+    console.log(this.ctx);
+    console.log(currentNode);
     return {ctx: this.ctx, node: (currentNode as PolyglotNodeValidation)};
     
   }
@@ -138,9 +147,11 @@ export class Execution {
 
     const satisfiedEdges = this.flow.edges.filter(edge => satisfiedConditions.includes(edge.reactFlow.id));
 
-    const currentNode = this.getCurrentNode();
+    const currentNode:PolyglotNode = this.getCurrentNode()!;
     const specificRuntimeNode = nodeTypeExecution(currentNode);
-    
+    console.log('esecuzione');
+    console.log(specificRuntimeNode?.runtimeData);
+
     return await this.selectAlgoRec(this.ctx.execNodeInfo,specificRuntimeNode,satisfiedEdges);
 
   }

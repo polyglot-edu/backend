@@ -1,49 +1,35 @@
 import { PolyglotNode } from "../../types";
-import { ChallengeContent, ChallengeSetup, zip } from "./Node";
+import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, closeEndedQuestionNodeData, readMaterialNodeData, zip } from "./Node";
 
 //LessonTextNodeData Execution block   
-export type LessonTextNodeData = {
-text: string;
-};
+function lessonTextNodeExecution(node:PolyglotNode):PolyglotNode{
+    const oldData = node.data as LessonTextNodeData;
 
-export type LessonTextNode = PolyglotNode & {
-type: 'lessonTextNode';
-data: LessonTextNodeData;
-};
-
-function lessonTextNodeExecution(node:PolyglotNode){
-const oldData = node.data as LessonTextNodeData;
-
-console.log('aaaaaaaaaaaaa');
-console.log(node);
-console.log('aaaaaaaaaaaaa');
-const challengeSetup: ChallengeSetup[] = [];
-const challengeContent: ChallengeContent[] = [
-    {
-    type: 'markdown',
-    content: oldData.text,
-    },
-];
-
-return {
-    ...node,
-    runtimeData: {
-    challengeSetup,
-    challengeContent,
-    },
-};}
+    const challengeSetup: ChallengeSetup[] = [];
+    const challengeContent = [
+        {
+        type: 'markdown',
+        content: oldData.text,
+        },
+    ];
+    const baaaa:PolyglotNode={
+        _id:node._id,
+        type:node.type,
+        data:node.data,
+        description:node.description,
+        difficulty:node.difficulty,
+        platform:node.platform,
+        title:node.title,
+        reactFlow:node.reactFlow,
+        runtimeData:{
+            challengeSetup,
+            challengeContent,
+          }
+    }
+    return baaaa;
+}
 
 //readMaterialNode Execution block
-export type readMaterialNodeData = {
-    text: string;
-    link: string;
-};
-  
-export type readMaterialNode = PolyglotNode & {
-    type: 'readMaterialNode';
-    data: readMaterialNodeData;
-};
-
 function readMaterialNodeExecution(node:PolyglotNode){
     const oldData = node.data as readMaterialNodeData;
 
@@ -51,34 +37,32 @@ function readMaterialNodeExecution(node:PolyglotNode){
     const challengeContent: ChallengeContent[] = [
       {
         type: 'markdown',
-        content: oldData.text,
+        content: 'aaaaaaaaaaaaaaa'+oldData.text,
       },
       {
         type: 'markdown',
-        content: 'Run this link: ' + oldData.link,
+        content: 'AAAAAAAAAAAAAAAAAARun this link: ' + oldData.link,
       },
     ];
-
-    return {
-      ...node,
-      runtimeData: {
-        challengeSetup,
-        challengeContent,
-      },
-    };}
+    const baaaa:PolyglotNode={
+        _id:node._id,
+        type:node.type,
+        data:node.data,
+        description:node.description,
+        difficulty:node.difficulty,
+        platform:node.platform,
+        title:node.title,
+        reactFlow:node.reactFlow,
+        runtimeData:{
+            challengeSetup,
+            challengeContent,
+          }
+    }
+    return baaaa;
+}
 
 //closeEndedQuestionNode Execution block
-export type closeEndedQuestionNodeData = {
-    question: string;
-    correctAnswers: string[];
-    };
-    
-    export type closeEndedQuestionNode = PolyglotNode & {
-    type: 'readMaterialNode';
-    data: closeEndedQuestionNodeData;
-    };
-
-    function closeEndedQuestionNodeExecution(node:PolyglotNode){
+function closeEndedQuestionNodeExecution(node:PolyglotNode):PolyglotNode{
     const oldData = node.data as closeEndedQuestionNodeData;
 
     const challengeSetup: ChallengeSetup[] = [];
@@ -105,13 +89,7 @@ export type closeEndedQuestionNodeData = {
 }
 
 //MultipleChoiceQuestionNodeData Execution block    
-export type MultipleChoiceQuestionNodeData = {
-    question: string;
-    choices: string[];
-    isChoiceCorrect: boolean[];
-  };
-  
-function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
+function multipleChoiceQuestionNodeExecution(node:PolyglotNode):PolyglotNode{
     const oldData = node.data as MultipleChoiceQuestionNodeData;
     const data = {
         ...oldData,
@@ -163,6 +141,6 @@ export function vsCodeExecution(node:PolyglotNode){
     if(node?.type=="multipleChoiceQuestionNode") return multipleChoiceQuestionNodeExecution(node);
     if(node?.type=="lessonTextNode") {console.log('lessonText'); return lessonTextNodeExecution(node);}
     if(node?.type=="closeEndedQuestionNode") return closeEndedQuestionNodeExecution(node);
-    if(node?.type=="ReadMaterialNode") return readMaterialNodeExecution(node);
+    if(node?.type=="ReadMaterialNode") {console.log('readMaterial'); return readMaterialNodeExecution(node);}
     return null;
 }
