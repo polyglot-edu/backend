@@ -73,14 +73,6 @@ export class Execution {
           type: e.type,
       }))
     }
-
-    console.log("try123");
-    console.log(actualNode);
-    const execNode= nodeTypeExecution(actualNode);
-    console.log("--------------------");
-    console.log(execNode);
-    
-
     return {
       ctx: Execution.createCtx(this.flow._id, firstNode._id),
       node: actualNode
@@ -132,9 +124,6 @@ export class Execution {
     // caso in cui mi sono calcolato il nodo successivo con l'algo normale e mi ha ritornato un nodo non astratto
     this.ctx.execNodeInfo = execNodeInfo;
     this.ctx.currentNodeId = currentNode.reactFlow.id; // todo check if needed
-    console.log("prova123");
-    console.log(this.ctx);
-    console.log(currentNode);
     return {ctx: this.ctx, node: (currentNode as PolyglotNodeValidation)};
     
   }
