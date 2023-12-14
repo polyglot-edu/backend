@@ -12,21 +12,13 @@ function lessonTextNodeExecution(node:PolyglotNode):PolyglotNode{
         content: oldData.text,
         },
     ];
-    const baaaa:PolyglotNode={
-        _id:node._id,
-        type:node.type,
-        data:node.data,
-        description:node.description,
-        difficulty:node.difficulty,
-        platform:node.platform,
-        title:node.title,
-        reactFlow:node.reactFlow,
-        runtimeData:{
-            challengeSetup,
-            challengeContent,
-          }
-    }
-    return baaaa;
+    return {
+        ...node,
+        runtimeData: {
+        challengeSetup,
+        challengeContent,
+        },
+    };
 }
 
 //readMaterialNode Execution block
@@ -37,28 +29,20 @@ function readMaterialNodeExecution(node:PolyglotNode){
     const challengeContent: ChallengeContent[] = [
       {
         type: 'markdown',
-        content: 'aaaaaaaaaaaaaaa'+oldData.text,
+        content: oldData.text,
       },
       {
         type: 'markdown',
-        content: 'AAAAAAAAAAAAAAAAAARun this link: ' + oldData.link,
+        content: 'Run this link: ' + oldData.link,
       },
     ];
-    const baaaa:PolyglotNode={
-        _id:node._id,
-        type:node.type,
-        data:node.data,
-        description:node.description,
-        difficulty:node.difficulty,
-        platform:node.platform,
-        title:node.title,
-        reactFlow:node.reactFlow,
-        runtimeData:{
-            challengeSetup,
-            challengeContent,
-          }
-    }
-    return baaaa;
+    return {
+        ...node,
+        runtimeData: {
+        challengeSetup,
+        challengeContent,
+        },
+    };
 }
 
 //closeEndedQuestionNode Execution block
@@ -103,6 +87,8 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode):PolyglotNode{
         [] as string[]
         ),
     };
+    console.log("checkpoint");
+    console.log(data.correctAnswers);
     const challengeSetup: ChallengeSetup[] = [
         `
     using Polyglot.Interactive;
@@ -137,7 +123,6 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode):PolyglotNode{
 };}
 
 export function vsCodeExecution(node:PolyglotNode){
-    console.log('vsCode execution run');
     if(node?.type=="multipleChoiceQuestionNode") return multipleChoiceQuestionNodeExecution(node);
     if(node?.type=="lessonTextNode") {console.log('lessonText'); return lessonTextNodeExecution(node);}
     if(node?.type=="closeEndedQuestionNode") return closeEndedQuestionNodeExecution(node);

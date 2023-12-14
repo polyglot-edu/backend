@@ -38,7 +38,7 @@ export type ChallengeContent = {
 export type WebAppSetup = {};
 export type WebAppContent = {
   type?: string;
-  content: string;
+  content: any;
   priority?: number;
 };
 
