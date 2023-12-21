@@ -1,23 +1,22 @@
 import { PolyglotNode } from "../../types";
-import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, closeEndedQuestionNodeData, readMaterialNodeData, zip } from "./Node";
+import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, WebAppContent, WebAppSetup, closeEndedQuestionNodeData, readMaterialNodeData, zip } from "./Node";
+
+type vsCodeSpecifics={challengeSetup: ChallengeSetup[], challengeContent:ChallengeContent[]};
 
 //LessonTextNodeData Execution block   
-function lessonTextNodeExecution(node:PolyglotNode):PolyglotNode{
+function lessonTextNodeExecution(node:PolyglotNode){
     const oldData = node.data as LessonTextNodeData;
 
     const challengeSetup: ChallengeSetup[] = [];
-    const challengeContent = [
+    const challengeContent: ChallengeContent[] = [
         {
         type: 'markdown',
         content: oldData.text,
         },
     ];
     return {
-        ...node,
-        runtimeData: {
         challengeSetup,
         challengeContent,
-        },
     };
 }
 
@@ -37,16 +36,13 @@ function readMaterialNodeExecution(node:PolyglotNode){
       },
     ];
     return {
-        ...node,
-        runtimeData: {
         challengeSetup,
-        challengeContent,
-        },
+        challengeContent,        
     };
 }
 
 //closeEndedQuestionNode Execution block
-function closeEndedQuestionNodeExecution(node:PolyglotNode):PolyglotNode{
+function closeEndedQuestionNodeExecution(node:PolyglotNode){
     const oldData = node.data as closeEndedQuestionNodeData;
 
     const challengeSetup: ChallengeSetup[] = [];
@@ -64,16 +60,13 @@ function closeEndedQuestionNodeExecution(node:PolyglotNode):PolyglotNode{
     ];
 
     return {
-        ...node,
-        runtimeData: {
         challengeSetup,
-        challengeContent,
-        },
+        challengeContent,        
     };
 }
 
 //MultipleChoiceQuestionNodeData Execution block    
-function multipleChoiceQuestionNodeExecution(node:PolyglotNode):PolyglotNode{
+function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
     const oldData = node.data as MultipleChoiceQuestionNodeData;
     const data = {
         ...oldData,
@@ -114,18 +107,28 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode):PolyglotNode{
     ];
 
     return {
-        ...node,
-        data,
-        runtimeData: {
         challengeSetup,
         challengeContent,
-        },
-};}
+    };
+}
 
 export function vsCodeExecution(node:PolyglotNode){
-    if(node?.type=="multipleChoiceQuestionNode") return multipleChoiceQuestionNodeExecution(node);
-    if(node?.type=="lessonTextNode") {console.log('lessonText'); return lessonTextNodeExecution(node);}
-    if(node?.type=="closeEndedQuestionNode") return closeEndedQuestionNodeExecution(node);
-    if(node?.type=="ReadMaterialNode") {console.log('readMaterial'); return readMaterialNodeExecution(node);}
-    return null;
+    const webAppSetup: WebAppSetup[] = [];
+    const webAppContent : WebAppContent [] = [
+        {
+        content: 'This node need to be executed on the Notebook in VSCode',
+        },
+    ];
+    let vsCodeSpecifics:vsCodeSpecifics={challengeSetup:[],challengeContent:[]};
+    if(node?.type=="multipleChoiceQuestionNode") vsCodeSpecifics = multipleChoiceQuestionNodeExecution(node);
+    if(node?.type=="lessonTextNode") vsCodeSpecifics=lessonTextNodeExecution(node);
+    if(node?.type=="closeEndedQuestionNode") vsCodeSpecifics=closeEndedQuestionNodeExecution(node);
+    if(node?.type=="ReadMaterialNode") vsCodeSpecifics=readMaterialNodeExecution(node);
+    return {...node,
+    runtimeData: {
+      webAppSetup,
+      webAppContent,
+      vsCodeSpecifics
+    },
+    }
 }
