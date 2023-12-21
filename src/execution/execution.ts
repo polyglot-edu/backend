@@ -73,10 +73,6 @@ export class Execution {
           type: e.type,
       }))
     }
-    console.log({
-      ctx: Execution.createCtx(this.flow._id, firstNode._id),
-      node: actualNode
-    });
     return {
       ctx: Execution.createCtx(this.flow._id, firstNode._id),
       node: actualNode
