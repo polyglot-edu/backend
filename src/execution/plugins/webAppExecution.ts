@@ -1,6 +1,8 @@
 import { PolyglotNode } from "../../types";
 import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, WebAppContent, WebAppSetup, closeEndedQuestionNodeData, readMaterialNodeData, zip } from "./Node";
 
+type webAppSpecifics={webAppSetup: WebAppSetup[], webAppContent:WebAppContent[]};
+
 //LessonTextNodeData Execution block
 
 function lessonTextNodeExecution(node:PolyglotNode){
@@ -65,7 +67,7 @@ function closeEndedQuestionNodeExecution(node:PolyglotNode){
 function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
   const data = node.data as MultipleChoiceQuestionNodeData;
   const webAppSetup: WebAppSetup[] = [];
-  const webAppContent: WebAppContent = {content: data, type: 'MultChoiceQuestion'};    
+  const webAppContent: WebAppContent[] = [{content: data, type: 'MultChoiceQuestion'}];    
 
   return {
     webAppSetup, 
@@ -81,7 +83,7 @@ export function webAppExecution(node:PolyglotNode){
       content: 'This node need to be executed in WebApp: https://polyglot-api.polyglot-edu.com/api/execution/next/'+node._id,
       },
   ];
-  let webAppSpecifics;
+  let webAppSpecifics:webAppSpecifics={webAppSetup:[],webAppContent:[],};
   if(node?.type=="multipleChoiceQuestionNode")  webAppSpecifics=multipleChoiceQuestionNodeExecution(node);
   if(node?.type=="lessonTextNode") webAppSpecifics=lessonTextNodeExecution(node);
   if(node?.type=="closeEndedQuestionNode") webAppSpecifics=closeEndedQuestionNodeExecution(node);
