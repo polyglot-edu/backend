@@ -1,5 +1,5 @@
 import { PolyglotNode } from "../../types";
-import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, WebAppContent, WebAppSetup, closeEndedQuestionNodeData, readMaterialNodeData, zip } from "./Node";
+import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, closeEndedQuestionNodeData, readMaterialNodeData, zip } from "./Node";
 
 type vsCodeSpecifics={challengeSetup: ChallengeSetup[], challengeContent:ChallengeContent[]};
 
@@ -113,22 +113,12 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
 }
 
 export function vsCodeExecution(node:PolyglotNode){
-    const webAppSetup: WebAppSetup[] = [];
-    const webAppContent : WebAppContent [] = [
-        {
-        content: 'This node need to be executed on the Notebook in VSCode',
-        },
-    ];
     let vsCodeSpecifics:vsCodeSpecifics={challengeSetup:[],challengeContent:[]};
     if(node?.type=="multipleChoiceQuestionNode") vsCodeSpecifics = multipleChoiceQuestionNodeExecution(node);
     if(node?.type=="lessonTextNode") vsCodeSpecifics=lessonTextNodeExecution(node);
     if(node?.type=="closeEndedQuestionNode") vsCodeSpecifics=closeEndedQuestionNodeExecution(node);
     if(node?.type=="ReadMaterialNode") vsCodeSpecifics=readMaterialNodeExecution(node);
     return {...node,
-    runtimeData: {
-      webAppSetup,
-      webAppContent,
-      vsCodeSpecifics
-    },
+    runtimeData: vsCodeSpecifics,
     }
 }
