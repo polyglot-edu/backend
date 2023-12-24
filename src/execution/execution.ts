@@ -2,6 +2,7 @@ import { GameEngine, SmartCampusGameEngine } from "../gamification/gamification"
 import { PolyglotEdge, PolyglotFlow, PolyglotNode, PolyglotNodeValidation } from "../types";
 import { getAbstractAlgorithm, getPathSelectorAlgorithm, pathSelectorMap } from "./algo/register";
 import { AbstractAlgorithm, DistrubutionAlgorithm } from "./algo/base";
+import { nodeTypeExecution } from "./plugins/pluginMap";
 
 export type ExecCtx = {
   flowId: string;
@@ -56,14 +57,13 @@ export class Execution {
   public getFirstExercise() : {ctx: ExecCtx, node: PolyglotNodeValidation | null}  {
     const nodesWithIncomingEdges = new Set(this.flow.edges.map(edge => this.flow.nodes.find(node => node.reactFlow.id === edge.reactFlow.target)));
     const nodesWithoutIncomingEdges = this.flow.nodes.filter(node => !nodesWithIncomingEdges.has(node));
-
     // if (nodesWithoutIncomingEdges.length === 0) return null;
 
     const firstNode = nodesWithoutIncomingEdges[Math.floor(Math.random() * nodesWithoutIncomingEdges.length)];
     const outgoingEdges = this.flow.edges.filter(edge => edge.reactFlow.source === firstNode.reactFlow.id);
 
     const actualNode: PolyglotNodeValidation = {
-      ...JSON.parse(JSON.stringify(firstNode)),
+      ...nodeTypeExecution(JSON.parse(JSON.stringify(firstNode)))!,
       validation: outgoingEdges.map(e => ({
           id: e.reactFlow.id,
           title: e.title,
@@ -72,7 +72,6 @@ export class Execution {
           type: e.type,
       }))
     }
-
     return {
       ctx: Execution.createCtx(this.flow._id, firstNode._id),
       node: actualNode
@@ -108,8 +107,19 @@ export class Execution {
 
       this.ctx.execNodeInfo = execNodeInfo;
       return {ctx: this.ctx, node: node};
-    }
+    }    
+    const outgoingEdges = this.flow.edges.filter(edge => edge.reactFlow.source === currentNode.reactFlow.id);
 
+    const actualNode: PolyglotNodeValidation = {
+      ...nodeTypeExecution(JSON.parse(JSON.stringify(currentNode)))!,
+      validation: outgoingEdges.map(e => ({
+          id: e.reactFlow.id,
+          title: e.title,
+          code: e.code,
+          data: e.data,
+          type: e.type,
+      }))
+    }
     // caso in cui sono appena entrato nella funzione e non sto eseguendo un nodo astratto
     if (satisfiedEdges) {
       const possibleNextNodes = satisfiedEdges.map(edge => this.flow.nodes.find(node => node.reactFlow.id === edge.reactFlow.target)) as PolyglotNode[];
@@ -124,8 +134,7 @@ export class Execution {
     // caso in cui mi sono calcolato il nodo successivo con l'algo normale e mi ha ritornato un nodo non astratto
     this.ctx.execNodeInfo = execNodeInfo;
     this.ctx.currentNodeId = currentNode.reactFlow.id; // todo check if needed
-
-    return {ctx: this.ctx, node: (currentNode as PolyglotNodeValidation)};
+    return {ctx: this.ctx, node: (actualNode)};
     
   }
 
@@ -138,9 +147,8 @@ export class Execution {
     const satisfiedEdges = this.flow.edges.filter(edge => satisfiedConditions.includes(edge.reactFlow.id));
 
     const currentNode = this.getCurrentNode();
-
+    
     return await this.selectAlgoRec(this.ctx.execNodeInfo,currentNode,satisfiedEdges);
-
   }
 }
 
