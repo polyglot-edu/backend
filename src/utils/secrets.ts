@@ -19,9 +19,9 @@ export const MONGO_URL = MONGODB_URI + (MONGODB_CERTIFICATE ? encodeURIComponent
 
 export const CORS_ORIGINS = process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : "*";
 
-export const AUTH0_ISSUER_BASE_URL = process.env.ISSUER_BASE_URL as string;
+export const AUTH0_ISSUER_BASE_URL = process.env.AUTH0_ISSUER_BASE_URL as string;
 
-export const AUTH0_AUDIENCE = process.env.AUDIENCE as string;
+export const AUTH0_AUDIENCE = process.env.AUTH0_AUDIENCE as string;
 
 export const OPENAI_SECRET_KEY = process.env.OPENAI_SECRET_KEY as string;
 export const OPENAI_ENDPOINT = process.env.OPENAI_ENDPOINT as string;
