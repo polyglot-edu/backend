@@ -58,8 +58,10 @@ jobs:
           env:
             PORT: 5000
             mongodbUri: '${{ secrets.MONGODB_URI }}'
+            authAudience: ${{ secrets.AUTH0_AUDIENCE }}
+            authIssuerUrl: ${{ secrets.AUTH0_ISSUER_BASE_URL }}
             openAiSecret: secret
             env.openAiEndpoint: domain
-            testMode: true
+            testMode: false
       env:
         KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'

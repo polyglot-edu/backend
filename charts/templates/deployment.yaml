@@ -46,6 +46,10 @@ spec:
               value: {{ .Values.env.openAiSecret }}
             - name: OPENAI_ENDPOINT
               value: {{ .Values.env.openAiEndpoint }}
+            - name: AUTH0_ISSUER_BASE_URL
+              value: {{ .Values.env.authIssuerUrl }}
+            - name: AUTH0_AUDIENCE
+              value: {{ .Values.env.authAudience }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
