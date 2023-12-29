@@ -46,8 +46,8 @@ jobs:
     - name: Deploy to Kubernetes cluster
       uses: daviFrag/helm@master
       with:
-        release: 'node-editor-staging'
-        namespace: 'node-editor-staging'
+        release: 'polyglot-backend-staging'
+        namespace: 'polyglot-backend-staging'
         chart: 'charts'
         token: '${{ github.token }}'
         values: |
