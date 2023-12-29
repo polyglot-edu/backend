@@ -62,7 +62,7 @@ jobs:
             authAudience: ${{ secrets.AUTH0_AUDIENCE }}
             authIssuerUrl: ${{ secrets.AUTH0_ISSUER_BASE_URL }}
             openAiSecret: secret
-            env.openAiEndpoint: domain
+            openAiEndpoint: domain
             testMode: false
       env:
         KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
