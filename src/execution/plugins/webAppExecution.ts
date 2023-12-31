@@ -6,13 +6,11 @@ type webAppSpecifics={webAppSetup: WebAppSetup[], webAppContent:WebAppContent[]}
 //LessonTextNodeData Execution block
 
 function lessonTextNodeExecution(node:PolyglotNode){
-  const oldData = node.data as LessonTextNodeData;
+  const data = node.data as LessonTextNodeData;
   const webAppSetup: WebAppSetup[] = [];
-  const webAppContent: WebAppContent[] = [
-      {
-      content: oldData.text,
-      },
-  ];
+  
+  const webAppContent: WebAppContent[] = [{content: data, type: 'LessonText'}];    
+
   return {
     webAppSetup, 
     webAppContent,        
@@ -22,17 +20,12 @@ function lessonTextNodeExecution(node:PolyglotNode){
 //readMaterialNode Execution block
 
 function readMaterialNodeExecution(node:PolyglotNode){
-  const oldData = node.data as readMaterialNodeData;
+  const data = node.data as readMaterialNodeData;
 
   const webAppSetup: WebAppSetup[] = [];
-  const webAppContent: WebAppContent[] = [
-    {
-      content: oldData.text,
-    },
-    {
-      content: 'Run this link: ' + oldData.link,
-    },
-  ];
+  
+  const webAppContent: WebAppContent[] = [{content: data, type: 'ReadMaterial'}];    
+
 
   return {
     webAppSetup, 
@@ -42,20 +35,11 @@ function readMaterialNodeExecution(node:PolyglotNode){
 
 //closeEndedQuestionNode Execution block 
 function closeEndedQuestionNodeExecution(node:PolyglotNode){
-  const oldData = node.data as closeEndedQuestionNodeData;
+  const data = node.data as closeEndedQuestionNodeData;
 
   const webAppSetup: WebAppSetup[] = [];
-  const webAppContent: WebAppContent[] = [
-      {
-      content: oldData?.question,
-      priority: 0,
-      },
-      {
-      type: 'html',
-      content: '',
-      priority: 1,
-      },
-  ];
+  
+  const webAppContent: WebAppContent[] = [{content: data, type: 'CloseEndedQuestion'}];    
 
   return {
     webAppSetup, 
