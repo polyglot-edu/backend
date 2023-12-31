@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import PolyglotFlowModel from "../models/flow.model";
 import { v4 } from "uuid";
 import { ExecCtx, Execution } from "../execution/execution";
+import { start } from "repl";
 
 type SendCommandBody = {
   ctxId: string;
@@ -17,6 +18,7 @@ type GetInitialExerciseBody = { flowId: string }
 type GetNextExerciseV2Body = {
   ctxId: string;
   satisfiedConditions: string[];
+  flowId?: string;
 }
 
 const ctxs: {[x: string] : ExecCtx} = {
@@ -76,9 +78,44 @@ export async function startExecution(req: Request<{},any,StartExecutionBody>, re
 }
 
 export async function getNextExercisev2(req: Request<{},any, GetNextExerciseV2Body>, res: Response, next: NextFunction) {
-  const { ctxId, satisfiedConditions } = req.body;
-
+  const { ctxId, satisfiedConditions, flowId } = req.body;
   try {
+    if(flowId){
+      try {
+        const flow = await PolyglotFlowModel.findById(flowId).populate(["nodes","edges"]);
+        if (!flow) {
+          return res.status(404).send();
+        }
+    
+        const algo = flow?.execution?.algo ?? "Random Execution";
+    
+        // create execution obj
+        const ctx = Execution.createCtx(flow._id, "");
+        const execution = new Execution({ctx, algo, flow});
+    
+        // get first available node
+        const {ctx: updatedCtx, node: firstNode} = execution.getFirstExercise();
+    
+        if (!firstNode) {
+          return res.status(404).send()
+        }
+    
+        // create execution ctx id
+        const ctxId = v4();
+    
+        // TODO: add to database
+        ctxs[ctxId] = updatedCtx; 
+    
+        return res.status(200).json({
+          ctx: ctxId,
+          firstNode: firstNode
+        })
+      } catch(err) {
+        next(err);
+      }
+    
+    }
+
     const ctx = ctxs[ctxId];
 
     if (!ctx) {
@@ -102,8 +139,6 @@ export async function getNextExercisev2(req: Request<{},any, GetNextExerciseV2Bo
     }
 
     ctxs[ctxId] = updatedCtx;
-
-    console.log(firstNode);
 
     return res.status(200).json(firstNode);
   }catch(err) {
