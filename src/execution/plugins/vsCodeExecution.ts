@@ -111,6 +111,22 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
         challengeContent,
     };
 }
+//notImplementedNode Execution block   
+function notImplementedNodeExecution(node:PolyglotNode){
+    const oldData = node.data as LessonTextNodeData;
+
+    const challengeSetup: ChallengeSetup[] = [];
+    const challengeContent: ChallengeContent[] = [
+        {
+        type: 'markdown',
+        content: "This node type is not implemented for vsCode execution",
+        },
+    ];
+    return {
+        challengeSetup,
+        challengeContent,
+    };
+}
 
 export function vsCodeExecution(node:PolyglotNode){
     let vsCodeSpecifics:vsCodeSpecifics={challengeSetup:[],challengeContent:[]};
@@ -118,6 +134,7 @@ export function vsCodeExecution(node:PolyglotNode){
     if(node?.type=="lessonTextNode") vsCodeSpecifics=lessonTextNodeExecution(node);
     if(node?.type=="closeEndedQuestionNode") vsCodeSpecifics=closeEndedQuestionNodeExecution(node);
     if(node?.type=="ReadMaterialNode") vsCodeSpecifics=readMaterialNodeExecution(node);
+    if(node?.type=="TrueFalseNode") vsCodeSpecifics = notImplementedNodeExecution(node);
     return {...node,
     runtimeData: vsCodeSpecifics,
     }
