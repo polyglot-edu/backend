@@ -63,6 +63,6 @@ jobs:
             authIssuerUrl: ${{ secrets.AUTH0_ISSUER_BASE_URL }}
             openAiSecret: secret
             openAiEndpoint: domain
-            testMode: false
+            testMode: true
       env:
         KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
