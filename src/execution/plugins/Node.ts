@@ -18,6 +18,14 @@ export type MultipleChoiceQuestionNodeData = {
   isChoiceCorrect: boolean[];
 };
 
+export type TrueFalseNodeData = {
+  instructions: string;
+  questions: string[];
+  isQuestionCorrect: boolean[];
+  negativePoints: number;
+  positvePoints: number;
+};
+
 export type closeEndedQuestionNodeData = {
   question: string;
   correctAnswers: string[];

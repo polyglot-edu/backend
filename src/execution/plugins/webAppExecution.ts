@@ -1,5 +1,5 @@
 import { PolyglotNode } from "../../types";
-import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, WebAppContent, WebAppSetup, closeEndedQuestionNodeData, readMaterialNodeData, zip } from "./Node";
+import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, TrueFalseNodeData, WebAppContent, WebAppSetup, closeEndedQuestionNodeData, readMaterialNodeData, zip } from "./Node";
 
 type webAppSpecifics={webAppSetup: WebAppSetup[], webAppContent:WebAppContent[]};
 
@@ -59,6 +59,17 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
   };
 }
 
+//trueFalseNodeData Execution block  
+function trueFalseNodeExecution(node:PolyglotNode){
+  const data = node.data as TrueFalseNodeData;
+  const webAppSetup: WebAppSetup[] = [];
+  const webAppContent: WebAppContent[] = [{content: data, type: 'TrueFalse'}];    
+
+  return {
+    webAppSetup, 
+    webAppContent,        
+  };
+}
 export function webAppExecution(node:PolyglotNode){
   const challengeSetup: ChallengeSetup[] = [];
   const challengeContent : ChallengeContent [] = [
@@ -72,6 +83,7 @@ export function webAppExecution(node:PolyglotNode){
   if(node?.type=="lessonTextNode") webAppSpecifics=lessonTextNodeExecution(node);
   if(node?.type=="closeEndedQuestionNode") webAppSpecifics=closeEndedQuestionNodeExecution(node);
   if(node?.type=="ReadMaterialNode") webAppSpecifics=readMaterialNodeExecution(node);
+  if(node?.type=="TrueFalseNode")  webAppSpecifics=trueFalseNodeExecution(node);
   return {...node,
   runtimeData: {
     challengeSetup,
