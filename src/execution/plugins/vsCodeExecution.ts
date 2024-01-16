@@ -1,5 +1,5 @@
 import { PolyglotNode } from "../../types";
-import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, closeEndedQuestionNodeData, readMaterialNodeData, zip } from "./Node";
+import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, closeEndedQuestionNodeData, textLinkNodeData, zip } from "./Node";
 
 type vsCodeSpecifics={challengeSetup: ChallengeSetup[], challengeContent:ChallengeContent[]};
 
@@ -22,7 +22,7 @@ function lessonTextNodeExecution(node:PolyglotNode){
 
 //readMaterialNode Execution block
 function readMaterialNodeExecution(node:PolyglotNode){
-    const oldData = node.data as readMaterialNodeData;
+    const oldData = node.data as textLinkNodeData;
 
     const challengeSetup: ChallengeSetup[] = [];
     const challengeContent: ChallengeContent[] = [
@@ -113,8 +113,6 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
 }
 //notImplementedNode Execution block   
 function notImplementedNodeExecution(node:PolyglotNode){
-    const oldData = node.data as LessonTextNodeData;
-
     const challengeSetup: ChallengeSetup[] = [];
     const challengeContent: ChallengeContent[] = [
         {
@@ -129,12 +127,31 @@ function notImplementedNodeExecution(node:PolyglotNode){
 }
 
 export function vsCodeExecution(node:PolyglotNode){
+    
     let vsCodeSpecifics:vsCodeSpecifics={challengeSetup:[],challengeContent:[]};
-    if(node?.type=="multipleChoiceQuestionNode") vsCodeSpecifics = multipleChoiceQuestionNodeExecution(node);
-    if(node?.type=="lessonTextNode") vsCodeSpecifics=lessonTextNodeExecution(node);
-    if(node?.type=="closeEndedQuestionNode") vsCodeSpecifics=closeEndedQuestionNodeExecution(node);
-    if(node?.type=="ReadMaterialNode") vsCodeSpecifics=readMaterialNodeExecution(node);
-    if(node?.type=="TrueFalseNode") vsCodeSpecifics = notImplementedNodeExecution(node);
+
+    switch (node?.type){
+        case "multipleChoiceQuestionNode": {
+            vsCodeSpecifics = multipleChoiceQuestionNodeExecution(node);
+            break;
+        }
+        case "lessonTextNode": {
+            vsCodeSpecifics=lessonTextNodeExecution(node);
+            break;
+        }
+        case "closeEndedQuestionNode":{
+            vsCodeSpecifics=closeEndedQuestionNodeExecution(node);
+            break;
+        }
+        case "ReadMaterialNode": {
+            vsCodeSpecifics=readMaterialNodeExecution(node);
+            break;
+        }
+        default: {
+            vsCodeSpecifics = notImplementedNodeExecution(node);
+        }
+    }
+    
     return {...node,
     runtimeData: vsCodeSpecifics,
     }
