@@ -114,39 +114,14 @@ export function webAppExecution(node:PolyglotNode){
       },
   ];
   let webAppSpecifics:webAppSpecifics={webAppSetup:[],webAppContent:[]};
-    switch (node?.type){
-      case "multipleChoiceQuestionNode": {
-        webAppSpecifics=multipleChoiceQuestionNodeExecution(node);
-        break;
-      }
-      case "lessonTextNode": {
-        webAppSpecifics=lessonTextNodeExecution(node);
-        break;
-      }
-      case "closeEndedQuestionNode":{
-        webAppSpecifics=closeEndedQuestionNodeExecution(node);
-        break;
-      }
-      case "ReadMaterialNode": {
-        webAppSpecifics=readMaterialNodeExecution(node);
-        break;
-      }
-      case "TrueFalseNode": {
-        webAppSpecifics=trueFalseNodeExecution(node);
-        break;
-      }
-      case "WatchVideoNode": {
-        webAppSpecifics=watchVideoNodeExecution(node);
-        break;
-      }
-      case "SummaryNode": {
-        webAppSpecifics=summaryNodeExecution(node);
-        break;
-      }
-      default:{      
-        webAppSpecifics = notImplementedNodeExecution(node);
-      }
-    }
+  if(node?.type=="multipleChoiceQuestionNode")  webAppSpecifics=multipleChoiceQuestionNodeExecution(node);
+  if(node?.type=="lessonTextNode") webAppSpecifics=lessonTextNodeExecution(node);
+  if(node?.type=="closeEndedQuestionNode") webAppSpecifics=closeEndedQuestionNodeExecution(node);
+  if(node?.type=="ReadMaterialNode") webAppSpecifics=readMaterialNodeExecution(node);
+  if(node?.type=="TrueFalseNode")  webAppSpecifics=trueFalseNodeExecution(node);  
+  if(node?.type=="WatchVideoNode") webAppSpecifics=watchVideoNodeExecution(node);
+  if(node?.type=="SummaryNode") webAppSpecifics=summaryNodeExecution(node);
+  if(node?.type=="") webAppSpecifics = notImplementedNodeExecution(node); //default statement
 
   return {...node,
   runtimeData: {

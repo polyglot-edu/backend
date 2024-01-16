@@ -130,28 +130,12 @@ export function vsCodeExecution(node:PolyglotNode){
     
     let vsCodeSpecifics:vsCodeSpecifics={challengeSetup:[],challengeContent:[]};
 
-    switch (node?.type){
-        case "multipleChoiceQuestionNode": {
-            vsCodeSpecifics = multipleChoiceQuestionNodeExecution(node);
-            break;
-        }
-        case "lessonTextNode": {
-            vsCodeSpecifics=lessonTextNodeExecution(node);
-            break;
-        }
-        case "closeEndedQuestionNode":{
-            vsCodeSpecifics=closeEndedQuestionNodeExecution(node);
-            break;
-        }
-        case "ReadMaterialNode": {
-            vsCodeSpecifics=readMaterialNodeExecution(node);
-            break;
-        }
-        default: {
-            vsCodeSpecifics = notImplementedNodeExecution(node);
-        }
-    }
-    
+    if(node?.type=="multipleChoiceQuestionNode") vsCodeSpecifics = multipleChoiceQuestionNodeExecution(node);
+    if(node?.type=="lessonTextNode") vsCodeSpecifics=lessonTextNodeExecution(node);
+    if(node?.type=="closeEndedQuestionNode") vsCodeSpecifics=closeEndedQuestionNodeExecution(node);
+    if(node?.type=="ReadMaterialNode") vsCodeSpecifics=readMaterialNodeExecution(node);
+    if(node?.type=="TrueFalseNode"||node?.type=="WatchVideoNode"||node?.type=="SummaryNode") vsCodeSpecifics = notImplementedNodeExecution(node);
+
     return {...node,
     runtimeData: vsCodeSpecifics,
     }
