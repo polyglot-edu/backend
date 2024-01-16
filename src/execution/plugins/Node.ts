@@ -7,7 +7,7 @@ export type LessonTextNodeData = {
   text: string;
 };
 
-export type readMaterialNodeData = {
+export type textLinkNodeData = {
   text: string;
   link: string;
 };
