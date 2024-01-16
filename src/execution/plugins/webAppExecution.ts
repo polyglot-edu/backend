@@ -1,5 +1,5 @@
 import { PolyglotNode } from "../../types";
-import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, TrueFalseNodeData, WebAppContent, WebAppSetup, closeEndedQuestionNodeData, readMaterialNodeData, zip } from "./Node";
+import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, TrueFalseNodeData, WebAppContent, WebAppSetup, closeEndedQuestionNodeData, textLinkNodeData as TextLinkNodeData, zip } from "./Node";
 
 type webAppSpecifics={webAppSetup: WebAppSetup[], webAppContent:WebAppContent[]};
 
@@ -20,7 +20,7 @@ function lessonTextNodeExecution(node:PolyglotNode){
 //readMaterialNode Execution block
 
 function readMaterialNodeExecution(node:PolyglotNode){
-  const data = node.data as readMaterialNodeData;
+  const data = node.data as TextLinkNodeData;
 
   const webAppSetup: WebAppSetup[] = [];
   
@@ -70,6 +70,41 @@ function trueFalseNodeExecution(node:PolyglotNode){
     webAppContent,        
   };
 }
+
+//watchVideoNodeData Execution block  
+function watchVideoNodeExecution(node:PolyglotNode){
+  const data = node.data as TextLinkNodeData;
+  const webAppSetup: WebAppSetup[] = [];
+  const webAppContent: WebAppContent[] = [{content: data, type: 'WatchVideo'}];    
+
+  return {
+    webAppSetup, 
+    webAppContent,        
+  };
+}
+
+function summaryNodeExecution(node:PolyglotNode){
+  const data = node.data as TextLinkNodeData;
+  const webAppSetup: WebAppSetup[] = [];
+  const webAppContent: WebAppContent[] = [{content: data, type: 'Summary'}];    
+
+  return {
+    webAppSetup, 
+    webAppContent,        
+  };
+}
+
+function notImplementedNodeExecution(node:PolyglotNode){
+
+  const webAppSetup: WebAppSetup[] = [];
+  const webAppContent: WebAppContent[] = [{content: "This node type is not implemented for WebApp execution, go to: "+node.platform, type: node.type}];    
+
+  return {
+    webAppSetup, 
+    webAppContent,        
+  };
+}
+
 export function webAppExecution(node:PolyglotNode){
   const challengeSetup: ChallengeSetup[] = [];
   const challengeContent : ChallengeContent [] = [
@@ -78,12 +113,41 @@ export function webAppExecution(node:PolyglotNode){
       content: 'This node need to be executed in WebApp: https://polyglot-api.polyglot-edu.com/api/execution/next/'+node._id,
       },
   ];
-  let webAppSpecifics:webAppSpecifics={webAppSetup:[],webAppContent:[],};
-  if(node?.type=="multipleChoiceQuestionNode")  webAppSpecifics=multipleChoiceQuestionNodeExecution(node);
-  if(node?.type=="lessonTextNode") webAppSpecifics=lessonTextNodeExecution(node);
-  if(node?.type=="closeEndedQuestionNode") webAppSpecifics=closeEndedQuestionNodeExecution(node);
-  if(node?.type=="ReadMaterialNode") webAppSpecifics=readMaterialNodeExecution(node);
-  if(node?.type=="TrueFalseNode")  webAppSpecifics=trueFalseNodeExecution(node);
+  let webAppSpecifics:webAppSpecifics={webAppSetup:[],webAppContent:[]};
+    switch (node?.type){
+      case "multipleChoiceQuestionNode": {
+        webAppSpecifics=multipleChoiceQuestionNodeExecution(node);
+        break;
+      }
+      case "lessonTextNode": {
+        webAppSpecifics=lessonTextNodeExecution(node);
+        break;
+      }
+      case "closeEndedQuestionNode":{
+        webAppSpecifics=closeEndedQuestionNodeExecution(node);
+        break;
+      }
+      case "ReadMaterialNode": {
+        webAppSpecifics=readMaterialNodeExecution(node);
+        break;
+      }
+      case "TrueFalseNode": {
+        webAppSpecifics=trueFalseNodeExecution(node);
+        break;
+      }
+      case "WatchVideoNode": {
+        webAppSpecifics=watchVideoNodeExecution(node);
+        break;
+      }
+      case "SummaryNode": {
+        webAppSpecifics=summaryNodeExecution(node);
+        break;
+      }
+      default:{      
+        webAppSpecifics = notImplementedNodeExecution(node);
+      }
+    }
+
   return {...node,
   runtimeData: {
     challengeSetup,
