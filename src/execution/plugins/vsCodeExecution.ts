@@ -1,5 +1,5 @@
 import { PolyglotNode } from "../../types";
-import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, closeEndedQuestionNodeData, textLinkNodeData, zip } from "./Node";
+import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, CloseEndedQuestionNodeData, textLinkNodeData, zip } from "./Node";
 
 type vsCodeSpecifics={challengeSetup: ChallengeSetup[], challengeContent:ChallengeContent[]};
 
@@ -43,7 +43,7 @@ function readMaterialNodeExecution(node:PolyglotNode){
 
 //closeEndedQuestionNode Execution block
 function closeEndedQuestionNodeExecution(node:PolyglotNode){
-    const oldData = node.data as closeEndedQuestionNodeData;
+    const oldData = node.data as CloseEndedQuestionNodeData;
 
     const challengeSetup: ChallengeSetup[] = [];
     const challengeContent: ChallengeContent[] = [

@@ -1,5 +1,5 @@
 import { PolyglotNode } from "../../types";
-import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, TrueFalseNodeData, WebAppContent, WebAppSetup, closeEndedQuestionNodeData, textLinkNodeData as TextLinkNodeData, zip } from "./Node";
+import { ChallengeContent, ChallengeSetup, LessonTextNodeData, OpenQuestionNodeData, MultipleChoiceQuestionNodeData, TrueFalseNodeData, WebAppContent, WebAppSetup, CloseEndedQuestionNodeData, textLinkNodeData as TextLinkNodeData, zip } from "./Node";
 
 type webAppSpecifics={webAppSetup: WebAppSetup[], webAppContent:WebAppContent[]};
 
@@ -35,11 +35,25 @@ function readMaterialNodeExecution(node:PolyglotNode){
 
 //closeEndedQuestionNode Execution block 
 function closeEndedQuestionNodeExecution(node:PolyglotNode){
-  const data = node.data as closeEndedQuestionNodeData;
+  const data = node.data as CloseEndedQuestionNodeData;
 
   const webAppSetup: WebAppSetup[] = [];
   
   const webAppContent: WebAppContent[] = [{content: data, type: 'CloseEndedQuestion'}];    
+
+  return {
+    webAppSetup, 
+    webAppContent,        
+  };
+}
+
+//closeEndedQuestionNode Execution block 
+function openQuestionNodeExecution(node:PolyglotNode){
+  const data = node.data as OpenQuestionNodeData;
+
+  const webAppSetup: WebAppSetup[] = [];
+  
+  const webAppContent: WebAppContent[] = [{content: data, type: 'OpenQuestion'}];    
 
   return {
     webAppSetup, 
@@ -117,6 +131,7 @@ export function webAppExecution(node:PolyglotNode){
   if(node?.type=="multipleChoiceQuestionNode")  webAppSpecifics=multipleChoiceQuestionNodeExecution(node);
   if(node?.type=="lessonTextNode") webAppSpecifics=lessonTextNodeExecution(node);
   if(node?.type=="closeEndedQuestionNode") webAppSpecifics=closeEndedQuestionNodeExecution(node);
+  if(node?.type=="OpenQuestionNode") webAppSpecifics=openQuestionNodeExecution(node);
   if(node?.type=="ReadMaterialNode") webAppSpecifics=readMaterialNodeExecution(node);
   if(node?.type=="TrueFalseNode")  webAppSpecifics=trueFalseNodeExecution(node);  
   if(node?.type=="WatchVideoNode") webAppSpecifics=watchVideoNodeExecution(node);
