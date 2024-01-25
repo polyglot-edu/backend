@@ -29,6 +29,12 @@ export type TrueFalseNodeData = {
 export type closeEndedQuestionNodeData = {
   question: string;
   correctAnswers: string[];
+  aiQuestion: boolean;
+  language?: string;
+  questionGenerated?: string;
+  possibleAnswer?: string;
+  questionCategory?: number;
+  questionType?: number;
 };
   
 export const zip = <T, K>(a: T[], b: K[]) =>
