@@ -134,7 +134,7 @@ export function vsCodeExecution(node:PolyglotNode){
     if(node?.type=="lessonTextNode") vsCodeSpecifics=lessonTextNodeExecution(node);
     if(node?.type=="closeEndedQuestionNode") vsCodeSpecifics=closeEndedQuestionNodeExecution(node);
     if(node?.type=="ReadMaterialNode") vsCodeSpecifics=readMaterialNodeExecution(node);
-    if(node?.type=="TrueFalseNode"||node?.type=="WatchVideoNode"||node?.type=="SummaryNode") vsCodeSpecifics = notImplementedNodeExecution(node);
+    if(node?.type=="TrueFalseNode"||node?.type=="WatchVideoNode"||node?.type=="SummaryNode"||node?.type=="OpenQuestionNode") vsCodeSpecifics = notImplementedNodeExecution(node);
 
     return {...node,
     runtimeData: vsCodeSpecifics,
