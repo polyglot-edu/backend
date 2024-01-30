@@ -96,14 +96,14 @@ export async function getActualNode(req: Request<{},any, GetNextExerciseV2Body>,
 
     const execution = new Execution({ctx, algo, flow});
 
-    const actualNode = await execution.getCurrentNode();
+    const actualNode = await execution.getActualNode();
 
     if (!actualNode) {
         res.status(404).send();
         return;
     }
 
-    return res.status(200).json(actualNode);
+    return res.status(200).json(actualNode.node);
   }catch(err) {
     next(err);
   }

@@ -82,6 +82,11 @@ export class Execution {
     return this.flow.nodes.find((node) => node._id === this.ctx.currentNodeId) ?? null;
   }
 
+  public getActualNode(){
+    const currentNode=this.getCurrentNode();
+    return this.selectAlgoRec(this.ctx.execNodeInfo,currentNode,null);
+  }
+
   private async selectAlgoRec(execNodeInfo: ExecCtxNodeInfo, currentNode: PolyglotNode | null, satisfiedEdges: PolyglotEdge[] | null) : Promise<{ctx: ExecCtx, node: PolyglotNodeValidation | null}> {
     // caso in cui current node è null (fine esecuzione)
     if (!currentNode) {

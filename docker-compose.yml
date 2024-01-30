@@ -24,6 +24,6 @@ services:
       - OPENAI_ENDPOINT=YOUR_OPENAI_ENDPOINT
       - ISSUER_BASE_URL=https://polyglot-edu.eu.auth0.com/
       - AUDIENCE=https://api.polyglot-edu.com
-      - TEST_MODE=false
+      - TEST_MODE=true
       
     command: npm run dev
