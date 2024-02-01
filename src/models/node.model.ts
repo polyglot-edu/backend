@@ -175,8 +175,10 @@ export const multipleChoiceQuestionNodeSchema = new mongoose.Schema({
 export const TrueFalseNodeSchema = new mongoose.Schema({
     data: {
         instructions: {type: String},
-        question: [{type: String}],
-        isQuestionCorrect: [{type: Boolean}]
+        questions: [{type: String}],
+        isQuestionCorrect: [{type: Boolean}],
+        negativePoints: {type: Number},
+        positvePoints: {type: Number}
     }
 }, options);
 
