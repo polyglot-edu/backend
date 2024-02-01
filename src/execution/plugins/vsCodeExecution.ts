@@ -1,5 +1,5 @@
 import { PolyglotNode } from "../../types";
-import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, closeEndedQuestionNodeData, textLinkNodeData, zip } from "./Node";
+import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, CloseEndedQuestionNodeData, textLinkNodeData, zip } from "./Node";
 
 type vsCodeSpecifics={challengeSetup: ChallengeSetup[], challengeContent:ChallengeContent[]};
 
@@ -43,7 +43,7 @@ function readMaterialNodeExecution(node:PolyglotNode){
 
 //closeEndedQuestionNode Execution block
 function closeEndedQuestionNodeExecution(node:PolyglotNode){
-    const oldData = node.data as closeEndedQuestionNodeData;
+    const oldData = node.data as CloseEndedQuestionNodeData;
 
     const challengeSetup: ChallengeSetup[] = [];
     const challengeContent: ChallengeContent[] = [
@@ -134,7 +134,7 @@ export function vsCodeExecution(node:PolyglotNode){
     if(node?.type=="lessonTextNode") vsCodeSpecifics=lessonTextNodeExecution(node);
     if(node?.type=="closeEndedQuestionNode") vsCodeSpecifics=closeEndedQuestionNodeExecution(node);
     if(node?.type=="ReadMaterialNode") vsCodeSpecifics=readMaterialNodeExecution(node);
-    if(node?.type=="TrueFalseNode"||node?.type=="WatchVideoNode"||node?.type=="SummaryNode") vsCodeSpecifics = notImplementedNodeExecution(node);
+    if(node?.type=="TrueFalseNode"||node?.type=="WatchVideoNode"||node?.type=="SummaryNode"||node?.type=="OpenQuestionNode") vsCodeSpecifics = notImplementedNodeExecution(node);
 
     return {...node,
     runtimeData: vsCodeSpecifics,

@@ -26,9 +26,14 @@ export type TrueFalseNodeData = {
   positvePoints: number;
 };
 
-export type closeEndedQuestionNodeData = {
+export type CloseEndedQuestionNodeData = {
   question: string;
   correctAnswers: string[];
+};
+
+export type OpenQuestionNodeData = {
+  question: string;
+  material: string;
   aiQuestion: boolean;
   language?: string;
   questionGenerated?: string;
