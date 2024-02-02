@@ -139,7 +139,8 @@ export const FindSolutionNodeSchema = new mongoose.Schema({
 export const closeEndedQuestionNodeSchema = new mongoose.Schema({
     data: {
         question: {type: String},
-        correctAnswers: [{type: String}]
+        correctAnswers: [{type: String}],
+        isAnswerCorrect: [{type: Boolean}]        
     }
 }, options);
 
