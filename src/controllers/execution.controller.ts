@@ -68,7 +68,7 @@ export async function startExecution(req: Request<{},any,StartExecutionBody>, re
 
     return res.status(200).json({
       ctx: ctxId,
-      firstNode: firstNode
+      platform: firstNode.platform
     })
   } catch(err) {
     next(err);
@@ -77,44 +77,41 @@ export async function startExecution(req: Request<{},any,StartExecutionBody>, re
 
 }
 
+//return actualNode to execute
+export async function getActualNode(req: Request<{},any, GetNextExerciseV2Body>, res: Response, next: NextFunction) {
+  const { ctxId, } = req.body;
+  try {
+
+    const ctx = ctxs[ctxId];
+
+    if (!ctx) {
+      return res.status(400).json({"error": "Ctx not found!"})
+    }
+    
+    const flow = await PolyglotFlowModel.findById(ctx.flowId).populate(["nodes","edges"]);
+    
+    if (!flow) return res.status(404).send();
+    
+    const algo = flow?.execution?.algo ?? "Random Execution";
+
+    const execution = new Execution({ctx, algo, flow});
+
+    const actualNode = await execution.getActualNode();
+
+    if (!actualNode) {
+        res.status(404).send();
+        return;
+    }
+
+    return res.status(200).json(actualNode.node);
+  }catch(err) {
+    next(err);
+  }
+}
+
 export async function getNextExercisev2(req: Request<{},any, GetNextExerciseV2Body>, res: Response, next: NextFunction) {
   const { ctxId, satisfiedConditions, flowId } = req.body;
   try {
-    if(flowId){
-      try {
-        const flow = await PolyglotFlowModel.findById(flowId).populate(["nodes","edges"]);
-        if (!flow) {
-          return res.status(404).send();
-        }
-    
-        const algo = flow?.execution?.algo ?? "Random Execution";
-    
-        // create execution obj
-        const ctx = Execution.createCtx(flow._id, "");
-        const execution = new Execution({ctx, algo, flow});
-    
-        // get first available node
-        const {ctx: updatedCtx, node: firstNode} = execution.getFirstExercise();
-    
-        if (!firstNode) {
-          return res.status(404).send()
-        }
-    
-        // create execution ctx id
-        const ctxId = v4();
-    
-        // TODO: add to database
-        ctxs[ctxId] = updatedCtx; 
-    
-        return res.status(200).json({
-          ctx: ctxId,
-          firstNode: firstNode
-        })
-      } catch(err) {
-        next(err);
-      }
-    
-    }
 
     const ctx = ctxs[ctxId];
 
