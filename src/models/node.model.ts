@@ -165,6 +165,14 @@ export const codingQuestionNodeSchema = new mongoose.Schema({
     }
 }, options);
 
+export const promptEngineeringNodeSchema = new mongoose.Schema({
+    data: {
+        question: {type: String},
+        codeTemplate: {type: String, default: ""},
+        language: {type: String, enum: ["csharp","sysml"], default: "csharp"}
+    }
+}, options);
+
 export const multipleChoiceQuestionNodeSchema = new mongoose.Schema({
     data: {
         question: {type: String},
@@ -236,9 +244,11 @@ export const FindSolutionNode = PolyglotNodeModel.discriminator('FindSolutionNod
 
 export const CloseEndedQuestionNode = PolyglotNodeModel.discriminator('closeEndedQuestionNode', closeEndedQuestionNodeSchema);
 
-export const OpenQuestionNode = PolyglotNodeModel.discriminator('openQuestionNode', openQuestionNodeSchema);
+export const OpenQuestionNode = PolyglotNodeModel.discriminator('OpenQuestionNode', openQuestionNodeSchema);
 
 export const CodingQuestionNode = PolyglotNodeModel.discriminator('codingQuestionNode', codingQuestionNodeSchema);
+
+export const PromptEngineeringNode = PolyglotNodeModel.discriminator('PromptEngineeringNode', promptEngineeringNodeSchema);
 
 export const MultipleChoiceQuestionNode = PolyglotNodeModel.discriminator('multipleChoiceQuestionNode', multipleChoiceQuestionNodeSchema);
 
