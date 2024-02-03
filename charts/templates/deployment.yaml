@@ -13,10 +13,8 @@ spec:
       {{- include "charts.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        timestamp: "{{ now | date "20060102150405" }}"
       labels:
         {{- include "charts.selectorLabels" . | nindent 8 }}
     spec:
