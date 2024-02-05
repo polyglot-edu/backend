@@ -18,6 +18,12 @@ export type MultipleChoiceQuestionNodeData = {
   isChoiceCorrect: boolean[];
 };
 
+export type CodingQuestionNodeData = {
+  question: string;
+  codeTemplate: string;
+  language: string;
+};
+
 export type TrueFalseNodeData = {
   instructions: string;
   questions: string[];
