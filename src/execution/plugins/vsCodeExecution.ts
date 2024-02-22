@@ -1,5 +1,5 @@
 import { PolyglotNode } from "../../types";
-import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, CloseEndedQuestionNodeData, textLinkNodeData, zip } from "./Node";
+import { ChallengeContent, ChallengeSetup, LessonTextNodeData, MultipleChoiceQuestionNodeData, CloseEndedQuestionNodeData, textLinkNodeData, zip, CodingQuestionNodeData } from "./Node";
 
 type vsCodeSpecifics={challengeSetup: ChallengeSetup[], challengeContent:ChallengeContent[]};
 
@@ -80,8 +80,6 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
         [] as string[]
         ),
     };
-    console.log("checkpoint");
-    console.log(data.correctAnswers);
     const challengeSetup: ChallengeSetup[] = [
         `
     using Polyglot.Interactive;
@@ -111,6 +109,29 @@ function multipleChoiceQuestionNodeExecution(node:PolyglotNode){
         challengeContent,
     };
 }
+
+function codingQuestionNodeExecution(node:PolyglotNode){
+    const data = node.data as CodingQuestionNodeData;
+
+    const challengeSetup: ChallengeSetup[] = [];
+    const challengeContent: ChallengeContent[] = [
+        {
+        type: 'markdown',
+        content: data?.question,
+        priority: 0,
+        },
+        {
+        type: data?.language,
+        content: data?.codeTemplate,
+        priority: 1,
+        },
+    ];
+
+    return {
+        challengeSetup,
+        challengeContent,      
+    };
+}
 //notImplementedNode Execution block   
 function notImplementedNodeExecution(node:PolyglotNode){
     const challengeSetup: ChallengeSetup[] = [];
@@ -134,8 +155,9 @@ export function vsCodeExecution(node:PolyglotNode){
     if(node?.type=="lessonTextNode") vsCodeSpecifics=lessonTextNodeExecution(node);
     if(node?.type=="closeEndedQuestionNode") vsCodeSpecifics=closeEndedQuestionNodeExecution(node);
     if(node?.type=="ReadMaterialNode") vsCodeSpecifics=readMaterialNodeExecution(node);
+    if(node?.type=="codingQuestionNode") vsCodeSpecifics=codingQuestionNodeExecution(node);
     if(node?.type=="TrueFalseNode"||node?.type=="WatchVideoNode"||node?.type=="SummaryNode"||node?.type=="OpenQuestionNode") vsCodeSpecifics = notImplementedNodeExecution(node);
-
+    
     return {...node,
     runtimeData: vsCodeSpecifics,
     }
