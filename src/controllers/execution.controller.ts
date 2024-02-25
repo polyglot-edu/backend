@@ -96,7 +96,7 @@ export async function getActualNode(req: Request<{},any, GetNextExerciseV2Body>,
 
     const execution = new Execution({ctx, algo, flow});
 
-    const actualNode = await execution.getActualNode();
+    const actualNode = await execution.getActualNode(ctxId);
 
     if (!actualNode) {
         res.status(404).send();
@@ -128,7 +128,7 @@ export async function getNextExercisev2(req: Request<{},any, GetNextExerciseV2Bo
 
     const execution = new Execution({ctx, algo, flow});
 
-    const {ctx: updatedCtx, node: firstNode} = await execution.getNextExercise(satisfiedConditions);
+    const {ctx: updatedCtx, node: firstNode} = await execution.getNextExercise(satisfiedConditions, ctxId);
 
     if (!firstNode) {
         res.status(404).send();
