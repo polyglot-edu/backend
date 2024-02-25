@@ -107,7 +107,6 @@ function notImplementedNodeExecution(node:PolyglotNode){
 
 export function webAppExecution(node:PolyglotNode,ctx:string){
   const challengeSetup: ChallengeSetup[] = [];
-  console.log("uffa "+ctx);
 
   const challengeContent : ChallengeContent [] = [
       {
