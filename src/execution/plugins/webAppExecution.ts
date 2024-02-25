@@ -119,12 +119,14 @@ function notImplementedNodeExecution(node:PolyglotNode){
   };
 }
 
-export function webAppExecution(node:PolyglotNode){
+export function webAppExecution(node:PolyglotNode,ctx:string){
   const challengeSetup: ChallengeSetup[] = [];
+  console.log("uffa "+ctx);
+
   const challengeContent : ChallengeContent [] = [
       {
       type: 'markdown',
-      content: 'This node need to be executed in WebApp: https://polyglot-api.polyglot-edu.com/api/execution/next/'+node._id,
+      content: 'https://polyglot-webapp.polyglot-edu.com/?&ctx='+ctx+'&rememberTipologyQuiz='+node.type+' !',
       },
   ];
   let webAppSpecifics:webAppSpecifics={webAppSetup:[],webAppContent:[]};

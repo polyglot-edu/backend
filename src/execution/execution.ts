@@ -62,8 +62,10 @@ export class Execution {
     const firstNode = nodesWithoutIncomingEdges[Math.floor(Math.random() * nodesWithoutIncomingEdges.length)];
     const outgoingEdges = this.flow.edges.filter(edge => edge.reactFlow.source === firstNode.reactFlow.id);
 
+    const ctx = Execution.createCtx(this.flow._id, firstNode._id);
+    
     const actualNode: PolyglotNodeValidation = {
-      ...nodeTypeExecution(JSON.parse(JSON.stringify(firstNode)))!,
+      ...nodeTypeExecution(JSON.parse(JSON.stringify(firstNode)), ctx.toString())!,
       validation: outgoingEdges.map(e => ({
           id: e.reactFlow.id,
           title: e.title,
@@ -73,7 +75,7 @@ export class Execution {
       }))
     }
     return {
-      ctx: Execution.createCtx(this.flow._id, firstNode._id),
+      ctx: ctx,
       node: actualNode
     }
   }
@@ -82,12 +84,12 @@ export class Execution {
     return this.flow.nodes.find((node) => node._id === this.ctx.currentNodeId) ?? null;
   }
 
-  public getActualNode(){
+  public getActualNode(ctxId:string){
     const currentNode=this.getCurrentNode();
-    return this.selectAlgoRec(this.ctx.execNodeInfo,currentNode,null);
+    return this.selectAlgoRec(this.ctx.execNodeInfo,currentNode,null,ctxId);
   }
 
-  private async selectAlgoRec(execNodeInfo: ExecCtxNodeInfo, currentNode: PolyglotNode | null, satisfiedEdges: PolyglotEdge[] | null) : Promise<{ctx: ExecCtx, node: PolyglotNodeValidation | null}> {
+  private async selectAlgoRec(execNodeInfo: ExecCtxNodeInfo, currentNode: PolyglotNode | null, satisfiedEdges: PolyglotEdge[] | null, ctxId:string) : Promise<{ctx: ExecCtx, node: PolyglotNodeValidation | null}> {
     // caso in cui current node è null (fine esecuzione)
     if (!currentNode) {
       return {ctx: this.ctx, node: null};
@@ -107,16 +109,15 @@ export class Execution {
         this.ctx.execNodeInfo = execNodeInfo;
         this.ctx.currentNodeId = node?.reactFlow.id;
 
-        return await this.selectAlgoRec(execNodeInfo, node, null);
+        return await this.selectAlgoRec(execNodeInfo, node, null, ctxId);
       }
 
       this.ctx.execNodeInfo = execNodeInfo;
       return {ctx: this.ctx, node: node};
     }    
     const outgoingEdges = this.flow.edges.filter(edge => edge.reactFlow.source === currentNode.reactFlow.id);
-
     const actualNode: PolyglotNodeValidation = {
-      ...nodeTypeExecution(JSON.parse(JSON.stringify(currentNode)))!,
+      ...nodeTypeExecution(JSON.parse(JSON.stringify(currentNode)), ctxId)!,
       validation: outgoingEdges.map(e => ({
           id: e.reactFlow.id,
           title: e.title,
@@ -133,7 +134,7 @@ export class Execution {
 
       this.ctx.currentNodeId = node?.reactFlow.id;
 
-      return await this.selectAlgoRec(execNodeInfo, node, null);
+      return await this.selectAlgoRec(execNodeInfo, node, null, ctxId);
     }
 
     // caso in cui mi sono calcolato il nodo successivo con l'algo normale e mi ha ritornato un nodo non astratto
@@ -143,17 +144,17 @@ export class Execution {
     
   }
 
-  public async getNextExercise(satisfiedConditions: string[]) : Promise<{ctx: ExecCtx, node: PolyglotNodeValidation | null}> {
+  public async getNextExercise(satisfiedConditions: string[],ctxId:string) : Promise<{ctx: ExecCtx, node: PolyglotNodeValidation | null}> {
     const {userId, gameId} = this.ctx;
     if (userId) {
       this.gameEngine.addPoints(gameId, userId, 100);
     }
-
+    console.log("ahahaahha "+ctxId);
     const satisfiedEdges = this.flow.edges.filter(edge => satisfiedConditions.includes(edge.reactFlow.id));
 
     const currentNode = this.getCurrentNode();
     
-    return await this.selectAlgoRec(this.ctx.execNodeInfo,currentNode,satisfiedEdges);
+    return await this.selectAlgoRec(this.ctx.execNodeInfo,currentNode,satisfiedEdges,ctxId);
   }
 }
 
