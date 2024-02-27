@@ -19,4 +19,7 @@ router.route("/:id")
 router.route("/:id/run")
     .get(FlowController.downloadNotebookVSC);
 
+router.route("/:id/:ctxId/run")
+    .get(FlowController.downloadNotebookVSC2);
+
 export default router;
