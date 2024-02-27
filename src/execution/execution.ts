@@ -149,7 +149,6 @@ export class Execution {
     if (userId) {
       this.gameEngine.addPoints(gameId, userId, 100);
     }
-    console.log("ahahaahha "+ctxId);
     const satisfiedEdges = this.flow.edges.filter(edge => satisfiedConditions.includes(edge.reactFlow.id));
 
     const currentNode = this.getCurrentNode();

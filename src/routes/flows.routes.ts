@@ -16,7 +16,14 @@ router.route("/:id")
     .put(checkAuth, FlowController.updateFlow)
     .delete(checkAuth, FlowController.deleteFlow);
  
-router.route("/:id/run")
+router.route("/:id/runFirst")   //first version of the notebook (run the execution from the first call)
     .get(FlowController.downloadNotebookVSC);
+
+router.route("/:id/run")    // version of notebook with only ctx information
+    .get(FlowController.downloadNotebookVSCCTX);
+
+router.route("/:id/:ctxId/run") //2nd version of notebook with ctx information and flowId
+    .get(FlowController.downloadNotebookVSC2);
+
 
 export default router;

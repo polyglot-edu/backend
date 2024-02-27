@@ -55,6 +55,40 @@ export async function downloadNotebookVSC(req: Request, res: Response, next: Nex
   res.end();
 }
 
+//2nd version of notebook with ctx information
+export async function downloadNotebookVSC2(req: Request, res: Response, next: NextFunction) {
+  const template = `#!csharp
+
+#r "nuget: Polyglot.Interactive, 0.0.3-*"
+
+#!csharp
+
+#!polyglot-setup --flowid ${req.params.id} --serverurl http${DOMAIN_APP_DEPLOY.includes('localhost') ? '': 's'}://${DOMAIN_APP_DEPLOY} --contextid ${req.params.ctxId}`
+
+  const file = Buffer.from(template);
+  res.setHeader('Content-Length', file.length);
+  res.setHeader('Content-Disposition', `attachment; filename=notebook-${req.params.id}.dib`);
+  res.write(file, 'binary');
+  res.end();
+}
+
+// version of notebook with only ctx information
+export async function downloadNotebookVSCCTX(req: Request, res: Response, next: NextFunction) {
+  const template = `#!csharp
+
+#r "nuget: Polyglot.Interactive, 0.0.3-*"
+
+#!csharp
+
+#!polyglot-setup --serverurl http${DOMAIN_APP_DEPLOY.includes('localhost') ? '': 's'}://${DOMAIN_APP_DEPLOY} --contextid ${req.params.ctxId}`
+
+  const file = Buffer.from(template);
+  res.setHeader('Content-Length', file.length);
+  res.setHeader('Content-Disposition', `attachment; filename=notebook-${req.params.id}.dib`);
+  res.write(file, 'binary');
+  res.end();
+}
+
 /*
     Get all the flows FIX: refactor with auth
     @route GET /flows
