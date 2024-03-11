@@ -27,6 +27,11 @@ export const flowSchema = new mongoose.Schema<PolyglotFlow>({
       type: String,
       required: true
     },
+    publish: { 
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     learningPathId: {
       type: String
     },
