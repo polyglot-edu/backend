@@ -25,5 +25,7 @@ router.route("/:ctxId/run")    // version of notebook with only ctx information
 router.route("/:id/:ctxId/run") //2nd version of notebook with ctx information and flowId
     .get(FlowController.downloadNotebookVSC2);
 
+router.route("/:id/publish")    //function to publish the flow
+    .put(checkAuth, FlowController.publishFlow);
 
 export default router;
