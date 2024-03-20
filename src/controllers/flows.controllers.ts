@@ -207,6 +207,7 @@ export async function updateFlow(req: Request, res: Response, next: NextFunction
     // await body("flow", "Flow is required").exists().run(req);
 
     try {
+      req.body.publish=false;
       const flow = await updateFlowQuery(req.params.id, req.body);
 
       if (!flow) {
@@ -218,6 +219,26 @@ export async function updateFlow(req: Request, res: Response, next: NextFunction
       return next(err);
     }
     
+}
+
+//function to publish the flow (change publish to true)
+export async function publishFlow(req: Request, res: Response, next : NextFunction) {
+  
+  try {
+
+    req.body.publish=true;
+
+    const flows = await updateFlowQuery(req.params.id, req.body);
+
+    if (!flows) {
+      return res.status(404).send()
+    }
+
+    return res.status(200).send(flows);
+  } catch (err) {
+    return next(err);
+  }
+  
 }
 
 export async function createFlow(req: Request, res: Response, next : NextFunction) {
