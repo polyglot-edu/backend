@@ -27,6 +27,11 @@ export const flowSchema = new mongoose.Schema<PolyglotFlow>({
       type: String,
       required: true
     },
+    platform: { 
+      type: String,
+      required: true,
+      default: ' ',
+    },
     publish: { 
       type: Boolean,
       required: true,
