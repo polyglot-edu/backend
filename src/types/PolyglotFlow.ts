@@ -11,6 +11,12 @@ export type PolyglotFlowInfo = {
     learningPathId: string;
     description: string;
     publish: boolean;
+    platform: string;
+    /* to be discussed: do we want to save in the database the last summarized material of the professor?
+    sourceMaterial?: string;
+    levelMaterial?: string;
+    generatedMaterial?: string;
+    noW?: number;*/
     tags: string[];
     execution: PolyglotExecutionData;
 }
