@@ -15,13 +15,10 @@ export type PolyglotFlowInfo = {
   learningContext: string;
   duration: number;
   topics: string[];
-  /* to be discussed: do we want to save in the database the last summarized material of the professor?
-    sourceMaterial?: string;
-    levelMaterial?: string;
-    generatedMaterial?: string;
-    noW?: number;*/
   tags: string[];
   execution: PolyglotExecutionData;
+  overallGrade?: number;
+  executedTimes?: number;
 };
 
 export type PolyglotFlow = PolyglotFlowInfo & {

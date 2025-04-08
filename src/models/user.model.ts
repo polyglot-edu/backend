@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import validator from "validator";
 
 export type UserDocument = Document & {
+  registrationDate: Date;
   username: string;
   email: string;
   googleId: string;
@@ -21,6 +22,7 @@ const userSchema = new mongoose.Schema<UserDocument>({
   googleId: { type: String },
   username: { type: String },
   email: { type: String },
+  registrationDate: { type: Date },
 });
 
 const User = mongoose.model<UserDocument>("User", userSchema);
