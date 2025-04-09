@@ -10,11 +10,11 @@ router
   .get(checkAuth, LearningDataController.getAllActions);
 
 router
-  .route("/userId/:id") //Penso non abbia senso tenere quelle singole no?
+  .route("/userId/:id")
   .get(checkAuth, LearningDataController.getActionByUserId);
 
 router
-  .route("/userIds/:ids")
+  .route("/userIds/:ids") // da rendere POST, dove passi nel body i parametri
   .get(checkAuth, LearningDataController.getActionsByUserIds);
 
 router
