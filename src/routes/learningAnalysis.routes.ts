@@ -10,6 +10,10 @@ router
   .get(checkAuth, LearningDataController.getAllActions);
 
 router
+  .route("/:password/serverCleanAll") //API to clean the server from empty flows
+  .get(LearningDataController.serverCleanUpAll);
+
+router
   .route("/userId/:id") //Penso non abbia senso tenere quelle singole no?
   .get(checkAuth, LearningDataController.getActionByUserId);
 
