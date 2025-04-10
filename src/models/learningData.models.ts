@@ -65,28 +65,27 @@ export interface DeleteLPActionDocument
 export interface SubmitAnswerActionDocument
   extends Types.SubmitAnswerAction,
     Document {}
-export interface GradeActionDocument
-  extends Types.GradeAction,
+export interface CompleteLPActionDocument
+  extends Types.CompleteLPAction,
+    Document {}    
+export interface GradeLPActionDocument
+  extends Types.GradeLPAction,
     Document {}
 
-//Schema base
+// Base scheme
 export const baseActionSchema = new Schema(
   {
     timestamp: { type: Date, required: true },
     userId: { type: String, required: true },
     actionType: { type: String, required: true },
     zoneId: { type: String, required: true, enum: Object.values(Types.ZoneId) },
-    platform: {
-      type: String,
-      required: true,
-      enum: Object.values(Types.Platform),
-    },
+    platform: { type: String, required: true, enum: Object.values(Types.Platform) },
     action: { type: Schema.Types.Mixed, default: null }, //Accettabile? Mi serve per poter filtrare usando i campi contenuti in action. Possibile sostituire con discriminatori e sistemare i find.
   },
   options,
 );
 
-//Schemi specifici
+// Specific schemes
 export const registrationToWorkAdventureActionSchema = new Schema(
   {
     ...baseActionSchema.obj,
@@ -323,7 +322,16 @@ export const submitAnswerActionSchema = new Schema(
   options,
 );
 
-export const gradeActionSchema = new Schema(
+export const completeLPActionSchema = new Schema(
+  {
+    ...baseActionSchema.obj,
+    action: {
+      flowId: { type: String, required: true },
+    }
+  }
+);
+
+export const gradeLPActionSchema = new Schema(
   {
     ...baseActionSchema.obj,
     action: {
@@ -331,18 +339,18 @@ export const gradeActionSchema = new Schema(
       grade: { type: Number, required: true },
     }
   }
-)
+);
 
-// MODELLO BASE
+// Base model
 export const BaseActionModel = model<BaseActionDocument>(
   "BaseAction",
   baseActionSchema,
 );
 
-// MODELLI SPECIFICI CON DISCRIMINATORE
+// Specific models with discriminator
 export const RegistrationToWorkAdventureActionModel =
   BaseActionModel.discriminator<RegistrationToWorkAdventureActionDocument>(
-    "RegistrationToWorkAdventureAction",
+    "RegistrationToWorkAdventureAction", 
     registrationToWorkAdventureActionSchema,
   );
 
@@ -460,8 +468,14 @@ export const SubmitAnswerActionModel =
     submitAnswerActionSchema,
   );
 
-export const GradeActionModel =
-  BaseActionModel.discriminator<GradeActionDocument>(
-    "GradeAction",
-    gradeActionSchema,
+  export const CompleteLPActionModel =
+  BaseActionModel.discriminator<CompleteLPActionDocument>(
+    "CompleteLPAction",
+    completeLPActionSchema,
+  );
+
+export const GradeLPActionModel =
+  BaseActionModel.discriminator<GradeLPActionDocument>(
+    "GradeLPAction",
+    gradeLPActionSchema,
   );
