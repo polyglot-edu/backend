@@ -3,6 +3,7 @@ import PolyglotFlowModel from "../models/flow.model";
 import { v4 } from "uuid";
 import { ExecCtx, Execution } from "../execution/execution";
 import { start } from "repl";
+import { PolyglotNodeValidation } from "../types";
 
 type SendCommandBody = {
   ctxId: string;
@@ -131,8 +132,8 @@ export async function getActualNode(
       res.status(404).send();
       return;
     }
-
-    return res.status(200).json(actualNode.node);
+    const nodeData = { ...actualNode.node, flowId: ctx.flowId}
+    return res.status(200).json(nodeData);
   } catch (err) {
     res.status(500).send(err);
   }
