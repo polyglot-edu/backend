@@ -105,39 +105,24 @@ export const createAction = async (req: Request, res: Response) => {
         action = await Models.CloseToolActionModel.create(closeToolAction);
         break;
 
-      case "open_node":
-        const OpenNode = req.body;
-        if (!OpenNode.action.flowId || !OpenNode.action.nodeId || !OpenNode.action.activity) {
+      case "open_activity":
+        const OpenActivity = req.body;
+        if (!OpenActivity.action.flowId || !OpenActivity.action.nodeId || !OpenActivity.action.activity) {
           return res.status(400).json({
-            error: "Missing fields for open_node: flowId, nodeId or activity.",
+            error: "Missing fields for open_activity: flowId, nodeId or activity.",
           });
         }
-        action = await Models.OpenNodeActionModel.create(OpenNode);
+        action = await Models.OpenActivityActionModel.create(OpenActivity);
         break;
 
-      case "close_node":
-        const CloseNode = req.body;
-        if (!CloseNode.action.flowId || !CloseNode.action.nodeId || !OpenNode.action.activity) {
+      case "close_activity":
+        const CloseActivity = req.body;
+        if (!CloseActivity.action.flowId || !CloseActivity.action.nodeId || !CloseActivity.action.activity) {
           return res.status(400).json({
-            error: "Missing fields for close_node: flowId, nodeId or activity.",
+            error: "Missing fields for close_activity: flowId, nodeId or activity.",
           });
         }
-        action = await Models.CloseNodeActionModel.create(CloseNode);
-        break;
-
-      case "change_node":
-        const ChangeNode = req.body;
-        if (
-          !ChangeNode.action.flowId ||
-          !ChangeNode.action.oldNodeId ||
-          !ChangeNode.action.newNodeId
-        ) {
-          return res.status(400).json({
-            error:
-              "Missing fields for change_node: flowId, oldNodeId or newNodeId.",
-          });
-        }
-        action = await Models.ChangeNodeActionModel.create(ChangeNode);
+        action = await Models.CloseActivityActionModel.create(CloseActivity);
         break;
 
       case "open_LP_info":
@@ -250,7 +235,19 @@ export const createAction = async (req: Request, res: Response) => {
         action = await Models.SubmitAnswerActionModel.create(SubmitAnswer);
         break;
 
-      case "GradeAction":    //TO CHECK!
+      case "complete_LP":
+        const CompleteLP = req.body;
+        if (!CompleteLP.action.flowId) {
+          return res.status(400).json({
+            error: "Missing fields for complete_LP: flowId.",
+          });
+        }
+        action = await Models.CompleteLPActionModel.create(
+          CompleteLP,
+        );
+        break;
+
+      case "grade_LP": 
         const GradeLP = req.body;
         if (
           !GradeLP.action.flowId ||
@@ -258,13 +255,13 @@ export const createAction = async (req: Request, res: Response) => {
         ) {
           return res.status(400).json({
             error:
-              "Missing fields for GradeAction: flowId or grade.",
+              "Missing fields for grade_LP: flowId or grade.",
           });
         }
         action = await Models.GradeLPActionModel.create(GradeLP);
 
         //update LP grade
-        flowGradeUpdate(GradeLP.action.flowId)
+        //flowGradeUpdate(GradeLP.action.flowId) -> Commentato perchè mi da problemi quando creo nuove action di tipo gradeLPAction!
 
         break;
 
@@ -565,7 +562,7 @@ export const calculateTimeOnTool = async (req: Request, res: Response) => {
   }
 }
 
-export const calculateNodeTimeByUserId = async (req: Request, res: Response) => {
+export const calculateNodeTimeByUserId = async (req: Request, res: Response) => { // Valutare cambio nome in calculateActivityTimeByUser!
   try {
     const { userId, flowId, nodeId } = req.query;
     if (!userId || !flowId || !nodeId) {
@@ -578,10 +575,10 @@ export const calculateNodeTimeByUserId = async (req: Request, res: Response) => 
       userId,
       "action.flowId": flowId,
       "action.nodeId": nodeId,
-      actionType: { $in: ["open_node", "close_node"] },
+      actionType: { $in: ["open_activity", "close_activity"] },
     })
       .sort({ timestamp: -1 })
-      .limit(100); //Per performance ma da checkare
+      .limit(100); //Per performance ma da checkare!
 
     if (!actions || actions.length === 0) {
       return res
@@ -590,22 +587,22 @@ export const calculateNodeTimeByUserId = async (req: Request, res: Response) => 
     }
 
     const lastClose = actions.find(
-      action => action.actionType === "close_node"
+      action => action.actionType === "close_activity"
     );
     if (!lastClose) {
       return res.status(400).json({
-        error: "No close_node action found for the given node and user.",
+        error: "No close_activity action found for the given node and user.",
       });
     }
 
     const lastOpen = actions.find(
       action =>
-        action.actionType === "open_node" &&
+        action.actionType === "open_activity" &&
         action.timestamp < lastClose.timestamp
     );
     if (!lastOpen) {
       return res.status(400).json({
-        error: "No valid open_node action found before the last close_node action.",
+        error: "No valid open_activity action found before the last close_activity action.",
       });
     }
 
@@ -708,7 +705,7 @@ export const calculateGradeMetrics = async (req: Request, res: Response) => {
       {
         $match: {
           "action.flowId": flowId,
-          actionType: "GradeAction",
+          actionType: "grade_LP",
         },
       },
       {
@@ -746,18 +743,18 @@ export const getGradeByUserId = async (req: Request, res: Response) => {
       });
     }
     console.log('check1')
-    const gradeAction = await Models.BaseActionModel.findOne({
+    const gradeLPAction = await Models.BaseActionModel.findOne({
       userId,
       "action.flowId": flowId,
-      actionType: "GradeAction",
+      actionType: "GradeLPAction",
     });
-    if (!gradeAction) {
+    if (!gradeLPAction) {
       return res.status(404).json({
         error: "No grade found for the given user and learning path.",
       });
     }
     console.log('check2')
-    res.status(200).send(gradeAction);
+    res.status(200).send(gradeLPAction);
   } catch (error: any) {
     console.error("Error getting grade:", error);
     return res.status(500).json({ error: (error as Error).message });  }

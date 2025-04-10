@@ -21,7 +21,7 @@ export enum ExerciseType {
   TrueFalseQuestion = "TrueFalseQuestion",
 }
 
-export enum Platform {
+export enum Platform { // Da cambiare in PlatformType per averli tutti uguali?
   PolyGloT = "PolyGloT",
   VisualStudio = "VisualStudio",
   PapyrusWeb = "PapyrusWeb",
@@ -35,7 +35,7 @@ export enum UserRole {
   Tutor = "Tutor",
 }
 
-export enum Activity {  //To discuss and to implement!
+export enum Activity {  //To discuss and to implement! -> Da cambiare in ActivityType per averli tutti uguali?
   OpenEndedQuestion = "OpenEndedQuestion",
   MultipleChoiceQuestion = "MultipleChoiceQuestion",
   Exercise = "Exercise",
@@ -97,8 +97,8 @@ export type CloseToolAction = BaseAction & {
   };
 };
 
-// Opening a non completed learning node for the first time in a session (starts execution of the node)
-export type OpenNodeAction = BaseAction & {
+// Starting an activity in a LearningPath
+export type OpenActivityAction = BaseAction & {
   action: {
     flowId: string;
     nodeId: string;
@@ -106,35 +106,14 @@ export type OpenNodeAction = BaseAction & {
   };
 };
 
-// Closing a non completed learning node (stop execution of the node) -> This happens when a node gets closed before completing its activity
-export type CloseNodeAction = BaseAction & {
+// Stopping the executionn of an activity in a LearningPath
+export type CloseActivityAction = BaseAction & {
   action: {
     flowId: string;
     nodeId: string;
     activity: string;
   };
 };
-
-// Moving to previous/next node
-export type ChangeNodeAction = BaseAction & {
-  action: {
-    flowId: string;
-    oldNodeId: string;
-    newNodeId: string;
-  };
-};
-
-/* Example of how it works, given Node1 a node where some information are given to the student, and Node2 a node where the user is asked to complete and activity. Node2 is the last node of the flow.
-  1) User starts a new learning flow, opens first node for the first time --> openNodeAction of Node1 is registered
-  2) User completes Node1's activity, then goes to the next node --> changeNodeAction from Node1 to Node2 is registered, then openNodeAction of Node2 is registered too 
-  3) User goes back to Node1 to check something before completing the activity in Node2 --> changeNodeAction from Node2 to Node1 is registered, nothing else
-    By doing this, time spent in Node1 after the change from Node2 is considered part of the time needed to complete the activity in Node2
-  4) User returns to Node2 to complete the activity --> changeNodeAction from Node1 to Node2, nothing else
-  5) User stops the execution of the Node2 (closes browser/window/flow execution) --> closeNodeAction of Node2 is registered
-  6) After some time but in the same login session, user re-opens the learning flow (starting a new session of flow execution) and is sent back to Node2 --> openNodeAction of Node2 is registered, since this is a new session of flow execution
-  7) User goes back to review Node1 --> changeNodeAction from Node2 to Node1 is registered, no openNodeAction of Node1 since it has been already completed in another session
-  8) User goes to Node2, completes correctly the activity and closes the execution of the flow, since there are no more nodes in the flow --> changeNodeAction from Node1 to Node2 is registered, and then a closeNode is also registered
-  */
 
 // Opening the "More info" page of a LearningPath in the LP selection page
 export type OpenLPInfoAction = BaseAction & {
@@ -238,9 +217,8 @@ export type UserAction =
   | LogOutToPolyGloTAction
   | OpenToolAction
   | CloseToolAction
-  | OpenNodeAction
-  | CloseNodeAction
-  | ChangeNodeAction
+  | OpenActivityAction
+  | CloseActivityAction
   | OpenLPInfoAction
   | CloseLPInfoAction
   | SearchForLPAction
