@@ -292,6 +292,21 @@ export async function getAllActions(req: Request, res: Response) {
     return res.status(500).send({ err });
   }
 }
+//api to remove all actions
+export async function serverCleanUpAll(
+  req: Request,
+  res: Response,
+) {
+  try {
+    if (req.params.password != "polyglotClean") throw "Wrong password";
+
+    const resp = await Models.BaseActionModel.deleteMany({});
+    console.log(resp);
+    res.status(204).json();
+  } catch (error) {
+    return res.status(500).send({ error });
+  }
+}
 
 export async function getActionByUserId(req: Request, res: Response) {
   try {
