@@ -1,50 +1,52 @@
 import { Date } from "mongoose";
 
 export enum ZoneId {
-  FreeZone,
-  OutsideZone,
-  SilentZone,
-  LearningPathSelectionZone,
-  InstructionWebpageZone,
-  WebAppZone,
-  MeetingRoomZone,
-  PolyGlotLearningZone,
-  PolyGlotLearningPathCreationZone,
-  PapyrusWebZone,
-  VirtualStudioZone,
+  FreeZone = "FreeZone",
+  OutsideZone = "OutsideZone",
+  SilentZone = "SilentZone",
+  LearningPathSelectionZone = "LearningPathSelectionZone",
+  InstructionWebpageZone = "InstructionWebpageZone",
+  WebAppZone = "WebAppZone",
+  MeetingRoomZone = "MeetingRoomZone",
+  PolyGloTLearningZone = "PolyGloTLearningZone",
+  PolyGloTLearningPathCreationZone = "PolyGloTLearningPathCreationZone",
+  PapyrusWebZone = "PapyrusWebZone",
+  VisualStudioZone = "VisualStudioZone",
 }
 
 export enum ExerciseType {
-  OpenEndedQuestion,
-  CloseEndedQuestion,
-  MultipleChoiceQuestion,
-  TrueFalseQuestion,
+  OpenEndedQuestion = "OpenEndedQuestion",
+  CloseEndedQuestion = "CloseEndedQuestion",
+  MultipleChoiceQuestion = "MultipleChoiceQuestion",
+  TrueFalseQuestion = "TrueFalseQuestion",
 }
 
 export enum Platform {
-  PolyGloT,
-  VisualStudio,
-  PapyrusWeb,
-  WebApp,
-  WorkAdventure,
+  PolyGloT = "PolyGloT",
+  VisualStudio = "VisualStudio",
+  PapyrusWeb = "PapyrusWeb",
+  WebApp = "WebApp",
+  WorkAdventure = "WorkAdventure",
 }
 
 export enum UserRole {
-  Teacher,
-  Student,
-  Tutor,
+  Teacher = "Teacher",
+  Student = "Student",
+  Tutor = "Tutor",
 }
 
-export enum Activity {
-  OpenEndedQuestion,
-  MultipleChoiceQuestion,
+export enum Activity {  //To discuss and to implement!
+  OpenEndedQuestion = "OpenEndedQuestion",
+  MultipleChoiceQuestion = "MultipleChoiceQuestion",
+  Exercise = "Exercise",
+  Other = "Other",
 }
 
-// Tipo base di tutte le azioni
+// Basic type for all actions
 export type BaseAction = {
   timestamp: Date;
   userId: string;
-  actionType: String;
+  actionType: String; //Sarebbe meglio fare una enum anche per actionType?
   zoneId: ZoneId;
   platform: Platform;
 };
