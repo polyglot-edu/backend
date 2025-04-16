@@ -15,10 +15,27 @@ export enum ZoneId {
 }
 
 export enum ExerciseType {
-  OpenEndedQuestion,
-  CloseEndedQuestion,
-  MultipleChoiceQuestion,
-  TrueFalseQuestion,
+  LessonNode = "lessonNode",
+  LessonTextNode = "lessonTextNode",
+  WatchVideoNode = "WatchVideoNode",
+  ReadMaterialNode = "ReadMaterialNode",
+  CreateKeywordsListNode = "CreateKeywordsListNode",
+  MemoriseKeywordsListNode = "MemoriseKeywordsListNode",
+  SummaryNode = "SummaryNode",
+  MindMapNode = "MindMapNode",
+  ProblemSolvingNode = "ProblemSolvingNode",
+  FindSolutionNode = "FindSolutionNode",
+  CloseEndedQuestionNode = "closeEndedQuestionNode",
+  OpenQuestionNode = "OpenQuestionNode",
+  CodingQuestionNode = "codingQuestionNode",
+  PromptEngineeringNode = "PromptEngineeringNode",
+  MultipleChoiceQuestionNode = "multipleChoiceQuestionNode",
+  TrueFalseNode = "TrueFalseNode",
+  ImageEvaluationNode = "ImageEvaluationNode",
+  CollaborativeModelingNode = "CollaborativeModelingNode",
+  UMLModelingNode = "UMLModelingNode",
+  CasesEvaluationNode = "CasesEvaluationNode",
+  InnovationPitchNode = "InnovationPitchNode",
 }
 
 export enum Platform {
