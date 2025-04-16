@@ -76,13 +76,13 @@ export class Execution {
       flowId: flowId,
       userId: userId ?? null,
       currentNodeId: currentNodeId,
-      username: username ?? null,
+      username: username ?? 'guest',
       execNodeInfo: {},
     } as ExecCtx;
   }
 
   // TODO: check if the first node is an abstract node
-  public getFirstExercise(username?: string): {
+  public getFirstExercise(username?: string, userId?: string): {
     ctx: ExecCtx;
     node: PolyglotNodeValidation | null;
   } {
@@ -109,7 +109,7 @@ export class Execution {
     const ctx = Execution.createCtx(
       this.flow._id,
       firstNode._id,
-      undefined,
+      userId,
       username,
     );
 

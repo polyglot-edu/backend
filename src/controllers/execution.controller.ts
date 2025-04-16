@@ -12,6 +12,7 @@ type SendCommandBody = {
 
 type StartExecutionBody = {
   flowId: string;
+  userId?: string;
   username?: string;
 };
 
@@ -61,7 +62,7 @@ export async function startExecution(
   res: Response,
   next: NextFunction,
 ) {
-  const { flowId, username } = req.body;
+  const { flowId, username, userId } = req.body;
 
   try {
     const flow = await PolyglotFlowModel.findById(flowId).populate([
@@ -80,7 +81,7 @@ export async function startExecution(
 
     // get first available node
     const { ctx: updatedCtx, node: firstNode } =
-      execution.getFirstExercise(username);
+      execution.getFirstExercise(username, userId);
 
     if (!firstNode) {
       return res.status(404).send();
