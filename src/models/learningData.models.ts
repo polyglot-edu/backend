@@ -44,9 +44,7 @@ export interface CloseLPInfoActionDocument
 export interface SearchForLPActionDocument
   extends Types.SearchForLPAction,
     Document {}
-export interface ShowLPActionDocument
-  extends Types.ShowLPAction,
-    Document {}
+export interface ShowLPActionDocument extends Types.ShowLPAction, Document {}
 export interface SelectLPActionDocument
   extends Types.SelectLPAction,
     Document {}
@@ -65,9 +63,7 @@ export interface DeleteLPActionDocument
 export interface SubmitAnswerActionDocument
   extends Types.SubmitAnswerAction,
     Document {}
-export interface GradeActionDocument
-  extends Types.GradeAction,
-    Document {}
+export interface GradeActionDocument extends Types.GradeAction, Document {}
 
 //Schema base
 export const baseActionSchema = new Schema(
@@ -323,15 +319,13 @@ export const submitAnswerActionSchema = new Schema(
   options,
 );
 
-export const gradeActionSchema = new Schema(
-  {
-    ...baseActionSchema.obj,
-    action: {
-      flowId: { type: String, required: true },
-      grade: { type: Number, required: true },
-    }
-  }
-)
+export const gradeActionSchema = new Schema({
+  ...baseActionSchema.obj,
+  action: {
+    flowId: { type: String, required: true },
+    grade: { type: Number, required: true },
+  },
+});
 
 // MODELLO BASE
 export const BaseActionModel = model<BaseActionDocument>(

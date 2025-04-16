@@ -80,8 +80,10 @@ export async function startExecution(
     const execution = new Execution({ ctx, algo, flow });
 
     // get first available node
-    const { ctx: updatedCtx, node: firstNode } =
-      execution.getFirstExercise(username, userId);
+    const { ctx: updatedCtx, node: firstNode } = execution.getFirstExercise(
+      username,
+      userId,
+    );
 
     if (!firstNode) {
       return res.status(404).send();
@@ -133,7 +135,7 @@ export async function getActualNode(
       res.status(404).send();
       return;
     }
-    const nodeData = { ...actualNode.node, flowId: ctx.flowId}
+    const nodeData = { ...actualNode.node, flowId: ctx.flowId };
     return res.status(200).json(nodeData);
   } catch (err) {
     res.status(500).send(err);

@@ -100,7 +100,8 @@ export type OpenNodeAction = BaseAction & {
 };
 
 // Azione di chiusura di un node di appendimento (termine esecuzione del node)
-export type CloseNodeAction = BaseAction & { //Quando avviene questa azione? Ad ogni cambio pagina o solo quando viene chiuso il nodo e basta?
+export type CloseNodeAction = BaseAction & {
+  //Quando avviene questa azione? Ad ogni cambio pagina o solo quando viene chiuso il nodo e basta?
   action: {
     flowId: string;
     nodeId: string;
@@ -200,8 +201,8 @@ export type GradeAction = BaseAction & {
   action: {
     flow: string;
     grade: number;
-  }
-}
+  };
+};
 
 // Tipo unione per tutte le azioni possibili dell'utente
 export type UserAction =

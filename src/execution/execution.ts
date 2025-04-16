@@ -76,13 +76,16 @@ export class Execution {
       flowId: flowId,
       userId: userId ?? null,
       currentNodeId: currentNodeId,
-      username: username ?? 'guest',
+      username: username ?? "guest",
       execNodeInfo: {},
     } as ExecCtx;
   }
 
   // TODO: check if the first node is an abstract node
-  public getFirstExercise(username?: string, userId?: string): {
+  public getFirstExercise(
+    username?: string,
+    userId?: string,
+  ): {
     ctx: ExecCtx;
     node: PolyglotNodeValidation | null;
   } {

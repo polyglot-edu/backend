@@ -70,7 +70,7 @@ export const flowSchema = new mongoose.Schema<PolyglotFlow>({
     },
   },
   overallGrade: { type: Number, required: false, default: null },
-  executedTimes: { type: Number, required: false, default: null }
+  executedTimes: { type: Number, required: false, default: null },
 });
 
 export interface PolyglotFlowModel extends Model<PolyglotFlow> {}
