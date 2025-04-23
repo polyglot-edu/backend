@@ -50,15 +50,15 @@ export enum SummarizeStyle {
   StructuredInformative = "structured and informative",
 }
 
-export type Topic ={topic: string; explanation: string}
+export type Topic = { topic: string; explanation: string };
 
 export type LessonNodeAI = {
   title: string;
   learning_outcome: LearningOutcome;
   topics: Topic[];
-}
+};
 
-export type AnalyseType = { text: string, model?: string };
+export type AnalyseType = { text: string; model?: string };
 
 export type AIExerciseType = {
   title: string;
@@ -67,12 +67,12 @@ export type AIExerciseType = {
   education_level: EducationLevel;
   learning_outcome: LearningOutcome;
   duration: number;
-  language : string;
+  language: string;
   model: string;
 };
 
-
-export type LOType = {  //outdate
+export type LOType = {
+  //outdate
   Topic: string;
   Level: number;
   Context: string;
@@ -109,4 +109,3 @@ export type SummerizerBody = {
   education_level: EducationLevel;
   learning_outcome: LearningOutcome;
 };
-

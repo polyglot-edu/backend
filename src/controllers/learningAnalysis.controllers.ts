@@ -581,11 +581,9 @@ export const calculateNodeTimeByUserId = async (
   try {
     const { userId, flowId, nodeId } = req.query;
     if (!userId || !flowId || !nodeId) {
-      return res
-        .status(400)
-        .json({
-          error: "Missing required parameters: userId, flowId, or nodeId",
-        });
+      return res.status(400).json({
+        error: "Missing required parameters: userId, flowId, or nodeId",
+      });
     }
 
     const actions = await Models.BaseActionModel.find({

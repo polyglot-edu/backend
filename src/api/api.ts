@@ -5,7 +5,7 @@ import {
   CorrectorType,
   LOType,
   MaterialType,
-  SummerizerBody,  
+  SummerizerBody,
 } from "../types/AIGenerativeTypes";
 
 export type aiAPIResponse = {
@@ -20,7 +20,7 @@ const AIAPIGeneration = axiosCreate.create({
     "Content-Type": "application/json",
     withCredentials: true,
     Access: "*",
-    'access-key': '7hXzB9w4r1'
+    "access-key": "7hXzB9w4r1",
   },
 });
 
@@ -61,9 +61,6 @@ export const API = {
   },
 
   corrector: (body: CorrectorType): Promise<AxiosResponse> => {
-    return AIAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/tasks/evaluate`,
-      body,
-    );
+    return AIAPIGeneration.post<{}, AxiosResponse, {}>(`/tasks/evaluate`, body);
   },
 };
