@@ -1,54 +1,112 @@
-export enum TypeOfExercise {
-  fill_in_the_blanks,
-  question,
-  choice,
-  conceptual,
-  practical,
+export enum EducationLevel {
+  ElementarySchool = "elementary school",
+  MiddleSchool = "middle school",
+  HighSchool = "high school",
+  College = "college",
+  Graduate = "graduate",
+  Professional = "professional",
 }
 
-export type AnalyseType = { material: string };
+export enum LearningOutcome {
+  RecallRecognize = "the ability to recall or recognize simple facts and definitions",
+  ExplainRelate = "the ability to explain concepts and principles, and recognize how different ideas are related",
+  ApplyKnowledge = "the ability to apply knowledge and perform operations in practical contexts",
+  SelfAssess = "the ability to assess your own understanding, identify gaps in knowledge, and strategize ways to close those gaps",
+  SynthesizeOrganize = "the ability to synthesize and organize concepts into a framework that allows for advanced problem-solving and prediction",
+  GenerateContribute = "the ability to generate new knowledge, challenge existing paradigms, and make significant contributions to the field",
+}
 
-export type LOType = {
+export enum QuestionType {
+  OpenQuestion = "open question",
+  ShortAnswerQuestion = "short answer question",
+  TrueOrFalse = "true or false",
+  FillInTheBlanks = "fill in the blanks",
+  Matching = "matching",
+  Ordering = "ordering",
+  MultipleChoice = "multiple choice",
+  MultipleSelect = "multiple select",
+  Coding = "coding",
+  Essay = "essay",
+  KnowledgeExposition = "knowledge exposition",
+  Debate = "debate",
+  Brainstorming = "brainstorming",
+  GroupDiscussion = "group discussion",
+  Simulation = "simulation",
+  InquiryBasedLearning = "inquiry based learning",
+  NonWrittenMaterialAnalysis = "non written material analysis",
+  NonWrittenMaterialProduction = "non written material production",
+  CaseStudyAnalysis = "case study analysis",
+  ProjectBasedLearning = "project based learning",
+  ProblemSolvingActivity = "problem solving activity",
+}
+
+export enum SummarizeStyle {
+  TopicSynthetic = "topic / synthetic",
+  StandardDescriptive = "standard descriptive",
+  Abstractive = "abstractive",
+  Extractive = "extractive",
+  ExplanatoryEvaluative = "explanatory and evaluative",
+  Informal = "informal",
+  StructuredInformative = "structured and informative",
+}
+
+export type Topic ={topic: string; explanation: string}
+
+export type LessonNodeAI = {
+  title: string;
+  learning_outcome: LearningOutcome;
+  topics: Topic[];
+}
+
+export type AnalyseType = { text: string, model?: string };
+
+export type AIExerciseType = {
+  title: string;
+  macro_subject: string;
+  topics: LessonNodeAI[];
+  education_level: EducationLevel;
+  learning_outcome: LearningOutcome;
+  duration: number;
+  language : string;
+  model: string;
+};
+
+
+export type LOType = {  //outdate
   Topic: string;
   Level: number;
   Context: string;
 };
 
 export type MaterialType = {
-  topic: string;
-  numberOfWords: number;
-  level: number;
-  learningObjective: string;
-};
-
-export type SummarizeType = {
-  material: string;
-  numberOfWords: number;
-  level: number;
-};
-
-export type AIExerciseType = {
-  macroSubject: string;
   title: string;
-  level: number; //0=primary_school, 1=middle_school, 2=high_school, 3=college, 4=academy
-  typeOfActivity: TypeOfExercise; //0=fill_in_the_blanks, 1=question, 2=choice, 3=conceptual, 4=practical
-  learningObjective?: string;
-  bloomLevel: number; //0=Remembering, 1=Understanding, 2=Applying, 3=Analyzing, 4=Evaluating, 5=Creating
+  macro_subject: string;
+  topics: LessonNodeAI[];
+  education_level: EducationLevel;
+  learning_outcome: LearningOutcome;
+  duration: number;
   language: string;
-  material: string;
-  correctAnswersNumber?: number;
-  distractorsNumber?: number;
-  easilyDiscardableDistractorsNumber?: number;
-  assignmentType: number; //0=theoretical, 1=code, 2=problem_resolution,
-  topic: string;
-  temperature: number;
+  model: string;
 };
 
 export type CorrectorType = {
-  question: string;
-  expectedAnswer: string;
+  macro_subject: string;
+  topic: string;
+  education_level: EducationLevel;
+  learning_outcome: LearningOutcome;
+  assignment: string;
   answer: string;
-  temperature: number;
+  solutions: string[];
+  type: QuestionType;
+  language: string;
+  model: string;
 };
 
-export type SummarizerBody = { lesson: string; noW: string; level: string };
+export type SummerizerBody = {
+  text: string;
+  model: string;
+  style: SummarizeStyle;
+  education_level: EducationLevel;
+  learning_outcome: LearningOutcome;
+};
+

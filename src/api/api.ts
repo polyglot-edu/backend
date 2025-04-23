@@ -5,7 +5,7 @@ import {
   CorrectorType,
   LOType,
   MaterialType,
-  SummarizeType,
+  SummerizerBody,  
 } from "../types/AIGenerativeTypes";
 
 export type aiAPIResponse = {
@@ -15,23 +15,19 @@ export type aiAPIResponse = {
 };
 
 const AIAPIGeneration = axiosCreate.create({
-  baseURL: "https://skapi.polyglot-edu.com",
+  baseURL: "http://131.114.22.98:8000",
   headers: {
     "Content-Type": "application/json",
     withCredentials: true,
     Access: "*",
-    ApiKey: process.env.APIKEY,
-    SetupModel:
-      '{"secretKey": "' +
-      process.env.SECRETKEY +
-      '","modelName": "GPT-4o-MINI","endpoint": "https://ai4edu.openai.azure.com/"}',
+    'access-key': '7hXzB9w4r1'
   },
 });
 
 export const API = {
   analyseMaterial: (body: AnalyseType): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/MaterialAnalyser/analyseMaterial`,
+      `/tasks/analyse_material`,
       body,
     );
   },
@@ -45,28 +41,28 @@ export const API = {
 
   generateMaterial: (body: MaterialType): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/MaterialGenerator/generatematerial`,
+      `/tasks/generate_material`,
       body,
     );
   },
 
-  summarize: (body: SummarizeType): Promise<AxiosResponse> => {
+  summarize: (body: SummerizerBody): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/Summarizer/summarize`,
+      `/tasks/summarize`,
       body,
     );
   },
 
   generateNewExercise: (body: AIExerciseType): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/ActivityGenerator/generateActivity`,
+      `/tasks/generate_activity`,
       body,
     );
   },
 
   corrector: (body: CorrectorType): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/Corrector/evaluate`,
+      `/tasks/evaluate`,
       body,
     );
   },
