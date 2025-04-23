@@ -22,6 +22,7 @@ export enum ExerciseType {
   CreateKeywordsListNode = "CreateKeywordsListNode",
   MemoriseKeywordsListNode = "MemoriseKeywordsListNode",
   SummaryNode = "SummaryNode",
+  ScanningNode = "ScanningNode",
   MindMapNode = "MindMapNode",
   ProblemSolvingNode = "ProblemSolvingNode",
   FindSolutionNode = "FindSolutionNode",

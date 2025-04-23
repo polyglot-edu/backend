@@ -137,6 +137,14 @@ export const SummaryNodeSchema = new mongoose.Schema(
   },
   options,
 );
+export const ScanningNodeSchema = new mongoose.Schema(
+  {
+    data: {
+      text: { type: String },
+    },
+  },
+  options,
+);
 
 export const MindMapNodeSchema = new mongoose.Schema(
   {
@@ -354,6 +362,11 @@ export const MemoriseKeywordsListNode = PolyglotNodeModel.discriminator(
 export const SummaryNode = PolyglotNodeModel.discriminator(
   "SummaryNode",
   SummaryNodeSchema,
+);
+
+export const ScanningNode = PolyglotNodeModel.discriminator(
+  "ScanningNode",
+  ScanningNodeSchema,
 );
 
 export const MindMapNode = PolyglotNodeModel.discriminator(
