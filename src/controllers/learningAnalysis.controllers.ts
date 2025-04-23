@@ -23,7 +23,6 @@ export const createAction = async (req: Request, res: Response) => {
     }
 
     let action: any; //Problema lasciare any?
-console.log('tutto ok')
     switch (actionType) {
       case "registration_to_WorkAdventure":
         const RegistrationToWorkAdventure = req.body;
@@ -106,7 +105,6 @@ console.log('tutto ok')
         break;
 
       case "open_node":
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         const OpenNode = req.body;
         if (!OpenNode.action.flowId || !OpenNode.action.nodeId || !OpenNode.action.activity) {
           return res.status(400).json({
@@ -118,7 +116,6 @@ console.log('tutto ok')
 
       case "close_node":
         const CloseNode = req.body;
-        console.log("bbbbbbbbbbbbbbbbbbbbbbbbbb")
         if (!CloseNode.action.flowId || !CloseNode.action.nodeId || !CloseNode.action.activity) {
           return res.status(400).json({
             error: "Missing fields for close_node: flowId, nodeId or activity.",
