@@ -5,6 +5,7 @@ import {
   CorrectorType,
   LOType,
   MaterialType,
+  OutdatedCorrectorType,
   SummerizerBody,
 } from "../types/AIGenerativeTypes";
 
@@ -21,6 +22,19 @@ const AIAPIGeneration = axiosCreate.create({
     withCredentials: true,
     Access: "*",
     "access-key": "7hXzB9w4r1",
+  },
+});
+const OutDatedAPIGeneration = axiosCreate.create({
+  baseURL: "https://skapi.polyglot-edu.com",
+  headers: {
+    "Content-Type": "application/json",
+    withCredentials: true,
+    Access: "*",
+    ApiKey: process.env.APIKEY,
+    SetupModel:
+      '{"secretKey": "' +
+      process.env.SECRETKEY +
+      '","modelName": "GPT-4o-MINI","endpoint": "https://ai4edu.openai.azure.com/"}',
   },
 });
 
@@ -60,7 +74,10 @@ export const API = {
     );
   },
 
-  corrector: (body: CorrectorType): Promise<AxiosResponse> => {
-    return AIAPIGeneration.post<{}, AxiosResponse, {}>(`/tasks/evaluate`, body);
+  corrector: (body: OutdatedCorrectorType): Promise<AxiosResponse> => {
+    return OutDatedAPIGeneration.post<{}, AxiosResponse, {}>(
+      `/Corrector/evaluate`,
+      body,
+    );
   },
 };

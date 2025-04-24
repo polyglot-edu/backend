@@ -101,6 +101,12 @@ export type CorrectorType = {
   language: string;
   model: string;
 };
+export type OutdatedCorrectorType = {
+  question: string;
+  expectedAnswer: string;
+  answer: string;
+  temperature: number;
+};
 
 export type SummerizerBody = {
   text: string;
