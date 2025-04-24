@@ -74,15 +74,15 @@ router
   .get(checkAuth, LearningDataController.calculateGradeMetrics);
 
 router
-  .route("/getGradeByUserId") 
+  .route("/getGradeByUserId")
   .get(checkAuth, LearningDataController.getGradeByUserId);
 
-router    
-  .route("/calcQuizMetrics")  //esempio: http://localhost:5000/api/learningAnalytics/calcQuizMetrics?flowId=flow1&nodeId=node3
+router
+  .route("/calcQuizMetrics") //esempio: http://localhost:5000/api/learningAnalytics/calcQuizMetrics?flowId=flow1&nodeId=node3
   .get(checkAuth, LearningDataController.calculateQuizMetrics);
 
-  router  
-  .route("/calcLPQuizMetrics")  //esempio: http://localhost:5000/api/learningAnalytics/calcLPQuizMetrics?flowId=flow1
+router
+  .route("/calcLPQuizMetrics") //esempio: http://localhost:5000/api/learningAnalytics/calcLPQuizMetrics?flowId=flow1
   .get(checkAuth, LearningDataController.calculateLPQuizMetrics);
 
 export default router;

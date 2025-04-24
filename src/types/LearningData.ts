@@ -242,8 +242,8 @@ export type GradeLPAction = BaseAction & {
   action: {
     flowId: string;
     grade: number;
-  }
-}
+  };
+};
 
 // Tipo unione per tutte le azioni possibili dell'utente
 export type UserAction =

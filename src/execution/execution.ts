@@ -17,6 +17,7 @@ import {
 import { AbstractAlgorithm, DistrubutionAlgorithm } from "./algo/base";
 import { nodeTypeExecution } from "./plugins/pluginMap";
 import { API } from "../api/api";
+import { EducationLevel, LearningOutcome } from "../types/AIGenerativeTypes";
 
 const mapType = {
   0: "OpenQuestionNode",
@@ -76,13 +77,16 @@ export class Execution {
       flowId: flowId,
       userId: userId ?? null,
       currentNodeId: currentNodeId,
-      username: username ?? 'guest',
+      username: username ?? "guest",
       execNodeInfo: {},
     } as ExecCtx;
   }
 
   // TODO: check if the first node is an abstract node
-  public getFirstExercise(username?: string, userId?: string): {
+  public getFirstExercise(
+    username?: string,
+    userId?: string,
+  ): {
     ctx: ExecCtx;
     node: PolyglotNodeValidation | null;
   } {
@@ -224,21 +228,15 @@ export class Execution {
           easilyDiscardableDistractorsNumber = 1;
         }
         const response = await API.generateNewExercise({
-          macroSubject: debtEdgeData.macroSubject,
-          level: debtEdgeData.level,
-          typeOfActivity: debtEdgeData.typeOfExercise,
-          bloomLevel: debtEdgeData.bloomLevel,
-          language: debtEdgeData.language,
-          material: debtEdgeData.material,
-          assignmentType: debtEdgeData.assignmentType,
-          temperature: 0.2,
-          title: debtEdgeData.title,
-          learningObjective: debtEdgeData.learningObjective,
-          topic: debtEdgeData.topic.Topic,
-          correctAnswersNumber: correctAnswersNumber,
-          distractorsNumber: distractorsNumber,
-          easilyDiscardableDistractorsNumber:
-            easilyDiscardableDistractorsNumber,
+          //fix aaaaaaaaaaaaaaaaaaaaaa
+          title: "",
+          macro_subject: "",
+          topics: [],
+          education_level: EducationLevel.ElementarySchool,
+          learning_outcome: LearningOutcome.RecallRecognize,
+          duration: 0,
+          language: "",
+          model: "",
         });
         let dataGen;
         switch (debtEdgeData.typeOfExercise) {

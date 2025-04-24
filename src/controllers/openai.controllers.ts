@@ -5,14 +5,6 @@ import {
   sendClassicPrompt,
 } from "../execution/prompts";
 import { genGraphChatGpt } from "../execution/generators";
-import {
-  AIExerciseType,
-  AnalyseType,
-  CorrectorType,
-  LOType,
-  MaterialType,
-  SummarizeType,
-} from "../types/AIGenerativeTypes";
 import { AxiosResponse } from "axios";
 import { API } from "../api/api";
 

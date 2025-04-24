@@ -44,9 +44,7 @@ export interface CloseLPInfoActionDocument
 export interface SearchForLPActionDocument
   extends Types.SearchForLPAction,
     Document {}
-export interface ShowLPActionDocument
-  extends Types.ShowLPAction,
-    Document {}
+export interface ShowLPActionDocument extends Types.ShowLPAction, Document {}
 export interface SelectLPActionDocument
   extends Types.SelectLPAction,
     Document {}

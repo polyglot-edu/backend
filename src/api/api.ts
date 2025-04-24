@@ -5,7 +5,8 @@ import {
   CorrectorType,
   LOType,
   MaterialType,
-  SummarizeType,
+  OutdatedCorrectorType,
+  SummerizerBody,
 } from "../types/AIGenerativeTypes";
 
 export type aiAPIResponse = {
@@ -15,6 +16,15 @@ export type aiAPIResponse = {
 };
 
 const AIAPIGeneration = axiosCreate.create({
+  baseURL: "http://131.114.22.98:8000",
+  headers: {
+    "Content-Type": "application/json",
+    withCredentials: true,
+    Access: "*",
+    "access-key": "7hXzB9w4r1",
+  },
+});
+const OutDatedAPIGeneration = axiosCreate.create({
   baseURL: "https://skapi.polyglot-edu.com",
   headers: {
     "Content-Type": "application/json",
@@ -31,7 +41,7 @@ const AIAPIGeneration = axiosCreate.create({
 export const API = {
   analyseMaterial: (body: AnalyseType): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/MaterialAnalyser/analyseMaterial`,
+      `/tasks/analyse_material`,
       body,
     );
   },
@@ -45,27 +55,27 @@ export const API = {
 
   generateMaterial: (body: MaterialType): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/MaterialGenerator/generatematerial`,
+      `/tasks/generate_material`,
       body,
     );
   },
 
-  summarize: (body: SummarizeType): Promise<AxiosResponse> => {
+  summarize: (body: SummerizerBody): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/Summarizer/summarize`,
+      `/tasks/summarize`,
       body,
     );
   },
 
   generateNewExercise: (body: AIExerciseType): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/ActivityGenerator/generateActivity`,
+      `/tasks/generate_activity`,
       body,
     );
   },
 
-  corrector: (body: CorrectorType): Promise<AxiosResponse> => {
-    return AIAPIGeneration.post<{}, AxiosResponse, {}>(
+  corrector: (body: OutdatedCorrectorType): Promise<AxiosResponse> => {
+    return OutDatedAPIGeneration.post<{}, AxiosResponse, {}>(
       `/Corrector/evaluate`,
       body,
     );
