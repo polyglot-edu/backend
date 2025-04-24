@@ -162,19 +162,6 @@ export function webAppExecution(node: PolyglotNode, ctx: string) {
     };
   }
 
-  const challengeSetup: ChallengeSetup[] = [];
-
-  const challengeContent: ChallengeContent[] = [
-    {
-      type: "markdown",
-      content:
-        "https://polyglot-webapp.polyglot-edu.com/?&ctx=" +
-        ctx +
-        "&rememberTipologyQuiz=" +
-        node.type +
-        " !",
-    },
-  ];
   let webAppSpecifics: webAppSpecifics = {
     webAppSetup: [],
     webAppContent: { content: "" },
@@ -199,8 +186,6 @@ export function webAppExecution(node: PolyglotNode, ctx: string) {
   return {
     ...node,
     runtimeData: {
-      challengeSetup,
-      challengeContent,
       webAppSpecifics,
     },
   };

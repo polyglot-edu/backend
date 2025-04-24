@@ -179,7 +179,7 @@ export function vsCodeExecution(node: PolyglotNode) {
     node?.type == "TrueFalseNode" ||
     node?.type == "WatchVideoNode" ||
     node?.type == "SummaryNode" ||
-    node?.type == "OpenQuestionNode"
+    node?.type == "OpenQuestionNode" || node?.type == "ScanningNode"
   )
     vsCodeSpecifics = notImplementedNodeExecution(node);
 

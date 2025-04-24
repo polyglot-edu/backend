@@ -15,16 +15,34 @@ export enum ZoneId {
 }
 
 export enum ExerciseType {
-  OpenEndedQuestion,
-  CloseEndedQuestion,
-  MultipleChoiceQuestion,
-  TrueFalseQuestion,
+  LessonNode = "lessonNode",
+  LessonTextNode = "lessonTextNode",
+  WatchVideoNode = "WatchVideoNode",
+  ReadMaterialNode = "ReadMaterialNode",
+  CreateKeywordsListNode = "CreateKeywordsListNode",
+  MemoriseKeywordsListNode = "MemoriseKeywordsListNode",
+  SummaryNode = "SummaryNode",
+  ScanningNode = "ScanningNode",
+  MindMapNode = "MindMapNode",
+  ProblemSolvingNode = "ProblemSolvingNode",
+  FindSolutionNode = "FindSolutionNode",
+  CloseEndedQuestionNode = "closeEndedQuestionNode",
+  OpenQuestionNode = "OpenQuestionNode",
+  CodingQuestionNode = "codingQuestionNode",
+  PromptEngineeringNode = "PromptEngineeringNode",
+  MultipleChoiceQuestionNode = "multipleChoiceQuestionNode",
+  TrueFalseNode = "TrueFalseNode",
+  ImageEvaluationNode = "ImageEvaluationNode",
+  CollaborativeModelingNode = "CollaborativeModelingNode",
+  UMLModelingNode = "UMLModelingNode",
+  CasesEvaluationNode = "CasesEvaluationNode",
+  InnovationPitchNode = "InnovationPitchNode",
 }
 
 export enum Platform {
   PolyGloT,
-  VirtualStudio,
-  Papyrus,
+  VisualStudio,
+  PapyrusWeb,
   WebApp,
   WorkAdventure,
 }
@@ -35,23 +53,28 @@ export enum UserRole {
   Tutor,
 }
 
+export enum Activity {
+  OpenEndedQuestion,
+  MultipleChoiceQuestion,
+}
+
 // Tipo base di tutte le azioni
 export type BaseAction = {
   timestamp: Date;
   userId: string;
   actionType: String;
   zoneId: ZoneId;
-  platform: Platform; //meglio modificare in "tool"?
+  platform: Platform;
 };
 
-// Azione di registrazione a WorkAdventure
+// Registration to WorkAdventure
 export type RegistrationToWorkAdventureAction = BaseAction & {
   action: {
     userRole: UserRole;
   };
 };
 
-// Azioni di LogIn e LogOut to WorkAdventure
+// LogIn and LogOut to WorkAdventure
 export type LogInToWorkAdventureAction = BaseAction & {
   action: {
     userRole: UserRole;
@@ -64,7 +87,7 @@ export type LogOutToWorkAdventureAction = BaseAction & {
   };
 };
 
-// Azioni di LogIn e LogOut to PoliGloT
+// LogIn and LogOut to PoliGloT
 export type LogInToPolyGloTAction = BaseAction & {
   action: {
     userRole: UserRole;
@@ -77,39 +100,38 @@ export type LogOutToPolyGloTAction = BaseAction & {
   };
 };
 
-// Azioni di apertura e chiusura di un tool
+// Opening and Closing a tool
 export type OpenToolAction = BaseAction & {
   action: {
-    // ?
+    //anything to add?
   };
 };
 
 export type CloseToolAction = BaseAction & {
   action: {
-    // ?
+    //anything to add?
   };
 };
 
-// Azione di apertura di un node di appendimento (inizio esecuzione del node)
+// Opening a non completed learning node for the first time in a session (starts execution of the node)
 export type OpenNodeAction = BaseAction & {
   action: {
     flowId: string;
     nodeId: string;
-    activity: string; //DA DISCUTERE!
+    activity: string;
   };
 };
 
-// Azione di chiusura di un node di appendimento (termine esecuzione del node)
+// Closing a non completed learning node (stop execution of the node) -> This happens when a node gets closed before completing its activity
 export type CloseNodeAction = BaseAction & {
-  //Quando avviene questa azione? Ad ogni cambio pagina o solo quando viene chiuso il nodo e basta?
   action: {
     flowId: string;
     nodeId: string;
-    activity: string; //DA DISCUTERE!
+    activity: string;
   };
 };
 
-// Azione di passaggio al node successivo/precedente durante un'attività di learning.
+// Moving to previous/next node
 export type ChangeNodeAction = BaseAction & {
   action: {
     flowId: string;
@@ -118,21 +140,33 @@ export type ChangeNodeAction = BaseAction & {
   };
 };
 
-//Apertura schermata di info aggiuntive nella selezione LP
+/* Example of how it works, given Node1 a node where some information are given to the student, and Node2 a node where the user is asked to complete and activity. Node2 is the last node of the flow.
+  1) User starts a new learning flow, opens first node for the first time --> openNodeAction of Node1 is registered
+  2) User completes Node1's activity, then goes to the next node --> changeNodeAction from Node1 to Node2 is registered, then openNodeAction of Node2 is registered too 
+  3) User goes back to Node1 to check something before completing the activity in Node2 --> changeNodeAction from Node2 to Node1 is registered, nothing else
+    By doing this, time spent in Node1 after the change from Node2 is considered part of the time needed to complete the activity in Node2
+  4) User returns to Node2 to complete the activity --> changeNodeAction from Node1 to Node2, nothing else
+  5) User stops the execution of the Node2 (closes browser/window/flow execution) --> closeNodeAction of Node2 is registered
+  6) After some time but in the same login session, user re-opens the learning flow (starting a new session of flow execution) and is sent back to Node2 --> openNodeAction of Node2 is registered, since this is a new session of flow execution
+  7) User goes back to review Node1 --> changeNodeAction from Node2 to Node1 is registered, no openNodeAction of Node1 since it has been already completed in another session
+  8) User goes to Node2, completes correctly the activity and closes the execution of the flow, since there are no more nodes in the flow --> changeNodeAction from Node1 to Node2 is registered, and then a closeNode is also registered
+  */
+
+// Opening the "More info" page of a LearningPath in the LP selection page
 export type OpenLPInfoAction = BaseAction & {
   action: {
     flowId: string;
   };
 };
 
-// Chiusura schermata di info aggiuntive riguardo un LP (serve?)
+// Closing the "More info" page of a LearningPath in the LP selection page (Do we need this?)
 export type CloseLPInfoAction = BaseAction & {
   action: {
     flowId: string;
   };
 };
 
-// Azione di ricerca di un LearningPath (LP)
+// Searching for LearningPaths in the LP selection page
 export type SearchForLPAction = BaseAction & {
   action: {
     queryId: string;
@@ -140,7 +174,7 @@ export type SearchForLPAction = BaseAction & {
   };
 };
 
-// Azione di mostrare i risultati di una ricerca di LP
+// Obtaining the results after a search for LearningPaths in the LP selection page
 export type ShowLPAction = BaseAction & {
   action: {
     queryId: string;
@@ -148,29 +182,28 @@ export type ShowLPAction = BaseAction & {
   };
 };
 
-// Azioni comuni della pagina di selezione del Learning Path (LP)
-// Azione di selezione di un LP
+// Selection of a LearningPath
 export type SelectLPAction = BaseAction & {
   action: {
     flowId: string;
   };
 };
 
-// Azione di rimozione di una selezione
+// Removal of the selection of a LearningPath
 export type RemoveLPSelectionAction = BaseAction & {
   action: {
     flowId: string;
   };
 };
 
-//Azione di creazione LP
+// Creation of a LP
 export type CreateLPAction = BaseAction & {
   action: {
     flowId: string;
   };
 };
 
-//Azione di modifica LP
+// Modification of a LP
 export type ModifyLPAction = BaseAction & {
   action: {
     flowId: string;
@@ -178,7 +211,7 @@ export type ModifyLPAction = BaseAction & {
   };
 };
 
-//Azione di eliminazione LP
+// Elimination of a LP
 export type DeleteLPAction = BaseAction & {
   action: {
     flowId: string;
@@ -186,20 +219,28 @@ export type DeleteLPAction = BaseAction & {
   };
 };
 
-// Azione di invio della risposta fornita
+// Submission of the answer to a node's activity
 export type SubmitAnswerAction = BaseAction & {
   action: {
     flowId: string;
     nodeId: string;
     exerciseType: ExerciseType;
     answer: string;
-    result: string; //boolean? enum{"correct","wrong"}?
+    result: string; //boolean? enum{"correct","wrong"}? any? -> Da rendere boolean e fix negli altri file
   };
 };
 
-export type GradeAction = BaseAction & {
+// Completion of a LearningPath
+export type CompleteLPAction = BaseAction & {
   action: {
-    flow: string;
+    flowId: string;
+  };
+};
+
+// Evaluation of a LP after its completion
+export type GradeLPAction = BaseAction & {
+  action: {
+    flowId: string;
     grade: number;
   };
 };
@@ -226,4 +267,5 @@ export type UserAction =
   | ModifyLPAction
   | DeleteLPAction
   | SubmitAnswerAction
-  | GradeAction;
+  | GradeLPAction
+  | CompleteLPAction;

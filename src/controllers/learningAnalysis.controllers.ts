@@ -13,7 +13,6 @@ export const createAction = async (req: Request, res: Response) => {
     if (
       !req.body.timestamp ||
       !req.body.userId ||
-      !req.body.actionType ||
       !req.body.zoneId ||
       !req.body.platform
     ) {
@@ -24,7 +23,6 @@ export const createAction = async (req: Request, res: Response) => {
     }
 
     let action: any; //Problema lasciare any?
-
     switch (actionType) {
       case "registration_to_WorkAdventure":
         const RegistrationToWorkAdventure = req.body;
@@ -108,9 +106,9 @@ export const createAction = async (req: Request, res: Response) => {
 
       case "open_node":
         const OpenNode = req.body;
-        if (!OpenNode.action.flowId || !OpenNode.action.nodeId) {
+        if (!OpenNode.action.flowId || !OpenNode.action.nodeId || !OpenNode.action.activity) {
           return res.status(400).json({
-            error: "Missing fields for open_node: flowId or nodeId.",
+            error: "Missing fields for open_node: flowId, nodeId or activity.",
           });
         }
         action = await Models.OpenNodeActionModel.create(OpenNode);
@@ -118,9 +116,9 @@ export const createAction = async (req: Request, res: Response) => {
 
       case "close_node":
         const CloseNode = req.body;
-        if (!CloseNode.action.flowId || !CloseNode.action.nodeId) {
+        if (!CloseNode.action.flowId || !CloseNode.action.nodeId || !CloseNode.action.activity) {
           return res.status(400).json({
-            error: "Missing fields for close_node: flowId or nodeId.",
+            error: "Missing fields for close_node: flowId, nodeId or activity.",
           });
         }
         action = await Models.CloseNodeActionModel.create(CloseNode);
@@ -256,8 +254,7 @@ export const createAction = async (req: Request, res: Response) => {
             error: "Missing fields for GradeAction: flowId or grade.",
           });
         }
-
-        action = await Models.GradeActionModel.create(GradeLP);
+        action = await Models.GradeLPActionModel.create(GradeLP);
 
         //update LP grade
         flowGradeUpdate(GradeLP.action.flowId);
