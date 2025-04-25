@@ -29,6 +29,7 @@ app.use(
       // TODO: check domain cors in production env
       return callback(null, true);
     },
+    credentials: true,
   }),
 );
 
