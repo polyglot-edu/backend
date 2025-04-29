@@ -261,7 +261,7 @@ export const createAction = async (req: Request, res: Response) => {
         action = await Models.GradeLPActionModel.create(GradeLP);
 
         //update LP grade
-        //flowGradeUpdate(GradeLP.action.flowId) -> Commentato perchè mi da problemi quando creo nuove action di tipo gradeLPAction!
+        flowGradeUpdate(GradeLP.action.flowId) //-> Commentato perchè mi da problemi quando creo nuove action di tipo gradeLPAction!
 
         break;
 
