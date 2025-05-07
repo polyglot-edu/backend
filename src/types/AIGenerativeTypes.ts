@@ -101,6 +101,7 @@ export type CorrectorType = {
   language: string;
   model: string;
 };
+
 export type OutdatedCorrectorType = {
   question: string;
   expectedAnswer: string;
@@ -114,4 +115,15 @@ export type SummerizerBody = {
   style: SummarizeStyle;
   education_level: EducationLevel;
   learning_outcome: LearningOutcome;
+};
+
+export type AIPlanLesson = {
+  topics: Topic[]; 
+  learning_outcome: LearningOutcome;
+  language: string;
+  macro_subject: string;
+  title: string;
+  education_level: EducationLevel;
+  context: string;
+  model: string;
 };

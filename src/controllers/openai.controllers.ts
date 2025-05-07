@@ -104,6 +104,16 @@ export async function activityGenerator(req: Request<any, any>, res: Response) {
   }
 }
 
+export async function planLesson(req: Request<any, any>, res: Response) {
+  try {
+    const response = await API.planLesson(req.body);
+    return res.status(200).json(response.data);
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json({ error: error });
+  }
+}
+
 export async function corrector(req: Request<any, any>, res: Response) {
   try {
     const response = await API.corrector(req.body);

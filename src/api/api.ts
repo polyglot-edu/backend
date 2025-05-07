@@ -1,6 +1,7 @@
 import axiosCreate, { AxiosResponse } from "axios";
 import {
   AIExerciseType,
+  AIPlanLesson,
   AnalyseType,
   CorrectorType,
   LOType,
@@ -70,6 +71,13 @@ export const API = {
   generateNewExercise: (body: AIExerciseType): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
       `/tasks/generate_activity`,
+      body,
+    );
+  },
+
+  planLesson: (body: AIPlanLesson): Promise<AxiosResponse> => {
+    return AIAPIGeneration.post<{}, AxiosResponse, {}>(
+      `/tasks/plan_lesson`,
       body,
     );
   },
