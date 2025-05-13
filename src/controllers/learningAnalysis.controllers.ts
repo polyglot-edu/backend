@@ -106,7 +106,11 @@ export const createAction = async (req: Request, res: Response) => {
 
       case "open_node":
         const OpenNode = req.body;
-        if (!OpenNode.action.flowId || !OpenNode.action.nodeId || !OpenNode.action.activity) {
+        if (
+          !OpenNode.action.flowId ||
+          !OpenNode.action.nodeId ||
+          !OpenNode.action.activity
+        ) {
           return res.status(400).json({
             error: "Missing fields for open_node: flowId, nodeId or activity.",
           });
@@ -116,7 +120,11 @@ export const createAction = async (req: Request, res: Response) => {
 
       case "close_node":
         const CloseNode = req.body;
-        if (!CloseNode.action.flowId || !CloseNode.action.nodeId || !CloseNode.action.activity) {
+        if (
+          !CloseNode.action.flowId ||
+          !CloseNode.action.nodeId ||
+          !CloseNode.action.activity
+        ) {
           return res.status(400).json({
             error: "Missing fields for close_node: flowId, nodeId or activity.",
           });

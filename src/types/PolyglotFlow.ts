@@ -21,9 +21,9 @@ export type PolyglotFlowInfo = {
   sourceMaterial?: string;
   learning_outcome?: LearningOutcome;
   topicsAI?: Topic[];
-  language?: string,
+  language?: string;
   macro_subject?: string;
-  education_level?: EducationLevel;  
+  education_level?: EducationLevel;
   context?: string;
   overallGrade?: number;
   executedTimes?: number;

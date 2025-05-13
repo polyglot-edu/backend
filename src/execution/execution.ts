@@ -159,6 +159,7 @@ export class Execution {
       return { ctx: this.ctx, node: null };
     }
     // caso in cui sto eseguendo un nodo astratto
+    /*outdated for new abstract node concept
     if (currentNode.type === "abstractNode") {
       // TODO: refactor this
       this.abstractAlgo = getAbstractAlgorithm(
@@ -191,7 +192,7 @@ export class Execution {
 
       this.ctx.execNodeInfo = execNodeInfo;
       return { ctx: this.ctx, node: node };
-    }
+    }*/
     const outgoingEdges = this.flow.edges.filter(
       (edge) => edge.reactFlow.source === currentNode.reactFlow.id,
     );
