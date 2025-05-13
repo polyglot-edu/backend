@@ -1,4 +1,5 @@
 import { PolyglotEdge, PolyglotNode } from ".";
+import { EducationLevel, LearningOutcome, Topic } from "./AIGenerativeTypes";
 
 export type PolyglotExecutionData = {
   algo: string;
@@ -17,6 +18,13 @@ export type PolyglotFlowInfo = {
   topics: string[];
   tags: string[];
   execution: PolyglotExecutionData;
+  sourceMaterial?: string;
+  learning_outcome?: LearningOutcome;
+  topicsAI?: Topic[];
+  language?: string,
+  macro_subject?: string;
+  education_level?: EducationLevel;  
+  context?: string;
   overallGrade?: number;
   executedTimes?: number;
 };

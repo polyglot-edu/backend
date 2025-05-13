@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import validator from "validator";
 import { PolyglotNode } from "../types";
 import { conceptMapSchema } from "./concept.models";
+import { LearningOutcome, Topic } from "../types/AIGenerativeTypes";
 
 const options = { discriminatorKey: "type" };
 
@@ -62,10 +63,13 @@ export const nodeSchema = new mongoose.Schema<PolyglotNode>(
 
 export const abstractNodeSchema = new mongoose.Schema(
   {
-    data: {
-      target: { type: String },
-      conceptmap: { type: conceptMapSchema },
-      execution: { type: {} },
+    data: {useFlowData: { type: Boolean},
+      sourceMaterial: { type: String},
+      learning_outcome: { type: String, enum: Object.values(LearningOutcome) }, 
+      education_level: { type: String },
+      topicsAI: [{ type: { topic: String, explanation: String } }],
+      language: { type: String, required: true },
+      macro_subject: { type: String, required: true },
     },
   },
   options,
