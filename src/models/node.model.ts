@@ -63,13 +63,16 @@ export const nodeSchema = new mongoose.Schema<PolyglotNode>(
 
 export const abstractNodeSchema = new mongoose.Schema(
   {
-    data: {useFlowData: { type: Boolean},
-      sourceMaterial: { type: String},
-      learning_outcome: { type: String, enum: Object.values(LearningOutcome) }, 
+    data: {
+      useFlowData: { type: Boolean },
+      sourceMaterial: { type: String },
+      learning_outcome: { type: String, enum: Object.values(LearningOutcome) },
       education_level: { type: String },
       topicsAI: [{ type: { topic: String, explanation: String } }],
       language: { type: String, required: true },
       macro_subject: { type: String, required: true },
+      title: { type: String, required: true },
+      context: { type: String, required: false },
     },
   },
   options,
