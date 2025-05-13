@@ -118,7 +118,7 @@ export type SummerizerBody = {
 };
 
 export type AIPlanLesson = {
-  topics: Topic[]; 
+  topics: Topic[];
   learning_outcome: LearningOutcome;
   language: string;
   macro_subject: string;
