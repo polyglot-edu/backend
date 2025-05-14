@@ -1,4 +1,4 @@
-import { Date } from "mongoose";
+//import { Date } from "mongoose";
 
 export enum ZoneId {
   FreeZone = "FreeZone",
@@ -15,10 +15,13 @@ export enum ZoneId {
 }
 
 export enum ExerciseType {
-  OpenEndedQuestion = "OpenEndedQuestion",
-  CloseEndedQuestion = "CloseEndedQuestion",
-  MultipleChoiceQuestion = "MultipleChoiceQuestion",
-  TrueFalseQuestion = "TrueFalseQuestion",
+  FillInQuestion = "fill-in",
+  LongFillInQuestion = "long-fill-in",
+  MultipleChoiceQuestion = "choice",
+  TrueFalseQuestion = "true-false",
+  NumericQuestion = "numeric",
+  Performance = "performance",
+  OtherQuestion = "other",
 }
 
 export enum Platform { // Da cambiare in PlatformType per averli tutti uguali?
