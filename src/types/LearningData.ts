@@ -14,6 +14,122 @@ export enum ZoneId {
   VisualStudioZone = "VisualStudioZone",
 }
 
+export const LearningTypeMap = [ //da usare per fare da intramezzo tra il nostro std e quello xapi, come traduttore
+  {
+    nodeType: 'OpenQuestionNode',
+    activity: 'Exercise', //Da aggiungere anche alle successive
+    integrated: true,
+    daxAPIsupported: 'long-fill-in', //Da fare anche per il resto!
+  },
+  {
+    key: 'short answer question',
+    text: 'Short Answer Question',
+    nodeType: 'closeEndedQuestionNode',
+    integrated: true,
+  },
+  {
+    key: 'true or false',
+    text: 'True or False',
+    nodeType: 'TrueFalseNode',
+    integrated: true,
+  },
+  {
+    key: 'fill in the blanks',
+    text: 'Fill in the Blanks',
+    nodeType: 'activity',
+    integrated: false,
+  },
+  {
+    key: 'matching',
+    text: 'Matching',
+    nodeType: 'activity',
+    integrated: false,
+  },
+  {
+    key: 'ordering',
+    text: 'Ordering',
+    nodeType: 'activity',
+    integrated: false,
+  },
+  {
+    key: 'multiple choice',
+    text: 'Multiple Choice',
+    nodeType: 'multipleChoiceQuestionNode',
+    integrated: true,
+  },
+  {
+    key: 'multiple select',
+    text: 'Multiple Select',
+    nodeType: 'activity',
+    integrated: false,
+  },
+  { key: 'coding', text: 'Coding', nodeType: 'activity', integrated: false },
+  { key: 'essay', text: 'Essay', nodeType: 'activity', integrated: false },
+  {
+    key: 'knowledge exposition',
+    text: 'Knowledge Exposition',
+    nodeType: 'discussion',
+    integrated: false,
+  },
+  { key: 'debate', text: 'Debate', nodeType: 'discussion', integrated: false },
+  {
+    key: 'brainstorming',
+    text: 'Brainstorming',
+    nodeType: 'discussion',
+    integrated: false,
+  },
+  {
+    key: 'group discussion',
+    text: 'Group Discussion',
+    nodeType: 'discussion',
+    integrated: false,
+  },
+  {
+    key: 'simulation',
+    text: 'Simulation',
+    nodeType: 'experiential',
+    integrated: false,
+  },
+  {
+    key: 'inquiry based learning',
+    text: 'Inquiry-Based Learning',
+    nodeType: 'experiential',
+    integrated: false,
+  },
+  {
+    key: 'non written material analysis',
+    text: 'Non-Written Material Analysis',
+    nodeType: 'experiential',
+    integrated: false,
+  },
+  {
+    key: 'non written material production',
+    text: 'Non-Written Material Production',
+    nodeType: 'experiential',
+    integrated: false,
+  },
+  {
+    key: 'case study analysis',
+    text: 'Case Study Analysis',
+    nodeType: 'project',
+    integrated: false,
+  },
+  {
+    key: 'project based learning',
+    text: 'Project-Based Learning',
+    nodeType: 'project',
+    integrated: false,
+  },
+  {
+    key: 'problem solving activity',
+    text: 'Problem Solving Activity',
+    nodeType: 'project',
+    integrated: false,
+  },
+];
+
+// Per conversione: const typeNode = LearningTypeMap.find((type) => type.daxAPIsupported== response.data.type)?.nodeType
+
 export enum ExerciseType {
   FillInQuestion = "fill-in",
   LongFillInQuestion = "long-fill-in",
@@ -22,6 +138,29 @@ export enum ExerciseType {
   NumericQuestion = "numeric",
   Performance = "performance",
   OtherQuestion = "other",
+
+  LessonNode = "lessonNode",
+  LessonTextNode = "lessonTextNode",
+  WatchVideoNode = "WatchVideoNode",
+  ReadMaterialNode = "ReadMaterialNode",
+  CreateKeywordsListNode = "CreateKeywordsListNode",
+  MemoriseKeywordsListNode = "MemoriseKeywordsListNode",
+  SummaryNode = "SummaryNode",
+  ScanningNode = "ScanningNode",
+  MindMapNode = "MindMapNode",
+  ProblemSolvingNode = "ProblemSolvingNode",
+  FindSolutionNode = "FindSolutionNode",
+  CloseEndedQuestionNode = "closeEndedQuestionNode",
+  OpenQuestionNode = "OpenQuestionNode",
+  CodingQuestionNode = "codingQuestionNode",
+  PromptEngineeringNode = "PromptEngineeringNode",
+  MultipleChoiceQuestionNode = "multipleChoiceQuestionNode",
+  TrueFalseNode = "TrueFalseNode",
+  ImageEvaluationNode = "ImageEvaluationNode",
+  CollaborativeModelingNode = "CollaborativeModelingNode",
+  UMLModelingNode = "UMLModelingNode",
+  CasesEvaluationNode = "CasesEvaluationNode",
+  InnovationPitchNode = "InnovationPitchNode",
 }
 
 export enum Platform { // Da cambiare in PlatformType per averli tutti uguali?
@@ -38,10 +177,10 @@ export enum UserRole {
   Tutor = "Tutor",
 }
 
-export enum Activity {  //To discuss and to implement! -> Da cambiare in ActivityType per averli tutti uguali?
-  OpenEndedQuestion = "OpenEndedQuestion",
-  MultipleChoiceQuestion = "MultipleChoiceQuestion",
+export enum Activity {  //To discuss and to implement! -> Da cambiare in ActivityType per averli tutti uguali? -> DA PRENDERE FACENDO IL MAP.FIND ECC
   Exercise = "Exercise",
+  Text = "Text",
+  Video = "Video",
   Other = "Other",
 }
 
@@ -90,7 +229,7 @@ export type LogOutToPolyGloTAction = BaseAction & {
 // Opening and Closing a tool
 export type OpenToolAction = BaseAction & {
   action: {
-    //anything to add?
+    //anything to add? -> Fare enum di Tool e inserire come dato il tool aperto può essere un'idea?
   };
 };
 
