@@ -2,8 +2,9 @@ import { UserAction } from "../../types/LearningData";
 import * as ActionTypes from "../../types/LearningData";
 import { XAPIStatement } from "./XAPITypes";
 
-import { convertSubmitAnswerAction } from "./convertFunctions/convertSubmitAnswerAction";
-import { convertCompleteLPAction } from "./convertFunctions/convertCompleteLPAction";
+import { convertSubmitAnswerAction } from "./convertActionFunctions/convertSubmitAnswerAction";
+import { convertCompleteLPAction } from "./convertActionFunctions/convertCompleteLPAction";
+import { PolyglotNode } from "../../types";
 // altri import...
 
 export function convertToXAPI(action: UserAction): XAPIStatement | null {
@@ -21,8 +22,8 @@ export function convertToXAPI(action: UserAction): XAPIStatement | null {
 
 /* ACTIONS TO CONVERT
 HIGH PRIO
-- SubmitAnswerAction DONE
-- CompleteLPAction
+- SubmitAnswerAction          TO FIX
+- CompleteLPAction            DONE
 - LogIn / LogOutToPlyGloT
 - Open / CloseActivityAction
 MID PRIO
@@ -30,3 +31,54 @@ MID PRIO
 - GradeLPAction 
 
 */
+
+export const dataFactory: Record<string, (values: PolyglotNode) => any> = { //dai nodo e ritorna struttura dati come l'abbiamo fatto noi, da spostare in submit
+  OpenQuestionNode: (values) => ({
+    question: values.data.question,
+    material: values.data.material,
+    possibleAnswer: values.data.possibleAnswer,
+  }),
+  closeEndedQuestionNode: (values) => ({
+    question: values.assignment + ' ' + values.plus,
+    correctAnswers: values.solutions,
+    isAnswerCorrect: [],
+  }),
+  TrueFalseNode: (values) => {
+    const solutions = values.solutions.map((s) => {
+      const splitIndex = s.indexOf('. ');
+      return splitIndex !== -1 ? s.slice(splitIndex + 2) : s;
+    });
+    const answers = [
+      ...solutions,
+      ...values.distractors,
+      ...values.easily_discardable_distractors,
+    ].filter((statement) => statement !== 'empty');
+    const shuffleAnswers = shuffleArray(answers);
+    const isAnswerCorrect = new Array(shuffleAnswers.length).fill(false);
+    shuffleAnswers.forEach((value, index) => {
+      if (values.solutions.includes(value)) isAnswerCorrect[index] = true;
+    });
+    return {
+      question: values.assignment,
+      choices: shuffleAnswers,
+      isChoiceCorrect: isAnswerCorrect,
+    };
+  },
+  multipleChoiceQuestionNode: (values) => {
+    const answers = [
+      ...values.solutions,
+      ...values.distractors,
+      ...values.easily_discardable_distractors,
+    ].filter((statement) => statement !== 'empty');
+    const shuffleAnswers = shuffleArray(answers);
+    const isAnswerCorrect = new Array(shuffleAnswers.length).fill(false);
+    shuffleAnswers.forEach((value, index) => {
+      if (values.solutions.includes(value)) isAnswerCorrect[index] = true;
+    });
+    return {
+      question: values.assignment,
+      choices: shuffleAnswers,
+      isChoiceCorrect: isAnswerCorrect,
+    };
+  },
+};
