@@ -5,14 +5,6 @@ import {
   sendClassicPrompt,
 } from "../execution/prompts";
 import { genGraphChatGpt } from "../execution/generators";
-import {
-  AIExerciseType,
-  AnalyseType,
-  CorrectorType,
-  LOType,
-  MaterialType,
-  SummarizeType,
-} from "../types/AIGenerativeTypes";
 import { AxiosResponse } from "axios";
 import { API } from "../api/api";
 
@@ -105,6 +97,16 @@ export async function summarize(req: Request<any, any>, res: Response) {
 export async function activityGenerator(req: Request<any, any>, res: Response) {
   try {
     const response = await API.generateNewExercise(req.body);
+    return res.status(200).json(response.data);
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json({ error: error });
+  }
+}
+
+export async function planLesson(req: Request<any, any>, res: Response) {
+  try {
+    const response = await API.planLesson(req.body);
     return res.status(200).json(response.data);
   } catch (error: any) {
     console.error(error);

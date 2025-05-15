@@ -66,25 +66,25 @@ export async function getFlowById(
     const flow = await PolyglotFlowModel.findById(req.params.id)
       .populate("nodes")
       .populate("edges");
-      if (!flow) {
-        return res.status(404).send();
+    if (!flow) {
+      return res.status(404).send();
+    }
+    //filter function for nodes
+    let seen: string[] = ["default"];
+    const filteredNodes = flow.nodes.filter((node) => {
+      if (seen.includes(node._id)) {
+        console.log("catch");
+        return false;
+      } else {
+        seen.push(node._id);
+        return true;
       }
-      //filter function for nodes
-      let seen: string[]=['default'];
-      const filteredNodes=flow.nodes.filter((node) => {
-          
-          if (seen.includes(node._id)){
-            console.log("catch"); return false;}
-          else {
-            seen.push(node._id);
-            return true;
-          }
-        });
-        flow.nodes=filteredNodes;
-      if (!flow) {
-        return res.status(404).send();
-      }
-      return res.status(200).send(flow);
+    });
+    flow.nodes = filteredNodes;
+    if (!flow) {
+      return res.status(404).send();
+    }
+    return res.status(200).send(flow);
   } catch (err: any) {
     return res.status(500).send(err);
   }
@@ -180,29 +180,33 @@ export async function getFlowList(
     if (me) {
       query.author = req.user?._id;
     }
-    const flows : Omit<Document<unknown, any, PolyglotFlow> & Omit<PolyglotFlowInfo & {
-      nodes: string[];
-      edges: PolyglotEdge[];
-  } & Required<{
-      _id: string;
-  }>, never>, never>[]= await PolyglotFlowModel.find(query).populate(
-      "author",
-      "username",
-    );
+    const flows: Omit<
+      Document<unknown, any, PolyglotFlow> &
+        Omit<
+          PolyglotFlowInfo & {
+            nodes: string[];
+            edges: PolyglotEdge[];
+          } & Required<{
+              _id: string;
+            }>,
+          never
+        >,
+      never
+    >[] = await PolyglotFlowModel.find(query).populate("author", "username");
     //filter function for nodes
-    let seen: string[]=['default'];
-    const filteredFlows = flows.map((flow) =>{
-      const filteredNodes=flow.nodes.filter((node) => {  
+    let seen: string[] = ["default"];
+    const filteredFlows = flows.map((flow) => {
+      const filteredNodes = flow.nodes.filter((node) => {
         if (seen.includes(node)) return false;
         else {
           seen.push(node);
           return true;
         }
       });
-      console.log(filteredNodes)
-      flow.nodes=filteredNodes;
-      return flow}
-    );
+      console.log(filteredNodes);
+      flow.nodes = filteredNodes;
+      return flow;
+    });
     if (!filteredFlows) {
       return res.status(404).send();
     }

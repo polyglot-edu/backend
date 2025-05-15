@@ -7,10 +7,11 @@ router.post("/genRes", OpenAiControllers.genResource);
 router.post("/genGraph", OpenAiControllers.genConceptMap);
 //generativeAPI
 router.post("/MaterialAnalyser", OpenAiControllers.analyseMaterial);
-router.post("/LearningObjectiveGenerator", OpenAiControllers.generateLO);
+router.post("/LearningObjectiveGenerator", OpenAiControllers.generateLO); //outdated
 router.post("/MaterialGenerator", OpenAiControllers.generateMaterial);
 router.post("/Summarizer", OpenAiControllers.summarize);
 router.post("/ActivityGenerator", OpenAiControllers.activityGenerator);
+router.post("/PlanLesson", OpenAiControllers.planLesson);
 router.post("/Corrector", OpenAiControllers.corrector);
 
 export default router;

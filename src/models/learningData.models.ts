@@ -41,9 +41,7 @@ export interface CloseLPInfoActionDocument
 export interface SearchForLPActionDocument
   extends Types.SearchForLPAction,
     Document {}
-export interface ShowLPActionDocument
-  extends Types.ShowLPAction,
-    Document {}
+export interface ShowLPActionDocument extends Types.ShowLPAction, Document {}
 export interface SelectLPActionDocument
   extends Types.SelectLPAction,
     Document {}
@@ -64,10 +62,8 @@ export interface SubmitAnswerActionDocument
     Document {}
 export interface CompleteLPActionDocument
   extends Types.CompleteLPAction,
-    Document {}    
-export interface GradeLPActionDocument
-  extends Types.GradeLPAction,
     Document {}
+export interface GradeLPActionDocument extends Types.GradeLPAction, Document {}
 
 // Base scheme
 export const baseActionSchema = new Schema(
@@ -76,7 +72,11 @@ export const baseActionSchema = new Schema(
     userId: { type: String, required: true },
     actionType: { type: String, required: true },
     zoneId: { type: String, required: true, enum: Object.values(Types.ZoneId) },
-    platform: { type: String, required: true, enum: Object.values(Types.Platform) },
+    platform: {
+      type: String,
+      required: true,
+      enum: Object.values(Types.Platform),
+    },
     action: { type: Schema.Types.Mixed, default: null }, //Accettabile? Mi serve per poter filtrare usando i campi contenuti in action. Possibile sostituire con discriminatori e sistemare i find.
   },
   options,
@@ -307,24 +307,20 @@ export const submitAnswerActionSchema = new Schema(
   options,
 );
 
-export const completeLPActionSchema = new Schema(
-  {
-    ...baseActionSchema.obj,
-    action: {
-      flowId: { type: String, required: true },
-    }
-  }
-);
+export const completeLPActionSchema = new Schema({
+  ...baseActionSchema.obj,
+  action: {
+    flowId: { type: String, required: true },
+  },
+});
 
-export const gradeLPActionSchema = new Schema(
-  {
-    ...baseActionSchema.obj,
-    action: {
-      flowId: { type: String, required: true },
-      grade: { type: Number, required: true },
-    }
-  }
-);
+export const gradeLPActionSchema = new Schema({
+  ...baseActionSchema.obj,
+  action: {
+    flowId: { type: String, required: true },
+    grade: { type: Number, required: true },
+  },
+});
 
 // Base model
 export const BaseActionModel = model<BaseActionDocument>(
@@ -335,7 +331,7 @@ export const BaseActionModel = model<BaseActionDocument>(
 // Specific models with discriminator
 export const RegistrationToWorkAdventureActionModel =
   BaseActionModel.discriminator<RegistrationToWorkAdventureActionDocument>(
-    "RegistrationToWorkAdventureAction", 
+    "RegistrationToWorkAdventureAction",
     registrationToWorkAdventureActionSchema,
   );
 
@@ -447,7 +443,7 @@ export const SubmitAnswerActionModel =
     submitAnswerActionSchema,
   );
 
-  export const CompleteLPActionModel =
+export const CompleteLPActionModel =
   BaseActionModel.discriminator<CompleteLPActionDocument>(
     "CompleteLPAction",
     completeLPActionSchema,
