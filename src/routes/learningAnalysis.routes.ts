@@ -66,7 +66,7 @@ router
   .get(checkAuth, LearningDataController.calculateTimeOnTool);
 
 router
-  .route("/calcNodeTimeByUserId/:id")
+  .route("/calcNodeTimeByUserId") //esempio: http://localhost:5000/api/learningAnalytics/calcNodeTimeByUserId?userId=userTester&flowId=flowTest&nodeId=node2
   .get(checkAuth, LearningDataController.calculateNodeTimeByUserId);
 
 router

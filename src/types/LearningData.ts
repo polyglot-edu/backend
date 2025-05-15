@@ -1,20 +1,144 @@
-import { Date } from "mongoose";
+//import { Date } from "mongoose";
 
 export enum ZoneId {
-  FreeZone,
-  OutsideZone,
-  SilentZone,
-  LearningPathSelectionZone,
-  InstructionWebpageZone,
-  WebAppZone,
-  MeetingRoomZone,
-  PolyGlotLearningZone,
-  PolyGlotLearningPathCreationZone,
-  PapyrusWebZone,
-  VirtualStudioZone,
+  FreeZone = "FreeZone",
+  OutsideZone = "OutsideZone",
+  SilentZone = "SilentZone",
+  LearningPathSelectionZone = "LearningPathSelectionZone",
+  InstructionWebpageZone = "InstructionWebpageZone",
+  WebAppZone = "WebAppZone",
+  MeetingRoomZone = "MeetingRoomZone",
+  PolyGloTLearningZone = "PolyGloTLearningZone",
+  PolyGloTLearningPathCreationZone = "PolyGloTLearningPathCreationZone",
+  PapyrusWebZone = "PapyrusWebZone",
+  VisualStudioZone = "VisualStudioZone",
 }
 
+export const LearningTypeMap = [ //da usare per fare da intramezzo tra il nostro std e quello xapi, come traduttore
+  {
+    nodeType: 'OpenQuestionNode',
+    activity: 'Exercise', //Da aggiungere anche alle successive
+    integrated: true,
+    daxAPIsupported: 'long-fill-in', //Da fare anche per il resto!
+  },
+  {
+    key: 'short answer question',
+    text: 'Short Answer Question',
+    nodeType: 'closeEndedQuestionNode',
+    integrated: true,
+  },
+  {
+    key: 'true or false',
+    text: 'True or False',
+    nodeType: 'TrueFalseNode',
+    integrated: true,
+  },
+  {
+    key: 'fill in the blanks',
+    text: 'Fill in the Blanks',
+    nodeType: 'activity',
+    integrated: false,
+  },
+  {
+    key: 'matching',
+    text: 'Matching',
+    nodeType: 'activity',
+    integrated: false,
+  },
+  {
+    key: 'ordering',
+    text: 'Ordering',
+    nodeType: 'activity',
+    integrated: false,
+  },
+  {
+    key: 'multiple choice',
+    text: 'Multiple Choice',
+    nodeType: 'multipleChoiceQuestionNode',
+    integrated: true,
+  },
+  {
+    key: 'multiple select',
+    text: 'Multiple Select',
+    nodeType: 'activity',
+    integrated: false,
+  },
+  { key: 'coding', text: 'Coding', nodeType: 'activity', integrated: false },
+  { key: 'essay', text: 'Essay', nodeType: 'activity', integrated: false },
+  {
+    key: 'knowledge exposition',
+    text: 'Knowledge Exposition',
+    nodeType: 'discussion',
+    integrated: false,
+  },
+  { key: 'debate', text: 'Debate', nodeType: 'discussion', integrated: false },
+  {
+    key: 'brainstorming',
+    text: 'Brainstorming',
+    nodeType: 'discussion',
+    integrated: false,
+  },
+  {
+    key: 'group discussion',
+    text: 'Group Discussion',
+    nodeType: 'discussion',
+    integrated: false,
+  },
+  {
+    key: 'simulation',
+    text: 'Simulation',
+    nodeType: 'experiential',
+    integrated: false,
+  },
+  {
+    key: 'inquiry based learning',
+    text: 'Inquiry-Based Learning',
+    nodeType: 'experiential',
+    integrated: false,
+  },
+  {
+    key: 'non written material analysis',
+    text: 'Non-Written Material Analysis',
+    nodeType: 'experiential',
+    integrated: false,
+  },
+  {
+    key: 'non written material production',
+    text: 'Non-Written Material Production',
+    nodeType: 'experiential',
+    integrated: false,
+  },
+  {
+    key: 'case study analysis',
+    text: 'Case Study Analysis',
+    nodeType: 'project',
+    integrated: false,
+  },
+  {
+    key: 'project based learning',
+    text: 'Project-Based Learning',
+    nodeType: 'project',
+    integrated: false,
+  },
+  {
+    key: 'problem solving activity',
+    text: 'Problem Solving Activity',
+    nodeType: 'project',
+    integrated: false,
+  },
+];
+
+// Per conversione: const typeNode = LearningTypeMap.find((type) => type.daxAPIsupported== response.data.type)?.nodeType
+
 export enum ExerciseType {
+  FillInQuestion = "fill-in",
+  LongFillInQuestion = "long-fill-in",
+  MultipleChoiceQuestion = "choice",
+  TrueFalseQuestion = "true-false",
+  NumericQuestion = "numeric",
+  Performance = "performance",
+  OtherQuestion = "other",
+
   LessonNode = "lessonNode",
   LessonTextNode = "lessonTextNode",
   WatchVideoNode = "WatchVideoNode",
@@ -39,30 +163,32 @@ export enum ExerciseType {
   InnovationPitchNode = "InnovationPitchNode",
 }
 
-export enum Platform {
-  PolyGloT,
-  VisualStudio,
-  PapyrusWeb,
-  WebApp,
-  WorkAdventure,
+export enum Platform { // Da cambiare in PlatformType per averli tutti uguali?
+  PolyGloT = "PolyGloT",
+  VisualStudio = "VisualStudio",
+  PapyrusWeb = "PapyrusWeb",
+  WebApp = "WebApp",
+  WorkAdventure = "WorkAdventure",
 }
 
 export enum UserRole {
-  Teacher,
-  Student,
-  Tutor,
+  Teacher = "Teacher",
+  Student = "Student",
+  Tutor = "Tutor",
 }
 
-export enum Activity {
-  OpenEndedQuestion,
-  MultipleChoiceQuestion,
+export enum Activity {  //To discuss and to implement! -> Da cambiare in ActivityType per averli tutti uguali? -> DA PRENDERE FACENDO IL MAP.FIND ECC
+  Exercise = "Exercise",
+  Text = "Text",
+  Video = "Video",
+  Other = "Other",
 }
 
-// Tipo base di tutte le azioni
+// Basic type for all actions
 export type BaseAction = {
   timestamp: Date;
   userId: string;
-  actionType: String;
+  actionType: String; //Sarebbe meglio fare una enum anche per actionType?
   zoneId: ZoneId;
   platform: Platform;
 };
@@ -103,7 +229,7 @@ export type LogOutToPolyGloTAction = BaseAction & {
 // Opening and Closing a tool
 export type OpenToolAction = BaseAction & {
   action: {
-    //anything to add?
+    //anything to add? -> Fare enum di Tool e inserire come dato il tool aperto può essere un'idea?
   };
 };
 
@@ -113,8 +239,8 @@ export type CloseToolAction = BaseAction & {
   };
 };
 
-// Opening a non completed learning node for the first time in a session (starts execution of the node)
-export type OpenNodeAction = BaseAction & {
+// Starting an activity in a LearningPath
+export type OpenActivityAction = BaseAction & {
   action: {
     flowId: string;
     nodeId: string;
@@ -122,35 +248,14 @@ export type OpenNodeAction = BaseAction & {
   };
 };
 
-// Closing a non completed learning node (stop execution of the node) -> This happens when a node gets closed before completing its activity
-export type CloseNodeAction = BaseAction & {
+// Stopping the executionn of an activity in a LearningPath
+export type CloseActivityAction = BaseAction & {
   action: {
     flowId: string;
     nodeId: string;
     activity: string;
   };
 };
-
-// Moving to previous/next node
-export type ChangeNodeAction = BaseAction & {
-  action: {
-    flowId: string;
-    oldNodeId: string;
-    newNodeId: string;
-  };
-};
-
-/* Example of how it works, given Node1 a node where some information are given to the student, and Node2 a node where the user is asked to complete and activity. Node2 is the last node of the flow.
-  1) User starts a new learning flow, opens first node for the first time --> openNodeAction of Node1 is registered
-  2) User completes Node1's activity, then goes to the next node --> changeNodeAction from Node1 to Node2 is registered, then openNodeAction of Node2 is registered too 
-  3) User goes back to Node1 to check something before completing the activity in Node2 --> changeNodeAction from Node2 to Node1 is registered, nothing else
-    By doing this, time spent in Node1 after the change from Node2 is considered part of the time needed to complete the activity in Node2
-  4) User returns to Node2 to complete the activity --> changeNodeAction from Node1 to Node2, nothing else
-  5) User stops the execution of the Node2 (closes browser/window/flow execution) --> closeNodeAction of Node2 is registered
-  6) After some time but in the same login session, user re-opens the learning flow (starting a new session of flow execution) and is sent back to Node2 --> openNodeAction of Node2 is registered, since this is a new session of flow execution
-  7) User goes back to review Node1 --> changeNodeAction from Node2 to Node1 is registered, no openNodeAction of Node1 since it has been already completed in another session
-  8) User goes to Node2, completes correctly the activity and closes the execution of the flow, since there are no more nodes in the flow --> changeNodeAction from Node1 to Node2 is registered, and then a closeNode is also registered
-  */
 
 // Opening the "More info" page of a LearningPath in the LP selection page
 export type OpenLPInfoAction = BaseAction & {
@@ -254,9 +359,8 @@ export type UserAction =
   | LogOutToPolyGloTAction
   | OpenToolAction
   | CloseToolAction
-  | OpenNodeAction
-  | CloseNodeAction
-  | ChangeNodeAction
+  | OpenActivityAction
+  | CloseActivityAction
   | OpenLPInfoAction
   | CloseLPInfoAction
   | SearchForLPAction

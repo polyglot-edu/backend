@@ -26,14 +26,11 @@ export interface OpenToolActionDocument
 export interface CloseToolActionDocument
   extends Types.CloseToolAction,
     Document {}
-export interface OpenNodeActionDocument
-  extends Types.OpenNodeAction,
+export interface OpenActivityActionDocument
+  extends Types.OpenActivityAction,
     Document {}
-export interface CloseNodeActionDocument
-  extends Types.CloseNodeAction,
-    Document {}
-export interface ChangeNodeActionDocument
-  extends Types.ChangeNodeAction,
+export interface CloseActivityActionDocument
+  extends Types.CloseActivityAction,
     Document {}
 export interface OpenLPInfoActionDocument
   extends Types.OpenLPInfoAction,
@@ -176,7 +173,7 @@ export const closeToolActionSchema = new Schema(
   options,
 );
 
-export const openNodeActionSchema = new Schema(
+export const openActivityActionSchema = new Schema(
   {
     ...baseActionSchema.obj,
     action: {
@@ -188,25 +185,13 @@ export const openNodeActionSchema = new Schema(
   options,
 );
 
-export const closeNodeActionSchema = new Schema(
+export const closeActivityActionSchema = new Schema(
   {
     ...baseActionSchema.obj,
     action: {
       flowId: { type: String, required: true },
       nodeId: { type: String, required: true },
       activity: { type: String, required: true },
-    },
-  },
-  options,
-);
-
-export const changeNodeActionSchema = new Schema(
-  {
-    ...baseActionSchema.obj,
-    action: {
-      flowId: { type: String, required: true },
-      oldNodeId: { type: String, required: true },
-      newNodeId: { type: String, required: true },
     },
   },
   options,
@@ -386,22 +371,16 @@ export const CloseToolActionModel =
     closeToolActionSchema,
   );
 
-export const OpenNodeActionModel =
-  BaseActionModel.discriminator<OpenNodeActionDocument>(
-    "OpenNodeAction",
-    openNodeActionSchema,
+export const OpenActivityActionModel =
+  BaseActionModel.discriminator<OpenActivityActionDocument>(
+    "OpenActivityAction",
+    openActivityActionSchema,
   );
 
-export const CloseNodeActionModel =
-  BaseActionModel.discriminator<CloseNodeActionDocument>(
-    "CloseNodeAction",
-    closeNodeActionSchema,
-  );
-
-export const ChangeNodeActionModel =
-  BaseActionModel.discriminator<ChangeNodeActionDocument>(
-    "ChangeNodeAction",
-    changeNodeActionSchema,
+export const CloseActivityActionModel =
+  BaseActionModel.discriminator<CloseActivityActionDocument>(
+    "CloseActivityAction",
+    closeActivityActionSchema,
   );
 
 export const OpenLPInfoActionModel =
