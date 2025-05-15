@@ -2,7 +2,7 @@ import { convertToXAPI } from "../src/utils/xapi/convertToXAPI";
 import * as ActionTypes from "../src/types/LearningData";
 //import { SubmitAnswerAction } from "../src/types/LearningData";
 
-const testAction: ActionTypes.SubmitAnswerAction = {
+const testSubmitAnswerAction: ActionTypes.SubmitAnswerAction = {
   timestamp: new Date(),
   userId: "testUserNik",
   actionType: "SubmitAnswer",
@@ -15,9 +15,20 @@ const testAction: ActionTypes.SubmitAnswerAction = {
     answer: "A",
     result: "correct",
   },
+}; 
+
+const testCompleteLPAction: ActionTypes.CompleteLPAction = {
+  timestamp: new Date(),
+  userId: "testUserNik",
+  actionType: "complete_LP",
+  zoneId: ActionTypes.ZoneId.WebAppZone,
+  platform: ActionTypes.Platform.PolyGloT,
+  action: {
+    flowId: "flowtest",
+  },
 };
 
-const result = convertToXAPI(testAction);
+const result = convertToXAPI(testCompleteLPAction);
 
 //console.log("Test result:", result);  
 console.dir(result, { depth: null, colors: true});  //Per testare: npx ts-node tests/testConvertToXAPI.ts

@@ -2,19 +2,31 @@ import { UserAction } from "../../types/LearningData";
 import * as ActionTypes from "../../types/LearningData";
 import { XAPIStatement } from "./XAPITypes";
 
-import { convertSubmitAnswer } from "./convertFunctions/convertSubmitAnswer";
-//import { convertGradeLP } from "./converters/convertGradeLP";
+import { convertSubmitAnswerAction } from "./convertFunctions/convertSubmitAnswerAction";
+import { convertCompleteLPAction } from "./convertFunctions/convertCompleteLPAction";
 // altri import...
 
 export function convertToXAPI(action: UserAction): XAPIStatement | null {
   switch (action.actionType) {
-    case "SubmitAnswer":
-      return convertSubmitAnswer(action as ActionTypes.SubmitAnswerAction);
-//    case "GradeLP":
-//      return convertGradeLP(action);
+    case "submit_answer":
+      return convertSubmitAnswerAction(action as ActionTypes.SubmitAnswerAction);
+    case "complete_LP":
+      return convertCompleteLPAction(action as ActionTypes.CompleteLPAction);
     // altri case...
     default:
-      console.warn(`No XAPI converter for action type: ${action.actionType}`);
+      console.warn(`Error: No XAPI converter for action type: ${action.actionType}`);
       return null;
   }
 }
+
+/* ACTIONS TO CONVERT
+HIGH PRIO
+- SubmitAnswerAction DONE
+- CompleteLPAction
+- LogIn / LogOutToPlyGloT
+- Open / CloseActivityAction
+MID PRIO
+- Open / CloseToolAction
+- GradeLPAction 
+
+*/

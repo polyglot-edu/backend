@@ -1,9 +1,7 @@
-import mongoose from "mongoose";
 import { SubmitAnswerAction } from "../../../types/LearningData";
 import { XAPIStatement } from "../XAPITypes";
 
-
-export function convertSubmitAnswer(action: SubmitAnswerAction): XAPIStatement {
+export function convertSubmitAnswerAction(action: SubmitAnswerAction): XAPIStatement {
   const {   //destructuring
     userId,
     timestamp,
