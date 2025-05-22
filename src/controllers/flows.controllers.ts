@@ -355,13 +355,11 @@ export async function updateFlow(
   // await body("flow", "Flow is required").exists().run(req);
 
   try {
-    req.body.publish = false;
     const flow = await updateFlowQuery(req.params.id, req.body);
 
     if (!flow) {
       return res.status(404).send();
     }
-
     return res.status(200).send(flow);
   } catch (err: any) {
     err.message = customizeErrorMessage(err);
