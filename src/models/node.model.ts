@@ -69,6 +69,7 @@ export const abstractNodeSchema = new mongoose.Schema(
       learning_outcome: { type: String, enum: Object.values(LearningOutcome) },
       education_level: { type: String },
       topicsAI: [{ type: { topic: String, explanation: String } }],
+      mandatoryTopics: [{ type: String }],
       language: { type: String, required: true },
       macro_subject: { type: String, required: true },
       title: { type: String, required: true },
