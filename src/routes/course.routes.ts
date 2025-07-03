@@ -11,5 +11,12 @@ router
   .post(checkAuth, CourseController.createCourse)
   .get(checkAuth, CourseController.getCourses);
 
+router.route("/json").post(checkAuth, CourseController.createCourseJson);
+
+router
+  .route("/:password/serverClean") //API to clean the server from empty flows
+  .get(CourseController.serverCleanUp);
+
+
 // get enrolled courses
 export default router;
