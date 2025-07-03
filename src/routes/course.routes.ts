@@ -11,5 +11,7 @@ router
   .post(checkAuth, CourseController.createCourse)
   .get(checkAuth, CourseController.getCourses);
 
+router.route("/json").post(checkAuth, CourseController.createCourseJson);
+
 // get enrolled courses
 export default router;

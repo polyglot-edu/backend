@@ -12,6 +12,7 @@ router.post("/MaterialGenerator", OpenAiControllers.generateMaterial);
 router.post("/Summarizer", OpenAiControllers.summarize);
 router.post("/ActivityGenerator", OpenAiControllers.activityGenerator);
 router.post("/PlanLesson", OpenAiControllers.planLesson);
+router.post("/PlanCourse", OpenAiControllers.planCourse);
 router.post("/Corrector", OpenAiControllers.corrector);
 
 export default router;
