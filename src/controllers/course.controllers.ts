@@ -128,6 +128,23 @@ export async function deleteCourse(req: Request, res: Response) {
     res.status(500).send;
   }
 }
+
+export async function serverCleanUp(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    if (req.params.password != "polyglotClean") throw "Wrong password";
+
+    const resp = await Course.deleteMany();
+    console.log(resp);
+    res.status(204).json();
+  } catch (error) {
+    next(error);
+  }
+}
+
 export async function getCourses(req: Request, res: Response) {
   try {
     const q = req.query?.q?.toString();
