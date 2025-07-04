@@ -5,7 +5,10 @@ import * as CourseController from "../controllers/course.controllers";
 const router = express.Router();
 // cambiare tutto con flow
 
-router.route("/:id").delete(checkAuth, CourseController.deleteCourse);
+router
+  .route("/:id")
+  .delete(checkAuth, CourseController.deleteCourse)
+  .get(checkAuth, CourseController.getCoursesById);
 router
   .route("/")
   .post(checkAuth, CourseController.createCourse)
