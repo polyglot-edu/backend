@@ -145,6 +145,36 @@ export async function serverCleanUp(
   }
 }
 
+export async function getCoursesById(req: Request, res: Response) {
+  try {
+    const courseId = req.params.id;
+
+    if (!courseId) {
+      return res.status(400).json({ error: "Missing course ID" });
+    }
+
+    const course = await Course.findById(courseId).lean();
+
+    if (!course) {
+      return res.status(404).json({ error: "Course not found" });
+    }
+
+    const flowIds = course.flowsId || [];
+    const flows = await Flow.find({ _id: { $in: flowIds } }).lean();
+
+    const courseWithFlows: PolyglotCourseWithFlow = {
+      ...course,
+      flows,
+    };
+
+    return res.json(courseWithFlows);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+
 export async function getCourses(req: Request, res: Response) {
   try {
     const q = req.query?.q?.toString();
@@ -156,19 +186,14 @@ export async function getCourses(req: Request, res: Response) {
       query["author._id"] = req.user?._id;
     }
 
-    // Trova i corsi che corrispondono alla query
     const courses = await Course.find(query).lean();
 
-    // Estrai tutti gli ID dei flow dai corsi trovati
     const flowIds = courses.flatMap((course) => course.flowsId || []);
 
-    // Elimina i duplicati
     const uniqueFlowIds = [...new Set(flowIds)];
 
-    // Recupera tutti i flow relativi
     const flows = await Flow.find({ _id: { $in: uniqueFlowIds } }).lean();
 
-    // Mappa i corsi aggiungendo i flow corrispondenti
     const coursesWithFlows: PolyglotCourseWithFlow[] = courses.map(
       (course) => ({
         ...course,
