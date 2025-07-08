@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../models/user.model";
-import Course from "../models/course.model";
+import Course, { courseSchema } from "../models/course.model";
 import Flow from "../models/flow.model";
 import { v4 as uuidv4 } from "uuid";
 import { PolyglotCourseWithFlow } from "../types/PolyglotCourse";
@@ -10,6 +10,9 @@ export async function createCourse(req: Request, res: Response) {
   const {
     title,
     description,
+    subjectArea,
+    learningObjectives,
+    accessCode,
     flowsId = [],
     tags = [],
     published = false,
@@ -18,7 +21,6 @@ export async function createCourse(req: Request, res: Response) {
     duration = 0,
     topics = [],
     sourceMaterial = null,
-    learning_outcome = null,
     education_level = null,
     topicsAI = null,
     language = null,
@@ -62,6 +64,9 @@ export async function createCourse(req: Request, res: Response) {
       _id: uuidv4(),
       title,
       description,
+      subjectArea,
+      learning_outcome: learningObjectives,
+      accessCode,
       author: userId,
       flows: validFlows,
       tags,
@@ -74,7 +79,6 @@ export async function createCourse(req: Request, res: Response) {
       duration,
       topics,
       sourceMaterial,
-      learning_outcome,
       education_level,
       topicsAI,
       language,
@@ -91,6 +95,91 @@ export async function createCourse(req: Request, res: Response) {
     return res.status(201).json(createdCourse);
   } catch (err) {
     console.error("Error creating course:", err);
+    return res.status(500).send("Internal server error");
+  }
+}
+
+export async function updateCourse(req: Request, res: Response) {
+  const userId = req.user?._id;
+  const {
+    _id,
+    title,
+    description,
+    subjectArea,
+    learningObjectives,
+    accessCode,
+    flowsId = [],
+    tags = [],
+    published = false,
+    img = "",
+    learningContext = " ",
+    duration = 0,
+    topics = [],
+    sourceMaterial = null,
+    education_level = null,
+    topicsAI = null,
+    language = null,
+    macro_subject = null,
+    context = null,
+  } = req.body;
+
+  try {
+    if (!userId) return res.status(400).send("userId is required");
+    if (!_id) return res.status(400).send("course _id is required");
+    if (!title) return res.status(400).send("title is required");
+
+    const course = await Course.findById(_id);
+    if (!course) return res.status(404).send("Course not found");
+
+    const flowsNotFound: string[] = [];
+    const validFlows: string[] = [];
+
+    for (const flowId of flowsId) {
+      if (!flowId) continue;
+      const exists = await Flow.exists({ _id: flowId });
+      if (exists) {
+        validFlows.push(flowId);
+      } else {
+        flowsNotFound.push(flowId);
+      }
+    }
+
+    if (flowsNotFound.length > 0) {
+      return res
+        .status(404)
+        .send("Flows not found: " + flowsNotFound.join(", "));
+    }
+
+    // Update fields
+    course.title = title;
+    course.description = description;
+    course.subjectArea = subjectArea;
+    course.learningObjectives = learningObjectives;
+    course.accessCode = accessCode;
+    course.flowsId = validFlows;
+    course.tags = tags;
+    course.published = published;
+    course.img = img;
+    course.lastUpdate = new Date();
+    course.learningContext = learningContext;
+    course.duration = duration;
+    course.topics = topics;
+    course.sourceMaterial = sourceMaterial;
+    course.education_level = education_level;
+    course.topicsAI = topicsAI;
+    course.language = language;
+    course.macro_subject = macro_subject;
+    course.context = context;
+
+    await course.save();
+
+    const updatedCourse = await Course.findById(course._id)
+      .populate("author")
+      .populate("flows");
+
+    return res.status(200).json(updatedCourse);
+  } catch (err) {
+    console.error("Error updating course:", err);
     return res.status(500).send("Internal server error");
   }
 }
@@ -173,7 +262,6 @@ export async function getCoursesById(req: Request, res: Response) {
     return res.status(500).json({ error: "Internal server error" });
   }
 }
-
 
 export async function getCourses(req: Request, res: Response) {
   try {
