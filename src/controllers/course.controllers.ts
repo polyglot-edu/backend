@@ -174,8 +174,7 @@ export async function updateCourse(req: Request, res: Response) {
     await course.save();
 
     const updatedCourse = await Course.findById(course._id)
-      .populate("author")
-      .populate("flows");
+      .populate("author");
 
     return res.status(200).json(updatedCourse);
   } catch (err) {
