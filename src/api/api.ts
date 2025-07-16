@@ -9,6 +9,7 @@ import {
   MaterialType,
   OutdatedCorrectorType,
   SummerizerBody,
+  AIDefineSyllabus,
 } from "../types/AIGenerativeTypes";
 
 export type aiAPIResponse = {
@@ -82,9 +83,17 @@ export const API = {
       body,
     );
   },
+
   planCourse: (body: AIPlanCourse): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
       `/tasks/plan_course`,
+      body,
+    );
+  },
+
+  defineSyllabus: (body: AIDefineSyllabus): Promise<AxiosResponse> => {
+    return AIAPIGeneration.post<{}, AxiosResponse, {}>(
+      `/tasks/define_syllabus`,
       body,
     );
   },
