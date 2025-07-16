@@ -148,3 +148,11 @@ export type AIPlanCourse = {
   language: string;
   model?: string;
 };
+
+export type AIDefineSyllabus = {
+  general_subject: string;
+  education_level: EducationLevel;
+  additional_information: string;
+  language: string;
+  model?: string;
+};
