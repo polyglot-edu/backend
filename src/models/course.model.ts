@@ -48,12 +48,12 @@ export const courseSchema = new mongoose.Schema<PolyglotCourseDocument>({
     },
   },
   title: { type: String, required: true },
-  description: { type: String, required: true },
-  subjectArea: { type: String, required: true },
-  macro_subject: { type: String, required: true },
-  education_level: { type: String, required: true },
-  language: { type: String, required: true },
-  duration: { type: String, required: true },
+  description: { type: String, required: false },
+  subjectArea: { type: String, required: false },
+  macro_subject: { type: String, required: false },
+  education_level: { type: String, required: false },
+  language: { type: String, required: false },
+  duration: { type: String, required: false },
 
   learningObjectives: {
     type: {
@@ -103,8 +103,8 @@ export const courseSchema = new mongoose.Schema<PolyglotCourseDocument>({
   sourceMaterial: { type: String },
   accessCode: { type: String, default: "" },
 
-  classContext: { type: String, required: true },
-  targetAudience: { type: String, required: true },
+  classContext: { type: String, required: false },
+  targetAudience: { type: String, required: false },
 
   flowsId: {
     type: [{ type: String }],
