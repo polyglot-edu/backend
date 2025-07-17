@@ -1,38 +1,44 @@
 import mongoose from "mongoose";
-import { EducationLevel } from "../types/AIGenerativeTypes";
+import {
+  EducationLevel,
+  LearningObjectives,
+  Topic,
+} from "../types/AIGenerativeTypes";
 import validator from "validator";
 import { v4 as uuidv4 } from "uuid";
 
-export type CourseDocument = Document & {
-  _id?: string;
-  title?: string;
-  description?: string;
-  subjectArea?: string;
-  macro_subject?: string;
-  education_level?: EducationLevel;
-  language?: string;
-  duration?: string;
-  learningObjectives?: string;
-  topics?: string[];
-  accessCode?: string;
-  topicsAI?: { topic: string; explanation: string }[];
-  tags?: { name: string; color: string }[];
+export type PolyglotCourseDocument = Document & {
+  _id: string;
+  title: string;
+  description: string;
+  subjectArea: string;
+  macro_subject: string;
+  education_level: EducationLevel;
+  language: string;
+  duration: string;
+  learningObjectives: LearningObjectives;
+  goals: string[];
+  prerequisites: string[];
+  topics: string[];
+  topicsAI: Topic[];
+  tags: { name: string; color: string }[];
   img?: string;
+  accessCode?: string;
   sourceMaterial?: string;
-  context?: string;
-  learningContext?: string;
-  flowsId?: string[];
-  author?: {
+  classContext: string;
+  flowsId: string[];
+  author: {
     _id?: string;
     username?: string;
   };
-  published?: boolean;
-  lastUpdate?: Date;
-  nSubscribed?: number;
-  nCompleted?: number;
+  targetAudience: string;
+  published: boolean;
+  lastUpdate: Date;
+  nSubscribed: number;
+  nCompleted: number;
 };
 
-export const courseSchema = new mongoose.Schema<CourseDocument>({
+export const courseSchema = new mongoose.Schema<PolyglotCourseDocument>({
   _id: {
     type: String,
     default: () => uuidv4(),
@@ -41,14 +47,32 @@ export const courseSchema = new mongoose.Schema<CourseDocument>({
       message: "Invalid UUID-v4",
     },
   },
-  title: { type: String },
-  description: { type: String },
-  subjectArea: { type: String },
-  macro_subject: { type: String },
-  education_level: { type: String },
-  language: { type: String },
-  duration: { type: String },
-  learningObjectives: { type: String },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  subjectArea: { type: String, required: true },
+  macro_subject: { type: String, required: true },
+  education_level: { type: String, required: true },
+  language: { type: String, required: true },
+  duration: { type: String, required: true },
+
+  learningObjectives: {
+    type: {
+      knowledge: { type: String },
+      skills: { type: String },
+      attitude: { type: String },
+    },
+    required: true,
+  },
+
+  goals: {
+    type: [{ type: String }],
+    default: [],
+  },
+
+  prerequisites: {
+    type: [{ type: String }],
+    default: [],
+  },
 
   topics: {
     type: [{ type: String }],
@@ -77,14 +101,16 @@ export const courseSchema = new mongoose.Schema<CourseDocument>({
 
   img: { type: String, default: "" },
   sourceMaterial: { type: String },
-  context: { type: String },
-  learningContext: { type: String },
+  accessCode: { type: String, default: "" },
+
+  classContext: { type: String, required: true },
+  targetAudience: { type: String, required: true },
 
   flowsId: {
     type: [{ type: String }],
     default: [],
   },
-  accessCode: { type: String, default: "" },
+
   author: {
     _id: { type: String },
     username: { type: String },
@@ -96,6 +122,6 @@ export const courseSchema = new mongoose.Schema<CourseDocument>({
   nCompleted: { type: Number, default: 0 },
 });
 
-const Course = mongoose.model<CourseDocument>("Course", courseSchema);
+const Course = mongoose.model<PolyglotCourseDocument>("Course", courseSchema);
 
 export default Course;

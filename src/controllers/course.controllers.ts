@@ -7,25 +7,28 @@ import { PolyglotCourseWithFlow } from "../types/PolyglotCourse";
 
 export async function createCourse(req: Request, res: Response) {
   const userId = req.user?._id;
+
   const {
     title,
     description,
     subjectArea,
+    macro_subject = "",
+    education_level = "",
+    language = "",
+    duration = "",
     learningObjectives,
-    accessCode,
-    flowsId = [],
-    tags = [],
-    published = false,
-    img = "",
-    learningContext = " ",
-    duration = 0,
+    goals = [],
+    prerequisites = [],
     topics = [],
-    sourceMaterial = null,
-    education_level = null,
-    topicsAI = null,
-    language = null,
-    macro_subject = null,
-    context = null,
+    topicsAI = [],
+    tags = [],
+    img = "",
+    accessCode = "",
+    sourceMaterial = "",
+    classContext = "",
+    targetAudience = "",
+    flowsId = [],
+    published = false,
   } = req.body;
 
   try {
@@ -65,25 +68,30 @@ export async function createCourse(req: Request, res: Response) {
       title,
       description,
       subjectArea,
-      learning_outcome: learningObjectives,
-      accessCode,
-      author: userId,
-      flows: validFlows,
+      macro_subject,
+      education_level,
+      language,
+      duration,
+      learningObjectives,
+      goals,
+      prerequisites,
+      topics,
+      topicsAI,
       tags,
-      published,
       img,
+      accessCode,
+      sourceMaterial,
+      classContext,
+      targetAudience,
+      flowsId: validFlows,
+      author: {
+        _id: user._id,
+        username: user.username,
+      },
+      published,
       lastUpdate: new Date(),
       nSubscribed: 0,
       nCompleted: 0,
-      learningContext,
-      duration,
-      topics,
-      sourceMaterial,
-      education_level,
-      topicsAI,
-      language,
-      macro_subject,
-      context,
     });
 
     await course.save();
@@ -112,7 +120,9 @@ export async function updateCourse(req: Request, res: Response) {
     tags = [],
     published = false,
     img = "",
-    learningContext = " ",
+    goals = [],
+    prerequisites = [],
+    targetAudience = "",
     duration = 0,
     topics = [],
     sourceMaterial = null,
@@ -120,7 +130,7 @@ export async function updateCourse(req: Request, res: Response) {
     topicsAI = null,
     language = null,
     macro_subject = null,
-    context = null,
+    context: classContext = null,
   } = req.body;
 
   try {
@@ -150,32 +160,31 @@ export async function updateCourse(req: Request, res: Response) {
         .send("Flows not found: " + flowsNotFound.join(", "));
     }
 
-    // Update fields
     course.title = title;
     course.description = description;
     course.subjectArea = subjectArea;
-    course.learningObjectives = learningObjectives;
-    course.accessCode = accessCode;
-    course.flowsId = validFlows;
-    course.tags = tags;
-    course.published = published;
-    course.img = img;
-    course.lastUpdate = new Date();
-    course.learningContext = learningContext;
-    course.duration = duration;
-    course.topics = topics;
-    course.sourceMaterial = sourceMaterial;
-    course.education_level = education_level;
-    course.topicsAI = topicsAI;
-    course.language = language;
     course.macro_subject = macro_subject;
-    course.context = context;
+    course.education_level = education_level;
+    course.language = language;
+    course.duration = duration;
+    course.learningObjectives = learningObjectives;
+    course.goals = goals;
+    course.prerequisites = prerequisites;
+    course.topics = topics;
+    course.topicsAI = topicsAI;
+    course.tags = tags;
+    course.img = img;
+    course.accessCode = accessCode;
+    course.sourceMaterial = sourceMaterial;
+    course.classContext = classContext;
+    course.targetAudience = targetAudience;
+    course.flowsId = validFlows;
+    course.published = published;
+    course.lastUpdate = new Date();
 
     await course.save();
 
-    const updatedCourse = await Course.findById(course._id)
-      .populate("author")
-      .populate("flows");
+    const updatedCourse = await Course.findById(course._id).populate("author");
 
     return res.status(200).json(updatedCourse);
   } catch (err) {
