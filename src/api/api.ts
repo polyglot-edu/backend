@@ -11,6 +11,7 @@ import {
   SummerizerBody,
   AIDefineSyllabus,
 } from "../types/AIGenerativeTypes";
+import { AIChatMessage } from "../types/AIChatTypes";
 
 export type aiAPIResponse = {
   Date: string;
@@ -27,6 +28,19 @@ const AIAPIGeneration = axiosCreate.create({
     "access-key": "7hXzB9w4r1",
   },
 });
+
+const AIChatAPITeacher = axiosCreate.create({
+  baseURL: "http://131.114.22.98:8000",
+  headers: {
+    "Content-Type": "application/json",
+    withCredentials: true,
+    Access: "*",
+    access_key: "9hXzB9w4r1",
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUZWFjaGVyIiwiZXhwIjoxNzU4NjQ3OTcyfQ.PLt7H_tVYDHXsdAT76MsRzskkycj1jQz2E6jYf_FH2M",
+  },
+});
+
 const OutDatedAPIGeneration = axiosCreate.create({
   baseURL: "https://skapi.polyglot-edu.com",
   headers: {
@@ -102,6 +116,25 @@ export const API = {
     return OutDatedAPIGeneration.post<{}, AxiosResponse, {}>(
       `/Corrector/evaluate`,
       body,
+    );
+  },
+
+  getChatTeacher: (chatId: string): Promise<AxiosResponse> => {
+    return AIChatAPITeacher.get<{}, AxiosResponse, {}>(`/user/chat/` + chatId);
+  },
+  chatTeacher: (
+    chatId: string,
+    body: AIChatMessage,
+  ): Promise<AxiosResponse> => {
+    return AIChatAPITeacher.post<{}, AxiosResponse, {}>(
+      `/user/chat/` + chatId,
+      body,
+    );
+  },
+
+  resetChatTeacher: (chatId: string): Promise<AxiosResponse> => {
+    return AIChatAPITeacher.put<{}, AxiosResponse, {}>(
+      `/user/chat/` + chatId + `/reset`,
     );
   },
 };

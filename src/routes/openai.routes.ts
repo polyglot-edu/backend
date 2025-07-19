@@ -16,4 +16,10 @@ router.post("/DefineSyllabus", OpenAiControllers.generateSyllabus);
 router.post("/PlanCourse", OpenAiControllers.planCourse);
 router.post("/Corrector", OpenAiControllers.corrector);
 
+router
+  .route("/chat/teacher/:id")
+  .get(OpenAiControllers.getChatTeacher)
+  .post(OpenAiControllers.chatTeacher)
+  .put(OpenAiControllers.resetChatTeacher);
+
 export default router;

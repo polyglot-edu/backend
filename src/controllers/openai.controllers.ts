@@ -143,3 +143,35 @@ export async function corrector(req: Request<any, any>, res: Response) {
     return res.status(500).json({ error: error });
   }
 }
+
+export async function getChatTeacher(req: Request<any, any>, res: Response) {
+  try {
+    const response: AxiosResponse = await API.getChatTeacher(req.params.id);
+    return res.status(200).json(response.data);
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json({ error: error });
+  }
+}
+
+export async function chatTeacher(req: Request<any, any>, res: Response) {
+  try {
+    const response: AxiosResponse = await API.chatTeacher(
+      req.params.id,
+      req.body,
+    );
+    return res.status(200).json(response.data);
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json({ error: error });
+  }
+}
+export async function resetChatTeacher(req: Request<any, any>, res: Response) {
+  try {
+    const response: AxiosResponse = await API.resetChatTeacher(req.params.id);
+    return res.status(200).json(response.data);
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json({ error: error });
+  }
+}
