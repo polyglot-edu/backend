@@ -45,6 +45,10 @@ export async function serverCleanUp(
 
     const resp = await PolyglotFlowModel.deleteMany({ nodes: [] });
     console.log(resp);
+
+    const resp2 = await PolyglotFlowModel.deleteMany({
+      nodes: { $size: 1 },
+    });
     res.status(204).json();
   } catch (error) {
     next(error);
