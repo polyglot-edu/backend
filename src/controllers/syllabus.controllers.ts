@@ -71,7 +71,9 @@ export async function createSyllabus(req: Request, res: Response) {
 
     await syllabus.save();
 
-    const createdSyllabus = await PolyglotSyllabusModel.findById(syllabus._id).lean();
+    const createdSyllabus = await PolyglotSyllabusModel.findById(
+      syllabus._id,
+    ).lean();
 
     return res.status(201).json(createdSyllabus);
   } catch (err) {
@@ -93,7 +95,7 @@ export async function updateSyllabus(req: Request, res: Response) {
     language,
     goals = [],
     prerequisites = [],
-    topics=[],
+    topics = [],
     academicYear,
     courseCode,
     courseOfStudy,
