@@ -1,6 +1,7 @@
 import express from "express";
 import flowRouter from "./flows.routes";
 import courseRouter from "./course.routes";
+import syllabusRouter from "./syllabus.routes";
 import executionRouter from "./execution.routes";
 import userRouter from "./user.routes";
 import fileRouter from "./file.routes";
@@ -15,6 +16,7 @@ const router = express.Router();
 
 router.use("/api/flows", flowRouter);
 router.use("/api/course", courseRouter);
+router.use("/api/syllabus", syllabusRouter);
 router.use("/api/file", fileRouter);
 router.use("/api/execution", executionRouter);
 router.use("/api/user", userRouter);
