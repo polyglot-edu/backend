@@ -10,7 +10,6 @@ import { SyllabusTopic } from "../types/PolyglotSyllabus";
 
 export type PolyglotSyllabusDocument = Document & {
   _id: string;
-  general_subject: string;
   educational_level: EducationLevel;
   additional_information: string;
   title: string;
@@ -24,6 +23,14 @@ export type PolyglotSyllabusDocument = Document & {
     username?: string;
   };
   lastUpdate: Date;
+
+  studyregulation: string;
+  curriculumPath: string;
+  studentPartition: string;
+  integratedCourseUnit: string;
+  subjectArea: string;
+  courseType: string;
+  department: string;
 
   academicYear?: string;
   courseCode?: string;
@@ -60,7 +67,6 @@ export const polyglotSyllabusSchema = new mongoose.Schema({
   },
   title: { type: String, required: true },
   description: { type: String, required: true },
-  general_subject: { type: String, required: true },
   educational_level: { type: String, required: true },
   additional_information: { type: String, required: false },
   language: { type: String, required: true },
@@ -90,7 +96,14 @@ export const polyglotSyllabusSchema = new mongoose.Schema({
     default: () => new Date(),
   },
 
-  // Estesi dal file .docx
+  studyregulation: { type: String },
+  curriculumPath: { type: String },
+  studentPartition: { type: String },
+  integratedCourseUnit: { type: String },
+  subjectArea: { type: String },
+  courseType: { type: String },
+  department: { type: String },
+  courseYear: { type: String },
   academicYear: { type: String },
   courseCode: { type: String },
   courseOfStudy: { type: String },
