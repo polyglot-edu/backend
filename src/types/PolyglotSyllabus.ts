@@ -21,7 +21,7 @@ export type PolyglotSyllabus = {
   };
   lastUpdate: Date;
 
-  studyregulation: string;
+  studyRegulation: string;
   curriculumPath: string;
   studentPartition: string;
   integratedCourseUnit: string;

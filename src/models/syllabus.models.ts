@@ -24,7 +24,7 @@ export type PolyglotSyllabusDocument = Document & {
   };
   lastUpdate: Date;
 
-  studyregulation: string;
+  studyRegulation: string;
   curriculumPath: string;
   studentPartition: string;
   integratedCourseUnit: string;
@@ -82,8 +82,8 @@ export const polyglotSyllabusSchema = new mongoose.Schema({
   },
 
   topics: {
-    type: syllabusTopicSchema,
-    default: {} as SyllabusTopic,
+    type: [syllabusTopicSchema],
+    default: [],
   },
 
   author: {
@@ -96,7 +96,7 @@ export const polyglotSyllabusSchema = new mongoose.Schema({
     default: () => new Date(),
   },
 
-  studyregulation: { type: String },
+  studyRegulation: { type: String },
   curriculumPath: { type: String },
   studentPartition: { type: String },
   integratedCourseUnit: { type: String },
