@@ -17,8 +17,7 @@ import {
 import { AbstractAlgorithm, DistrubutionAlgorithm } from "./algo/base";
 import { nodeTypeExecution } from "./plugins/pluginMap";
 import { API } from "../api/api";
-import { EducationLevel, LearningOutcome } from "../types/AIGenerativeTypes";
-
+import { EducationLevel, LearningOutcome } from "../types";
 const mapType = {
   0: "OpenQuestionNode",
   2: "TrueFalseNode",
