@@ -4,7 +4,6 @@ import {
   AIPlanLesson,
   AIPlanCourse,
   AnalyseType,
-  CorrectorType,
   LOType,
   MaterialType,
   OutdatedCorrectorType,
