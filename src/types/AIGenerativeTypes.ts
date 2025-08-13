@@ -70,13 +70,21 @@ export type LessonNodeAI = {
 
 export type AnalyseType = { text: string; model?: string };
 
+type ParamsExercise = {
+  solutions_number: number;
+  distractors_number: number;
+  easily_discardable_distractors_number: number;
+  type: string;
+};
+
 export type AIExerciseType = {
-  title: string;
   macro_subject: string;
-  topics: LessonNodeAI[];
+  topic: string;
+  topic_explanation: string;
   education_level: EducationLevel;
   learning_outcome: LearningOutcome;
-  duration: number;
+  material: string;
+  params: ParamsExercise[];
   language: string;
   model: string;
 };
@@ -97,6 +105,7 @@ export type MaterialType = {
   duration: number;
   language: string;
   model: string;
+  type_of_file: string;
 };
 
 export type CorrectorType = {

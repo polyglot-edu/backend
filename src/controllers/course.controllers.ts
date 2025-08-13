@@ -3,7 +3,7 @@ import User from "../models/user.model";
 import Course, { courseSchema } from "../models/course.model";
 import Flow from "../models/flow.model";
 import { v4 as uuidv4 } from "uuid";
-import { PolyglotCourseWithFlow } from "../types/PolyglotCourse";
+import { PolyglotCourseWithFlow } from "../types";
 
 export async function createCourse(req: Request, res: Response) {
   const userId = req.user?._id;

@@ -1,12 +1,8 @@
 import mongoose from "mongoose";
-import {
-  EducationLevel,
-  LearningObjectives,
-  Topic,
-} from "../types/AIGenerativeTypes";
+import { EducationLevel, LearningObjectives, Topic } from "../types";
 import validator from "validator";
 import { v4 as uuidv4 } from "uuid";
-import { SyllabusTopic } from "../types/PolyglotSyllabus";
+import { SyllabusTopic } from "../types";
 
 export type PolyglotSyllabusDocument = Document & {
   _id: string;

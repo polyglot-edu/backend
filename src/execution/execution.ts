@@ -17,8 +17,7 @@ import {
 import { AbstractAlgorithm, DistrubutionAlgorithm } from "./algo/base";
 import { nodeTypeExecution } from "./plugins/pluginMap";
 import { API } from "../api/api";
-import { EducationLevel, LearningOutcome } from "../types/AIGenerativeTypes";
-
+import { EducationLevel, LearningOutcome } from "../types";
 const mapType = {
   0: "OpenQuestionNode",
   2: "TrueFalseNode",
@@ -158,41 +157,6 @@ export class Execution {
     if (!currentNode) {
       return { ctx: this.ctx, node: null };
     }
-    // caso in cui sto eseguendo un nodo astratto
-    /*outdated for new abstract node concept
-    if (currentNode.type === "abstractNode") {
-      // TODO: refactor this
-      this.abstractAlgo = getAbstractAlgorithm(
-        currentNode.data.execution.abstractAlgo,
-        this.ctx,
-      );
-      const { execNodeInfo, node } = await this.abstractAlgo.getNextExercise(
-        this.ctx.execNodeInfo,
-        currentNode,
-        satisfiedEdges,
-      );
-
-      if (execNodeInfo.done) {
-        const nextEdges = this.flow.edges.filter(
-          (edge) => edge.reactFlow.source === currentNode.reactFlow.id,
-        );
-        const nextNodes = nextEdges.map((edge) =>
-          this.flow.nodes.find(
-            (node) => node.reactFlow.id === edge.reactFlow.target,
-          ),
-        ) as PolyglotNode[];
-
-        const { execNodeInfo, node } = this.algo.getNextExercise(nextNodes);
-
-        this.ctx.execNodeInfo = execNodeInfo;
-        this.ctx.currentNodeId = node?.reactFlow.id;
-
-        return await this.selectAlgoRec(execNodeInfo, node, null, ctxId);
-      }
-
-      this.ctx.execNodeInfo = execNodeInfo;
-      return { ctx: this.ctx, node: node };
-    }*/
     const outgoingEdges = this.flow.edges.filter(
       (edge) => edge.reactFlow.source === currentNode.reactFlow.id,
     );
@@ -206,12 +170,12 @@ export class Execution {
         type: e.type,
       })),
     };
-    // caso in cui sono appena entrato nella funzione e non sto eseguendo un nodo astratto
+
     if (satisfiedEdges) {
       if (satisfiedEdges[0].type == "failDebtEdge") {
         //case where there is a debt in the fail edge
-
-        const debtEdgeData: PolyglotEdgeFailDebtData = satisfiedEdges[0]
+        //to be updated with new AI GENERATION API and new concept of "failDebt throw"
+        /*const debtEdgeData: PolyglotEdgeFailDebtData = satisfiedEdges[0]
           .data as PolyglotEdgeFailDebtData;
         let correctAnswersNumber: number = 1;
         let distractorsNumber: number = 1;
@@ -249,7 +213,7 @@ export class Execution {
               aiQuestion: false,
               possibleAnswer: response.data.Solutions[0],
             };
-            break; /*
+            break; 
                   case 2:
                     console.log('creating trueFalse');
                     dataGen = {
@@ -259,7 +223,7 @@ export class Execution {
                       possibleAnswer: response.data.Solutions[0],
                     };
                     break;
-                  */
+                  
           case 3:
             console.log("creating close_ended_question");
             const question =
@@ -326,6 +290,9 @@ export class Execution {
         console.log("completed");
         this.ctx.currentNodeId = "ghostNode";
         return { ctx: this.ctx, node: ghostNode };
+      */
+        console.log("fail debt");
+        return { ctx: this.ctx, node: null };
       }
       const possibleNextNodes = satisfiedEdges.map((edge) =>
         this.flow.nodes.find(

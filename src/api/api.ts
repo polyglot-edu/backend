@@ -4,14 +4,13 @@ import {
   AIPlanLesson,
   AIPlanCourse,
   AnalyseType,
-  CorrectorType,
   LOType,
   MaterialType,
   OutdatedCorrectorType,
   SummerizerBody,
   AIDefineSyllabus,
-} from "../types/AIGenerativeTypes";
-import { AIChatMessage } from "../types/AIChatTypes";
+  AIChatMessage,
+} from "../types";
 
 export type aiAPIResponse = {
   Date: string;

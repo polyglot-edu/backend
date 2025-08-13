@@ -3,8 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import validator from "validator";
 import { PolyglotNode } from "../types";
 import { conceptMapSchema } from "./concept.models";
-import { LearningOutcome, Topic } from "../types/AIGenerativeTypes";
-
+import { LearningOutcome, Topic } from "../types";
 const options = { discriminatorKey: "type" };
 
 export interface PolyglotNodeDocument extends PolyglotNode, Document {
