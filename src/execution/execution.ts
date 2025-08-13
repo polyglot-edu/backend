@@ -291,8 +291,9 @@ export class Execution {
         this.ctx.currentNodeId = "ghostNode";
         return { ctx: this.ctx, node: ghostNode };
       */
-     console.log('fail debt')
-    return { ctx: this.ctx, node: null };}
+        console.log("fail debt");
+        return { ctx: this.ctx, node: null };
+      }
       const possibleNextNodes = satisfiedEdges.map((edge) =>
         this.flow.nodes.find(
           (node) => node.reactFlow.id === edge.reactFlow.target,
