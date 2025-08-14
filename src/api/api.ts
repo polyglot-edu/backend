@@ -17,6 +17,8 @@ export type aiAPIResponse = {
   Question: string;
   CorrectAnswer: string;
 };
+import FormDataNode from 'form-data';
+
 
 const AIAPIGeneration = axiosCreate.create({
   baseURL: "http://131.114.22.98:8000",
@@ -55,12 +57,14 @@ const OutDatedAPIGeneration = axiosCreate.create({
 });
 
 export const API = {
-  analyseMaterial: (body: AnalyseType): Promise<AxiosResponse> => {
-    return AIAPIGeneration.post<{}, AxiosResponse, {}>(
+  analyseMaterial: (formData: FormDataNode): Promise<AxiosResponse> => {
+    return AIAPIGeneration.post(
       `/tasks/analyse_material`,
-      body,
+      formData,
+      { headers: formData.getHeaders() }
     );
   },
+
 
   generateLO: (body: LOType): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(

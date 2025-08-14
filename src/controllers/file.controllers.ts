@@ -8,17 +8,12 @@ const path = require("path");
 
 const baseUploadsDir = path.join(__dirname, "../../uploads");
 
-// Funzione per creare la directory se non esiste
 const createUploadsDir = (dir: any) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
 };
 
-// Estendi l'interfaccia Request per includere la proprietà 'file'
-const { Request } = require("express");
-
-// Definizione del tipo per multer.File
 interface MulterFile {
   fieldname: string;
   originalname: string;
@@ -28,13 +23,10 @@ interface MulterFile {
   filename: string;
   path: string;
   size: number;
-}
 
-interface RequestWithFile extends Request {
-  file?: MulterFile; // Aggiungi la proprietà file di tipo MulterFile
-}
 
-// Configura multer per salvare i file
+}type RequestWithFile = Request & { file?: MulterFile };
+
 const storage = multer.diskStorage({
   destination: (req: any, file: any, cb: any) => {
     const nodeId = req.params.id; // ID del nodo passato come parametro
