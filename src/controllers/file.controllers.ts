@@ -23,9 +23,8 @@ interface MulterFile {
   filename: string;
   path: string;
   size: number;
-
-
-}type RequestWithFile = Request & { file?: MulterFile };
+}
+type RequestWithFile = Request & { file?: MulterFile };
 
 const storage = multer.diskStorage({
   destination: (req: any, file: any, cb: any) => {

@@ -7,7 +7,7 @@ import {
 import { genGraphChatGpt } from "../execution/generators";
 import { AxiosResponse } from "axios";
 import { API } from "../api/api";
-import FormDataNode from 'form-data';
+import FormDataNode from "form-data";
 
 export async function genResource(
   req: Request<any, any, GenResProps>,
@@ -54,26 +54,27 @@ export async function genConceptMap(
     return res.status(500).json({ error: error });
   }
 }
+
 export async function analyseMaterial(req: Request, res: Response) {
   try {
     const formData = new FormDataNode();
 
     if (req.file) {
-      formData.append('file', req.file.buffer, req.file.originalname);
+      formData.append("file", req.file.buffer, req.file.originalname);
     }
 
     if (req.body.url) {
-      formData.append('url', req.body.url);
+      formData.append("url", req.body.url);
     }
     if (req.body.model) {
-      formData.append('model', req.body.model);
+      formData.append("model", req.body.model);
     }
 
     const response = await API.analyseMaterial(formData);
 
     return res.status(200).json(response.data);
   } catch (error: any) {
-    console.error('error', error);
+    console.error("error", error);
     return res.status(500).json({ error: error.message });
   }
 }
@@ -180,6 +181,28 @@ export async function chatTeacher(req: Request<any, any>, res: Response) {
     return res.status(500).json({ error: error });
   }
 }
+
+export async function chatFileUpload(req: Request, res: Response) {
+  try {
+    const formData = new FormDataNode();
+
+    if (req.file) {
+      formData.append("file", req.file.buffer, req.file.originalname);
+    }
+
+    if (req.body.url) {
+      formData.append("db_name", req.body.db_name);
+    }
+
+    const response = await API.analyseMaterial(formData);
+
+    return res.status(200).json(response.data);
+  } catch (error: any) {
+    console.error("error", error);
+    return res.status(500).json({ error: error.message });
+  }
+}
+
 export async function resetChatTeacher(req: Request<any, any>, res: Response) {
   try {
     const response: AxiosResponse = await API.resetChatTeacher(req.params.id);
