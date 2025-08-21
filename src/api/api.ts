@@ -17,8 +17,7 @@ export type aiAPIResponse = {
   Question: string;
   CorrectAnswer: string;
 };
-import FormDataNode from 'form-data';
-
+import FormDataNode from "form-data";
 
 const AIAPIGeneration = axiosCreate.create({
   baseURL: "http://131.114.22.98:8000",
@@ -58,13 +57,10 @@ const OutDatedAPIGeneration = axiosCreate.create({
 
 export const API = {
   analyseMaterial: (formData: FormDataNode): Promise<AxiosResponse> => {
-    return AIAPIGeneration.post(
-      `/tasks/analyse_material`,
-      formData,
-      { headers: formData.getHeaders() }
-    );
+    return AIAPIGeneration.post(`/tasks/analyse_material`, formData, {
+      headers: formData.getHeaders(),
+    });
   },
-
 
   generateLO: (body: LOType): Promise<AxiosResponse> => {
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
@@ -125,6 +121,7 @@ export const API = {
   getChatTeacher: (chatId: string): Promise<AxiosResponse> => {
     return AIChatAPITeacher.get<{}, AxiosResponse, {}>(`/user/chat/` + chatId);
   },
+
   chatTeacher: (
     chatId: string,
     body: AIChatMessage,
@@ -133,6 +130,15 @@ export const API = {
       `/user/chat/` + chatId,
       body,
     );
+  },
+
+  chatFileUpload: (
+    chatId: string,
+    formData: FormDataNode,
+  ): Promise<AxiosResponse> => {
+    return AIChatAPITeacher.post(`/user/chat/` + chatId + `/upload`, formData, {
+      headers: formData.getHeaders(),
+    });
   },
 
   resetChatTeacher: (chatId: string): Promise<AxiosResponse> => {
