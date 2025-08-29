@@ -184,17 +184,18 @@ export async function chatTeacher(req: Request<any, any>, res: Response) {
 
 export async function chatFileUpload(req: Request, res: Response) {
   try {
+    const chatId = req.params.id;
     const formData = new FormDataNode();
 
     if (req.file) {
       formData.append("file", req.file.buffer, req.file.originalname);
     }
 
-    if (req.body.url) {
+    if (req.body.db_name) {
       formData.append("db_name", req.body.db_name);
     }
 
-    const response = await API.analyseMaterial(formData);
+    const response = await API.chatFileUpload(chatId, formData);
 
     return res.status(200).json(response.data);
   } catch (error: any) {
