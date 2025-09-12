@@ -191,15 +191,11 @@ export async function chatFileUpload(req: Request, res: Response) {
       formData.append("file", req.file.buffer, req.file.originalname);
     }
 
-    if (req.body.db_name) {
-      formData.append("db_name", req.body.db_name);
-    }
-
     const response = await API.chatFileUpload(chatId, formData);
 
-    return res.status(200).json(response.data);
+    return res.status(response.status).json(response.data);
   } catch (error: any) {
-    console.error("error", error);
+    console.error("error", error.response?.data || error.message);
     return res.status(500).json({ error: error.message });
   }
 }
