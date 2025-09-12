@@ -32,6 +32,7 @@ export enum ExerciseType {
   PromptEngineeringNode = "PromptEngineeringNode",
   MultipleChoiceQuestionNode = "multipleChoiceQuestionNode",
   TrueFalseNode = "TrueFalseNode",
+  CircuitNode = "CircuitNode",
   ImageEvaluationNode = "ImageEvaluationNode",
   CollaborativeModelingNode = "CollaborativeModelingNode",
   UMLModelingNode = "UMLModelingNode",
