@@ -256,6 +256,16 @@ export const TrueFalseNodeSchema = new mongoose.Schema(
   options,
 );
 
+export const CircuitNodeSchema = new mongoose.Schema(
+  {
+    data: {
+      instructions: { type: String },
+      pinsList: [{ type: {pin: String, value: String} }],
+    },
+  },
+  options,
+);
+
 export const ImageEvaluationNodeSchema = new mongoose.Schema(
   {
     data: {
@@ -419,6 +429,11 @@ export const MultipleChoiceQuestionNode = PolyglotNodeModel.discriminator(
 export const TrueFalseNode = PolyglotNodeModel.discriminator(
   "TrueFalseNode",
   TrueFalseNodeSchema,
+);
+
+export const CircuitNode = PolyglotNodeModel.discriminator(
+  "CircuitNode",
+  CircuitNodeSchema,
 );
 
 export const ImageEvaluationNode = PolyglotNodeModel.discriminator(

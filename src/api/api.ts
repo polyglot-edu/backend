@@ -17,6 +17,7 @@ export type aiAPIResponse = {
   Question: string;
   CorrectAnswer: string;
 };
+import FormData = require("form-data"); 
 import FormDataNode from "form-data";
 
 const AIAPIGeneration = axiosCreate.create({
@@ -132,15 +133,18 @@ export const API = {
     );
   },
 
-  chatFileUpload: (
-    chatId: string,
-    formData: FormDataNode,
-  ): Promise<AxiosResponse> => {
-    return AIChatAPITeacher.post(`/user/chat/` + chatId + `/upload`, formData, {
+chatFileUpload: (
+  chatId: string,
+  formData: FormData
+): Promise<AxiosResponse> => {
+  return AIChatAPITeacher.post(
+    `/user/chat/${chatId}/upload`,
+    formData,
+    {
       headers: formData.getHeaders(),
-    });
-  },
-
+    }
+  );
+},
   resetChatTeacher: (chatId: string): Promise<AxiosResponse> => {
     return AIChatAPITeacher.put<{}, AxiosResponse, {}>(
       `/user/chat/` + chatId + `/reset`,
