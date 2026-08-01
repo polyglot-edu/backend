@@ -1,12 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { expressjwt as jwt } from "express-jwt";
-import jwks from "jwks-rsa";
+import { OAuth2Client } from "google-auth-library";
 import User from "../models/user.model";
-import {
-  AUTH0_AUDIENCE,
-  AUTH0_ISSUER_BASE_URL,
-  TEST_MODE,
-} from "../utils/secrets";
+import { GOOGLE_CLIENT_ID, TEST_MODE } from "../utils/secrets";
 
 let checkAuthTmp;
 
@@ -20,54 +15,45 @@ if (TEST_MODE) {
     }
   };
 } else {
-  checkAuthTmp = [
-    jwt({
-      secret: jwks.expressJwtSecret({
-        cache: true,
-        rateLimit: true,
-        jwksRequestsPerMinute: 5,
-        jwksUri: AUTH0_ISSUER_BASE_URL + ".well-known/jwks.json",
-      }) as any,
-      audience: AUTH0_AUDIENCE,
-      issuer: AUTH0_ISSUER_BASE_URL,
-      algorithms: ["RS256"],
-    }),
-    async (req: Request, res: Response, next: NextFunction) => {
-      try {
-        const sub = req?.auth?.sub;
-        const username = req?.auth?.["https://polyglot-edu.com/username"];
-        if (!sub) return res.status(400).json({ error: "Bad request!" });
+  // Verifies Google ID tokens. The client caches Google's JWKS internally and
+  // checks signature, issuer, audience and expiry as part of verifyIdToken.
+  const client = new OAuth2Client();
 
-        let query;
-        switch (sub.split("|")[0]) {
-          case "google-oauth2":
-            query = { googleId: sub.split("|")[1] };
-            break;
-          default:
-            return res.status(400).json({ error: "Invalid user auth" });
-        }
+  // GOOGLE_CLIENT_ID may hold several comma-separated ids so that a second
+  // client (e.g. a native one) can be accepted without a code change.
+  const audience = GOOGLE_CLIENT_ID.split(",")
+    .map((id) => id.trim())
+    .filter(Boolean);
 
-        let user = await User.findOne(query);
+  checkAuthTmp = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const token = req.headers.authorization?.match(/^Bearer (.+)$/)?.[1];
+      if (!token)
+        return res.status(401).json({ error: "Missing bearer token" });
 
-        if (!user) {
-          user = await User.create({
-            ...query,
-            username: username,
-          });
-        }
+      const ticket = await client.verifyIdToken({ idToken: token, audience });
+      const payload = ticket.getPayload();
+      if (!payload?.sub)
+        return res.status(401).json({ error: "Invalid token" });
 
-        if (user.username !== username) {
-          user.username = username;
-          await user.save();
-        }
+      let user = await User.findOne({ googleId: payload.sub });
 
-        req.user = user;
-        next();
-      } catch (error) {
-        next(error);
+      // Username is only set on create: existing users keep the name they
+      // already have rather than being renamed from their Google profile.
+      if (!user) {
+        user = await User.create({
+          googleId: payload.sub,
+          email: payload.email,
+          username: payload.name ?? payload.email,
+        });
       }
-    },
-  ];
+
+      req.user = user;
+      next();
+    } catch (error) {
+      return res.status(401).json({ error: "Invalid token" });
+    }
+  };
 }
 
 export const checkAuth = checkAuthTmp;

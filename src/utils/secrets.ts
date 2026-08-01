@@ -25,10 +25,9 @@ export const CORS_ORIGINS = process.env.CORS_ORIGINS
   ? process.env.CORS_ORIGINS.split(",")
   : "*";
 
-export const AUTH0_ISSUER_BASE_URL = process.env
-  .AUTH0_ISSUER_BASE_URL as string;
-
-export const AUTH0_AUDIENCE = process.env.AUTH0_AUDIENCE as string;
+// Google OAuth client id used as the expected `aud` of incoming ID tokens.
+// Accepts a comma-separated list so additional clients can be added later.
+export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string;
 
 export const OPENAI_SECRET_KEY = process.env.OPENAI_SECRET_KEY as string;
 export const OPENAI_ENDPOINT = process.env.OPENAI_ENDPOINT as string;
@@ -43,10 +42,7 @@ if (!OPENAI_SECRET_KEY) throw new Error("OPENAI_SECRET_KEY env not defined!");
 if (!OPENAI_ENDPOINT) throw new Error("OPENAI_ENDPOINT env not defined!");
 
 if (!TEST_MODE) {
-  if (!AUTH0_ISSUER_BASE_URL)
-    throw new Error("ISSUER_BASE_URL env not defined!");
-
-  if (!AUTH0_AUDIENCE) throw new Error("AUDIENCE env not defined!");
+  if (!GOOGLE_CLIENT_ID) throw new Error("GOOGLE_CLIENT_ID env not defined!");
 }
 
 // Env rielaboration

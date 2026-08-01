@@ -10,10 +10,12 @@ import metadataRouter from "./metadata.routes";
 import openaiRouter from "./openai.routes";
 import conceptRouter from "./concept.routes";
 import learningRouter from "./learningAnalysis.routes";
+import healthRouter from "./health.routes";
 import cors from "cors";
 
 const router = express.Router();
 
+router.use("/api/health", healthRouter);
 router.use("/api/flows", flowRouter);
 router.use("/api/course", courseRouter);
 router.use("/api/syllabus", syllabusRouter);

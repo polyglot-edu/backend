@@ -107,3 +107,6 @@ certificate.pem
 
 # avoid pushing local uploads dir
 uploads/
+
+# any stray env dump, not just .env
+*.env

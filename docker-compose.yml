@@ -1,29 +1,39 @@
-version: "3.3"
-
 services:
   mongodb:
     image: mongo:5.0
+    restart: unless-stopped
     ports:
       - 27017:27017
     volumes:
-      - ~/apps/mongo:/data/db
+      - mongo-data:/data/db
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=prova
-      - MONGO_INITDB_ROOT_PASSWORD=SECRET
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER:-polyglot}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:-polyglot}
+
   backend:
     build: .
+    restart: unless-stopped
+    depends_on:
+      - mongodb
     ports:
       - 5000:5000
     volumes:
-      - ./:/backend
+      # multer writes uploads to disk and stores their absolute path in Mongo,
+      # so this has to be persistent or existing records go dangling.
+      - uploads:/backend/uploads
     environment:
-      - MONGODB_URI=mongodb://prova:SECRET@mongodb:27017
-      - CORS_ORIGINS=http://localhost:3000
-      - COOKIE_KEY=any_long_and_random_string
-      - OPENAI_SECRET_KEY=YOUR_OPENAI_SECRET_KEY
-      - OPENAI_ENDPOINT=YOUR_OPENAI_ENDPOINT
-      - ISSUER_BASE_URL=https://polyglot-edu.eu.auth0.com/
-      - AUDIENCE=https://api.polyglot-edu.com
-      - TEST_MODE=true
-      
-    command: npm run dev
+      - PORT=5000
+      - MONGODB_URI=mongodb://${MONGO_USER:-polyglot}:${MONGO_PASSWORD:-polyglot}@mongodb:27017
+      # Host only, no scheme — the code prefixes http(s):// itself.
+      - DOMAIN_APP_DEPLOY=${DOMAIN_APP_DEPLOY:-localhost:5000}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - OPENAI_SECRET_KEY=${OPENAI_SECRET_KEY}
+      - OPENAI_ENDPOINT=${OPENAI_ENDPOINT}
+      - APIKEY=${APIKEY}
+      - SECRETKEY=${SECRETKEY}
+      - CORS_ORIGINS=${CORS_ORIGINS:-*}
+      - TEST_MODE=${TEST_MODE:-false}
+
+volumes:
+  mongo-data:
+  uploads:
