@@ -1,39 +1,60 @@
-services:
-  mongodb:
-    image: mongo:5.0
-    restart: unless-stopped
-    ports:
-      - 27017:27017
-    volumes:
-      - mongo-data:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER:-polyglot}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:-polyglot}
+# Deployment compose, consumed by Coolify's Docker Compose build pack.
+# Every ${VAR} below is supplied from Coolify's environment panel.
+#
+# There is deliberately NO database service here: MongoDB is a separate
+# Coolify resource, and its internal connection string arrives as MONGODB_URI.
+# For a local stack use docker-compose.local.yml instead.
 
+services:
   backend:
     build: .
-    restart: unless-stopped
-    depends_on:
-      - mongodb
-    ports:
-      - 5000:5000
+    restart: always
+    # expose, not ports: Coolify's proxy reaches the container over the
+    # internal network, so nothing needs publishing on the host.
+    expose:
+      - '5000'
     volumes:
       # multer writes uploads to disk and stores their absolute path in Mongo,
-      # so this has to be persistent or existing records go dangling.
+      # so this must be persistent or existing records go dangling on redeploy.
       - uploads:/backend/uploads
     environment:
       - PORT=5000
-      - MONGODB_URI=mongodb://${MONGO_USER:-polyglot}:${MONGO_PASSWORD:-polyglot}@mongodb:27017
-      # Host only, no scheme — the code prefixes http(s):// itself.
-      - DOMAIN_APP_DEPLOY=${DOMAIN_APP_DEPLOY:-localhost:5000}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - OPENAI_SECRET_KEY=${OPENAI_SECRET_KEY}
-      - OPENAI_ENDPOINT=${OPENAI_ENDPOINT}
-      - APIKEY=${APIKEY}
-      - SECRETKEY=${SECRETKEY}
+
+      # Database. Set to the Coolify internal MongoDB URL.
+      - MONGODB_URI=${MONGODB_URI}
+      # Optional: PEM contents of a Mongo TLS client certificate.
+      - MONGODB_CERTIFICATE=${MONGODB_CERTIFICATE}
+
+      # Public host of THIS backend, WITHOUT a scheme — the code prefixes
+      # http(s):// itself. Embedded into the `--serverurl` of generated
+      # notebooks, so it must be the externally reachable domain.
+      - DOMAIN_APP_DEPLOY=${DOMAIN_APP_DEPLOY}
       - CORS_ORIGINS=${CORS_ORIGINS:-*}
+      # true bypasses auth entirely: every request becomes the shared `guest`
+      # user, and demo flows are seeded on boot. Must match the editor's value.
       - TEST_MODE=${TEST_MODE:-false}
 
+      # Google Sign-In. Must be the SAME client id the editor signs in with,
+      # since it is the `aud` of the ID tokens being verified. Not required
+      # when TEST_MODE=true.
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+
+      # Azure OpenAI. Both are mandatory at startup even in TEST_MODE —
+      # secrets.ts throws and the container crash-loops without them.
+      - OPENAI_SECRET_KEY=${OPENAI_SECRET_KEY}
+      - OPENAI_ENDPOINT=${OPENAI_ENDPOINT}
+
+      # External AI-generation service credentials, read directly in
+      # src/api/api.ts. Missing values interpolate as the string "undefined".
+      - APIKEY=${APIKEY}
+      - SECRETKEY=${SECRETKEY}
+
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://127.0.0.1:5000/api/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
 volumes:
-  mongo-data:
   uploads:

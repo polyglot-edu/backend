@@ -1,0 +1,25 @@
+# LOCAL DEVELOPMENT ONLY — never used by a deployment.
+#
+# Brings up the supporting services the backend needs on your machine; run the
+# backend itself on the host with `npm run dev` so you keep hot reload.
+#
+#   docker compose -f docker-compose.local.yml up -d
+#   MONGODB_URI=mongodb://admin:SECRET@localhost:27017 npm run dev
+#
+# In Coolify none of this exists: MongoDB is its own resource and the backend
+# is deployed from docker-compose.yml.
+
+services:
+  mongodb:
+    image: mongo:5.0
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_local_data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=SECRET
+
+volumes:
+  mongodb_local_data:
