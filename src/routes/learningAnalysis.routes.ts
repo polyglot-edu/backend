@@ -1,5 +1,6 @@
 import express from "express";
 import { checkAuth } from "../middlewares/auth.middleware";
+import { requireMaintenanceSecret } from "../middlewares/maintenance.middleware";
 import * as LearningDataController from "../controllers/learningAnalysis.controllers";
 
 const router = express.Router();
@@ -8,10 +9,6 @@ router
   .route("/")
   .post(checkAuth, LearningDataController.createAction)
   .get(checkAuth, LearningDataController.getAllActions);
-
-router
-  .route("/:password/serverCleanAll") //API to clean the server from empty flows
-  .get(LearningDataController.serverCleanUpAll);
 
 router
   .route("/userId/:id")
@@ -84,5 +81,15 @@ router
 router
   .route("/calcLPQuizMetrics") //esempio: http://localhost:5000/api/learningAnalytics/calcLPQuizMetrics?flowId=flow1
   .get(checkAuth, LearningDataController.calculateLPQuizMetrics);
+
+// Destructive maintenance route: gated by MAINTENANCE_SECRET, not by a
+// password in the URL. Declared before any "/:id" route would match it.
+router
+  .route("/serverCleanAll")
+  .delete(
+    requireMaintenanceSecret,
+    checkAuth,
+    LearningDataController.serverCleanUpAll,
+  );
 
 export default router;

@@ -299,7 +299,7 @@ export async function getAllActions(req: Request, res: Response) {
 //api to remove all actions
 export async function serverCleanUpAll(req: Request, res: Response) {
   try {
-    if (req.params.password != "polyglotClean") throw "Wrong password";
+    // Access is enforced by requireMaintenanceSecret on the route.
 
     const resp = await Models.BaseActionModel.deleteMany({});
     console.log(resp);

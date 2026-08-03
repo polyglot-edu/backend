@@ -107,7 +107,7 @@ export async function fileCleanUp(
   next: NextFunction,
 ) {
   try {
-    if (req.params.password != "polyglotClean") throw "Wrong password";
+    // Access is enforced by requireMaintenanceSecret on the route.
 
     const files = await PolyglotFileModel.find();
     const flows = await PolyglotFlowModel.find();

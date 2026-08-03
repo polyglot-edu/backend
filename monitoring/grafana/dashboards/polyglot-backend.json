@@ -1,0 +1,425 @@
+{
+  "uid": "polyglot-backend",
+  "title": "Polyglot backend",
+  "description": "Application-level health from prom-client: RED metrics, per-route latency, Node process internals and Mongo connectivity.",
+  "tags": ["polyglot", "backend"],
+  "editable": false,
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "time": { "from": "now-6h", "to": "now" },
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Request rate",
+      "description": "Requests per second across all routes.",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(rate(http_requests_total{service=\"polyglot-backend\"}[$__rate_interval]))"
+        }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "none",
+        "graphMode": "area",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": { "unit": "reqps", "decimals": 2, "color": { "mode": "fixed", "fixedColor": "text" } },
+        "overrides": []
+      }
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "5xx error rate",
+      "description": "Share of requests returning 5xx. Deliberately excludes 4xx: once Google auth is enabled, 401s become normal traffic and would otherwise look like an incident.",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "100 * (sum(rate(http_requests_total{service=\"polyglot-backend\",status_code=~\"5..\"}[$__rate_interval])) or vector(0)) / clamp_min(sum(rate(http_requests_total{service=\"polyglot-backend\"}[$__rate_interval])), 0.0001)"
+        }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 2,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "red", "value": 5 }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "p95 latency",
+      "description": "95th percentile request duration across all routes.",
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket{service=\"polyglot-backend\"}[$__rate_interval])))"
+        }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "decimals": 3,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "red", "value": 3 }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "MongoDB connection",
+      "description": "Mongoose readyState. Anything other than Connected means writes are failing.",
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        { "refId": "A", "expr": "mongodb_connection_state{service=\"polyglot-backend\"}" }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": { "text": "Disconnected", "color": "red", "index": 0 },
+                "1": { "text": "Connected", "color": "green", "index": 1 },
+                "2": { "text": "Connecting", "color": "yellow", "index": 2 },
+                "3": { "text": "Disconnecting", "color": "orange", "index": 3 }
+              }
+            }
+          ],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "text", "value": null }] }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Requests by status class",
+      "description": "Throughput split by response class. One unit (req/s) on a single axis.",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "legendFormat": "2xx success",
+          "expr": "sum(rate(http_requests_total{service=\"polyglot-backend\",status_code=~\"2..\"}[$__rate_interval]))"
+        },
+        {
+          "refId": "B",
+          "legendFormat": "3xx redirect",
+          "expr": "sum(rate(http_requests_total{service=\"polyglot-backend\",status_code=~\"3..\"}[$__rate_interval]))"
+        },
+        {
+          "refId": "C",
+          "legendFormat": "4xx client",
+          "expr": "sum(rate(http_requests_total{service=\"polyglot-backend\",status_code=~\"4..\"}[$__rate_interval]))"
+        },
+        {
+          "refId": "D",
+          "legendFormat": "5xx server",
+          "expr": "sum(rate(http_requests_total{service=\"polyglot-backend\",status_code=~\"5..\"}[$__rate_interval]))"
+        }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": [] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "decimals": 2,
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 8,
+            "showPoints": "never",
+            "spanNulls": false,
+            "axisSoftMin": 0
+          }
+        },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "5xx server" }, "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }] },
+          { "matcher": { "id": "byName", "options": "4xx client" }, "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "yellow" } }] },
+          { "matcher": { "id": "byName", "options": "2xx success" }, "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }] }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Errors by status code",
+      "description": "Individual 4xx/5xx codes, so an expected 401 wave is distinguishable from a real 500.",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "legendFormat": "{{status_code}} {{route}}",
+          "expr": "sum by (status_code, route) (rate(http_requests_total{service=\"polyglot-backend\",status_code=~\"4..|5..\"}[$__rate_interval])) > 0"
+        }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": [] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "decimals": 2,
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "spanNulls": false,
+            "axisSoftMin": 0
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "Latency percentiles",
+      "description": "p50 / p95 / p99 request duration. All three share the same unit, so a single axis is correct.",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "legendFormat": "p50",
+          "expr": "histogram_quantile(0.50, sum by (le) (rate(http_request_duration_seconds_bucket{service=\"polyglot-backend\"}[$__rate_interval])))"
+        },
+        {
+          "refId": "B",
+          "legendFormat": "p95",
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket{service=\"polyglot-backend\"}[$__rate_interval])))"
+        },
+        {
+          "refId": "C",
+          "legendFormat": "p99",
+          "expr": "histogram_quantile(0.99, sum by (le) (rate(http_request_duration_seconds_bucket{service=\"polyglot-backend\"}[$__rate_interval])))"
+        }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": [] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "decimals": 3,
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "spanNulls": false,
+            "axisSoftMin": 0
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 8,
+      "type": "bargauge",
+      "title": "Slowest routes (p95)",
+      "description": "Magnitude by identity, so a slow AI endpoint cannot hide behind fast health checks. Routes are Express patterns, never raw paths.",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "legendFormat": "{{route}}",
+          "instant": true,
+          "expr": "topk(10, histogram_quantile(0.95, sum by (le, route) (rate(http_request_duration_seconds_bucket{service=\"polyglot-backend\"}[$__rate_interval]))))"
+        }
+      ],
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "showUnfilled": true,
+        "valueMode": "color",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "decimals": 3,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "red", "value": 3 }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "Event loop lag (p99)",
+      "description": "The single best indicator that the Node process is saturated. Rising lag means requests queue regardless of route.",
+      "gridPos": { "h": 7, "w": 8, "x": 0, "y": 20 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        { "refId": "A", "legendFormat": "lag p99", "expr": "nodejs_eventloop_lag_p99_seconds{service=\"polyglot-backend\"}" }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": false, "calcs": [] },
+        "tooltip": { "mode": "single", "sort": "none" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "decimals": 4,
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 8,
+            "showPoints": "never",
+            "spanNulls": false,
+            "axisSoftMin": 0
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "Heap used",
+      "description": "Resident heap. A sawtooth is healthy GC; a monotonic climb is a leak.",
+      "gridPos": { "h": 7, "w": 8, "x": 8, "y": 20 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        { "refId": "A", "legendFormat": "heap used", "expr": "nodejs_heap_size_used_bytes{service=\"polyglot-backend\"}" },
+        { "refId": "B", "legendFormat": "heap total", "expr": "nodejs_heap_size_total_bytes{service=\"polyglot-backend\"}" }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": [] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "decimals": 1,
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "spanNulls": false,
+            "axisSoftMin": 0
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 11,
+      "type": "timeseries",
+      "title": "CPU & in-flight requests",
+      "description": "CPU as a fraction of one core. In-flight count is plotted on the same panel only because both are unitless counts of pressure; see the note in monitoring/README.md if you add a second unit here.",
+      "gridPos": { "h": 7, "w": 8, "x": 16, "y": 20 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "legendFormat": "CPU cores",
+          "expr": "rate(process_cpu_seconds_total{service=\"polyglot-backend\"}[$__rate_interval])"
+        },
+        {
+          "refId": "B",
+          "legendFormat": "in flight",
+          "expr": "http_requests_in_flight{service=\"polyglot-backend\"}"
+        }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": [] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 3,
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "spanNulls": false,
+            "axisSoftMin": 0
+          }
+        },
+        "overrides": []
+      }
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import User from "./models/user.model";
 import learningPath from "./guestExamples.json";
 import { updateFlowQuery } from "./controllers/flows.controllers";
 import PolyglotFlowModel from "./models/flow.model";
+import { startMetricsServer } from "./metrics";
 
 /**
  * Error Handler. Provides full stack
@@ -18,6 +19,8 @@ if (ENV === "development") {
 /**
  * Start Express server.
  */
+startMetricsServer();
+
 const server = app.listen(PORT, async () => {
   await mongoose.connect(MONGO_URL);
   console.log("  Database Connected!");

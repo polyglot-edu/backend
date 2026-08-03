@@ -1,5 +1,6 @@
 import express from "express";
 import { checkAuth } from "../middlewares/auth.middleware";
+import { requireMaintenanceSecret } from "../middlewares/maintenance.middleware";
 import * as FlowController from "../controllers/flows.controllers";
 
 const router = express.Router();
@@ -11,15 +12,16 @@ router
 
 router.route("/json").post(checkAuth, FlowController.createFlowJson);
 
+// Registered before "/:id" so it is not shadowed by the id route.
+router
+  .route("/serverClean")
+  .delete(requireMaintenanceSecret, checkAuth, FlowController.serverCleanUp);
+
 router
   .route("/:id")
   .get(checkAuth, FlowController.getFlowById)
   .put(checkAuth, FlowController.updateFlow)
   .delete(checkAuth, FlowController.deleteFlow);
-
-router
-  .route("/:password/serverClean") //API to clean the server from empty flows
-  .get(FlowController.serverCleanUp);
 
 router
   .route("/:id/runFirst") //first version of the notebook (run the execution from the first call)

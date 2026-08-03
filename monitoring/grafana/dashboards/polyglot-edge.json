@@ -1,0 +1,250 @@
+{
+  "uid": "polyglot-edge",
+  "title": "Polyglot edge (Traefik)",
+  "description": "What users actually experience, measured at the proxy. Covers the node-editor as well as the backend, including requests that never reach an application.",
+  "tags": ["polyglot", "traefik", "edge"],
+  "editable": false,
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "time": { "from": "now-6h", "to": "now" },
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Edge request rate",
+      "description": "All requests reaching Traefik, both services.",
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        { "refId": "A", "expr": "sum(rate(traefik_service_requests_total[$__rate_interval]))" }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "none",
+        "graphMode": "area",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": { "unit": "reqps", "decimals": 2, "color": { "mode": "fixed", "fixedColor": "text" } },
+        "overrides": []
+      }
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Edge 5xx rate",
+      "description": "Includes failures the application never saw, such as an unreachable container.",
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "100 * (sum(rate(traefik_service_requests_total{code=~\"5..\"}[$__rate_interval])) or vector(0)) / clamp_min(sum(rate(traefik_service_requests_total[$__rate_interval])), 0.0001)"
+        }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 2,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "red", "value": 5 }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Edge p95 latency",
+      "description": "Includes proxy overhead and connection setup, so it will read slightly above the application's own p95.",
+      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(traefik_service_request_duration_seconds_bucket[$__rate_interval])))"
+        }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "decimals": 3,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "red", "value": 3 }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Request rate by service",
+      "description": "Backend versus editor throughput.",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "legendFormat": "{{service}}",
+          "expr": "sum by (service) (rate(traefik_service_requests_total[$__rate_interval]))"
+        }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": [] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "decimals": 2,
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 8,
+            "showPoints": "never",
+            "spanNulls": false,
+            "axisSoftMin": 0
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "p95 latency by service",
+      "description": "Same unit for every series, so one axis is correct.",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "legendFormat": "{{service}}",
+          "expr": "histogram_quantile(0.95, sum by (le, service) (rate(traefik_service_request_duration_seconds_bucket[$__rate_interval])))"
+        }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": [] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "decimals": 3,
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "spanNulls": false,
+            "axisSoftMin": 0
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Responses by status class",
+      "description": "A spike in 404 here with no matching application traffic is the signature of a routing problem rather than an application fault.",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        { "refId": "A", "legendFormat": "2xx success", "expr": "sum(rate(traefik_service_requests_total{code=~\"2..\"}[$__rate_interval]))" },
+        { "refId": "B", "legendFormat": "3xx redirect", "expr": "sum(rate(traefik_service_requests_total{code=~\"3..\"}[$__rate_interval]))" },
+        { "refId": "C", "legendFormat": "4xx client", "expr": "sum(rate(traefik_service_requests_total{code=~\"4..\"}[$__rate_interval]))" },
+        { "refId": "D", "legendFormat": "5xx server", "expr": "sum(rate(traefik_service_requests_total{code=~\"5..\"}[$__rate_interval]))" }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": [] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "decimals": 2,
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 8,
+            "showPoints": "never",
+            "spanNulls": false,
+            "axisSoftMin": 0
+          }
+        },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "5xx server" }, "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }] },
+          { "matcher": { "id": "byName", "options": "4xx client" }, "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "yellow" } }] },
+          { "matcher": { "id": "byName", "options": "2xx success" }, "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }] }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "bargauge",
+      "title": "Request rate by router",
+      "description": "Requires --metrics.prometheus.addRoutersLabels=true on the proxy. Empty means that flag is missing.",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
+      "datasource": { "type": "prometheus", "uid": "polyglot-prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "legendFormat": "{{router}}",
+          "instant": true,
+          "expr": "topk(10, sum by (router) (rate(traefik_router_requests_total[$__rate_interval])))"
+        }
+      ],
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "showUnfilled": true,
+        "valueMode": "color",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "decimals": 2,
+          "min": 0,
+          "color": { "mode": "continuous-BlPu" }
+        },
+        "overrides": []
+      }
+    }
+  ]
+}

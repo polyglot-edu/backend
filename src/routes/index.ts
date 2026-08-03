@@ -11,9 +11,23 @@ import openaiRouter from "./openai.routes";
 import conceptRouter from "./concept.routes";
 import learningRouter from "./learningAnalysis.routes";
 import healthRouter from "./health.routes";
+import swaggerUi from "swagger-ui-express";
+import { openApiSpec } from "../docs/openapi";
 import cors from "cors";
 
 const router = express.Router();
+
+// Interactive API reference. The raw document is served separately so that
+// codegen tooling can consume it without scraping the UI.
+router.get("/api/docs.json", (_req, res) => res.json(openApiSpec));
+router.use(
+  "/api/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(openApiSpec as any, {
+    customSiteTitle: "Polyglot API",
+    swaggerOptions: { persistAuthorization: true },
+  }),
+);
 
 router.use("/api/health", healthRouter);
 router.use("/api/flows", flowRouter);

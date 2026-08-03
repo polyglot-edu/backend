@@ -1,9 +1,16 @@
 import express from "express";
 import { checkAuth } from "../middlewares/auth.middleware";
+import { requireMaintenanceSecret } from "../middlewares/maintenance.middleware";
 import * as CourseController from "../controllers/course.controllers";
 
 const router = express.Router();
 // cambiare tutto con flow
+
+// Destructive maintenance route: gated by MAINTENANCE_SECRET, not by a password
+// in the URL. MUST stay above "/:id", which would otherwise match it.
+router
+  .route("/serverClean")
+  .delete(requireMaintenanceSecret, checkAuth, CourseController.serverCleanUp);
 
 router
   .route("/:id")
@@ -17,10 +24,6 @@ router
   .get(checkAuth, CourseController.getCourses);
 
 router.route("/json").post(checkAuth, CourseController.createCourseJson);
-
-router
-  .route("/:password/serverClean") //API to clean the server from empty flows
-  .get(CourseController.serverCleanUp);
 
 // get enrolled courses
 export default router;

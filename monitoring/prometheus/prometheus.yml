@@ -1,0 +1,40 @@
+# Template, not the live config. The compose entrypoint substitutes the
+# __*_TARGET__ placeholders from environment variables and writes the result to
+# /tmp/prometheus.yml, because Prometheus does not expand env vars itself.
+
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+  external_labels:
+    environment: production
+    project: polyglot
+
+scrape_configs:
+  # ---------------------------------------------------------------------------
+  # Backend application metrics (prom-client), on its own unrouted port.
+  # ---------------------------------------------------------------------------
+  - job_name: polyglot-backend
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['__BACKEND_METRICS_TARGET__']
+        labels:
+          service: polyglot-backend
+
+  # ---------------------------------------------------------------------------
+  # Traefik: the edge view. Covers the editor as well as the backend, including
+  # requests that never reach an application.
+  # ---------------------------------------------------------------------------
+  - job_name: traefik
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['__TRAEFIK_METRICS_TARGET__']
+        labels:
+          service: traefik
+
+  # ---------------------------------------------------------------------------
+  # Prometheus itself — cheap, and makes scrape failures visible.
+  # ---------------------------------------------------------------------------
+  - job_name: prometheus
+    static_configs:
+      - targets: ['127.0.0.1:9090']

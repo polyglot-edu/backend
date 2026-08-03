@@ -13,12 +13,16 @@ services:
     # internal network, so nothing needs publishing on the host.
     expose:
       - '5000'
+      # Prometheus scrape port. Never given a Traefik route, so /metrics is
+      # reachable only from inside the Docker network.
+      - '9091'
     volumes:
       # multer writes uploads to disk and stores their absolute path in Mongo,
       # so this must be persistent or existing records go dangling on redeploy.
       - uploads:/backend/uploads
     environment:
       - PORT=5000
+      - METRICS_PORT=9091
 
       # Database. Set to the Coolify internal MongoDB URL.
       - MONGODB_URI=${MONGODB_URI}
@@ -43,6 +47,10 @@ services:
       # secrets.ts throws and the container crash-loops without them.
       - OPENAI_SECRET_KEY=${OPENAI_SECRET_KEY}
       - OPENAI_ENDPOINT=${OPENAI_ENDPOINT}
+
+      # Gates the destructive serverClean routes (x-maintenance-secret header).
+      # Unset disables them entirely.
+      - MAINTENANCE_SECRET=${MAINTENANCE_SECRET}
 
       # External AI-generation service credentials, read directly in
       # src/api/api.ts. Missing values interpolate as the string "undefined".

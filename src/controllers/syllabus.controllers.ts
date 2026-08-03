@@ -238,7 +238,7 @@ export async function serverCleanUp(
   next: NextFunction,
 ) {
   try {
-    if (req.params.password !== "polyglotClean") throw "Wrong password";
+    // Access is enforced by requireMaintenanceSecret on the route.
     const resp = await PolyglotSyllabusModel.deleteMany();
     console.log(resp);
     res.status(204).json();

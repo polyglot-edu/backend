@@ -4,6 +4,7 @@ import { loggerMiddleware } from "./middlewares/logger.middleware";
 import router from "./routes";
 import cors from "cors";
 import { ENV } from "./utils/secrets";
+import { metricsMiddleware } from "./metrics";
 
 /*
     STRUCTURE
@@ -32,6 +33,9 @@ app.use(
     credentials: true,
   }),
 );
+
+// Before the router so every request is timed, including 404s.
+app.use(metricsMiddleware);
 
 app.use(bodyParser.json({ limit: "1mb" }));
 app.use(loggerMiddleware);

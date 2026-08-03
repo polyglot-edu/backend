@@ -10,6 +10,12 @@ export const ENV = process.env.DOMAIN_APP_DEPLOY
 
 export const PORT = process.env.PORT ? +process.env.PORT : 5000;
 
+// Prometheus scrape port. Deliberately separate from PORT: the public
+// hostname routes every path, so /metrics must not live on the app port.
+export const METRICS_PORT = process.env.METRICS_PORT
+  ? +process.env.METRICS_PORT
+  : 9091;
+
 export const DOMAIN_APP_DEPLOY =
   process.env.DOMAIN_APP_DEPLOY || "localhost:" + PORT;
 
@@ -33,6 +39,10 @@ export const OPENAI_SECRET_KEY = process.env.OPENAI_SECRET_KEY as string;
 export const OPENAI_ENDPOINT = process.env.OPENAI_ENDPOINT as string;
 
 export const TEST_MODE = process.env.TEST_MODE === "true";
+
+// Gates the destructive `serverClean` maintenance routes. Optional: when unset
+// those routes are disabled outright rather than falling back to a default.
+export const MAINTENANCE_SECRET = process.env.MAINTENANCE_SECRET as string;
 
 // Env check
 if (!MONGODB_URI) throw new Error("MONGODB_URI env not defined!");
