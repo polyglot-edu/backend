@@ -9,17 +9,27 @@
 # Prometheus is intentionally NOT given a domain: it has no authentication of
 # its own. Reach it through Grafana, or an SSH port-forward when debugging.
 #
+# NOTE ON CONFIG DELIVERY. Both services are BUILT from the repo rather than
+# pulled, so their configuration is baked into the image. Do not "simplify" this
+# back to `image:` plus a relative bind mount such as
+#     ./grafana/provisioning:/etc/grafana/provisioning
+# Under Coolify those paths may not resolve to the repo, and Docker then creates
+# an empty directory and mounts it. The container starts healthy with no
+# datasources and no dashboards, and nothing is logged. Only the named data
+# volumes below are mounts, and neither carries configuration.
+#
 # Both services join the external `coolify` network so Prometheus can scrape the
 # backend's metrics port and Traefik's metrics entrypoint over internal DNS.
 
 services:
   prometheus:
-    image: prom/prometheus:v2.54.1
+    build:
+      context: ./prometheus
+      dockerfile: Dockerfile
     restart: always
     expose:
       - '9090'
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.template.yml:ro
       - prometheus-data:/prometheus
     environment:
       # Container name of the backend, whose :9091 is scraped. Coolify names
@@ -29,7 +39,7 @@ services:
       # Traefik's metrics entrypoint (see monitoring/README.md step 1).
       - TRAEFIK_METRICS_TARGET=${TRAEFIK_METRICS_TARGET:-coolify-proxy:8082}
     # Prometheus does not expand environment variables in its config, so the
-    # mounted file is a template rendered at start-up. sed and sh are both
+    # baked-in file is a template rendered at start-up. sed and sh are both
     # present in the image; no extra tooling required.
     entrypoint:
       - /bin/sh
@@ -54,15 +64,18 @@ services:
       - coolify
 
   grafana:
-    image: grafana/grafana:11.2.0
+    build:
+      context: ./grafana
+      dockerfile: Dockerfile
     restart: always
     depends_on:
       - prometheus
     expose:
       - '3000'
     volumes:
-      - ./grafana/provisioning:/etc/grafana/provisioning:ro
-      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+      # Grafana's own state (SQLite, sessions). Contains no provisioning —
+      # dashboards live under /etc/grafana/provisioning inside the image, so
+      # this volume cannot mask them and image updates always take effect.
       - grafana-data:/var/lib/grafana
     environment:
       # Public URL Grafana is served from, used for generated links.

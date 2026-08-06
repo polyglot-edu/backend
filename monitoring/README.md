@@ -77,6 +77,27 @@ Prometheus does not expand environment variables in its own config, so
 per-environment container name into the repo and mounting the Docker socket for
 service discovery — the latter would hand Prometheus full control of the daemon.
 
+### Configuration is baked into the images — do not bind-mount it
+
+Both services are **built** from this directory rather than pulled, and their
+config is `COPY`'d in. This is deliberate.
+
+A relative bind mount such as `./grafana/provisioning:/etc/grafana/provisioning`
+fails **silently** under Coolify when the path does not resolve to the repo:
+Docker creates an empty directory and mounts that. The container then reports
+healthy with zero datasources and zero dashboards, and nothing appears in any
+log. This is what broke the first polyglot deployment.
+
+gamification-hub uses the same Grafana pattern — dashboards live beside
+`dashboards.yml` inside `provisioning/`, so one `COPY` captures both. It still
+bind-mounts its `prometheus.yml`, which works there only because its compose sits
+at the repo root so the relative path resolves. Polyglot's compose is in a
+subdirectory, so Prometheus is baked in here too.
+
+Dashboards live under `/etc/grafana/provisioning`, never `/var/lib/grafana` —
+the `grafana-data` volume is mounted at the latter and would mask them, so an
+updated image would never replace dashboards already copied into the volume.
+
 ## 3. Put Grafana behind Cloudflare Access
 
 Add the Grafana hostname as a Public Hostname on the tunnel, then create an

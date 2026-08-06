@@ -11,4 +11,8 @@ providers:
     allowUiUpdates: false
     updateIntervalSeconds: 30
     options:
-      path: /var/lib/grafana/dashboards
+      # Dashboards sit in this same directory, so one COPY in the Dockerfile
+      # captures provider config and dashboards together. Note /etc/grafana,
+      # not /var/lib/grafana — the grafana-data volume is mounted at the latter
+      # and would mask dashboards baked into the image.
+      path: /etc/grafana/provisioning/dashboards
