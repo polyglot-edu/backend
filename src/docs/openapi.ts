@@ -7,12 +7,42 @@ import { DOMAIN_APP_DEPLOY, TEST_MODE } from "../utils/secrets";
  * Dockerfile's runner stage copies only `dist`, and tsc emits only imported
  * .json files — a standalone spec file would silently not ship.
  *
- * The `/:password/serverClean` maintenance routes are intentionally NOT
- * documented here; they are unauthenticated and destructive, and publishing
- * them would advertise that.
+ * Two route groups are intentionally NOT documented here:
+ *   - the `serverClean` maintenance routes, which are destructive
+ *   - `/api/user/apikeys`, key management, covered in API-GUIDE.md instead
+ *
+ * The ApiKey *security scheme* is still declared, because it is what lets
+ * Swagger UI's Authorize button accept a `pgk_` key against the documented
+ * endpoints.
  */
 
-const scheme = DOMAIN_APP_DEPLOY.includes("localhost") ? "http" : "https";
+const isLocal = DOMAIN_APP_DEPLOY.includes("localhost");
+const scheme = isLocal ? "http" : "https";
+
+/**
+ * Servers advertised to Swagger UI.
+ *
+ * The first entry is deliberately RELATIVE. Swagger UI resolves it against the
+ * origin the docs were loaded from, so "Try it out" always uses the same scheme
+ * and host the user is already on. An absolute URL derived from
+ * DOMAIN_APP_DEPLOY is not safe as the primary: when that variable is unset the
+ * code falls back to `localhost:5000`, and the UI then fires requests at the
+ * user's own machine over plain HTTP.
+ *
+ * The absolute URL is still published as a second option, but only when it has
+ * actually been configured — it is useful for client generators, which cannot
+ * resolve a relative server.
+ */
+const servers: { url: string; description: string }[] = [
+  { url: "/", description: "This instance (same origin as these docs)" },
+];
+
+if (!isLocal) {
+  servers.push({
+    url: `${scheme}://${DOMAIN_APP_DEPLOY}`,
+    description: "Absolute URL, for client generators",
+  });
+}
 
 // ---------------------------------------------------------------------------
 // Reusable pieces
@@ -38,8 +68,11 @@ const tag = {
   properties: { name: { type: "string" }, color: { type: "string" } },
 } as const;
 
-/** Applied to every operation that goes through `checkAuth`. */
-const secured = [{ GoogleIdToken: [] }];
+/**
+ * Applied to every operation that goes through `checkAuth`. The two schemes are
+ * alternatives — either one satisfies the requirement.
+ */
+const secured = [{ ApiKey: [] }, { GoogleIdToken: [] }];
 
 const responses = {
   Unauthorized: {
@@ -152,17 +185,22 @@ export const openApiSpec = {
     description: [
       "REST API behind the Polyglot node-editor and the .NET Interactive runtime.",
       "",
-      "**Authentication.** Protected endpoints expect a Google **ID token** as a",
-      "bearer token: `Authorization: Bearer <id_token>`. The token's `aud` must",
-      "equal the server's `GOOGLE_CLIENT_ID`. The editor obtains it via NextAuth",
-      "and its `/api/[...proxy]` route attaches it server-side, so browser code",
-      "never handles the token directly.",
+      "**Authentication.** Protected endpoints accept either credential:",
+      "",
+      "- **API key** (recommended for scripts and integrations) — send",
+      "  `x-api-key: pgk_…`, or `Authorization: Bearer pgk_…` if your client only",
+      "  supports bearer auth. Keys do not expire unless given a TTL and can be",
+      "  revoked individually. See API-GUIDE.md for how to create one.",
+      "- **Google ID token** — `Authorization: Bearer <id_token>`, with `aud`",
+      "  equal to the server's `GOOGLE_CLIENT_ID`. This is what the node-editor",
+      "  uses; its `/api/[...proxy]` route attaches the token server-side, so",
+      "  browser code never handles it directly. Expires after about an hour.",
       "",
       `**This instance has \`TEST_MODE=${TEST_MODE}\`.**` +
         (TEST_MODE
           ? " Authentication is bypassed: every request resolves to the shared" +
-            " `guest` user and no bearer token is required."
-          : " Protected endpoints require a valid Google ID token."),
+            " `guest` user and no credential is required."
+          : " Protected endpoints require an API key or a Google ID token."),
       "",
       "Some request/response bodies are described as free-form objects where the",
       "underlying controller is untyped — notably the AI-generation endpoints,",
@@ -170,9 +208,7 @@ export const openApiSpec = {
     ].join("\n"),
     license: { name: "MIT" },
   },
-  servers: [
-    { url: `${scheme}://${DOMAIN_APP_DEPLOY}`, description: "This instance" },
-  ],
+  servers,
   tags: [
     { name: "Health", description: "Liveness probe" },
     { name: "Flows", description: "Learning paths and notebook generation" },
@@ -189,12 +225,26 @@ export const openApiSpec = {
   ],
   components: {
     securitySchemes: {
+      ApiKey: {
+        type: "apiKey",
+        in: "header",
+        name: "x-api-key",
+        description:
+          "Polyglot API key, `pgk_…`. Create one at POST /api/user/apikeys " +
+          "after signing in with Google. Does not expire unless you set a TTL, " +
+          "and can be revoked individually. Also accepted as " +
+          "`Authorization: Bearer pgk_…` for clients that only support bearer " +
+          "auth. This is the recommended credential for scripts and " +
+          "integrations.",
+      },
       GoogleIdToken: {
         type: "http",
         scheme: "bearer",
         bearerFormat: "JWT",
         description:
-          "Google ID token. Verified against GOOGLE_CLIENT_ID as the audience.",
+          "Google ID token, verified with GOOGLE_CLIENT_ID as the audience. " +
+          "Used by the node-editor and required to manage API keys. Expires " +
+          "after about an hour.",
       },
     },
     schemas: {

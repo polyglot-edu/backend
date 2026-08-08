@@ -11,6 +11,7 @@ import openaiRouter from "./openai.routes";
 import conceptRouter from "./concept.routes";
 import learningRouter from "./learningAnalysis.routes";
 import healthRouter from "./health.routes";
+import apiKeyRouter from "./apiKey.routes";
 import swaggerUi from "swagger-ui-express";
 import { openApiSpec } from "../docs/openapi";
 import cors from "cors";
@@ -35,6 +36,8 @@ router.use("/api/course", courseRouter);
 router.use("/api/syllabus", syllabusRouter);
 router.use("/api/file", fileRouter);
 router.use("/api/execution", executionRouter);
+// Mounted before /api/user so the more specific prefix is matched first.
+router.use("/api/user/apikeys", apiKeyRouter);
 router.use("/api/user", userRouter);
 router.use("/api/search", searchRouter);
 router.use("/api/metadata", metadataRouter);
