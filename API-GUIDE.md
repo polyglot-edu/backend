@@ -17,28 +17,14 @@ curl https://polyglot-backend.createlab-univaq.it/api/health
 
 ## Quick start
 
-**1. Get an API key.** Sign in to the [node-editor](https://polyglot-node-editor.createlab-univaq.it)
-with your Google account, then create a key:
+**1. Get an API key.** Sign in to the
+[node-editor](https://polyglot-node-editor.createlab-univaq.it) with your Google
+account and go to **API keys** in the top bar, or straight to
+[`/settings/api-keys`](https://polyglot-node-editor.createlab-univaq.it/settings/api-keys).
 
-```bash
-curl -X POST https://polyglot-backend.createlab-univaq.it/api/user/apikeys \
-  -H "Authorization: Bearer <google-id-token>" \
-  -H "Content-Type: application/json" \
-  -d '{"name": "my integration"}'
-```
-
-```json
-{
-  "_id": "c2754a43-cf3b-4ff5-a172-606847c75002",
-  "name": "my integration",
-  "display": "pgk_eaEsCn…",
-  "token": "pgk_eaEsCngLLr...",
-  "warning": "Store this token now — it cannot be retrieved again."
-}
-```
-
-The Google token is only needed for this one call — see
-[Creating your first key](#creating-your-first-key) for how to obtain it.
+Give the key a name, optionally set an expiry, and press **Create**. The token is
+shown **once** — copy it before closing the dialog. It cannot be retrieved
+afterwards, only revoked and replaced.
 
 **2. Use the key.** That's the whole integration:
 
@@ -71,49 +57,56 @@ only support bearer auth — including Swagger UI's **Authorize** button.
 Both resolve to the same user, so a key can do exactly what its owner can do.
 There are no scopes or per-key permissions.
 
-### Creating your first key
-
-Key management deliberately requires a **Google sign-in** — an API key cannot
-create or revoke keys, including itself. That's what makes revocation meaningful:
-a leaked key can't mint replacements.
-
-The easiest way to get a Google ID token: sign in to the editor, then open
-
-```
-https://polyglot-node-editor.createlab-univaq.it/api/auth/session
-```
-
-and copy the `idToken` value. It's valid for about an hour — long enough to
-create a key, which is all you need it for.
-
 ### Managing keys
 
+Everything happens on
+[`/settings/api-keys`](https://polyglot-node-editor.createlab-univaq.it/settings/api-keys)
+in the editor: create, see when each key was last used, and revoke.
+
+| Column | Meaning |
+|---|---|
+| Name | how you recognise the key — one per integration is a good habit |
+| Key | truncated prefix, e.g. `pgk_eaEsCn…`; the full value is never shown again |
+| Status | Active, Expired, or Revoked |
+| Last used | updated at most hourly, so it's approximate |
+| Expires | `Never` unless you set a TTL at creation |
+
+Revoking takes effect immediately and cannot be undone — anything using that key
+starts receiving 401.
+
+Only the SHA-256 hash is stored, so a lost key can't be recovered. Revoke it and
+create another.
+
+> **Why key management needs a Google sign-in:** an API key cannot create or
+> revoke keys, including itself. That's what makes revocation meaningful — a
+> leaked key can't mint replacements. Using a key against `/api/user/apikeys`
+> returns 403.
+
+<details>
+<summary>Scripting key creation instead of using the UI</summary>
+
+The same endpoints are callable directly, but they require a Google ID token
+rather than an API key. Sign in to the editor, then take `idToken` from
+`https://polyglot-node-editor.createlab-univaq.it/api/auth/session`:
+
 ```bash
-GOOGLE_TOKEN="<google-id-token>"
+GOOGLE_TOKEN="<idToken>"
 BASE="https://polyglot-backend.createlab-univaq.it"
 
-# Create, with an optional expiry
 curl -X POST "$BASE/api/user/apikeys" \
   -H "Authorization: Bearer $GOOGLE_TOKEN" -H "Content-Type: application/json" \
   -d '{"name": "ci-pipeline", "expiresInDays": 90}'
 
-# List (metadata only — the token is never returned again)
 curl "$BASE/api/user/apikeys" -H "Authorization: Bearer $GOOGLE_TOKEN"
 
-# Revoke, immediately and permanently
 curl -X DELETE "$BASE/api/user/apikeys/<key-id>" \
   -H "Authorization: Bearer $GOOGLE_TOKEN"
 ```
 
-| Field | Meaning |
-|---|---|
-| `name` | required; how you'll recognise the key when revoking it |
-| `expiresInDays` | optional; omit for a key that never expires |
-| `display` | truncated prefix, e.g. `pgk_eaEsCn…`, shown in listings |
-| `lastUsedAt` | updated at most hourly, so it's approximate |
+`name` is required; `expiresInDays` is optional. These endpoints are deliberately
+absent from the OpenAPI spec — this guide is their documentation.
 
-Only the SHA-256 hash of a key is stored, so a lost key cannot be recovered —
-revoke it and create another.
+</details>
 
 ---
 
@@ -233,7 +226,7 @@ hit its expiry. `GET /api/user/apikeys` shows `revokedAt` and `expiresAt`.
 ## Checklist for a new integration
 
 - [ ] Google sign-in through the editor, once
-- [ ] Key created with a descriptive `name`
+- [ ] Key created on `/settings/api-keys` with a descriptive `name`
 - [ ] Token stored in an environment variable, not in code
 - [ ] `GET /api/user/me` returns your user — the end-to-end proof
 - [ ] Old or unused keys revoked
