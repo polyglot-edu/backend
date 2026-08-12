@@ -3,8 +3,6 @@ import {
   AIExerciseType,
   AIPlanLesson,
   AIPlanCourse,
-  AnalyseType,
-  LOType,
   MaterialType,
   OutdatedCorrectorType,
   SummerizerBody,
@@ -21,101 +19,103 @@ import FormData = require("form-data");
 import FormDataNode from "form-data";
 
 const AIAPIGeneration = axiosCreate.create({
-  baseURL: "http://131.114.22.98:8000",
+  baseURL: "https://edu-pal-api.createlab-univaq.it",
   headers: {
     "Content-Type": "application/json",
     withCredentials: true,
     Access: "*",
-    "access-key": "7hXzB9w4r1",
+    "access-key": "Jwk70doGZF_EjX3o_-yHOJP9YD2Cbhr_x60bNmRjc1w",
   },
 });
 
 const AIChatAPITeacher = axiosCreate.create({
-  baseURL: "http://131.114.22.98:8000",
+  baseURL: "https://edu-pal-api.createlab-univaq.it",
   headers: {
     "Content-Type": "application/json",
     withCredentials: true,
     Access: "*",
-    access_key: "9hXzB9w4r1",
+    access_key: "Jwk70doGZF_EjX3o_-yHOJP9YD2Cbhr_x60bNmRjc1w",
     token:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUZWFjaGVyIiwiZXhwIjoxNzU4NjQ3OTcyfQ.PLt7H_tVYDHXsdAT76MsRzskkycj1jQz2E6jYf_FH2M",
   },
 });
 
-const OutDatedAPIGeneration = axiosCreate.create({
-  baseURL: "https://skapi.polyglot-edu.com",
-  headers: {
-    "Content-Type": "application/json",
-    withCredentials: true,
-    Access: "*",
-    ApiKey: process.env.APIKEY,
-    SetupModel:
-      '{"secretKey": "' +
-      process.env.SECRETKEY +
-      '","modelName": "GPT-4o-MINI","endpoint": "https://ai4edu.openai.azure.com/"}',
-  },
-});
+//used to split the llm_token from the body to the header
+function splitLlmToken<T extends { llm_token?: string }>(
+  body: T,
+): { body: Omit<T, "llm_token">; headers: Record<string, string> } {
+  const { llm_token, ...rest } = body;
+  return {
+    body: rest,
+    headers: llm_token ? { llm_token } : {},
+  };
+}
+
 
 export const API = {
-  analyseMaterial: (formData: FormDataNode): Promise<AxiosResponse> => {
+  analyseMaterial: (
+    formData: FormDataNode,
+    llm_token?: string,
+  ): Promise<AxiosResponse> => {
     return AIAPIGeneration.post(`/tasks/analyse_material`, formData, {
-      headers: formData.getHeaders(),
+      headers: {
+        ...formData.getHeaders(),
+        ...(llm_token ? { llm_token } : {}),
+      },
     });
   },
 
-  generateLO: (body: LOType): Promise<AxiosResponse> => {
-    return AIAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/LearningObjectiveGenerator/generateLearningObjective`,
-      body,
-    );
-  },
-
   generateMaterial: (body: MaterialType): Promise<AxiosResponse> => {
+    const { body: rest, headers } = splitLlmToken(body);
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
       `/tasks/generate_material`,
-      body,
+      rest,
+      { headers },
     );
   },
 
   summarize: (body: SummerizerBody): Promise<AxiosResponse> => {
+    const { body: rest, headers } = splitLlmToken(body);
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
       `/tasks/summarize`,
-      body,
+      rest,
+      { headers },
     );
   },
 
   generateNewExercise: (body: AIExerciseType): Promise<AxiosResponse> => {
+    const { body: rest, headers } = splitLlmToken(body);
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
       `/tasks/generate_activity`,
-      body,
+      rest,
+      { headers },
     );
   },
 
   planLesson: (body: AIPlanLesson): Promise<AxiosResponse> => {
+    const { body: rest, headers } = splitLlmToken(body);
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
       `/tasks/plan_lesson`,
-      body,
+      rest,
+      { headers },
     );
   },
 
   planCourse: (body: AIPlanCourse): Promise<AxiosResponse> => {
+    const { body: rest, headers } = splitLlmToken(body);
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
       `/tasks/plan_course`,
-      body,
+      rest,
+      { headers },
     );
   },
 
   defineSyllabus: (body: AIDefineSyllabus): Promise<AxiosResponse> => {
+    const { body: rest, headers } = splitLlmToken(body);
     return AIAPIGeneration.post<{}, AxiosResponse, {}>(
       `/tasks/define_syllabus`,
-      body,
-    );
-  },
-
-  corrector: (body: OutdatedCorrectorType): Promise<AxiosResponse> => {
-    return OutDatedAPIGeneration.post<{}, AxiosResponse, {}>(
-      `/Corrector/evaluate`,
-      body,
+      rest,
+      { headers },
     );
   },
 

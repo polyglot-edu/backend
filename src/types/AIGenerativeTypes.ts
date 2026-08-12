@@ -72,6 +72,7 @@ export type AnalyseType = {
   file: string;
   url: string;
   model?: string;
+  llm_token?: string;
 };
 
 type ParamsExercise = {
@@ -91,13 +92,7 @@ export type AIExerciseType = {
   params: ParamsExercise[];
   language: string;
   model: string;
-};
-
-export type LOType = {
-  //outdate
-  Topic: string;
-  Level: number;
-  Context: string;
+  llm_token?: string;
 };
 
 export type MaterialType = {
@@ -110,6 +105,7 @@ export type MaterialType = {
   language: string;
   model: string;
   type_of_file: string;
+  llm_token?: string;
 };
 
 export type CorrectorType = {
@@ -138,6 +134,7 @@ export type SummerizerBody = {
   style: SummarizeStyle;
   education_level: EducationLevel;
   learning_outcome: LearningOutcome;
+  llm_token?: string;
 };
 
 export type AIPlanLesson = {
@@ -149,6 +146,7 @@ export type AIPlanLesson = {
   education_level: EducationLevel;
   context: string;
   model: string;
+  llm_token?: string;
 };
 
 export type AIPlanCourse = {
@@ -160,6 +158,7 @@ export type AIPlanCourse = {
   duration_of_lesson: number;
   language: string;
   model?: string;
+  llm_token?: string;
 };
 
 export type AIDefineSyllabus = {
@@ -168,4 +167,5 @@ export type AIDefineSyllabus = {
   additional_information: string;
   language: string;
   model?: string;
+  llm_token?: string;
 };

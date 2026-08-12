@@ -8,7 +8,7 @@ import { genGraphChatGpt } from "../execution/generators";
 import { AxiosResponse } from "axios";
 import { API } from "../api/api";
 import FormDataNode from "form-data";
-
+/*
 export async function genResource(
   req: Request<any, any, GenResProps>,
   res: Response,
@@ -54,7 +54,7 @@ export async function genConceptMap(
     return res.status(500).json({ error: error });
   }
 }
-
+*/
 export async function analyseMaterial(req: Request, res: Response) {
   try {
     const formData = new FormDataNode();
@@ -70,22 +70,14 @@ export async function analyseMaterial(req: Request, res: Response) {
       formData.append("model", req.body.model);
     }
 
-    const response = await API.analyseMaterial(formData);
+    const response = await API.analyseMaterial(formData, req.body.llm_token);
 
     return res.status(200).json(response.data);
   } catch (error: any) {
-    console.error("error", error);
-    return res.status(500).json({ error: error.message });
-  }
-}
-
-export async function generateLO(req: Request<any, any>, res: Response) {
-  try {
-    const response = await API.generateLO(req.body);
-    return res.status(200).json(response.data);
-  } catch (error: any) {
-    console.error("error");
-    return res.status(500).json({ error: error });
+    console.error("error", error?.response?.data || error.message);
+    const status = error?.response?.status ?? 500;
+    const data = error?.response?.data ?? { error: error.message };
+    return res.status(status).json(data);
   }
 }
 
@@ -94,8 +86,10 @@ export async function generateMaterial(req: Request<any, any>, res: Response) {
     const response = await API.generateMaterial(req.body);
     return res.status(200).json(response.data);
   } catch (error: any) {
-    console.error(error);
-    return res.status(500).json({ error: error });
+    console.error("error", error?.response?.data || error.message);
+    const status = error?.response?.status ?? 500;
+    const data = error?.response?.data ?? { error: error.message };
+    return res.status(status).json(data);
   }
 }
 
@@ -104,8 +98,10 @@ export async function summarize(req: Request<any, any>, res: Response) {
     const response = await API.summarize(req.body);
     return res.status(200).json(response.data);
   } catch (error: any) {
-    console.error(error);
-    return res.status(500).json({ error: error });
+    console.error("error", error?.response?.data || error.message);
+    const status = error?.response?.status ?? 500;
+    const data = error?.response?.data ?? { error: error.message };
+    return res.status(status).json(data);
   }
 }
 
@@ -114,8 +110,10 @@ export async function activityGenerator(req: Request<any, any>, res: Response) {
     const response = await API.generateNewExercise(req.body);
     return res.status(200).json(response.data);
   } catch (error: any) {
-    console.error(error);
-    return res.status(500).json({ error: error });
+    console.error("error", error?.response?.data || error.message);
+    const status = error?.response?.status ?? 500;
+    const data = error?.response?.data ?? { error: error.message };
+    return res.status(status).json(data);
   }
 }
 
@@ -124,8 +122,10 @@ export async function planLesson(req: Request<any, any>, res: Response) {
     const response = await API.planLesson(req.body);
     return res.status(200).json(response.data);
   } catch (error: any) {
-    console.error(error);
-    return res.status(500).json({ error: error });
+    console.error("error", error?.response?.data || error.message);
+    const status = error?.response?.status ?? 500;
+    const data = error?.response?.data ?? { error: error.message };
+    return res.status(status).json(data);
   }
 }
 
@@ -134,8 +134,10 @@ export async function planCourse(req: Request<any, any>, res: Response) {
     const response = await API.planCourse(req.body);
     return res.status(200).json(response.data);
   } catch (error: any) {
-    console.error(error);
-    return res.status(500).json({ error: error });
+    console.error("error", error?.response?.data || error.message);
+    const status = error?.response?.status ?? 500;
+    const data = error?.response?.data ?? { error: error.message };
+    return res.status(status).json(data);
   }
 }
 
@@ -144,18 +146,10 @@ export async function generateSyllabus(req: Request<any, any>, res: Response) {
     const response = await API.defineSyllabus(req.body);
     return res.status(200).json(response.data);
   } catch (error: any) {
-    console.error(error);
-    return res.status(500).json({ error: error });
-  }
-}
-
-export async function corrector(req: Request<any, any>, res: Response) {
-  try {
-    const response = await API.corrector(req.body);
-    return res.status(200).json(response.data);
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json({ error: error });
+    console.error("error", error?.response?.data || error.message);
+    const status = error?.response?.status ?? 500;
+    const data = error?.response?.data ?? { error: error.message };
+    return res.status(status).json(data);
   }
 }
 
